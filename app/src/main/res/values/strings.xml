@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">OnderGrup</string>
+    <string name="forget_password_detail">Şifrenizi sıfırlamak istediğiniz hesabın e-postasını girin</string>
+    <string name="next_btn">İlerle</string>
+    <string name="enter_email">Email</string>
+    <string name="make_selection">Seçİmİnİ Yap</string>
+    <string name="make_selection_detail">Lütfen şifreni sıfırlamak istediğin yönetmi seç</string>
+    <string name="via_sms">SMS ile Sıfırla</string>
+    <string name="via_mail">E-Posta ile Sıfırla</string>
+    <string name="todo">Onay Kodu</string>
+    <string name="otp_code_text">On\nay</string>
+    <string name="otp_verification_text">Doğrulama Aşaması</string>
+    <string name="otp_description_text">Seçtiğiniz doğrulama yöntemine gelen onay kodunu girin</string>
+    <string name="verify_code">İlerle</string>
+    <string name="new_credentials">Yenİ Şİfren</string>
+    <string name="new_credentials_detail">Eski şifrenden farklı bir şifre belirleyerek aşağıdaki alana yazabilirsin</string>
+    <string name="password_updated">BAŞARILI</string>
+    <string name="password_updated_success_message">Tebrikler şifren değiştirildi. Artık yeni şifren ile giriş yapabilirsin</string>
+    <string name="login">Giriş Yap</string>
+</resources>
