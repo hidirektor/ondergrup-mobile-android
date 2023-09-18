@@ -1,12 +1,16 @@
 package me.t3sl4.ondergrup.Screens.Auth;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,9 +28,10 @@ import me.t3sl4.ondergrup.Util.HTTP.RequestURLs;
 public class LoginScreen extends AppCompatActivity {
 
     private EditText editTextTextPersonName;
-    private EditText editTextTextPasswordName;
+    private EditText editTextTextPassword;
     private ImageView loginButton;
     private TextView registerTextView;
+    private boolean isPasswordVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +39,7 @@ public class LoginScreen extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         editTextTextPersonName = findViewById(R.id.editTextTextPersonName);
-        editTextTextPasswordName = findViewById(R.id.editTextTextPasswordName);
+        editTextTextPassword = findViewById(R.id.editTextTextPassword);
         loginButton = findViewById(R.id.loginButton);
         registerTextView = findViewById(R.id.registerTextView);
 
@@ -44,11 +49,47 @@ public class LoginScreen extends AppCompatActivity {
             Intent intent = new Intent(LoginScreen.this, RegisterScreen.class);
             startActivity(intent);
         });
+
+        editTextTextPassword.setOnTouchListener(new View.OnTouchListener() {
+            final int DRAWABLE_RIGHT = 2;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (editTextTextPassword.getRight() - editTextTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        togglePasswordVisibility();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
+    private void togglePasswordVisibility() {
+        isPasswordVisible = !isPasswordVisible;
+        int drawableResId = isPasswordVisible ? R.drawable.field_password_hide : R.drawable.field_password_show;
+        setPasswordVisibility(isPasswordVisible);
+        updatePasswordToggleIcon(drawableResId);
+    }
+
+    private void setPasswordVisibility(boolean visible) {
+        int inputType = visible ? android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                : android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
+        editTextTextPassword.setInputType(inputType);
+        editTextTextPassword.setSelection(editTextTextPassword.getText().length());
+    }
+
+    private void updatePasswordToggleIcon(@DrawableRes int drawableResId) {
+        Drawable[] drawables = editTextTextPassword.getCompoundDrawablesRelative();
+        drawables[2] = getResources().getDrawable(drawableResId, getApplicationContext().getTheme());
+        editTextTextPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                drawables[0], drawables[1], drawables[2], drawables[3]);
     }
 
     private void sendLoginRequest() {
         String username = editTextTextPersonName.getText().toString();
-        String password = editTextTextPasswordName.getText().toString();
+        String password = editTextTextPassword.getText().toString();
 
         String authenticationUrl = RequestURLs.BASE_URL + RequestURLs.loginURLPrefix;
 

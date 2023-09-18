@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8EEEC"
-    tools:context=".Screens.MainActivity">
+    tools:context=".Screens.MainActivity"
+    android:fitsSystemWindows="true">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -79,7 +80,7 @@
                 android:textColorHint="#756C6C" />
 
             <EditText
-                android:id="@+id/editTextTextPasswordName"
+                android:id="@+id/editTextTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -87,6 +88,7 @@
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/edittext_background"
                 android:drawableStart="@drawable/password"
+                android:drawableEnd="@drawable/field_password_show"
                 android:drawablePadding="16dp"
                 android:ems="10"
                 android:hint="Şifre"

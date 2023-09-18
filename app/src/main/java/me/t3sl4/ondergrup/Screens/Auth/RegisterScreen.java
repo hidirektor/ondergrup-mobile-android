@@ -2,12 +2,17 @@ package me.t3sl4.ondergrup.Screens.Auth;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,12 +31,13 @@ public class RegisterScreen extends AppCompatActivity {
     private ImageView profilePhoto;
     private EditText editTextTextPersonName3;
     private EditText editTextTextPersonName4;
-    private EditText editTextTextPasswordName;
+    private EditText editTextTextPassword;
     private EditText editTextTextPersonName;
     private EditText editTextTextPasswordName3;
     private EditText editTextTextPasswordName2;
     boolean isPhotoSelected = false;
     private Uri selectedImageUri;
+    private boolean isPasswordVisible = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +46,7 @@ public class RegisterScreen extends AppCompatActivity {
 
         editTextTextPersonName3 = findViewById(R.id.editTextTextPersonName3);
         editTextTextPersonName4 = findViewById(R.id.editTextTextPersonName4);
-        editTextTextPasswordName = findViewById(R.id.editTextTextPasswordName);
+        editTextTextPassword = findViewById(R.id.editTextTextPassword);
         editTextTextPersonName = findViewById(R.id.editTextTextPersonName);
         editTextTextPasswordName3 = findViewById(R.id.editTextTextPasswordName3);
         editTextTextPasswordName2 = findViewById(R.id.editTextTextPasswordName2);
@@ -55,6 +61,42 @@ public class RegisterScreen extends AppCompatActivity {
             intent.setType("image/*");
             startActivityForResult(intent, 1);
         });
+
+        editTextTextPassword.setOnTouchListener(new View.OnTouchListener() {
+            final int DRAWABLE_RIGHT = 2;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (editTextTextPassword.getRight() - editTextTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        togglePasswordVisibility();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
+    private void togglePasswordVisibility() {
+        isPasswordVisible = !isPasswordVisible;
+        int drawableResId = isPasswordVisible ? R.drawable.field_password_hide : R.drawable.field_password_show;
+        setPasswordVisibility(isPasswordVisible);
+        updatePasswordToggleIcon(drawableResId);
+    }
+
+    private void setPasswordVisibility(boolean visible) {
+        int inputType = visible ? android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                : android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
+        editTextTextPassword.setInputType(inputType);
+        editTextTextPassword.setSelection(editTextTextPassword.getText().length());
+    }
+
+    private void updatePasswordToggleIcon(@DrawableRes int drawableResId) {
+        Drawable[] drawables = editTextTextPassword.getCompoundDrawablesRelative();
+        drawables[2] = getResources().getDrawable(drawableResId, getApplicationContext().getTheme());
+        editTextTextPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                drawables[0], drawables[1], drawables[2], drawables[3]);
     }
 
     @Override
@@ -72,7 +114,7 @@ public class RegisterScreen extends AppCompatActivity {
     private void sendRegisterRequest() {
         String userName = editTextTextPersonName3.getText().toString();
         String email = editTextTextPersonName4.getText().toString();
-        String password = editTextTextPasswordName.getText().toString();
+        String password = editTextTextPassword.getText().toString();
         String nameSurname = editTextTextPersonName.getText().toString();
         String phone = editTextTextPasswordName3.getText().toString();
         String companyName = editTextTextPasswordName2.getText().toString();
