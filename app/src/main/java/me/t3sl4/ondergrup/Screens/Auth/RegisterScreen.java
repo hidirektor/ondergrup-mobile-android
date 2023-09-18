@@ -1,5 +1,6 @@
 package me.t3sl4.ondergrup.Screens.Auth;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
@@ -11,50 +12,58 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Dashboard.DashboardUserScreen;
+import me.t3sl4.ondergrup.Util.HTTP.HTTP;
+import me.t3sl4.ondergrup.Util.HTTP.RequestURLs;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 public class RegisterScreen extends AppCompatActivity {
 
-    private ImageView imageView2;
+    private ImageView signUp;
     private ImageView profilePhoto;
-    private EditText editTextTextPersonName3;
-    private EditText editTextTextPersonName4;
-    private EditText editTextTextPassword;
-    private EditText editTextTextPersonName;
-    private EditText editTextTextPasswordName3;
-    private EditText editTextTextPasswordName2;
+    private EditText editTextNickname;
+    private EditText editTextMail;
+    private EditText editTextPassword;
+    private EditText editTextNameSurname;
+    private EditText editTextPhone;
+    private EditText editTextCompany;
     boolean isPhotoSelected = false;
     private Uri selectedImageUri;
     private boolean isPasswordVisible = false;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        editTextTextPersonName3 = findViewById(R.id.editTextTextPersonName3);
-        editTextTextPersonName4 = findViewById(R.id.editTextTextPersonName4);
-        editTextTextPassword = findViewById(R.id.editTextTextPassword);
-        editTextTextPersonName = findViewById(R.id.editTextTextPersonName);
-        editTextTextPasswordName3 = findViewById(R.id.editTextTextPasswordName3);
-        editTextTextPasswordName2 = findViewById(R.id.editTextTextPasswordName2);
+        editTextNickname = findViewById(R.id.editTextNickname);
+        editTextMail = findViewById(R.id.editTextMail);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        editTextNameSurname = findViewById(R.id.editTextNameSurname);
+        editTextPhone = findViewById(R.id.editTextPhone);
+        editTextCompany = findViewById(R.id.editTextCompany);
 
         profilePhoto = findViewById(R.id.profilePhoto);
 
-        imageView2 = findViewById(R.id.imageView2);
-        imageView2.setOnClickListener(v -> sendRegisterRequest());
+        signUp = findViewById(R.id.signUp);
+        signUp.setOnClickListener(v -> sendRegisterRequest());
 
         profilePhoto.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
@@ -62,13 +71,13 @@ public class RegisterScreen extends AppCompatActivity {
             startActivityForResult(intent, 1);
         });
 
-        editTextTextPassword.setOnTouchListener(new View.OnTouchListener() {
+        editTextPassword.setOnTouchListener(new View.OnTouchListener() {
             final int DRAWABLE_RIGHT = 2;
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= (editTextTextPassword.getRight() - editTextTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                    if (event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                         togglePasswordVisibility();
                         return true;
                     }
@@ -88,14 +97,14 @@ public class RegisterScreen extends AppCompatActivity {
     private void setPasswordVisibility(boolean visible) {
         int inputType = visible ? android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                 : android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
-        editTextTextPassword.setInputType(inputType);
-        editTextTextPassword.setSelection(editTextTextPassword.getText().length());
+        editTextPassword.setInputType(inputType);
+        editTextPassword.setSelection(editTextPassword.getText().length());
     }
 
     private void updatePasswordToggleIcon(@DrawableRes int drawableResId) {
-        Drawable[] drawables = editTextTextPassword.getCompoundDrawablesRelative();
+        Drawable[] drawables = editTextPassword.getCompoundDrawablesRelative();
         drawables[2] = getResources().getDrawable(drawableResId, getApplicationContext().getTheme());
-        editTextTextPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(
+        editTextPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(
                 drawables[0], drawables[1], drawables[2], drawables[3]);
     }
 
@@ -103,78 +112,90 @@ public class RegisterScreen extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            selectedImageUri = data.getData(); // Store the selected image URI
+            selectedImageUri = data.getData();
             isPhotoSelected = true;
 
-            // Set the selected image to the profilePhoto ImageView
             profilePhoto.setImageURI(selectedImageUri);
         }
     }
 
     private void sendRegisterRequest() {
-        String userName = editTextTextPersonName3.getText().toString();
-        String email = editTextTextPersonName4.getText().toString();
-        String password = editTextTextPassword.getText().toString();
-        String nameSurname = editTextTextPersonName.getText().toString();
-        String phone = editTextTextPasswordName3.getText().toString();
-        String companyName = editTextTextPasswordName2.getText().toString();
+        String userName = editTextNickname.getText().toString();
+        String email = editTextMail.getText().toString();
+        String password = editTextPassword.getText().toString();
+        String nameSurname = editTextNameSurname.getText().toString();
+        String phone = editTextPhone.getText().toString();
+        String companyName = editTextCompany.getText().toString();
         String filePath;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         String createdAt = sdf.format(new Date());
 
-        MultipartBody.Builder builder = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("Role", "NORMAL")
-                .addFormDataPart("UserName", userName)
-                .addFormDataPart("Email", email)
-                .addFormDataPart("Password", password)
-                .addFormDataPart("NameSurname", nameSurname)
-                .addFormDataPart("Phone", phone)
-                .addFormDataPart("Profile_Photo", "C:/imgs/test.png")
-                .addFormDataPart("CompanyName", companyName)
-                .addFormDataPart("Created_At", createdAt);
+        if(checkFields(userName, email, password, nameSurname, phone, companyName)) {
+            if(isPhotoSelected) {
+                String profilePhotoPath = userName + ".jpg";
+                String registerJsonBody =
+                        "{" +
+                                "\"Role\":\"" + "NORMAL" + "\"," +
+                                "\"UserName\":\"" + userName + "\"," +
+                                "\"Email\":\"" + email + "\"," +
+                                "\"Password\":\"" + password + "\"," +
+                                "\"NameSurname\":\"" + nameSurname + "\"," +
+                                "\"Phone\":\"" + phone + "\"," +
+                                "\"Profile_Photo\":\"" + profilePhotoPath + "\"," +
+                                "\"CompanyName\":\"" + companyName + "\"," +
+                                "\"Created_At\":\"" + createdAt + "\"" +
+                                "}";
 
-        if (isPhotoSelected) {
-            filePath = getRealPathFromURI(selectedImageUri);
-            if (filePath != null) {
-                File photoFile = new File(filePath);
-                builder.addFormDataPart("Profile_Photo", "profile_photo.png", RequestBody.create(MediaType.parse("image/*"), photoFile));
+                sendRegisterRequest(registerJsonBody, userName);
             } else {
-                Log.d("RegisterScreen", "File path is null.");
+                Toast.makeText(RegisterScreen.this, "Profil fotoğrafı seçmeyi unutma!", Toast.LENGTH_SHORT).show();
             }
         } else {
-            filePath = "";
+            Toast.makeText(RegisterScreen.this, "Kayıt olmak için tüm alanları doldurmalısın!", Toast.LENGTH_SHORT).show();
         }
-
-        RequestBody requestBody = builder.build();
-
-        /*HTTPRequest.postPhoto("http://85.95.231.92:3000/api/register", requestBody, response -> {
-            Log.d("RegisterScreen", "Register request response: " + response);
-
-            if (isPhotoSelected) {
-                String username = userName;
-                uploadProfilePhoto(username, filePath);
-            }
-        });*/
     }
 
-    private void uploadProfilePhoto(String username, String filePath) {
-        File photoFile = new File(filePath);
-        if (!photoFile.exists()) {
-            Log.d("UploadPhoto", "File does not exist: " + filePath);
+    private void sendRegisterRequest(String jsonBody, String userName) {
+        String registerUrl = RequestURLs.BASE_URL + RequestURLs.registerURLPrefix;
+
+        HTTP http = new HTTP(this);
+        http.sendRequest(registerUrl, jsonBody, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) throws IOException {
+                uploadProfilePhoto2Server(userName);
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(RegisterScreen.this, "Kayıt olurken hata meydana geldi!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void uploadProfilePhoto2Server(String userName) {
+        String uploadUrl = RequestURLs.BASE_URL + RequestURLs.uploadURLPrefix;
+
+        File profilePhotoFile = uriToFile(selectedImageUri);
+        if (!profilePhotoFile.exists()) {
+            Toast.makeText(RegisterScreen.this, "Profil fotoğrafı bulunamadı!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("username", username)
-                .addFormDataPart("file", "profile_photo.png", RequestBody.create(MediaType.parse("image/*"), photoFile))
-                .build();
+        HTTP http = new HTTP(this);
+        http.sendMultipartRequest(uploadUrl, userName, profilePhotoFile, new HTTP.RequestCallback() {
+            @Override
+            public void onSuccess(String response) throws IOException {
+                Intent intent = new Intent(RegisterScreen.this, LoginScreen.class);
+                startActivity(intent);
+                finish();
+            }
 
-        /*HTTPRequest.postPhoto("http://85.95.231.92:3000/api/fileSystem/upload", requestBody, response -> {
-            Log.d("UploadPhoto", "Upload response: " + response);
-        });*/
+            @Override
+            public void onFailure() {
+                Toast.makeText(RegisterScreen.this, "Profil fotoğrafı yüklenirken hata meydana geldi!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private String getRealPathFromURI(Uri contentUri) {
@@ -186,5 +207,20 @@ public class RegisterScreen extends AppCompatActivity {
         String filePath = cursor.getString(column_index);
         cursor.close();
         return filePath;
+    }
+
+    private File uriToFile(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String filePath = cursor.getString(column_index);
+        cursor.close();
+
+        return new File(filePath);
+    }
+
+    private boolean checkFields(String userName, String email, String password, String nameSurname, String phone, String companyName) {
+        return !userName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !nameSurname.isEmpty() && !phone.isEmpty() && !companyName.isEmpty();
     }
 }

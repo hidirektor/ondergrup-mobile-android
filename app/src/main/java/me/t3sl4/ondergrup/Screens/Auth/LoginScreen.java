@@ -1,10 +1,12 @@
 package me.t3sl4.ondergrup.Screens.Auth;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,10 +31,12 @@ public class LoginScreen extends AppCompatActivity {
 
     private EditText editTextTextPersonName;
     private EditText editTextTextPassword;
+    private Button registerButton;
+    private Button resetPassButton;
     private ImageView loginButton;
-    private TextView registerTextView;
     private boolean isPasswordVisible = false;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +45,11 @@ public class LoginScreen extends AppCompatActivity {
         editTextTextPersonName = findViewById(R.id.editTextTextPersonName);
         editTextTextPassword = findViewById(R.id.editTextTextPassword);
         loginButton = findViewById(R.id.loginButton);
-        registerTextView = findViewById(R.id.registerTextView);
+        registerButton = findViewById(R.id.registerButton);
 
         loginButton.setOnClickListener(v -> sendLoginRequest());
 
-        registerTextView.setOnClickListener(v -> {
+        registerButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginScreen.this, RegisterScreen.class);
             startActivity(intent);
         });

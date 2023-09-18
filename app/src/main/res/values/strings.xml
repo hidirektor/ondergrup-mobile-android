@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OnderGrup</string>
+    <string name="app_name">Önder Grup</string>
     <string name="forget_password_detail">Şifrenizi sıfırlamak istediğiniz hesabın e-postasını girin</string>
     <string name="next_btn">İlerle</string>
     <string name="enter_email">Email</string>

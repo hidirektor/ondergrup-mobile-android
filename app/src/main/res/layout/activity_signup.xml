@@ -48,7 +48,7 @@
                 android:src="@drawable/upload"/>
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/editTextNameSurname"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -64,7 +64,7 @@
                 android:textColorHint="#756C6C" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/editTextNickname"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -80,7 +80,7 @@
                 android:textColorHint="#756C6C" />
 
             <EditText
-                android:id="@+id/editTextTextPassword"
+                android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -97,7 +97,7 @@
                 android:textColorHint="#756C6C" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName4"
+                android:id="@+id/editTextMail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -113,7 +113,7 @@
                 android:textColorHint="#756C6C" />
 
             <EditText
-                android:id="@+id/editTextTextPasswordName3"
+                android:id="@+id/editTextPhone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -129,7 +129,7 @@
                 android:textColorHint="#756C6C" />
 
             <EditText
-                android:id="@+id/editTextTextPasswordName2"
+                android:id="@+id/editTextCompany"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -145,7 +145,7 @@
                 android:textColorHint="#756C6C" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/signUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -157,7 +157,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Şifreni mi unuttun? Hemen sıfırla !"
+                android:text="Şifreni mi unuttun?\nHemen sıfırla !"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#3B608C"
