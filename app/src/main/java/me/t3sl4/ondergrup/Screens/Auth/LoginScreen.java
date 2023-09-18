@@ -46,10 +46,16 @@ public class LoginScreen extends AppCompatActivity {
         editTextTextPassword = findViewById(R.id.editTextTextPassword);
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
+        resetPassButton = findViewById(R.id.resetPassButton);
 
         loginButton.setOnClickListener(v -> sendLoginRequest());
 
         registerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginScreen.this, RegisterScreen.class);
+            startActivity(intent);
+        });
+
+        resetPassButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginScreen.this, RegisterScreen.class);
             startActivity(intent);
         });
