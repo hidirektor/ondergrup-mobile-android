@@ -39,12 +39,12 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
 
-        setupOnboarding();
-        /*if (isFirstTime) {
+        //setupOnboarding();
+        if (isFirstTime) {
             setupOnboarding();
         } else {
             redirectToMainActivity();
-        }*/
+        }
     }
 
     private void setupOnboarding() {

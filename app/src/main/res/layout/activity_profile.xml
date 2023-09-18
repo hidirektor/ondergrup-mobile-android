@@ -249,7 +249,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="SysOp"
+                                android:text="Kullanıcı Rolü"
                                 android:textAlignment="viewEnd"
                                 android:textColor="#5B5B5B"
                                 android:textSize="16sp" />
@@ -286,7 +286,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="hidirektor"
+                                android:text="Kullanıcı Adı"
                                 android:textAlignment="viewEnd"
                                 android:textColor="#5B5B5B"
                                 android:textSize="16sp" />
@@ -360,7 +360,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Önder Grup"
+                                android:text="Şirket İsmi"
                                 android:textAlignment="viewEnd"
                                 android:textColor="#5B5B5B"
                                 android:textSize="16sp" />
@@ -397,7 +397,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="+90 (541) 741 03 09"
+                                android:text="Kullanıcı Telefon"
                                 android:textAlignment="viewEnd"
                                 android:textColor="#5B5B5B"
                                 android:textSize="16sp" />

@@ -6,19 +6,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Util.HTTPRequest;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -110,14 +107,14 @@ public class RegisterScreen extends AppCompatActivity {
 
         RequestBody requestBody = builder.build();
 
-        HTTPRequest.postPhoto("http://85.95.231.92:3000/api/register", requestBody, response -> {
+        /*HTTPRequest.postPhoto("http://85.95.231.92:3000/api/register", requestBody, response -> {
             Log.d("RegisterScreen", "Register request response: " + response);
 
             if (isPhotoSelected) {
                 String username = userName;
                 uploadProfilePhoto(username, filePath);
             }
-        });
+        });*/
     }
 
     private void uploadProfilePhoto(String username, String filePath) {
@@ -133,9 +130,9 @@ public class RegisterScreen extends AppCompatActivity {
                 .addFormDataPart("file", "profile_photo.png", RequestBody.create(MediaType.parse("image/*"), photoFile))
                 .build();
 
-        HTTPRequest.postPhoto("http://85.95.231.92:3000/api/fileSystem/upload", requestBody, response -> {
+        /*HTTPRequest.postPhoto("http://85.95.231.92:3000/api/fileSystem/upload", requestBody, response -> {
             Log.d("UploadPhoto", "Upload response: " + response);
-        });
+        });*/
     }
 
     private String getRealPathFromURI(Uri contentUri) {

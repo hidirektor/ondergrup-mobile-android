@@ -2,17 +2,24 @@ package me.t3sl4.ondergrup.Screens.Auth;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Dashboard.DashboardEngineerScreen;
+import me.t3sl4.ondergrup.Screens.Dashboard.DashboardSysOpScreen;
+import me.t3sl4.ondergrup.Screens.Dashboard.DashboardTechnicianScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardUserScreen;
-import me.t3sl4.ondergrup.Util.HTTPRequest;
+import me.t3sl4.ondergrup.Util.HTTP.HTTP;
+import me.t3sl4.ondergrup.Util.HTTP.RequestURLs;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -43,27 +50,68 @@ public class LoginScreen extends AppCompatActivity {
         String username = editTextTextPersonName.getText().toString();
         String password = editTextTextPasswordName.getText().toString();
 
-        JSONObject requestBody = new JSONObject();
-        try {
-            requestBody.put("username", username);
-            requestBody.put("password", password);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        String authenticationUrl = RequestURLs.BASE_URL + RequestURLs.loginURLPrefix;
 
-        HTTPRequest.post("http://85.95.231.92:3000/api/login", requestBody, response -> {
-            try {
-                JSONObject jsonResponse = new JSONObject(response);
-                boolean success = jsonResponse.getBoolean("Giriş başarılı");
+        String jsonLoginBody = "{\"Username\": \"" + username + "\", \"Password\": \"" + password + "\"}";
 
-                if (success) {
-                    Intent intent = new Intent(LoginScreen.this, DashboardUserScreen.class);
-                    startActivity(intent);
-                } else {
-                    // Handle unsuccessful login here
+        HTTP http = new HTTP(this);
+        http.sendRequest(authenticationUrl, jsonLoginBody, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) throws IOException {
+                getUserType(username);
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(LoginScreen.this, "Kullanıcı adı veya şifre hatalı!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void getUserType(String username) throws IOException {
+        String userTypeUrl = RequestURLs.BASE_URL + RequestURLs.profileInfoURLPrefix + ":Role";
+        String jsonProfileInfoBody = "{\"Username\": \"" + username + "\"}";
+
+        HTTP http = new HTTP(this);
+        http.sendRequest(userTypeUrl, jsonProfileInfoBody, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                try {
+                    String role = response.getString("Role");
+
+                    Intent intent = null;
+
+                    switch (role) {
+                        case "NORMAL":
+                            intent = new Intent(LoginScreen.this, DashboardUserScreen.class);
+                            break;
+                        case "TECHNICIAN":
+                            intent = new Intent(LoginScreen.this, DashboardTechnicianScreen.class);
+                            break;
+                        case "ENGINEER":
+                            intent = new Intent(LoginScreen.this, DashboardEngineerScreen.class);
+                            break;
+                        case "SYSOP":
+                            intent = new Intent(LoginScreen.this, DashboardSysOpScreen.class);
+                            break;
+                        default:
+                            Toast.makeText(LoginScreen.this, "Desteklenmeyen bir kullanıcı türüne sahipsin!", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+
+                    if (intent != null) {
+                        startActivity(intent);
+                        finish();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(LoginScreen.this, "Profil bilgileri alınamadı!", Toast.LENGTH_SHORT).show();
             }
         });
     }
