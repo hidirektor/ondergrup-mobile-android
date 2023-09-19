@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
@@ -25,7 +24,7 @@ import me.t3sl4.ondergrup.Screens.Dashboard.DashboardSysOpScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardTechnicianScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardUserScreen;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
-import me.t3sl4.ondergrup.Util.HTTP.RequestURLs;
+import me.t3sl4.ondergrup.Util.Util;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -36,11 +35,15 @@ public class LoginScreen extends AppCompatActivity {
     private ImageView loginButton;
     private boolean isPasswordVisible = false;
 
+    public Util util;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        util = new Util(getApplicationContext());
 
         editTextTextPersonName = findViewById(R.id.editTextTextPersonName);
         editTextTextPassword = findViewById(R.id.editTextTextPassword);
@@ -101,7 +104,7 @@ public class LoginScreen extends AppCompatActivity {
         String username = editTextTextPersonName.getText().toString();
         String password = editTextTextPassword.getText().toString();
 
-        String authenticationUrl = RequestURLs.BASE_URL + RequestURLs.loginURLPrefix;
+        String authenticationUrl = util.BASE_URL + util.loginURLPrefix;
 
         String jsonLoginBody = "{\"Username\": \"" + username + "\", \"Password\": \"" + password + "\"}";
 
@@ -119,8 +122,8 @@ public class LoginScreen extends AppCompatActivity {
         });
     }
 
-    private void getUserType(String username) throws IOException {
-        String userTypeUrl = RequestURLs.BASE_URL + RequestURLs.profileInfoURLPrefix + ":Role";
+    private void getUserType(String username) {
+        String userTypeUrl = util.BASE_URL + util.profileInfoURLPrefix + ":Role";
         String jsonProfileInfoBody = "{\"Username\": \"" + username + "\"}";
 
         HTTP http = new HTTP(this);

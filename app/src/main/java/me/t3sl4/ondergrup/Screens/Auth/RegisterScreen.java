@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -19,11 +18,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
@@ -38,13 +34,9 @@ import java.util.Locale;
 import java.util.Map;
 
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Screens.Dashboard.DashboardUserScreen;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
-import me.t3sl4.ondergrup.Util.HTTP.RequestURLs;
 import me.t3sl4.ondergrup.Util.HTTP.VolleyMultipartRequest;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
+import me.t3sl4.ondergrup.Util.Util;
 
 public class RegisterScreen extends AppCompatActivity {
 
@@ -60,11 +52,15 @@ public class RegisterScreen extends AppCompatActivity {
     private Uri selectedImageUri;
     private boolean isPasswordVisible = false;
 
+    public Util util;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        util = new Util(getApplicationContext());
 
         editTextNickname = findViewById(R.id.editTextNickname);
         editTextMail = findViewById(R.id.editTextMail);
@@ -170,7 +166,7 @@ public class RegisterScreen extends AppCompatActivity {
     }
 
     private void sendRegisterRequest(String jsonBody, String userName) {
-        String registerUrl = RequestURLs.BASE_URL + RequestURLs.registerURLPrefix;
+        String registerUrl = util.BASE_URL + util.registerURLPrefix;
 
         HTTP http = new HTTP(this);
         http.sendRequest(registerUrl, jsonBody, new HTTP.HttpRequestCallback() {
@@ -187,7 +183,7 @@ public class RegisterScreen extends AppCompatActivity {
     }
 
     private void uploadProfilePhoto2Server(String userName) {
-        String uploadUrl = RequestURLs.BASE_URL + RequestURLs.uploadURLPrefix;
+        String uploadUrl = util.BASE_URL + util.uploadURLPrefix;
 
         File profilePhotoFile = uriToFile(selectedImageUri);
         if (!profilePhotoFile.exists()) {
