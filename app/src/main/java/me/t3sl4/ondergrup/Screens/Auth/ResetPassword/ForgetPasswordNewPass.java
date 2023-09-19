@@ -1,14 +1,18 @@
 package me.t3sl4.ondergrup.Screens.Auth.ResetPassword;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -32,6 +36,10 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
     private TextInputLayout editTextConfirmNewPass;
     private TextInputEditText editTextConfirmNewPassText;
 
+    private boolean isPasswordVisibleNormal = false;
+    private boolean isPasswordVisibleConfirm = false;
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +56,37 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
         editTextNewPassText = editTextNewPass.findViewById(R.id.editTextNewPassText);
         editTextConfirmNewPass = findViewById(R.id.editTextConfirmNewPass);
         editTextConfirmNewPassText = editTextConfirmNewPass.findViewById(R.id.editTextConfirmNewPassText);
+
+        editTextNewPass.setEndIconOnClickListener(v -> {
+            isPasswordVisibleNormal = !isPasswordVisibleNormal;
+            updatePasswordVisibilityNormal(editTextNewPassText);
+        });
+        editTextConfirmNewPass.setEndIconOnClickListener(v -> {
+            isPasswordVisibleConfirm = !isPasswordVisibleConfirm;
+            updatePasswordVisibilityConfirm(editTextConfirmNewPassText);
+        });
+    }
+
+    private void updatePasswordVisibilityNormal(TextInputEditText editText) {
+        if (isPasswordVisibleNormal) {
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            editTextNewPass.setEndIconDrawable(R.drawable.field_password_hide);
+        } else {
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            editTextNewPass.setEndIconDrawable(R.drawable.field_password_show);
+        }
+        editText.setSelection(editText.getText().length());
+    }
+
+    private void updatePasswordVisibilityConfirm(TextInputEditText editText) {
+        if (isPasswordVisibleConfirm) {
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            editTextConfirmNewPass.setEndIconDrawable(R.drawable.field_password_hide);
+        } else {
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            editTextConfirmNewPass.setEndIconDrawable(R.drawable.field_password_show);
+        }
+        editText.setSelection(editText.getText().length());
     }
 
     public void setNewPassword(View view) {
