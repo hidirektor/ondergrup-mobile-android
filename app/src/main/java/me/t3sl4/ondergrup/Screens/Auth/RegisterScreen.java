@@ -3,6 +3,7 @@ package me.t3sl4.ondergrup.Screens.Auth;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,17 +19,29 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardUserScreen;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.HTTP.RequestURLs;
+import me.t3sl4.ondergrup.Util.HTTP.VolleyMultipartRequest;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -182,20 +195,46 @@ public class RegisterScreen extends AppCompatActivity {
             return;
         }
 
-        HTTP http = new HTTP(this);
-        http.sendMultipartRequest(uploadUrl, userName, profilePhotoFile, new HTTP.RequestCallback() {
+        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(
+                Request.Method.POST,
+                uploadUrl,
+                response -> {
+                    Intent intent = new Intent(RegisterScreen.this, LoginScreen.class);
+                    startActivity(intent);
+                    finish();
+                },
+                error -> {
+                    Toast.makeText(RegisterScreen.this, "Profil fotoğrafı yüklenirken hata meydana geldi!", Toast.LENGTH_SHORT).show();
+                }
+        ) {
             @Override
-            public void onSuccess(String response) throws IOException {
-                Intent intent = new Intent(RegisterScreen.this, LoginScreen.class);
-                startActivity(intent);
-                finish();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", userName);
+                return params;
             }
 
             @Override
-            public void onFailure() {
-                Toast.makeText(RegisterScreen.this, "Profil fotoğrafı yüklenirken hata meydana geldi!", Toast.LENGTH_SHORT).show();
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                String imageName = userName + ".jpg";
+                profilePhoto.setDrawingCacheEnabled(true);
+                profilePhoto.buildDrawingCache();
+                Bitmap bitmap = profilePhoto.getDrawingCache();
+                byte[] imageBytes = convertBitmapToByteArray(bitmap);
+                params.put("file", new DataPart(imageName, imageBytes, "image/jpeg"));
+                return params;
             }
-        });
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(multipartRequest);
+    }
+
+    private byte[] convertBitmapToByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
     }
 
     private String getRealPathFromURI(Uri contentUri) {
