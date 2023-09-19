@@ -5,11 +5,16 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Util.Util;
 
 public class DashboardTechnicianScreen extends AppCompatActivity {
+    public Util util;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_technician);
+
+        util = new Util(getApplicationContext());
     }
 }

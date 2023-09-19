@@ -154,7 +154,7 @@
                 app:srcCompat="@drawable/btn_arrow2" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/resetPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Şifreni mi unuttun?\nHemen sıfırla !"

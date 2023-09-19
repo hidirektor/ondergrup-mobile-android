@@ -2,7 +2,7 @@
     <string name="app_name">Önder Grup</string>
     <string name="forget_password_detail">Şifrenizi sıfırlamak istediğiniz hesabın e-postasını girin</string>
     <string name="next_btn">İlerle</string>
-    <string name="enter_email">Email</string>
+    <string name="enter_username">Kullanıcı Adı</string>
     <string name="make_selection">Seçİmİnİ Yap</string>
     <string name="make_selection_detail">Lütfen şifreni sıfırlamak istediğin yönetmi seç</string>
     <string name="via_sms">SMS ile Sıfırla</string>

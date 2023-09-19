@@ -1,6 +1,9 @@
 package me.t3sl4.ondergrup.Util;
 
 import android.content.Context;
+import android.widget.EditText;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 public class Util {
     public Context context;
@@ -27,5 +30,12 @@ public class Util {
     public Util(Context context) {
         this.context = context;
         this.profilePhotoPath = context.getFilesDir() + "/profilePhoto/";
+    }
+
+    public boolean isEmpty(TextInputEditText etText) {
+        if (etText.getText().toString().trim().length() > 0)
+            return false;
+
+        return true;
     }
 }

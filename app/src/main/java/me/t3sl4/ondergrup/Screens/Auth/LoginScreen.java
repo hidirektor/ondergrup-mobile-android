@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardEngineerScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardSysOpScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardTechnicianScreen;
@@ -59,8 +60,9 @@ public class LoginScreen extends AppCompatActivity {
         });
 
         resetPassButton.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginScreen.this, RegisterScreen.class);
+            Intent intent = new Intent(LoginScreen.this, ForgetPassword.class);
             startActivity(intent);
+            finish();
         });
 
         editTextTextPassword.setOnTouchListener(new View.OnTouchListener() {

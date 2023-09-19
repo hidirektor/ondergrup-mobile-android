@@ -34,6 +34,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.HTTP.VolleyMultipartRequest;
 import me.t3sl4.ondergrup.Util.Util;
@@ -48,6 +49,7 @@ public class RegisterScreen extends AppCompatActivity {
     private EditText editTextNameSurname;
     private EditText editTextPhone;
     private EditText editTextCompany;
+    private EditText resetPass;
     boolean isPhotoSelected = false;
     private Uri selectedImageUri;
     private boolean isPasswordVisible = false;
@@ -78,6 +80,11 @@ public class RegisterScreen extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             startActivityForResult(intent, 1);
+        });
+
+        resetPass.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterScreen.this, ForgetPassword.class);
+            startActivity(intent);
         });
 
         editTextPassword.setOnTouchListener(new View.OnTouchListener() {
