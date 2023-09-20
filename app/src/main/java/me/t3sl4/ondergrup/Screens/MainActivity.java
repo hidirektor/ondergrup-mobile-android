@@ -16,8 +16,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.airbnb.lottie.LottieAnimationView;
-
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.OnBoard.OnBoardingFragment1;
@@ -40,12 +38,12 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
 
-        setupOnboarding();
-        /*if (isFirstTime) {
+        //setupOnboarding();
+        if (isFirstTime) {
             setupOnboarding();
         } else {
             redirectToMainActivity();
-        }*/
+        }
     }
 
     private void setupOnboarding() {
