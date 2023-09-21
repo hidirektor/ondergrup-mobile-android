@@ -5,8 +5,12 @@ import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import me.t3sl4.ondergrup.Util.User.User;
+
 public class Util {
     public Context context;
+
+    public static User user = new User("1", "1", "1", "1", "1", "1", "1");
 
     public String BASE_URL = "http://85.95.231.92:3000";
 

@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Base64;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +16,20 @@ import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import me.t3sl4.ondergrup.R;
@@ -24,8 +38,15 @@ import me.t3sl4.ondergrup.Screens.Dashboard.DashboardEngineerScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardSysOpScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardTechnicianScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardUserScreen;
+import me.t3sl4.ondergrup.Screens.MainActivity;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
+import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -134,32 +155,7 @@ public class LoginScreen extends AppCompatActivity {
             public void onSuccess(JSONObject response) {
                 try {
                     String role = response.getString("Role");
-
-                    Intent intent = null;
-
-                    switch (role) {
-                        case "NORMAL":
-                            intent = new Intent(LoginScreen.this, DashboardUserScreen.class);
-                            break;
-                        case "TECHNICIAN":
-                            intent = new Intent(LoginScreen.this, DashboardTechnicianScreen.class);
-                            break;
-                        case "ENGINEER":
-                            intent = new Intent(LoginScreen.this, DashboardEngineerScreen.class);
-                            break;
-                        case "SYSOP":
-                            intent = new Intent(LoginScreen.this, DashboardSysOpScreen.class);
-                            break;
-                        default:
-                            Toast.makeText(LoginScreen.this, "Desteklenmeyen bir kullanıcı türüne sahipsin!", Toast.LENGTH_SHORT).show();
-                            break;
-                    }
-
-                    if (intent != null) {
-                        startActivity(intent);
-                        finish();
-                    }
-
+                    initUser(username, role);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -168,6 +164,97 @@ public class LoginScreen extends AppCompatActivity {
             @Override
             public void onFailure(String errorMessage) {
                 Toast.makeText(LoginScreen.this, "Profil bilgileri alınamadı!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void initUser(String username, String role) {
+        String reqUrl = util.BASE_URL + util.wholeProfileURLPrefix;
+
+        String jsonLoginBody = "{\"username\": \"" + username + "\"}";
+
+        HTTP http = new HTTP(this);
+        http.sendRequest(reqUrl, jsonLoginBody, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) throws JSONException, IOException {
+                Log.d("Resp", String.valueOf(response));
+                String role = response.getString("Role");
+                String userName = response.getString("UserName");
+                String eMail = response.getString("Email");
+                String nameSurname = response.getString("NameSurname");
+                String phoneNumber = response.getString("Phone");
+                String company = response.getString("CompanyName");
+                String createdAt = response.getString("CreatedAt");
+                Log.d("User", role + userName + eMail + nameSurname + phoneNumber + company + createdAt);
+                util.user = new User(role, userName, eMail, nameSurname, phoneNumber, company, createdAt);
+                Log.d("UserTemp", util.user.getUserName());
+                util.user.setRole(role);
+                util.user.setUserName(userName);
+                util.user.seteMail(eMail);
+                util.user.setNameSurname(nameSurname);
+                util.user.setPhoneNumber(phoneNumber);
+                downloadProfilePhoto(username, role);
+                util.user.setCompanyName(company);
+                util.user.setCreatedAt(createdAt);
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(LoginScreen.this, "Kullanıcı adı veya şifre hatalı!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void downloadProfilePhoto(String username, String role) throws IOException {
+        String localDirectoryPath = getApplicationContext().getFilesDir().getPath() + "/OnderGrup/profilePhoto/";
+        String localFilePath = localDirectoryPath + username + ".jpg";
+
+        File localFile = new File(localDirectoryPath);
+        if (!localFile.exists()) {
+            localFile.mkdirs();
+        }
+
+        String reqURL = util.BASE_URL + util.downloadPhotoURLPrefix;
+        String profilePhotoInfoBody = "{\"username\": \"" + username + "\"}";
+
+        HTTP http = new HTTP(this);
+        http.sendRequest4File(reqURL, profilePhotoInfoBody, localDirectoryPath, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) throws IOException, JSONException {
+                Util.user.setProfilePhotoPath(localDirectoryPath);
+                Intent intent = null;
+
+                switch (role) {
+                    case "NORMAL":
+                        intent = new Intent(LoginScreen.this, DashboardUserScreen.class);
+                        intent.putExtra("user", util.user);
+                        break;
+                    case "TECHNICIAN":
+                        intent = new Intent(LoginScreen.this, DashboardTechnicianScreen.class);
+                        intent.putExtra("user", util.user);
+                        break;
+                    case "ENGINEER":
+                        intent = new Intent(LoginScreen.this, DashboardEngineerScreen.class);
+                        intent.putExtra("user", util.user);
+                        break;
+                    case "SYSOP":
+                        intent = new Intent(LoginScreen.this, DashboardSysOpScreen.class);
+                        intent.putExtra("user", util.user);
+                        break;
+                    default:
+                        Toast.makeText(LoginScreen.this, "Desteklenmeyen bir kullanıcı türüne sahipsin!", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+
+                if (intent != null) {
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Log.d("Photo", "Fotoğraf indirilemedi");
             }
         });
     }

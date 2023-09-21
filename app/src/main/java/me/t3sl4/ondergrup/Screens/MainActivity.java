@@ -21,6 +21,7 @@ import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.OnBoard.OnBoardingFragment1;
 import me.t3sl4.ondergrup.Screens.OnBoard.OnBoardingFragment2;
 import me.t3sl4.ondergrup.Screens.OnBoard.OnBoardingFragment3;
+import me.t3sl4.ondergrup.Util.User.User;
 
 public class MainActivity extends AppCompatActivity {
 
