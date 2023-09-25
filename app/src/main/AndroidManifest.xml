@@ -73,6 +73,12 @@
         <activity
             android:name=".Screens.Auth.ResetPassword.ForgetPasswordSuccess"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.Weather.Weather"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.Weather.Future"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
