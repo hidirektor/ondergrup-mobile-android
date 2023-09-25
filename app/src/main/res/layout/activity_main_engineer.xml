@@ -170,23 +170,6 @@
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <EditText
-                android:id="@+id/editTextTextPersonName3"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/search_edt_background"
-                android:drawableEnd="@drawable/search_icon"
-                android:drawablePadding="8dp"
-                android:elevation="3dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:padding="8dp"
-                android:text="İstediğiniz şeyi arayın..." />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
