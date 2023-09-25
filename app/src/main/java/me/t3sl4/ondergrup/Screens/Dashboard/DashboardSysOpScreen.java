@@ -48,9 +48,9 @@ public class DashboardSysOpScreen extends AppCompatActivity {
 
         File file = new File("/data/user/0/me.t3sl4.ondergrup/files/OnderGrup/profilePhoto/hidirektor.jpg");
         if(file.exists()) {
-            Log.d("DOsya", "Dosya var");
+            Log.d("Dosya", "Dosya var");
         } else {
-            Log.d("DOsya", "Dosya yok");
+            Log.d("Dosya", "Dosya yok");
         }
 
         Bitmap profilePhotoBitmap = BitmapFactory.decodeFile(localFilePath);

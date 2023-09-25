@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
@@ -49,7 +50,7 @@ public class RegisterScreen extends AppCompatActivity {
     private EditText editTextNameSurname;
     private EditText editTextPhone;
     private EditText editTextCompany;
-    private EditText resetPass;
+    private TextView resetPass;
     boolean isPhotoSelected = false;
     private Uri selectedImageUri;
     private boolean isPasswordVisible = false;
@@ -70,6 +71,7 @@ public class RegisterScreen extends AppCompatActivity {
         editTextNameSurname = findViewById(R.id.editTextNameSurname);
         editTextPhone = findViewById(R.id.editTextPhone);
         editTextCompany = findViewById(R.id.editTextCompany);
+        resetPass = findViewById(R.id.resetPass);
 
         profilePhoto = findViewById(R.id.profilePhoto);
 

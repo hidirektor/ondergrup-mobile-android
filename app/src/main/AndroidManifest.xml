@@ -32,6 +32,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Screens.OnBoard.OnBoarding1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.OnBoard.OnBoarding2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.OnBoard.OnBoarding3"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Screens.Auth.LoginScreen"
             android:screenOrientation="portrait" />
         <activity
