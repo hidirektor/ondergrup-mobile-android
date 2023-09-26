@@ -14,7 +14,7 @@ import me.t3sl4.ondergrup.Screens.OnBoard.OnBoarding1;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int SPLASH_DELAY = 5000;
+    private static final int SPLASH_DELAY = 3500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +25,12 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
 
-        setupOnboarding();
-        /*if (isFirstTime) {
+        //setupOnboarding();
+        if (isFirstTime) {
             setupOnboarding();
         } else {
             redirectToMainActivity();
-        }*/
+        }
     }
 
     private void setupOnboarding() {

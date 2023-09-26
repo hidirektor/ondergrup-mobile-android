@@ -1,6 +1,7 @@
 package me.t3sl4.ondergrup.Screens.Auth;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -50,6 +51,8 @@ public class LoginScreen extends AppCompatActivity {
     private Button registerButton;
     private Button resetPassButton;
     private ImageView loginButton;
+
+    private Dialog uyariDiyalog;
     private boolean isPasswordVisible = false;
 
     public Util util;
@@ -61,6 +64,7 @@ public class LoginScreen extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         util = new Util(getApplicationContext());
+        uyariDiyalog = new Dialog(this);
 
         editTextTextPersonName = findViewById(R.id.editTextTextPersonName);
         editTextTextPassword = findViewById(R.id.editTextTextPassword);
@@ -135,7 +139,7 @@ public class LoginScreen extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMessage) {
-                Toast.makeText(LoginScreen.this, "Kullanıcı adı veya şifre hatalı!", Toast.LENGTH_SHORT).show();
+                util.showErrorPopup(uyariDiyalog, "Kullanıcı adı veya şifreniz hatalı. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
             }
         });
     }
@@ -191,6 +195,36 @@ public class LoginScreen extends AppCompatActivity {
                 //downloadProfilePhoto(username, role);
                 util.user.setCompanyName(company);
                 util.user.setCreatedAt(createdAt);
+
+                //Util.user.setProfilePhotoPath(localDirectoryPath);
+                Intent intent = null;
+
+                switch (role) {
+                    case "NORMAL":
+                        intent = new Intent(LoginScreen.this, DashboardUserScreen.class);
+                        intent.putExtra("user", util.user);
+                        break;
+                    case "TECHNICIAN":
+                        intent = new Intent(LoginScreen.this, DashboardTechnicianScreen.class);
+                        intent.putExtra("user", util.user);
+                        break;
+                    case "ENGINEER":
+                        intent = new Intent(LoginScreen.this, DashboardEngineerScreen.class);
+                        intent.putExtra("user", util.user);
+                        break;
+                    case "SYSOP":
+                        intent = new Intent(LoginScreen.this, DashboardSysOpScreen.class);
+                        intent.putExtra("user", util.user);
+                        break;
+                    default:
+                        Toast.makeText(LoginScreen.this, "Desteklenmeyen bir kullanıcı türüne sahipsin!", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+
+                if (intent != null) {
+                    startActivity(intent);
+                    finish();
+                }
             }
 
             @Override

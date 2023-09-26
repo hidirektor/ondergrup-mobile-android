@@ -1,10 +1,16 @@
 package me.t3sl4.ondergrup.Util;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.User.User;
 
 public class Util {
@@ -41,5 +47,17 @@ public class Util {
             return false;
 
         return true;
+    }
+
+    public void showErrorPopup(Dialog diyalog, String hataMesaji) {
+        diyalog.setContentView(R.layout.activity_popup_warning);
+        Button close = diyalog.findViewById(R.id.kapatButton);
+        TextView hataMesajiTextView = diyalog.findViewById(R.id.uyariMesaji);
+
+        hataMesajiTextView.setText(hataMesaji);
+        close.setOnClickListener(v -> diyalog.dismiss());
+
+        diyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        diyalog.show();
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.MainActivity;
+import me.t3sl4.ondergrup.Screens.Weather.Weather;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -23,6 +26,8 @@ public class DashboardSysOpScreen extends AppCompatActivity {
 
     private TextView isimSoyisim;
     private ImageView profilePhotoView;
+
+    private LinearLayout destekButton;
 
     public User receivedUser;
 
@@ -39,7 +44,15 @@ public class DashboardSysOpScreen extends AppCompatActivity {
         isimSoyisim = findViewById(R.id.textView4);
         profilePhotoView = findViewById(R.id.imageView4);
 
+        destekButton = findViewById(R.id.destekButton);
+
         setUserInfo();
+
+        destekButton.setOnClickListener(v -> {
+            Intent intent2 = new Intent(DashboardSysOpScreen.this, Weather.class);
+            startActivity(intent2);
+            finish();
+        });
     }
 
     public void setUserInfo() {
