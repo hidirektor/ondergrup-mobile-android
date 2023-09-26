@@ -10,7 +10,6 @@ public class User implements Parcelable {
     private String eMail;
     private String nameSurname;
     private String phoneNumber;
-    private String profilePhotoPath;
     private String companyName;
     private String createdAt;
 
@@ -64,14 +63,6 @@ public class User implements Parcelable {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getProfilePhotoPath() {
-        return profilePhotoPath;
-    }
-
-    public void setProfilePhotoPath(String profilePhotoPath) {
-        this.profilePhotoPath = profilePhotoPath;
-    }
-
     public String getCompanyName() {
         return companyName;
     }
@@ -100,7 +91,6 @@ public class User implements Parcelable {
         dest.writeString(eMail);
         dest.writeString(nameSurname);
         dest.writeString(phoneNumber);
-        dest.writeString(profilePhotoPath);
         dest.writeString(companyName);
         dest.writeString(createdAt);
     }
@@ -117,14 +107,12 @@ public class User implements Parcelable {
         }
     };
 
-    // Parcelable'den geri çevirme işlemi
     protected User(Parcel in) {
         role = in.readString();
         userName = in.readString();
         eMail = in.readString();
         nameSurname = in.readString();
         phoneNumber = in.readString();
-        profilePhotoPath = in.readString();
         companyName = in.readString();
         createdAt = in.readString();
     }

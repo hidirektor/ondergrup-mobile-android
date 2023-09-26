@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+
 import java.io.File;
 
 import me.t3sl4.ondergrup.R;
@@ -42,14 +44,11 @@ public class DashboardEngineerScreen extends AppCompatActivity {
     }
 
     public void setUserInfo() {
-        String root = Environment.getExternalStorageDirectory().toString();
-        File dataDir = new File(root + "/data/profilePhoto/");
-        String profilePhotoPath = dataDir.getPath() + "/" + receivedUser.getUserName() + ".jpg";
-
-        Bitmap profilePhotoBitmap = BitmapFactory.decodeFile(profilePhotoPath);
-
         isimSoyisim.setText(receivedUser.getNameSurname());
-        profilePhotoView.setImageBitmap(profilePhotoBitmap);
+        String imageUrl = util.BASE_URL + util.getPhotoURLPrefix + receivedUser.getUserName() + ".jpg";
+        Glide.with(this)
+                .load(imageUrl)
+                .into(profilePhotoView);
 
     }
 }

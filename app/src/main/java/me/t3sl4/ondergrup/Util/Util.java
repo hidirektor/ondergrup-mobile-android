@@ -31,6 +31,7 @@ public class Util {
     public String updatePassURLPrefix = "/api/users/updatePass";
     public String updateProfileURLPrefix = "/api/users/updateProfile";
     public String wholeProfileURLPrefix = "/api/users/getWholeProfileInfo";
+    public String getPhotoURLPrefix = "/api/fileSystem/getPhoto/";
 
 
     public String uploadURLPrefix = "/api/fileSystem/upload";

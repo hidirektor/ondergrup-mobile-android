@@ -144,7 +144,6 @@ public class RegisterScreen extends AppCompatActivity {
         String nameSurname = editTextNameSurname.getText().toString();
         String phone = editTextPhone.getText().toString();
         String companyName = editTextCompany.getText().toString();
-        String filePath;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         String createdAt = sdf.format(new Date());
@@ -240,17 +239,6 @@ public class RegisterScreen extends AppCompatActivity {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
-    }
-
-    private String getRealPathFromURI(Uri contentUri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
-        if (cursor == null) return null;
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String filePath = cursor.getString(column_index);
-        cursor.close();
-        return filePath;
     }
 
     private File uriToFile(Uri uri) {

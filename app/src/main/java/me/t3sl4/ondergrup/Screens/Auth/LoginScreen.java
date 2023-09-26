@@ -2,9 +2,13 @@ package me.t3sl4.ondergrup.Screens.Auth;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,8 +24,12 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.android.volley.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +37,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +51,6 @@ import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.HTTP.VolleyMultipartRequest;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
-import okhttp3.Response;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -175,7 +183,7 @@ public class LoginScreen extends AppCompatActivity {
         HTTP http = new HTTP(this);
         http.sendRequest(reqUrl, jsonLoginBody, new HTTP.HttpRequestCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws JSONException, IOException {
+            public void onSuccess(JSONObject response) throws JSONException {
                 Log.d("Resp", String.valueOf(response));
                 String role = response.getString("Role");
                 String userName = response.getString("UserName");
@@ -192,39 +200,9 @@ public class LoginScreen extends AppCompatActivity {
                 util.user.seteMail(eMail);
                 util.user.setNameSurname(nameSurname);
                 util.user.setPhoneNumber(phoneNumber);
-                //downloadProfilePhoto(username, role);
+                redirectBasedRole(role);
                 util.user.setCompanyName(company);
                 util.user.setCreatedAt(createdAt);
-
-                //Util.user.setProfilePhotoPath(localDirectoryPath);
-                Intent intent = null;
-
-                switch (role) {
-                    case "NORMAL":
-                        intent = new Intent(LoginScreen.this, DashboardUserScreen.class);
-                        intent.putExtra("user", util.user);
-                        break;
-                    case "TECHNICIAN":
-                        intent = new Intent(LoginScreen.this, DashboardTechnicianScreen.class);
-                        intent.putExtra("user", util.user);
-                        break;
-                    case "ENGINEER":
-                        intent = new Intent(LoginScreen.this, DashboardEngineerScreen.class);
-                        intent.putExtra("user", util.user);
-                        break;
-                    case "SYSOP":
-                        intent = new Intent(LoginScreen.this, DashboardSysOpScreen.class);
-                        intent.putExtra("user", util.user);
-                        break;
-                    default:
-                        Toast.makeText(LoginScreen.this, "Desteklenmeyen bir kullanıcı türüne sahipsin!", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-
-                if (intent != null) {
-                    startActivity(intent);
-                    finish();
-                }
             }
 
             @Override
@@ -234,152 +212,34 @@ public class LoginScreen extends AppCompatActivity {
         });
     }
 
-    public void downloadProfilePhoto(String username, String role) {
-        String localDirectoryPath = getApplicationContext().getFilesDir().getPath() + "/OnderGrup/profilePhoto/";
-        String localFilePath = localDirectoryPath + username + ".jpg";
+    public void redirectBasedRole(String role) {
+        Intent intent = null;
 
-        File localFile = new File(localDirectoryPath);
-        if (!localFile.exists()) {
-            localFile.mkdirs();
+        switch (role) {
+            case "NORMAL":
+                intent = new Intent(LoginScreen.this, DashboardUserScreen.class);
+                intent.putExtra("user", util.user);
+                break;
+            case "TECHNICIAN":
+                intent = new Intent(LoginScreen.this, DashboardTechnicianScreen.class);
+                intent.putExtra("user", util.user);
+                break;
+            case "ENGINEER":
+                intent = new Intent(LoginScreen.this, DashboardEngineerScreen.class);
+                intent.putExtra("user", util.user);
+                break;
+            case "SYSOP":
+                intent = new Intent(LoginScreen.this, DashboardSysOpScreen.class);
+                intent.putExtra("user", util.user);
+                break;
+            default:
+                Toast.makeText(LoginScreen.this, "Desteklenmeyen bir kullanıcı türüne sahipsin!", Toast.LENGTH_SHORT).show();
+                break;
         }
 
-        String reqURL = util.BASE_URL + util.downloadPhotoURLPrefix;
-
-        // Create a JSON object to send as the request body
-        JSONObject requestBody = new JSONObject();
-        try {
-            requestBody.put("username", username);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (intent != null) {
+            startActivity(intent);
+            finish();
         }
-
-        // Create a request for binary data
-        /*Request<byte[]> request = new Request<byte[]>(
-                Request.Method.POST,
-                reqURL,
-                response -> {
-                    try {
-                        // Save the response data as a file
-                        FileOutputStream fos = new FileOutputStream(localFilePath);
-                        fos.write(response);
-                        fos.close();
-
-                        Log.d("Download", "File saved successfully: " + localFilePath);
-
-                        // The rest of your code here
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                },
-                error -> {
-                    Log.e("Download", "Error while downloading profile photo: " + error.getMessage());
-                    Toast.makeText(LoginScreen.this, "Profil fotoğrafı indirilirken hata meydana geldi!", Toast.LENGTH_SHORT).show();
-                }
-        ) {
-            @Override
-            protected com.android.volley.Response<byte[]> parseNetworkResponse(NetworkResponse response) {
-                return Response.success(response.data, HttpHeaderParser.parseCacheHeaders(response));
-            }
-
-            @Override
-            protected void deliverResponse(byte[] response) {
-                // Handle the response here
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                // Add headers if needed
-                return headers;
-            }
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("username", username);
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(request);*/
-    }
-
-    public void downloadProfilePhoto2(String username, String role) {
-        String localDirectoryPath = getApplicationContext().getFilesDir().getPath() + "/OnderGrup/profilePhoto/";
-        String localFilePath = localDirectoryPath + username + ".jpg";
-
-        File localFile = new File(localDirectoryPath);
-        if (!localFile.exists()) {
-            localFile.mkdirs();
-        }
-
-        String reqURL = util.BASE_URL + util.downloadPhotoURLPrefix;
-
-        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(
-                Request.Method.POST,
-                reqURL,
-                response -> {
-                    try {
-                        byte[] imageData = response.data;
-                        FileOutputStream fos = new FileOutputStream(localFilePath);
-                        fos.write(imageData);
-                        fos.close();
-                        System.out.println("Dosya başarıyla kaydedildi: " + localFilePath);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    Util.user.setProfilePhotoPath(localDirectoryPath);
-                    Intent intent = null;
-
-                    switch (role) {
-                        case "NORMAL":
-                            intent = new Intent(LoginScreen.this, DashboardUserScreen.class);
-                            intent.putExtra("user", util.user);
-                            break;
-                        case "TECHNICIAN":
-                            intent = new Intent(LoginScreen.this, DashboardTechnicianScreen.class);
-                            intent.putExtra("user", util.user);
-                            break;
-                        case "ENGINEER":
-                            intent = new Intent(LoginScreen.this, DashboardEngineerScreen.class);
-                            intent.putExtra("user", util.user);
-                            break;
-                        case "SYSOP":
-                            intent = new Intent(LoginScreen.this, DashboardSysOpScreen.class);
-                            intent.putExtra("user", util.user);
-                            break;
-                        default:
-                            Toast.makeText(LoginScreen.this, "Desteklenmeyen bir kullanıcı türüne sahipsin!", Toast.LENGTH_SHORT).show();
-                            break;
-                    }
-
-                    if (intent != null) {
-                        startActivity(intent);
-                        finish();
-                    }
-                },
-                error -> {
-                    Toast.makeText(LoginScreen.this, "Profil fotoğrafı indirilirken hata meydana geldi!", Toast.LENGTH_SHORT).show();
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("username", username);
-                return params;
-            }
-
-            @Override
-            protected Map<String, DataPart> getByteData() throws AuthFailureError {
-                Map<String, DataPart> params = new HashMap<>();
-                params.put("username", new DataPart("username", username.getBytes(), "text/plain"));
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(multipartRequest);
     }
 }

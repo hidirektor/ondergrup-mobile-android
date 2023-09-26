@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+
 import java.io.File;
 
 import me.t3sl4.ondergrup.R;
@@ -56,20 +58,11 @@ public class DashboardSysOpScreen extends AppCompatActivity {
     }
 
     public void setUserInfo() {
-        String localDirectoryPath = getApplicationContext().getFilesDir().getPath() + "/OnderGrup/profilePhoto/";
-        String localFilePath = localDirectoryPath + receivedUser.getUserName() + ".jpg";
-
-        File file = new File("/data/user/0/me.t3sl4.ondergrup/files/OnderGrup/profilePhoto/hidirektor.jpg");
-        if(file.exists()) {
-            Log.d("Dosya", "Dosya var");
-        } else {
-            Log.d("Dosya", "Dosya yok");
-        }
-
-        Bitmap profilePhotoBitmap = BitmapFactory.decodeFile(localFilePath);
-
         isimSoyisim.setText(receivedUser.getNameSurname());
-        profilePhotoView.setImageBitmap(profilePhotoBitmap);
+        String imageUrl = util.BASE_URL + util.getPhotoURLPrefix + receivedUser.getUserName() + ".jpg";
+        Glide.with(this)
+                .load(imageUrl)
+                .into(profilePhotoView);
 
     }
 }
