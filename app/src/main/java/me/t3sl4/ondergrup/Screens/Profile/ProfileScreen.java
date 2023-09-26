@@ -16,7 +16,9 @@ import java.util.Date;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
+import me.t3sl4.ondergrup.Screens.Dashboard.DashboardEngineerScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardSysOpScreen;
+import me.t3sl4.ondergrup.Screens.Dashboard.DashboardTechnicianScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardUserScreen;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
@@ -61,9 +63,32 @@ public class ProfileScreen extends AppCompatActivity {
             Intent profileIntent = new Intent(ProfileScreen.this, EditProfileScreen.class);
             profileIntent.putExtra("user", util.user);
             startActivity(profileIntent);
+            finish();
         });
 
         setUserInfo();
+    }
+
+    @Override
+    public void onBackPressed() {
+        String userRole = receivedUser.getRole();
+        if(userRole == "NORMAL") {
+            Intent profileIntent = new Intent(ProfileScreen.this, DashboardUserScreen.class);
+            finish();
+            startActivity(profileIntent.putExtra("user", receivedUser));
+        } else if(userRole == "TECHNICIAN") {
+            Intent profileIntent = new Intent(ProfileScreen.this, DashboardTechnicianScreen.class);
+            finish();
+            startActivity(profileIntent.putExtra("user", receivedUser));
+        } else if(userRole == "ENGINEER") {
+            Intent profileIntent = new Intent(ProfileScreen.this, DashboardEngineerScreen.class);
+            finish();
+            startActivity(profileIntent.putExtra("user", receivedUser));
+        } else {
+            Intent profileIntent = new Intent(ProfileScreen.this, DashboardSysOpScreen.class);
+            finish();
+            startActivity(profileIntent.putExtra("user", receivedUser));
+        }
     }
 
     public void setUserInfo() {
@@ -71,7 +96,7 @@ public class ProfileScreen extends AppCompatActivity {
 
         String createdAtString = receivedUser.getCreatedAt();
 
-        Glide.with(this).load(imageUrl).override(120, 120).into(profilePhoto);
+        Glide.with(this).load(imageUrl).override(100, 100).into(profilePhoto);
         nameSurname.setText(receivedUser.getNameSurname());
         eMail.setText(receivedUser.geteMail());
         kullaniciRolu.setText(receivedUser.getRole());

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 
@@ -26,7 +27,7 @@ public class DashboardTechnicianScreen extends AppCompatActivity {
     private TextView isimSoyisim;
     private ImageView profilePhotoView;
 
-    private ImageView profileButton;
+    private ConstraintLayout profileButton;
 
     public User receivedUser;
 
@@ -43,12 +44,13 @@ public class DashboardTechnicianScreen extends AppCompatActivity {
         isimSoyisim = findViewById(R.id.textView4);
         profilePhotoView = findViewById(R.id.imageView4);
 
-        profileButton = findViewById(R.id.imageView20);
+        profileButton = findViewById(R.id.profileConstraint);
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(DashboardTechnicianScreen.this, ProfileScreen.class);
             profileIntent.putExtra("user", util.user);
             startActivity(profileIntent);
+            finish();
         });
 
         setUserInfo();
@@ -58,7 +60,7 @@ public class DashboardTechnicianScreen extends AppCompatActivity {
         isimSoyisim.setText(receivedUser.getNameSurname());
         String imageUrl = util.BASE_URL + util.getPhotoURLPrefix + receivedUser.getUserName() + ".jpg";
         Glide.with(this)
-                .load(imageUrl)
+                .load(imageUrl).override(100,100)
                 .into(profilePhotoView);
 
     }

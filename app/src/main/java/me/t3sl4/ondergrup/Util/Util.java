@@ -84,24 +84,9 @@ public class Util {
         }
     }
 
-    public static void togglePasswordVisibility(boolean isPasswordVisible, EditText passwordEditText, Context context) {
-        isPasswordVisible = !isPasswordVisible;
-        int drawableResId = isPasswordVisible ? R.drawable.field_password_hide : R.drawable.field_password_show;
-        setPasswordVisibility(isPasswordVisible, passwordEditText);
-        updatePasswordToggleIcon(drawableResId, passwordEditText, context);
-    }
-
-    public static void setPasswordVisibility(boolean visible, EditText passwordEditText) {
-        int inputType = visible ? android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                : android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
-        passwordEditText.setInputType(inputType);
-        passwordEditText.setSelection(passwordEditText.getText().length());
-    }
-
-    public static void updatePasswordToggleIcon(@DrawableRes int drawableResId, EditText passwordEditText, Context context) {
-        Drawable[] drawables = passwordEditText.getCompoundDrawablesRelative();
-        drawables[2] = context.getResources().getDrawable(drawableResId, context.getApplicationContext().getTheme());
-        passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                drawables[0], drawables[1], drawables[2], drawables[3]);
+    public static String getCurrentDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 }

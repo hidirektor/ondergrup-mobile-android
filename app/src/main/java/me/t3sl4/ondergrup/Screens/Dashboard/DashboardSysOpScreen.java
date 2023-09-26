@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 
@@ -32,7 +33,7 @@ public class DashboardSysOpScreen extends AppCompatActivity {
 
     private LinearLayout destekButton;
 
-    private ImageView profileButton;
+    private ConstraintLayout profileButton;
 
     public User receivedUser;
 
@@ -49,13 +50,14 @@ public class DashboardSysOpScreen extends AppCompatActivity {
         isimSoyisim = findViewById(R.id.textView4);
         profilePhotoView = findViewById(R.id.imageView4);
 
-        profileButton = findViewById(R.id.imageView20);
+        profileButton = findViewById(R.id.profileConstraint);
         destekButton = findViewById(R.id.destekButton);
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(DashboardSysOpScreen.this, ProfileScreen.class);
             profileIntent.putExtra("user", util.user);
             startActivity(profileIntent);
+            finish();
         });
 
         setUserInfo();
@@ -71,7 +73,7 @@ public class DashboardSysOpScreen extends AppCompatActivity {
         isimSoyisim.setText(receivedUser.getNameSurname());
         String imageUrl = util.BASE_URL + util.getPhotoURLPrefix + receivedUser.getUserName() + ".jpg";
         Glide.with(this)
-                .load(imageUrl)
+                .load(imageUrl).override(100,100)
                 .into(profilePhotoView);
 
     }

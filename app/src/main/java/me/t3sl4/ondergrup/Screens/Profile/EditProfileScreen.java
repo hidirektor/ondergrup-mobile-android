@@ -2,19 +2,43 @@ package me.t3sl4.ondergrup.Screens.Profile;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
+import me.t3sl4.ondergrup.Screens.Auth.RegisterScreen;
+import me.t3sl4.ondergrup.Util.HTTP.HTTP;
+import me.t3sl4.ondergrup.Util.HTTP.VolleyMultipartRequest;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -29,8 +53,13 @@ public class EditProfileScreen extends AppCompatActivity {
     private EditText phone;
     private EditText companyName;
     private EditText passwordEditText;
+    private LinearLayout showProfile;
+    private Button updateProfileButton;
+    private ImageView uploadPhoto;
 
     private boolean isPasswordVisible = false;
+    private boolean isPhotoSelected = false;
+    private Uri selectedImageUri;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -51,6 +80,27 @@ public class EditProfileScreen extends AppCompatActivity {
         phone = findViewById(R.id.editTextPhone);
         companyName = findViewById(R.id.editTextCompany);
         passwordEditText = findViewById(R.id.editTextPassword);
+        uploadPhoto = findViewById(R.id.imageViewSelect);
+
+        showProfile = findViewById(R.id.showProfileLayout);
+        updateProfileButton = findViewById(R.id.button3);
+
+        showProfile.setOnClickListener(v -> {
+            Intent profileIntent = new Intent(EditProfileScreen.this, ProfileScreen.class);
+            profileIntent.putExtra("user", receivedUser);
+            startActivity(profileIntent);
+            finish();
+        });
+
+        updateProfileButton.setOnClickListener(v -> {
+            updateWholeProfile();
+        });
+
+        uploadPhoto.setOnClickListener(v -> {
+            Intent photoPick = new Intent(Intent.ACTION_PICK);
+            photoPick.setType("image/*");
+            startActivityForResult(photoPick, 1);
+        });
 
         passwordEditText.setOnTouchListener(new View.OnTouchListener() {
             final int DRAWABLE_RIGHT = 2;
@@ -73,12 +123,144 @@ public class EditProfileScreen extends AppCompatActivity {
     public void setUserInfo() {
         String imageUrl = util.BASE_URL + util.getPhotoURLPrefix + receivedUser.getUserName() + ".jpg";
 
-        Glide.with(this).load(imageUrl).override(120, 120).into(profilePhoto);
+        Glide.with(this).load(imageUrl).override(100, 100).into(profilePhoto);
         nameSurname.setText(receivedUser.getNameSurname());
         eMail.setText(receivedUser.geteMail());
         kullaniciAdi.setText(receivedUser.getUserName());
         phone.setText(receivedUser.getPhoneNumber());
         companyName.setText(receivedUser.getCompanyName());
+    }
+
+    public void updateWholeProfile() {
+        String created_at = Util.getCurrentDateTime();
+        String password = String.valueOf(passwordEditText.getText());
+
+        if (password.isEmpty()) {
+            password = "null";
+        }
+
+        String registerJsonBody =
+                "{" +
+                        "\"UserName\":\"" + kullaniciAdi.getText() + "\"," +
+                        "\"Email\":\"" + eMail.getText() + "\"," +
+                        "\"Password\":\"" + password + "\"," +
+                        "\"NameSurname\":\"" + nameSurname.getText() + "\"," +
+                        "\"Phone\":\"" + phone.getText() + "\"," +
+                        "\"CompanyName\":\"" + companyName.getText() + "\"," +
+                        "\"Created_At\":\"" + created_at + "\"" +
+                        "}";
+
+        sendUpdateRequest(registerJsonBody, String.valueOf(kullaniciAdi.getText()));
+    }
+
+    private void sendUpdateRequest(String jsonBody, String username) {
+        String updateProfileUrl = util.BASE_URL + util.updateProfileURLPrefix;
+
+        HTTP http = new HTTP(this);
+        http.sendRequest(updateProfileUrl, jsonBody, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                if(selectedImageUri != null && isPhotoSelected) {
+                    uploadProfilePhoto2Server(username);
+                }
+                finish();
+                updateUserObject(receivedUser);
+                startActivity(getIntent().putExtra("user", receivedUser));
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Log.e("Hata", " " + errorMessage);
+                Toast.makeText(EditProfileScreen.this, "Profil güncellenirken hata meydana geldi!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void uploadProfilePhoto2Server(String userName) {
+        String uploadUrl = util.BASE_URL + util.uploadURLPrefix;
+
+        File profilePhotoFile = uriToFile(selectedImageUri);
+        if (!profilePhotoFile.exists()) {
+            Toast.makeText(EditProfileScreen.this, "Profil fotoğrafı bulunamadı!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(
+                Request.Method.POST,
+                uploadUrl,
+                response -> {
+                    Intent intent = new Intent(EditProfileScreen.this, LoginScreen.class);
+                    startActivity(intent);
+                    finish();
+                },
+                error -> {
+                    Toast.makeText(EditProfileScreen.this, "Profil fotoğrafı yüklenirken hata meydana geldi!", Toast.LENGTH_SHORT).show();
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", userName);
+                return params;
+            }
+
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                String imageName = userName + ".jpg";
+                profilePhoto.setDrawingCacheEnabled(true);
+                profilePhoto.buildDrawingCache();
+                Bitmap bitmap = profilePhoto.getDrawingCache();
+                byte[] imageBytes = convertBitmapToByteArray(bitmap);
+                params.put("file", new DataPart(imageName, imageBytes, "image/jpeg"));
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(multipartRequest);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent profileIntent = new Intent(EditProfileScreen.this, ProfileScreen.class);
+        finish();
+        startActivity(profileIntent.putExtra("user", receivedUser));
+    }
+
+    private byte[] convertBitmapToByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    private File uriToFile(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String filePath = cursor.getString(column_index);
+        cursor.close();
+
+        return new File(filePath);
+    }
+
+    public void updateUserObject(User receivedUser) {
+        receivedUser.setNameSurname(String.valueOf(nameSurname.getText()));
+        receivedUser.seteMail(String.valueOf(eMail.getText()));
+        receivedUser.setPhoneNumber(String.valueOf(phone.getText()));
+        receivedUser.setCompanyName(String.valueOf(companyName.getText()));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            selectedImageUri = data.getData();
+            isPhotoSelected = true;
+
+            profilePhoto.setImageURI(selectedImageUri);
+        }
     }
 
     private void togglePasswordVisibility() {
