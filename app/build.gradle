@@ -6,7 +6,7 @@ android {
         applicationId "me.t3sl4.ondergrup"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 2
+        versionCode 3
         versionName "T3SL4"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
