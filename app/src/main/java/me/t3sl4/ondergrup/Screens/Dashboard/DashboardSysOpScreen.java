@@ -19,6 +19,7 @@ import java.io.File;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.MainActivity;
+import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.Weather.Weather;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
@@ -30,6 +31,8 @@ public class DashboardSysOpScreen extends AppCompatActivity {
     private ImageView profilePhotoView;
 
     private LinearLayout destekButton;
+
+    private ImageView profileButton;
 
     public User receivedUser;
 
@@ -46,7 +49,14 @@ public class DashboardSysOpScreen extends AppCompatActivity {
         isimSoyisim = findViewById(R.id.textView4);
         profilePhotoView = findViewById(R.id.imageView4);
 
+        profileButton = findViewById(R.id.imageView20);
         destekButton = findViewById(R.id.destekButton);
+
+        profileButton.setOnClickListener(v -> {
+            Intent profileIntent = new Intent(DashboardSysOpScreen.this, ProfileScreen.class);
+            profileIntent.putExtra("user", util.user);
+            startActivity(profileIntent);
+        });
 
         setUserInfo();
 

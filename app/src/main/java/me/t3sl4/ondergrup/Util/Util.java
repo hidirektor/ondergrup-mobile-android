@@ -4,11 +4,19 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.User.User;
@@ -60,5 +68,40 @@ public class Util {
 
         diyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         diyalog.show();
+    }
+
+    public static String dateTimeConvert(String inputDate) {
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        inputDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat outputDateFormat = new SimpleDateFormat("MM.dd.yyyy hh:mm:ss");
+
+        try {
+            Date date = inputDateFormat.parse(inputDate);
+            return outputDateFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void togglePasswordVisibility(boolean isPasswordVisible, EditText passwordEditText, Context context) {
+        isPasswordVisible = !isPasswordVisible;
+        int drawableResId = isPasswordVisible ? R.drawable.field_password_hide : R.drawable.field_password_show;
+        setPasswordVisibility(isPasswordVisible, passwordEditText);
+        updatePasswordToggleIcon(drawableResId, passwordEditText, context);
+    }
+
+    public static void setPasswordVisibility(boolean visible, EditText passwordEditText) {
+        int inputType = visible ? android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                : android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
+        passwordEditText.setInputType(inputType);
+        passwordEditText.setSelection(passwordEditText.getText().length());
+    }
+
+    public static void updatePasswordToggleIcon(@DrawableRes int drawableResId, EditText passwordEditText, Context context) {
+        Drawable[] drawables = passwordEditText.getCompoundDrawablesRelative();
+        drawables[2] = context.getResources().getDrawable(drawableResId, context.getApplicationContext().getTheme());
+        passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                drawables[0], drawables[1], drawables[2], drawables[3]);
     }
 }

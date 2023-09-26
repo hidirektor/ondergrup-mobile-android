@@ -41,15 +41,27 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <ImageView
-                        android:id="@+id/imageView"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardViewPhoto"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_marginTop="32dp"
+                        app:cardCornerRadius="50dp"
+                        app:cardBackgroundColor="@color/transparent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ondergrup_ikon"/>
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginEnd="32dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ondergrup_ikon" />
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:id="@+id/textView"
@@ -60,9 +72,9 @@
                         android:textColor="#ffffff"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView"
-                        app:layout_constraintStart_toStartOf="@+id/imageView"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                        app:layout_constraintEnd_toEndOf="@+id/cardViewPhoto"
+                        app:layout_constraintStart_toStartOf="@+id/cardViewPhoto"
+                        app:layout_constraintTop_toBottomOf="@+id/cardViewPhoto" />
 
                     <ImageView
                         android:id="@+id/imageViewSelect"
@@ -148,143 +160,102 @@
                             </LinearLayout>
                         </LinearLayout>
 
-                        <LinearLayout
+                        <EditText
+                            android:id="@+id/editTextNameSurname"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="24dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:orientation="horizontal">
+                            android:layout_height="50dp"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="32dp"
+                            android:background="@drawable/edittext_background"
+                            android:drawableStart="@drawable/name"
+                            android:drawablePadding="16dp"
+                            android:ems="10"
+                            android:hint="İsim Soyisim"
+                            android:inputType="textPersonName"
+                            android:padding="8dp"
+                            android:textColorHint="#756C6C" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Kullanıcı Adı"
-                                android:textColorHint="@color/colorGrey2">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/ed_username"
-                                    android:hint="Kullanıcı Adı"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/colorGrey2" />
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <EditText
+                            android:id="@+id/editTextNickname"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                            android:layout_height="50dp"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="32dp"
+                            android:background="@drawable/edittext_background"
+                            android:drawableStart="@drawable/kullaniciadi"
+                            android:drawablePadding="16dp"
+                            android:ems="10"
+                            android:hint="Kullanıcı Adı"
+                            android:inputType="textPersonName"
+                            android:padding="8dp"
+                            android:textColorHint="#756C6C" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="İsim Soyisim"
-                                android:textColorHint="@color/colorGrey2">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/ed_namesurname"
-                                    android:hint="İsim Soyisim"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/colorGrey2" />
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <EditText
+                            android:id="@+id/editTextPassword"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                            android:layout_height="50dp"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="32dp"
+                            android:background="@drawable/edittext_background"
+                            android:drawableStart="@drawable/password"
+                            android:drawableEnd="@drawable/field_password_show"
+                            android:drawablePadding="16dp"
+                            android:ems="10"
+                            android:hint="Şifre"
+                            android:inputType="textPassword"
+                            android:padding="8dp"
+                            android:textColorHint="#756C6C" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Şirket"
-                                android:textColorHint="@color/colorGrey2">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/ed_company"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="Şirket"
-                                    android:textColor="@color/colorGrey2" />
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <EditText
+                            android:id="@+id/editTextMail"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                            android:layout_height="50dp"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="32dp"
+                            android:background="@drawable/edittext_background"
+                            android:drawableStart="@drawable/email"
+                            android:drawablePadding="16dp"
+                            android:ems="10"
+                            android:hint="E-Posta"
+                            android:inputType="textPersonName"
+                            android:padding="8dp"
+                            android:textColorHint="#756C6C" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="E-Posta"
-                                android:textColorHint="@color/colorGrey2">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/ed_email"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="E-Posta"
-                                    android:textColor="@color/colorGrey2" />
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <EditText
+                            android:id="@+id/editTextPhone"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                            android:layout_height="50dp"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="32dp"
+                            android:background="@drawable/edittext_background"
+                            android:drawableStart="@drawable/telephone"
+                            android:drawablePadding="16dp"
+                            android:ems="10"
+                            android:hint="Telefon"
+                            android:inputType="textPersonName"
+                            android:padding="8dp"
+                            android:textColorHint="#756C6C" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Telefon Numarası"
-                                android:textColorHint="@color/colorGrey2">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/ed_alternatmob"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="Telefon Numarası"
-                                    android:inputType="phone"
-                                    android:textColor="@color/colorGrey2" />
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <EditText
+                            android:id="@+id/editTextCompany"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Şifre"
-                                android:textColorHint="@color/colorGrey2"
-                                app:passwordToggleEnabled="true">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/ed_password"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="Şifre"
-                                    android:inputType="textPassword"
-                                    android:textColor="@color/colorGrey2" />
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </LinearLayout>
+                            android:layout_height="50dp"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="32dp"
+                            android:background="@drawable/edittext_background"
+                            android:drawableStart="@drawable/sirket"
+                            android:drawablePadding="16dp"
+                            android:ems="10"
+                            android:hint="Şirket"
+                            android:inputType="textPersonName"
+                            android:padding="8dp"
+                            android:textColorHint="#756C6C" />
 
                     </LinearLayout>
 

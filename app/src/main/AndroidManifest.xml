@@ -81,6 +81,12 @@
         <activity
             android:name=".Screens.Weather.Future"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.Profile.ProfileScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.Profile.EditProfileScreen"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

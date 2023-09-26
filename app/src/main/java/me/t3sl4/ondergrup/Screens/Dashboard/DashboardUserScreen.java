@@ -16,6 +16,7 @@ import java.io.File;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.MainActivity;
+import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -24,6 +25,8 @@ public class DashboardUserScreen extends AppCompatActivity {
 
     private TextView isimSoyisim;
     private ImageView profilePhotoView;
+
+    private ImageView profileButton;
 
     public User receivedUser;
 
@@ -39,6 +42,14 @@ public class DashboardUserScreen extends AppCompatActivity {
 
         isimSoyisim = findViewById(R.id.textView4);
         profilePhotoView = findViewById(R.id.imageView4);
+
+        profileButton = findViewById(R.id.imageView20);
+
+        profileButton.setOnClickListener(v -> {
+            Intent profileIntent = new Intent(DashboardUserScreen.this, ProfileScreen.class);
+            profileIntent.putExtra("user", util.user);
+            startActivity(profileIntent);
+        });
 
         setUserInfo();
     }
