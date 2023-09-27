@@ -18,6 +18,7 @@ import java.io.File;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.MainActivity;
+import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.Support.SupportScreen;
 import me.t3sl4.ondergrup.Util.User.User;
@@ -30,6 +31,7 @@ public class DashboardTechnicianScreen extends AppCompatActivity {
     private ImageView profilePhotoView;
 
     private ConstraintLayout profileButton;
+    private ConstraintLayout settingsButton;
     private LinearLayout destekButton;
 
     public User receivedUser;
@@ -49,6 +51,7 @@ public class DashboardTechnicianScreen extends AppCompatActivity {
 
         profileButton = findViewById(R.id.profileConstraint);
         destekButton = findViewById(R.id.destekButton);
+        settingsButton = findViewById(R.id.settingsConstraint);
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(DashboardTechnicianScreen.this, ProfileScreen.class);
@@ -61,6 +64,13 @@ public class DashboardTechnicianScreen extends AppCompatActivity {
             Intent destekIntent = new Intent(DashboardTechnicianScreen.this, SupportScreen.class);
             destekIntent.putExtra("user", util.user);
             startActivity(destekIntent);
+        });
+
+        settingsButton.setOnClickListener(v -> {
+            Intent settingsIntent = new Intent(DashboardTechnicianScreen.this, EditProfileScreen.class);
+            settingsIntent.putExtra("user", receivedUser);
+            startActivity(settingsIntent);
+            finish();
         });
 
         setUserInfo();

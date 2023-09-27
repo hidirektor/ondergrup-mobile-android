@@ -20,6 +20,7 @@ import java.io.File;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.MainActivity;
+import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.Support.SupportScreen;
 import me.t3sl4.ondergrup.Screens.Weather.Weather;
@@ -35,6 +36,7 @@ public class DashboardSysOpScreen extends AppCompatActivity {
     private LinearLayout destekButton;
 
     private ConstraintLayout profileButton;
+    private ConstraintLayout settingsButton;
 
     public User receivedUser;
 
@@ -53,21 +55,29 @@ public class DashboardSysOpScreen extends AppCompatActivity {
 
         profileButton = findViewById(R.id.profileConstraint);
         destekButton = findViewById(R.id.destekButton);
+        settingsButton = findViewById(R.id.settingsConstraint);
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(DashboardSysOpScreen.this, ProfileScreen.class);
-            profileIntent.putExtra("user", util.user);
+            profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
             finish();
         });
 
-        setUserInfo();
-
         destekButton.setOnClickListener(v -> {
             Intent destekIntent = new Intent(DashboardSysOpScreen.this, SupportScreen.class);
-            destekIntent.putExtra("user", util.user);
+            destekIntent.putExtra("user", receivedUser);
             startActivity(destekIntent);
         });
+
+        settingsButton.setOnClickListener(v -> {
+            Intent settingsIntent = new Intent(DashboardSysOpScreen.this, EditProfileScreen.class);
+            settingsIntent.putExtra("user", receivedUser);
+            startActivity(settingsIntent);
+            finish();
+        });
+
+        setUserInfo();
     }
 
     public void setUserInfo() {
