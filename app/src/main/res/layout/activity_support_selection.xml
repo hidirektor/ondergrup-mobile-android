@@ -11,6 +11,7 @@
     <ScrollView
         android:id="@+id/mainScroll"
         android:layout_width="match_parent"
+        android:padding="30dp"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,10 +83,10 @@
 
 
                 <Button
+                    android:id="@+id/mapButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/transparent"
-                    android:onClick="showMap" />
+                    android:background="@color/transparent" />
 
 
             </RelativeLayout>
@@ -133,10 +134,10 @@
 
 
                 <Button
+                    android:id="@+id/mailButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/transparent"
-                    android:onClick="mailUs" />
+                    android:background="@color/transparent" />
 
             </RelativeLayout>
 
@@ -182,10 +183,10 @@
 
 
                 <Button
+                    android:id="@+id/callButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/transparent"
-                    android:onClick="callUs" />
+                    android:background="@color/transparent" />
 
             </RelativeLayout>
 
