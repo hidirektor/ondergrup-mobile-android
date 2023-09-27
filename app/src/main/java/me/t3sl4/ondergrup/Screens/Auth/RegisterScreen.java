@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -82,6 +83,26 @@ public class RegisterScreen extends AppCompatActivity {
 
         signUp = findViewById(R.id.signUp);
         signUp.setOnClickListener(v -> sendRegisterRequest());
+        signUp.setOnTouchListener((v, event) -> {
+
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    ImageView view = (ImageView) v;
+                    view.getDrawable().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                    view.invalidate();
+                    break;
+                }
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL: {
+                    ImageView view = (ImageView) v;
+                    view.getDrawable().clearColorFilter();
+                    view.invalidate();
+                    break;
+                }
+            }
+
+            return false;
+        });
 
         profilePhoto.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);

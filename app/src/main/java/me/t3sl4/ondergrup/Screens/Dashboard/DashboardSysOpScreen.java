@@ -21,6 +21,7 @@ import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.MainActivity;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
+import me.t3sl4.ondergrup.Screens.Support.SupportScreen;
 import me.t3sl4.ondergrup.Screens.Weather.Weather;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
@@ -63,9 +64,9 @@ public class DashboardSysOpScreen extends AppCompatActivity {
         setUserInfo();
 
         destekButton.setOnClickListener(v -> {
-            Intent intent2 = new Intent(DashboardSysOpScreen.this, Weather.class);
-            startActivity(intent2);
-            finish();
+            Intent destekIntent = new Intent(DashboardSysOpScreen.this, SupportScreen.class);
+            destekIntent.putExtra("user", util.user);
+            startActivity(destekIntent);
         });
     }
 

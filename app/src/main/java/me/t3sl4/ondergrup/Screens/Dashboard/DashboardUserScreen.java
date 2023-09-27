@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import java.io.File;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.MainActivity;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
+import me.t3sl4.ondergrup.Screens.Support.SupportScreen;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -28,6 +30,7 @@ public class DashboardUserScreen extends AppCompatActivity {
     private ImageView profilePhotoView;
 
     private ConstraintLayout profileButton;
+    private LinearLayout destekButton;
 
     public User receivedUser;
 
@@ -45,12 +48,19 @@ public class DashboardUserScreen extends AppCompatActivity {
         profilePhotoView = findViewById(R.id.imageView4);
 
         profileButton = findViewById(R.id.profileConstraint);
+        destekButton = findViewById(R.id.destekButton);
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(DashboardUserScreen.this, ProfileScreen.class);
             profileIntent.putExtra("user", util.user);
             startActivity(profileIntent);
             finish();
+        });
+
+        destekButton.setOnClickListener(v -> {
+            Intent destekIntent = new Intent(DashboardUserScreen.this, SupportScreen.class);
+            destekIntent.putExtra("user", util.user);
+            startActivity(destekIntent);
         });
 
         setUserInfo();
