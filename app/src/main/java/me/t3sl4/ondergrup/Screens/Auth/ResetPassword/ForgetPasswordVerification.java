@@ -1,5 +1,6 @@
 package me.t3sl4.ondergrup.Screens.Auth.ResetPassword;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,8 @@ public class ForgetPasswordVerification extends AppCompatActivity {
 
     private PinView enteredOTP;
 
+    private Dialog uyariDiyalog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,7 @@ public class ForgetPasswordVerification extends AppCompatActivity {
 
         util = new Util(getApplicationContext());
 
+        uyariDiyalog = new Dialog(this);
         Intent intent = getIntent();
         if (intent != null) {
             otpCode = intent.getStringExtra("otpcode");
@@ -51,13 +55,13 @@ public class ForgetPasswordVerification extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(ForgetPasswordVerification.this, "Hatalı OTP kodu girdiniz!", Toast.LENGTH_SHORT).show();
+                    util.showErrorPopup(uyariDiyalog, "Hatalı OTP kodu girdiniz. Lütfen gelen kodu kontrol edip tekrar dene.");
                 }
             } else {
-                Toast.makeText(ForgetPasswordVerification.this, "OTP kodu hatası!", Toast.LENGTH_SHORT).show();
+                util.showErrorPopup(uyariDiyalog, "OTP kodu alınamadı. Lütfen tekrar dene.");
             }
         } else {
-            Toast.makeText(ForgetPasswordVerification.this, "Lütfen önce OTP kodunu gir!", Toast.LENGTH_SHORT).show();
+            util.showErrorPopup(uyariDiyalog, "OTP kodunu girmeden işleme devam edemezsin.");
         }
     }
 

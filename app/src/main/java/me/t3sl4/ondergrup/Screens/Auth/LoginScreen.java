@@ -2,44 +2,24 @@ package me.t3sl4.ondergrup.Screens.Auth;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.android.volley.Response;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
@@ -48,7 +28,6 @@ import me.t3sl4.ondergrup.Screens.Dashboard.DashboardSysOpScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardTechnicianScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardUserScreen;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
-import me.t3sl4.ondergrup.Util.HTTP.VolleyMultipartRequest;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -81,6 +60,27 @@ public class LoginScreen extends AppCompatActivity {
         resetPassButton = findViewById(R.id.resetPassButton);
 
         loginButton.setOnClickListener(v -> sendLoginRequest());
+
+        loginButton.setOnTouchListener((v, event) -> {
+
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    ImageView view = (ImageView) v;
+                    view.getDrawable().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                    view.invalidate();
+                    break;
+                }
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL: {
+                    ImageView view = (ImageView) v;
+                    view.getDrawable().clearColorFilter();
+                    view.invalidate();
+                    break;
+                }
+            }
+
+            return false;
+        });
 
         registerButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginScreen.this, RegisterScreen.class);
@@ -170,7 +170,7 @@ public class LoginScreen extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMessage) {
-                Toast.makeText(LoginScreen.this, "Profil bilgileri alınamadı!", Toast.LENGTH_SHORT).show();
+                util.showErrorPopup(uyariDiyalog, "Profil bilgileri alınırken hata meydana geldi. Lütfen tekrar dene.");
             }
         });
     }
@@ -207,7 +207,7 @@ public class LoginScreen extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMessage) {
-                Toast.makeText(LoginScreen.this, "Kullanıcı adı veya şifre hatalı!", Toast.LENGTH_SHORT).show();
+                util.showErrorPopup(uyariDiyalog, "Girmiş olduğun kullanıcı adı veya şifre hatalı. Lütfen kontrol edip tekrar dene.");
             }
         });
     }
@@ -233,7 +233,7 @@ public class LoginScreen extends AppCompatActivity {
                 intent.putExtra("user", util.user);
                 break;
             default:
-                Toast.makeText(LoginScreen.this, "Desteklenmeyen bir kullanıcı türüne sahipsin!", Toast.LENGTH_SHORT).show();
+                util.showErrorPopup(uyariDiyalog, "Desteklenmeyen bir kullanıcı rolüne sahipsin. Lütfen iletişime geç.");
                 break;
         }
 

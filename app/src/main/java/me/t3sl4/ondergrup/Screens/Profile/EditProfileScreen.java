@@ -1,6 +1,7 @@
 package me.t3sl4.ondergrup.Screens.Profile;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -15,8 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,13 +29,11 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
-import me.t3sl4.ondergrup.Screens.Auth.RegisterScreen;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.HTTP.VolleyMultipartRequest;
 import me.t3sl4.ondergrup.Util.User.User;
@@ -57,6 +54,8 @@ public class EditProfileScreen extends AppCompatActivity {
     private Button updateProfileButton;
     private ImageView uploadPhoto;
 
+    private Dialog uyariDiyalog;
+
     private boolean isPasswordVisible = false;
     private boolean isPhotoSelected = false;
     private Uri selectedImageUri;
@@ -70,6 +69,7 @@ public class EditProfileScreen extends AppCompatActivity {
 
         util = new Util(getApplicationContext());
 
+        uyariDiyalog = new Dialog(this);
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
@@ -171,7 +171,7 @@ public class EditProfileScreen extends AppCompatActivity {
             @Override
             public void onFailure(String errorMessage) {
                 Log.e("Hata", " " + errorMessage);
-                Toast.makeText(EditProfileScreen.this, "Profil güncellenirken hata meydana geldi!", Toast.LENGTH_SHORT).show();
+                util.showErrorPopup(uyariDiyalog, "Profil güncellenirken hata meydana geldi. Lütfen tekrar dene.");
             }
         });
     }
@@ -181,7 +181,7 @@ public class EditProfileScreen extends AppCompatActivity {
 
         File profilePhotoFile = uriToFile(selectedImageUri);
         if (!profilePhotoFile.exists()) {
-            Toast.makeText(EditProfileScreen.this, "Profil fotoğrafı bulunamadı!", Toast.LENGTH_SHORT).show();
+            util.showErrorPopup(uyariDiyalog, "Profil fotoğrafı bulunamadı. Lütfen tekrar dene.");
             return;
         }
 
@@ -194,7 +194,7 @@ public class EditProfileScreen extends AppCompatActivity {
                     finish();
                 },
                 error -> {
-                    Toast.makeText(EditProfileScreen.this, "Profil fotoğrafı yüklenirken hata meydana geldi!", Toast.LENGTH_SHORT).show();
+                    util.showErrorPopup(uyariDiyalog, "Profil fotoğrafı yüklenirken hata meydana geldi. Lütfen tekrar dene.");
                 }
         ) {
             @Override

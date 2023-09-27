@@ -1,6 +1,7 @@
 package me.t3sl4.ondergrup.Screens.Auth;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -57,6 +58,8 @@ public class RegisterScreen extends AppCompatActivity {
 
     public Util util;
 
+    private Dialog uyariDiyalog;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +67,8 @@ public class RegisterScreen extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         util = new Util(getApplicationContext());
+
+        uyariDiyalog = new Dialog(this);
 
         editTextNickname = findViewById(R.id.editTextNickname);
         editTextMail = findViewById(R.id.editTextMail);
@@ -166,10 +171,10 @@ public class RegisterScreen extends AppCompatActivity {
 
                 sendRegisterRequest(registerJsonBody, userName);
             } else {
-                Toast.makeText(RegisterScreen.this, "Profil fotoğrafı seçmeyi unutma!", Toast.LENGTH_SHORT).show();
+                util.showErrorPopup(uyariDiyalog, "Kayıt olmak için profil fotoğrafı da seçmelisin.");
             }
         } else {
-            Toast.makeText(RegisterScreen.this, "Kayıt olmak için tüm alanları doldurmalısın!", Toast.LENGTH_SHORT).show();
+            util.showErrorPopup(uyariDiyalog, "Kayıt olmak için tüm alanları doldurmalısın.");
         }
     }
 
@@ -185,7 +190,7 @@ public class RegisterScreen extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMessage) {
-                Toast.makeText(RegisterScreen.this, "Kayıt olurken hata meydana geldi!", Toast.LENGTH_SHORT).show();
+                util.showErrorPopup(uyariDiyalog, "Kayıt olurken hata meydana geldi. Lütfen tekrar dene.");
             }
         });
     }
@@ -195,7 +200,7 @@ public class RegisterScreen extends AppCompatActivity {
 
         File profilePhotoFile = uriToFile(selectedImageUri);
         if (!profilePhotoFile.exists()) {
-            Toast.makeText(RegisterScreen.this, "Profil fotoğrafı bulunamadı!", Toast.LENGTH_SHORT).show();
+            util.showErrorPopup(uyariDiyalog, "Profil fotoğrafı bulunamadı. Lütfen tekrar dene.");
             return;
         }
 
@@ -208,7 +213,7 @@ public class RegisterScreen extends AppCompatActivity {
                     finish();
                 },
                 error -> {
-                    Toast.makeText(RegisterScreen.this, "Profil fotoğrafı yüklenirken hata meydana geldi!", Toast.LENGTH_SHORT).show();
+                    util.showErrorPopup(uyariDiyalog, "Profil fotoğrafı yüklenirken hata meydana geldi. Lütfen tekrar dene.");
                 }
         ) {
             @Override

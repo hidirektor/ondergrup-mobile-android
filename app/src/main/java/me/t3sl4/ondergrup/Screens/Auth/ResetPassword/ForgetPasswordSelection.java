@@ -1,5 +1,6 @@
 package me.t3sl4.ondergrup.Screens.Auth.ResetPassword;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,8 @@ public class ForgetPasswordSelection extends AppCompatActivity {
 
     public String userName;
 
+    private Dialog uyariDiyalog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +30,7 @@ public class ForgetPasswordSelection extends AppCompatActivity {
 
         util = new Util(getApplicationContext());
 
+        uyariDiyalog = new Dialog(this);
         Intent intent = getIntent();
         if (intent != null) {
             userName = intent.getStringExtra("username");
@@ -34,7 +38,7 @@ public class ForgetPasswordSelection extends AppCompatActivity {
     }
 
     public void sendOTPWithSMS(View view) {
-        Toast.makeText(ForgetPasswordSelection.this, "SMS sistemimiz henüz aktif değil!", Toast.LENGTH_SHORT).show();
+        util.showErrorPopup(uyariDiyalog, "SMS sistemimiz henüz aktif değil.");
     }
 
     public void sendOTPWithEmail(View view) {
@@ -52,7 +56,7 @@ public class ForgetPasswordSelection extends AppCompatActivity {
                         if(!email.equals(null)) {
                             sendOTP(email);
                         } else {
-                            Toast.makeText(ForgetPasswordSelection.this, "E-Posta adresi alınamadı!", Toast.LENGTH_SHORT).show();
+                            util.showErrorPopup(uyariDiyalog, "E-Posta adresi alınamadı. Lütfen tekrar dene.");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -61,11 +65,11 @@ public class ForgetPasswordSelection extends AppCompatActivity {
 
                 @Override
                 public void onFailure(String errorMessage) {
-                    Toast.makeText(ForgetPasswordSelection.this, "Kullanıcı bulunamadı!", Toast.LENGTH_SHORT).show();
+                    util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen bilgilerini kontrol edip tekrar dene.");
                 }
             });
         } else {
-            Toast.makeText(ForgetPasswordSelection.this, "Kullanıcı bulunamadı!", Toast.LENGTH_SHORT).show();
+            util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen bilgilerini kontrol edip tekrar dene.");
         }
     }
 
@@ -87,7 +91,7 @@ public class ForgetPasswordSelection extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(ForgetPasswordSelection.this, "OTP kodu alınamadı!", Toast.LENGTH_SHORT).show();
+                        util.showErrorPopup(uyariDiyalog, "OTP kodu alınamadı. Lütfen bilgilerini kontrol edip tekrar dene.");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -96,7 +100,7 @@ public class ForgetPasswordSelection extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMessage) {
-                Toast.makeText(ForgetPasswordSelection.this, "Kullanıcı bulunamadı!", Toast.LENGTH_SHORT).show();
+                util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen bilgilerini kontrol edip tekrar dene.");
             }
         });
     }

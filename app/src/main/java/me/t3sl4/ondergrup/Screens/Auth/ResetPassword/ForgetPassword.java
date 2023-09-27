@@ -1,10 +1,10 @@
 package me.t3sl4.ondergrup.Screens.Auth.ResetPassword;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,12 +26,15 @@ public class ForgetPassword extends AppCompatActivity {
     private TextInputEditText forgetPassUsernameText;
     private Button forgetPassButton;
 
+    private Dialog uyariDiyalog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
 
         util = new Util(getApplicationContext());
+        uyariDiyalog = new Dialog(this);
 
         forgetPassUsername = findViewById(R.id.forgetPassUsername);
         forgetPassUsernameText = forgetPassUsername.findViewById(R.id.forgetPassUsernameText);
@@ -42,7 +45,7 @@ public class ForgetPassword extends AppCompatActivity {
                 String username = forgetPassUsernameText.getText().toString();
                 sendOTP(username);
             } else {
-                Toast.makeText(ForgetPassword.this, "E-Posta alanı boş olamaz!", Toast.LENGTH_SHORT).show();
+                util.showErrorPopup(uyariDiyalog, "E-Posta alanı boş olamaz.");
             }
         });
     }
@@ -64,7 +67,7 @@ public class ForgetPassword extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(ForgetPassword.this, "Kullanıcı bulunamadı!", Toast.LENGTH_SHORT).show();
+                        util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. İstersen tekrar deneyebilirsin.");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -73,7 +76,7 @@ public class ForgetPassword extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMessage) {
-                Toast.makeText(ForgetPassword.this, "Kullanıcı bulunamadı!", Toast.LENGTH_SHORT).show();
+                util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. İstersen tekrar deneyebilirsin.");
             }
         });
     }

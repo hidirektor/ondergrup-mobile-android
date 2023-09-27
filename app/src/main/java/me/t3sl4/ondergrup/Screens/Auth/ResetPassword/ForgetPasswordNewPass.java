@@ -1,6 +1,7 @@
 package me.t3sl4.ondergrup.Screens.Auth.ResetPassword;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -30,6 +31,8 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
     private TextInputLayout editTextConfirmNewPass;
     private TextInputEditText editTextConfirmNewPassText;
 
+    private Dialog uyariDiyalog;
+
     private boolean isPasswordVisibleNormal = false;
     private boolean isPasswordVisibleConfirm = false;
 
@@ -41,6 +44,7 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
 
         util = new Util(getApplicationContext());
 
+        uyariDiyalog = new Dialog(this);
         Intent intent = getIntent();
         if (intent != null) {
             eMail = intent.getStringExtra("eMail");
@@ -107,7 +111,7 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                             } else {
-                                Toast.makeText(ForgetPasswordNewPass.this, "Şifre güncellenemedi!", Toast.LENGTH_SHORT).show();
+                                util.showErrorPopup(uyariDiyalog, "Şifre güncellenirken hata meydana geldi. Lütfen tekrar dene.");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -116,14 +120,14 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
 
                     @Override
                     public void onFailure(String errorMessage) {
-                        Toast.makeText(ForgetPasswordNewPass.this, "Kullanıcı bulunamadı!", Toast.LENGTH_SHORT).show();
+                        util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen tekrar dene.");
                     }
                 });
             } else {
-                Toast.makeText(ForgetPasswordNewPass.this, "Girilen şifreler birbirleriyle uyuşmuyor!", Toast.LENGTH_SHORT).show();
+                util.showErrorPopup(uyariDiyalog, "Girilen şifreler birbirleriyle uyuşmuyor. Lütfen tekrar dene.");
             }
         } else {
-            Toast.makeText(ForgetPasswordNewPass.this, "Lütfen iki şifre alanını da doldur!", Toast.LENGTH_SHORT).show();
+            util.showErrorPopup(uyariDiyalog, "İki şifre alanını da doldurman gerekiyor.");
         }
     }
 
