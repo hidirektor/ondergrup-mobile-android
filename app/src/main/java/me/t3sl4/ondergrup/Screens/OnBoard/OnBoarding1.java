@@ -1,9 +1,12 @@
 package me.t3sl4.ondergrup.Screens.OnBoard;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +17,7 @@ import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 
 public class OnBoarding1 extends AppCompatActivity {
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,27 @@ public class OnBoarding1 extends AppCompatActivity {
             Intent intent = new Intent(OnBoarding1.this, OnBoarding2.class);
             startActivity(intent);
             finish();
+        });
+
+        nextButton1.setOnTouchListener((v, event) -> {
+
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    ImageView view = (ImageView) v;
+                    view.getDrawable().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                    view.invalidate();
+                    break;
+                }
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL: {
+                    ImageView view = (ImageView) v;
+                    view.getDrawable().clearColorFilter();
+                    view.invalidate();
+                    break;
+                }
+            }
+
+            return false;
         });
 
         setOnBoardingState();
