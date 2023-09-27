@@ -95,6 +95,18 @@
         <activity
             android:name=".Screens.Support.SupportScreen"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.Documents.DocumentsScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.Documents.KVKKScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.Documents.PrivacyScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.Documents.DestructionScreen"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

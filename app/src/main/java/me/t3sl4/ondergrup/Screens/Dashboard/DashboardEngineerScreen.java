@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import java.io.File;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Documents.DocumentsScreen;
 import me.t3sl4.ondergrup.Screens.MainActivity;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
@@ -33,6 +34,7 @@ public class DashboardEngineerScreen extends AppCompatActivity {
     private ConstraintLayout profileButton;
     private ConstraintLayout settingsButton;
     private LinearLayout destekButton;
+    private ConstraintLayout belgelerButton;
 
     public User receivedUser;
 
@@ -52,6 +54,7 @@ public class DashboardEngineerScreen extends AppCompatActivity {
         profileButton = findViewById(R.id.profileConstraint);
         settingsButton = findViewById(R.id.settingsConstraint);
         destekButton = findViewById(R.id.destekButton);
+        belgelerButton = findViewById(R.id.belgelerConstraint);
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(DashboardEngineerScreen.this, ProfileScreen.class);
@@ -71,6 +74,11 @@ public class DashboardEngineerScreen extends AppCompatActivity {
             settingsIntent.putExtra("user", receivedUser);
             startActivity(settingsIntent);
             finish();
+        });
+
+        belgelerButton.setOnClickListener(v -> {
+            Intent belgelerIntent = new Intent(DashboardEngineerScreen.this, DocumentsScreen.class);
+            startActivity(belgelerIntent);
         });
 
         setUserInfo();
