@@ -2,11 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 33
+    def date = new Date()
+    def formattedDate = date.format('yyMMddHHmm')
+    def code = formattedDate.toInteger()
     defaultConfig {
         applicationId "me.t3sl4.ondergrup"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 6
+        versionCode code
         versionName "T3SL4"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
