@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,10 +48,29 @@ public class SubUserListScreen extends AppCompatActivity {
         subUserListAdapter = new SubUserAdapter(getApplicationContext(), subUserList);
         subUserListView.setAdapter(subUserListAdapter);
 
-        subUserListView.setOnItemClickListener((adapterView, view, position, id) -> {
-            SubUser selectedMachine = subUserList.get(position);
-            //TODO
-            //Sub user'a tıklandığında yapılacak işlemleri seç:
+        subUserListView.setOnItemLongClickListener((adapterView, view, position, id) -> {
+            SubUser selectedSubUser = subUserList.get(position);
+
+            PopupMenu popupMenu = new PopupMenu(this, view);
+            popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+
+            popupMenu.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.menu_option1:
+                        deleteAndUpdateSubUser(selectedSubUser, subUserList);
+                        return true;
+                    case R.id.menu_option2:
+                        //TODO
+                        //Alt kullanıcı düzenleme işlemi
+                        return true;
+                    default:
+                        return false;
+                }
+            });
+
+            popupMenu.show();
+
+            return true;
         });
     }
 
@@ -98,5 +118,29 @@ public class SubUserListScreen extends AppCompatActivity {
         subUserList = subUsers;
         subUserListAdapter = new SubUserAdapter(getApplicationContext(), subUserList);
         subUserListView.setAdapter(subUserListAdapter);
+    }
+
+    private void deleteAndUpdateSubUser(SubUser selectedSubUser, ArrayList<SubUser> subUsers) {
+        String reqURL = util.BASE_URL + util.deleteSubUserPrefix;
+
+        String selectedSubUsername = selectedSubUser.getUserName();
+        String ownerName = receivedUser.getUserName();
+        String jsonSubUserBody = "{\"username\": \"" + selectedSubUsername + "\", \"OwnerName\": \"" + ownerName + "\"}";
+
+        HTTP http = new HTTP(this);
+        http.sendRequest(reqURL, jsonSubUserBody, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde silindi !");
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                util.showErrorPopup(uyariDiyalog, "Kullanıcı silinmeedi. \nLütfen birazdan tekrar deneyin.");
+            }
+        });
+
+        subUsers.remove(selectedSubUser);
+        updateListView(subUsers);
     }
 }

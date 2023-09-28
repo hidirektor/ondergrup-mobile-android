@@ -35,6 +35,7 @@ public class Util {
     public String otpURLPrefix = "/api/sendOTP";
     public String addSubURLPrefix = "/api/createSub";
     public String getSubUsersPrefix = "/api/getSubUsers";
+    public String deleteSubUserPrefix = "/api/deleteSubUser";
 
 
     public String profileInfoURLPrefix = "/api/users/profileInfo/";
@@ -62,6 +63,18 @@ public class Util {
 
     public void showErrorPopup(Dialog diyalog, String hataMesaji) {
         diyalog.setContentView(R.layout.activity_popup_warning);
+        Button close = diyalog.findViewById(R.id.kapatButton);
+        TextView hataMesajiTextView = diyalog.findViewById(R.id.uyariMesaji);
+
+        hataMesajiTextView.setText(hataMesaji);
+        close.setOnClickListener(v -> diyalog.dismiss());
+
+        diyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        diyalog.show();
+    }
+
+    public void showSuccessPopup(Dialog diyalog, String hataMesaji) {
+        diyalog.setContentView(R.layout.activity_popup_success);
         Button close = diyalog.findViewById(R.id.kapatButton);
         TextView hataMesajiTextView = diyalog.findViewById(R.id.uyariMesaji);
 
