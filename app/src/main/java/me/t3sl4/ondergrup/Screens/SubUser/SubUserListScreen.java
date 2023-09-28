@@ -46,6 +46,12 @@ public class SubUserListScreen extends AppCompatActivity {
 
         subUserListAdapter = new SubUserAdapter(getApplicationContext(), subUserList);
         subUserListView.setAdapter(subUserListAdapter);
+
+        subUserListView.setOnItemClickListener((adapterView, view, position, id) -> {
+            SubUser selectedMachine = subUserList.get(position);
+            //TODO
+            //Sub user'a tıklandığında yapılacak işlemleri seç:
+        });
     }
 
     private ArrayList<SubUser> getSubUserList() {
