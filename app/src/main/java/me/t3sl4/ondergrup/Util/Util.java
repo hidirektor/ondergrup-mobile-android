@@ -34,6 +34,7 @@ public class Util {
     public String registerURLPrefix = "/api/register";
     public String otpURLPrefix = "/api/sendOTP";
     public String addSubURLPrefix = "/api/createSub";
+    public String getSubUsersPrefix = "/api/getSubUsers";
 
 
     public String profileInfoURLPrefix = "/api/users/profileInfo/";

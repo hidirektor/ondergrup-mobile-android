@@ -141,7 +141,7 @@ public class LoginScreen extends AppCompatActivity {
         HTTP http = new HTTP(this);
         http.sendRequest(authenticationUrl, jsonLoginBody, new HTTP.HttpRequestCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws IOException {
+            public void onSuccess(JSONObject response) {
                 getUserType(username);
             }
 

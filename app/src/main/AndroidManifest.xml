@@ -113,6 +113,9 @@
         <activity
             android:name=".Screens.SubUser.SubUserAddScreen"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.SubUser.SubUserListScreen"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

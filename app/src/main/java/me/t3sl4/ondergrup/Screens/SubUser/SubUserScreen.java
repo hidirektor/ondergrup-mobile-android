@@ -44,6 +44,12 @@ public class SubUserScreen extends AppCompatActivity {
         machineButton = findViewById(R.id.machineConstraint);
         settingsButton = findViewById(R.id.settingsConstraint);
 
+        subUserListeleButton.setOnClickListener(v -> {
+            Intent addIntent = new Intent(SubUserScreen.this, SubUserListScreen.class);
+            addIntent.putExtra("user", receivedUser);
+            startActivity(addIntent);
+        });
+
         subUsterEkleButton.setOnClickListener(v -> {
             Intent addIntent = new Intent(SubUserScreen.this, SubUserAddScreen.class);
             addIntent.putExtra("user", receivedUser);
