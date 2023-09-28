@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+android.buildTypes.release.ndk.debugSymbolLevel = 'FULL'
 
 android {
     compileSdkVersion 33
