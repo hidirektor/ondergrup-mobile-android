@@ -1,4 +1,4 @@
-package me.t3sl4.ondergrup.Screens.Auth;
+package me.t3sl4.ondergrup.Screens.SubUser;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -15,10 +15,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -37,12 +35,16 @@ import java.util.Locale;
 import java.util.Map;
 
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
+import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
+import me.t3sl4.ondergrup.Screens.Auth.RegisterScreen;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.HTTP.VolleyMultipartRequest;
+import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
-public class RegisterScreen extends AppCompatActivity {
+public class SubUserAddScreen extends AppCompatActivity {
+    public Util util;
+    public User receivedUser;
 
     private ImageView signUp;
     private ImageView profilePhoto;
@@ -52,24 +54,24 @@ public class RegisterScreen extends AppCompatActivity {
     private EditText editTextNameSurname;
     private EditText editTextPhone;
     private EditText editTextCompany;
-    private TextView resetPass;
     boolean isPhotoSelected = false;
     private Uri selectedImageUri;
     private boolean isPasswordVisible = false;
-
-    public Util util;
 
     private Dialog uyariDiyalog;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
 
-        util = new Util(getApplicationContext());
+        setContentView(R.layout.activity_subuser_add);
 
         uyariDiyalog = new Dialog(this);
+
+        util = new Util(getApplicationContext());
+        Intent intent = getIntent();
+        receivedUser = intent.getParcelableExtra("user");
 
         editTextNickname = findViewById(R.id.editTextNickname);
         editTextMail = findViewById(R.id.editTextMail);
@@ -77,7 +79,6 @@ public class RegisterScreen extends AppCompatActivity {
         editTextNameSurname = findViewById(R.id.editTextNameSurname);
         editTextPhone = findViewById(R.id.editTextPhone);
         editTextCompany = findViewById(R.id.editTextCompany);
-        resetPass = findViewById(R.id.resetPass);
 
         profilePhoto = findViewById(R.id.profilePhoto);
 
@@ -105,14 +106,9 @@ public class RegisterScreen extends AppCompatActivity {
         });
 
         profilePhoto.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            startActivityForResult(intent, 1);
-        });
-
-        resetPass.setOnClickListener(v -> {
-            Intent intent = new Intent(RegisterScreen.this, ForgetPassword.class);
-            startActivity(intent);
+            Intent photoIntent = new Intent(Intent.ACTION_PICK);
+            photoIntent.setType("image/*");
+            startActivityForResult(photoIntent, 1);
         });
 
         editTextPassword.setOnTouchListener(new View.OnTouchListener() {
@@ -187,31 +183,32 @@ public class RegisterScreen extends AppCompatActivity {
                                 "\"Phone\":\"" + phone + "\"," +
                                 "\"Profile_Photo\":\"" + profilePhotoPath + "\"," +
                                 "\"CompanyName\":\"" + companyName + "\"," +
+                                "\"OwnerName\":\"" + receivedUser.getUserName() + "\"," +
                                 "\"Created_At\":\"" + createdAt + "\"" +
                                 "}";
 
                 sendRegisterRequestFinal(registerJsonBody, userName);
             } else {
-                util.showErrorPopup(uyariDiyalog, "Kayıt olmak için profil fotoğrafı da seçmelisin.");
+                util.showErrorPopup(uyariDiyalog, "Alt kullanıcı eklemek için profil fotoğrafı da seçmelisin.");
             }
         } else {
-            util.showErrorPopup(uyariDiyalog, "Kayıt olmak için tüm alanları doldurmalısın.");
+            util.showErrorPopup(uyariDiyalog, "Alt kullanıcı eklemek için tüm alanları doldurmalısın.");
         }
     }
 
     private void sendRegisterRequestFinal(String jsonBody, String userName) {
-        String registerUrl = util.BASE_URL + util.registerURLPrefix;
+        String registerUrl = util.BASE_URL + util.addSubURLPrefix;
 
         HTTP http = new HTTP(this);
         http.sendRequest(registerUrl, jsonBody, new HTTP.HttpRequestCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws IOException {
+            public void onSuccess(JSONObject response) {
                 uploadProfilePhoto2Server(userName);
             }
 
             @Override
             public void onFailure(String errorMessage) {
-                util.showErrorPopup(uyariDiyalog, "Kayıt olurken hata meydana geldi. Lütfen tekrar dene.");
+                util.showErrorPopup(uyariDiyalog, "Alt kullanıcı eklerken hata meydana geldi. Lütfen tekrar dene.");
             }
         });
     }
@@ -229,8 +226,6 @@ public class RegisterScreen extends AppCompatActivity {
                 Request.Method.POST,
                 uploadUrl,
                 response -> {
-                    Intent intent = new Intent(RegisterScreen.this, LoginScreen.class);
-                    startActivity(intent);
                     finish();
                 },
                 error -> {

@@ -107,6 +107,12 @@
         <activity
             android:name=".Screens.Documents.DestructionScreen"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.SubUser.SubUserScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.SubUser.SubUserAddScreen"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

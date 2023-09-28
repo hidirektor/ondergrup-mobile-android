@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import me.t3sl4.ondergrup.Screens.Dashboard.DashboardEngineerScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardSysOpScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardTechnicianScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardUserScreen;
+import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -36,6 +38,7 @@ public class ProfileScreen extends AppCompatActivity {
     private TextView companyName;
     private TextView createdDate;
     private Button editProfileButton;
+    private LinearLayout subUserButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +61,19 @@ public class ProfileScreen extends AppCompatActivity {
         createdDate = findViewById(R.id.textView27);
 
         editProfileButton = findViewById(R.id.button3);
+        subUserButton = findViewById(R.id.subUserConstraint);
 
         editProfileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(ProfileScreen.this, EditProfileScreen.class);
             profileIntent.putExtra("user", util.user);
             startActivity(profileIntent);
             finish();
+        });
+
+        subUserButton.setOnClickListener(v -> {
+            Intent settingsIntent = new Intent(ProfileScreen.this, SubUserScreen.class);
+            settingsIntent.putExtra("user", receivedUser);
+            startActivity(settingsIntent);
         });
 
         setUserInfo();

@@ -33,6 +33,7 @@ public class Util {
     public String directLoginURLPrefix = "/api/directLogin";
     public String registerURLPrefix = "/api/register";
     public String otpURLPrefix = "/api/sendOTP";
+    public String addSubURLPrefix = "/api/createSub";
 
 
     public String profileInfoURLPrefix = "/api/users/profileInfo/";

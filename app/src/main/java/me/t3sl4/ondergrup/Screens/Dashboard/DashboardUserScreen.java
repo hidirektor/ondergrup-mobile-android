@@ -21,6 +21,7 @@ import me.t3sl4.ondergrup.Screens.Documents.DocumentsScreen;
 import me.t3sl4.ondergrup.Screens.MainActivity;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
+import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Screens.Support.SupportScreen;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
@@ -35,6 +36,7 @@ public class DashboardUserScreen extends AppCompatActivity {
     private LinearLayout destekButton;
     private ConstraintLayout settingsButton;
     private ConstraintLayout belgelerButton;
+    private ConstraintLayout subUserButton;
 
     public User receivedUser;
 
@@ -55,6 +57,7 @@ public class DashboardUserScreen extends AppCompatActivity {
         destekButton = findViewById(R.id.destekButton);
         settingsButton = findViewById(R.id.settingsConstraint);
         belgelerButton = findViewById(R.id.belgelerConstraint);
+        subUserButton = findViewById(R.id.subUserConstraint);
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(DashboardUserScreen.this, ProfileScreen.class);
@@ -79,6 +82,12 @@ public class DashboardUserScreen extends AppCompatActivity {
         belgelerButton.setOnClickListener(v -> {
             Intent belgelerIntent = new Intent(DashboardUserScreen.this, DocumentsScreen.class);
             startActivity(belgelerIntent);
+        });
+
+        subUserButton.setOnClickListener(v -> {
+            Intent settingsIntent = new Intent(DashboardUserScreen.this, SubUserScreen.class);
+            settingsIntent.putExtra("user", receivedUser);
+            startActivity(settingsIntent);
         });
 
         setUserInfo();
