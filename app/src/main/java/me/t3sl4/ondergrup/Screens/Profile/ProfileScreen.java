@@ -2,6 +2,7 @@ package me.t3sl4.ondergrup.Screens.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -82,22 +83,27 @@ public class ProfileScreen extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         String userRole = receivedUser.getRole();
-        if(userRole == "NORMAL") {
+        Log.d("Rol", " " + userRole);
+        if(userRole.equals("NORMAL")) {
             Intent profileIntent = new Intent(ProfileScreen.this, DashboardUserScreen.class);
+            profileIntent.putExtra("user", receivedUser);
+            startActivity(profileIntent);
             finish();
-            startActivity(profileIntent.putExtra("user", receivedUser));
-        } else if(userRole == "TECHNICIAN") {
+        } else if(userRole.equals("TECHNICIAN")) {
             Intent profileIntent = new Intent(ProfileScreen.this, DashboardTechnicianScreen.class);
+            profileIntent.putExtra("user", receivedUser);
+            startActivity(profileIntent);
             finish();
-            startActivity(profileIntent.putExtra("user", receivedUser));
-        } else if(userRole == "ENGINEER") {
+        } else if(userRole.equals("ENGINEER")) {
             Intent profileIntent = new Intent(ProfileScreen.this, DashboardEngineerScreen.class);
+            profileIntent.putExtra("user", receivedUser);
+            startActivity(profileIntent);
             finish();
-            startActivity(profileIntent.putExtra("user", receivedUser));
-        } else {
+        } else if(userRole.equals("SYSOP")) {
             Intent profileIntent = new Intent(ProfileScreen.this, DashboardSysOpScreen.class);
+            profileIntent.putExtra("user", receivedUser);
+            startActivity(profileIntent);
             finish();
-            startActivity(profileIntent.putExtra("user", receivedUser));
         }
     }
 

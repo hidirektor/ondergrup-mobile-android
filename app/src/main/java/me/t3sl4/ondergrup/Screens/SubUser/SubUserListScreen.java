@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Profile.EditSubScreen;
 import me.t3sl4.ondergrup.Screens.SubUser.Adapter.SubUser;
 import me.t3sl4.ondergrup.Screens.SubUser.Adapter.SubUserAdapter;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
@@ -60,8 +61,11 @@ public class SubUserListScreen extends AppCompatActivity {
                         deleteAndUpdateSubUser(selectedSubUser, subUserList);
                         return true;
                     case R.id.menu_option2:
-                        //TODO
-                        //Alt kullanıcı düzenleme işlemi
+                        Intent editSubIntent = new Intent(SubUserListScreen.this, EditSubScreen.class);
+                        editSubIntent.putExtra("user", receivedUser);
+                        editSubIntent.putExtra("subuser", selectedSubUser);
+                        startActivity(editSubIntent);
+                        finish();
                         return true;
                     default:
                         return false;

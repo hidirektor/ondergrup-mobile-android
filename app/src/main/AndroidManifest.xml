@@ -116,6 +116,9 @@
         <activity
             android:name=".Screens.SubUser.SubUserListScreen"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.Profile.EditSubScreen"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

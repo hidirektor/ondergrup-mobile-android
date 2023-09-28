@@ -146,8 +146,7 @@ public class EditProfileScreen extends AppCompatActivity {
                         "\"Password\":\"" + password + "\"," +
                         "\"NameSurname\":\"" + nameSurname.getText() + "\"," +
                         "\"Phone\":\"" + phone.getText() + "\"," +
-                        "\"CompanyName\":\"" + companyName.getText() + "\"," +
-                        "\"Created_At\":\"" + created_at + "\"" +
+                        "\"CompanyName\":\"" + companyName.getText() + "\"" +
                         "}";
 
         sendUpdateRequest(registerJsonBody, String.valueOf(kullaniciAdi.getText()));
@@ -224,8 +223,9 @@ public class EditProfileScreen extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent profileIntent = new Intent(EditProfileScreen.this, ProfileScreen.class);
+        profileIntent.putExtra("user", receivedUser);
+        startActivity(profileIntent);
         finish();
-        startActivity(profileIntent.putExtra("user", receivedUser));
     }
 
     private byte[] convertBitmapToByteArray(Bitmap bitmap) {
