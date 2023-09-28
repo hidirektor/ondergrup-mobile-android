@@ -6,14 +6,17 @@ android {
         applicationId "me.t3sl4.ondergrup"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 7
+        versionCode 9
         versionName "T3SL4"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
         }
     }
     buildFeatures {
