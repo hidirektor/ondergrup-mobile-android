@@ -19,4 +19,9 @@
     <string name="password_updated">BAŞARILI</string>
     <string name="password_updated_success_message">Tebrikler şifren değiştirildi. Artık yeni şifren ile giriş yapabilirsin</string>
     <string name="login">Giriş Yap</string>
+
+    <string-array name="machineType">
+        <item>ESP</item>
+        <item>CSP</item>
+    </string-array>
 </resources>

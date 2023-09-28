@@ -2,16 +2,32 @@ package me.t3sl4.ondergrup.Screens.Support;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.camera2.params.ColorSpaceTransform;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardEngineerScreen;
@@ -31,10 +47,13 @@ public class SupportScreen extends AppCompatActivity {
     private ConstraintLayout profileButton;
     private ConstraintLayout machineButton;
     private ConstraintLayout settingsButton;
+    private FloatingActionButton qrButton;
 
     private Button mapButton;
     private Button mailButton;
     private Button callButton;
+
+    private String scannedQRCode;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -55,6 +74,7 @@ public class SupportScreen extends AppCompatActivity {
         mapButton = findViewById(R.id.mapButton);
         mailButton = findViewById(R.id.mailButton);
         callButton = findViewById(R.id.callButton);
+        qrButton = findViewById(R.id.qrConstraint);
 
         homeButton.setOnClickListener(v -> {
             geriDon();
@@ -66,9 +86,57 @@ public class SupportScreen extends AppCompatActivity {
             startActivity(profileIntent);
         });
 
+        qrButton.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.activity_machine_add);
+
+            ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
+
+            EditText editText = dialog.findViewById(R.id.editTextID);
+            if (scannedQRCode != null) {
+                editText.setText(scannedQRCode);
+            }
+
+            editText.setOnTouchListener((vi, event) -> {
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        ImageView view = (ImageView) vi;
+                        view.getDrawable().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                        view.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL: {
+                        ImageView view = (ImageView) vi;
+                        view.getDrawable().clearColorFilter();
+                        view.invalidate();
+                        break;
+                    }
+                }
+
+                return false;
+            });
+
+            cancelButton.setOnClickListener(view -> dialog.dismiss());
+
+            Spinner autoCompleteTextView = dialog.findViewById(R.id.machineTypeSpinner);
+
+            String[] machineTypes = getResources().getStringArray(R.array.machineType);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, machineTypes);
+            autoCompleteTextView.setAdapter(adapter);
+
+            dialog.show();
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+            dialog.getWindow().setGravity(Gravity.BOTTOM);
+        });
+
         machineButton.setOnClickListener(v -> {
             //TODO
-            //Makine ekranı kodları:
+            //Makinelerim ekranı:
         });
 
         settingsButton.setOnClickListener(v -> {
