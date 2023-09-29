@@ -44,6 +44,8 @@ public class Util {
     public String wholeProfileURLPrefix = "/api/users/getWholeProfileInfo";
     public String getPhotoURLPrefix = "/api/fileSystem/getPhoto/";
 
+    public String addMachineURL = "/api/machine/add";
+
 
     public String uploadURLPrefix = "/api/fileSystem/upload";
     public String downloadPhotoURLPrefix = "/api/fileSystem/downloadPhoto";

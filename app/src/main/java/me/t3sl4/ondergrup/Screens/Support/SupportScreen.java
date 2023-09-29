@@ -29,6 +29,8 @@ import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONObject;
+
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardEngineerScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardSysOpScreen;
@@ -36,6 +38,8 @@ import me.t3sl4.ondergrup.Screens.Dashboard.DashboardTechnicianScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.DashboardUserScreen;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
+import me.t3sl4.ondergrup.Screens.QR.QRScanner;
+import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -53,7 +57,11 @@ public class SupportScreen extends AppCompatActivity {
     private Button mailButton;
     private Button callButton;
 
-    private String scannedQRCode;
+    public static String scannedQRCode;
+    public static EditText scannedQRCodeEditText;
+
+    private Dialog uyariDiyalog;
+    private Dialog qrDiyalog;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -66,6 +74,9 @@ public class SupportScreen extends AppCompatActivity {
 
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
+
+        uyariDiyalog = new Dialog(this);
+        qrDiyalog = new Dialog(this);
 
         homeButton = findViewById(R.id.mainConstraint);
         profileButton = findViewById(R.id.profileConstraint);
@@ -87,51 +98,43 @@ public class SupportScreen extends AppCompatActivity {
         });
 
         qrButton.setOnClickListener(v -> {
-            Dialog dialog = new Dialog(this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.activity_machine_add);
+            qrDiyalog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            qrDiyalog.setContentView(R.layout.activity_machine_add);
 
-            ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
+            ImageView cancelButton = qrDiyalog.findViewById(R.id.cancelButton);
+            Button addButton = qrDiyalog.findViewById(R.id.makineEkleButton);
+            Spinner machineTypeSpinner = qrDiyalog.findViewById(R.id.machineTypeSpinner);
 
-            EditText editText = dialog.findViewById(R.id.editTextID);
+            scannedQRCodeEditText = qrDiyalog.findViewById(R.id.editTextID);
             if (scannedQRCode != null) {
-                editText.setText(scannedQRCode);
+                scannedQRCodeEditText.setText(scannedQRCode);
             }
 
-            editText.setOnTouchListener((vi, event) -> {
-
+            scannedQRCodeEditText.setOnTouchListener((vi, event) -> {
                 switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        ImageView view = (ImageView) vi;
-                        view.getDrawable().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-                        view.invalidate();
-                        break;
-                    }
                     case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL: {
-                        ImageView view = (ImageView) vi;
-                        view.getDrawable().clearColorFilter();
-                        view.invalidate();
-                        break;
-                    }
+                        if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
+                            Intent qrIntent = new Intent(SupportScreen.this, QRScanner.class);
+                            startActivity(qrIntent);
+                            return true;
+                        }
                 }
-
                 return false;
             });
 
-            cancelButton.setOnClickListener(view -> dialog.dismiss());
+            cancelButton.setOnClickListener(view -> qrDiyalog.dismiss());
 
-            Spinner autoCompleteTextView = dialog.findViewById(R.id.machineTypeSpinner);
+            addButton.setOnClickListener(view -> makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCode));
 
             String[] machineTypes = getResources().getStringArray(R.array.machineType);
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, machineTypes);
-            autoCompleteTextView.setAdapter(adapter);
+            machineTypeSpinner.setAdapter(adapter);
 
-            dialog.show();
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-            dialog.getWindow().setGravity(Gravity.BOTTOM);
+            qrDiyalog.show();
+            qrDiyalog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            qrDiyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+            qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
         });
 
         machineButton.setOnClickListener(v -> {
@@ -206,5 +209,27 @@ public class SupportScreen extends AppCompatActivity {
             startActivity(mainIntent);
             finish();
         }
+    }
+
+    public void makineEkle(String machineType, String machineID) {
+        String reqURL = util.BASE_URL + util.addMachineURL;
+
+        String userName = receivedUser.getUserName();
+        String companyName = receivedUser.getCompanyName();
+        String jsonAddMachineBody = "{\"Username\": \"" + userName + "\", \"CompanyName\": \"" + companyName + "\", \"MachineID\": \"" + machineID + "\"}";
+
+        HTTP http = new HTTP(this);
+        http.sendRequest(reqURL, jsonAddMachineBody, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                qrDiyalog.dismiss();
+                util.showSuccessPopup(uyariDiyalog, "Makine başarılı bir şekilde eklendi.");
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                util.showErrorPopup(uyariDiyalog, "Kullanıcı adı veya şifreniz hatalı. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
+            }
+        });
     }
 }
