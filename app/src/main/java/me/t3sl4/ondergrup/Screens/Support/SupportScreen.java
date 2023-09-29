@@ -98,43 +98,48 @@ public class SupportScreen extends AppCompatActivity {
         });
 
         qrButton.setOnClickListener(v -> {
-            qrDiyalog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            qrDiyalog.setContentView(R.layout.activity_machine_add);
+            if(receivedUser.getRole().equals("NORMAL")) {
+                qrDiyalog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                qrDiyalog.setContentView(R.layout.activity_machine_add);
 
-            ImageView cancelButton = qrDiyalog.findViewById(R.id.cancelButton);
-            Button addButton = qrDiyalog.findViewById(R.id.makineEkleButton);
-            Spinner machineTypeSpinner = qrDiyalog.findViewById(R.id.machineTypeSpinner);
+                ImageView cancelButton = qrDiyalog.findViewById(R.id.cancelButton);
+                Button addButton = qrDiyalog.findViewById(R.id.makineEkleButton);
+                Spinner machineTypeSpinner = qrDiyalog.findViewById(R.id.machineTypeSpinner);
 
-            scannedQRCodeEditText = qrDiyalog.findViewById(R.id.editTextID);
-            if (scannedQRCode != null) {
-                scannedQRCodeEditText.setText(scannedQRCode);
-            }
-
-            scannedQRCodeEditText.setOnTouchListener((vi, event) -> {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_UP:
-                        if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
-                            Intent qrIntent = new Intent(SupportScreen.this, QRScanner.class);
-                            startActivity(qrIntent);
-                            return true;
-                        }
+                scannedQRCodeEditText = qrDiyalog.findViewById(R.id.editTextID);
+                if (scannedQRCode != null) {
+                    scannedQRCodeEditText.setText(scannedQRCode);
                 }
-                return false;
-            });
 
-            cancelButton.setOnClickListener(view -> qrDiyalog.dismiss());
+                scannedQRCodeEditText.setOnTouchListener((vi, event) -> {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_UP:
+                            if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
+                                Intent qrIntent = new Intent(SupportScreen.this, QRScanner.class);
+                                intent.putExtra("fromScreen", "Support");
+                                startActivity(qrIntent);
+                                return true;
+                            }
+                    }
+                    return false;
+                });
 
-            addButton.setOnClickListener(view -> makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCode));
+                cancelButton.setOnClickListener(view -> qrDiyalog.dismiss());
 
-            String[] machineTypes = getResources().getStringArray(R.array.machineType);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, machineTypes);
-            machineTypeSpinner.setAdapter(adapter);
+                addButton.setOnClickListener(view -> makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCode));
 
-            qrDiyalog.show();
-            qrDiyalog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            qrDiyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-            qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
+                String[] machineTypes = getResources().getStringArray(R.array.machineType);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, machineTypes);
+                machineTypeSpinner.setAdapter(adapter);
+
+                qrDiyalog.show();
+                qrDiyalog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                qrDiyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
+            } else {
+                util.showErrorPopup(uyariDiyalog, "Sadece NORMAL kullanıcılar doğrudan makine ekleyebilir.");
+            }
         });
 
         machineButton.setOnClickListener(v -> {

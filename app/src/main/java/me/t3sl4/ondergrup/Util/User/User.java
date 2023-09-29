@@ -11,6 +11,7 @@ public class User implements Parcelable {
     private String nameSurname;
     private String phoneNumber;
     private String companyName;
+    private String ownerName;
     private String createdAt;
 
     public User(String role, String userName, String eMail, String nameSurname, String phoneNumber, String companyName, String createdAt) {
@@ -69,6 +70,14 @@ public class User implements Parcelable {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
     public String getCreatedAt() {

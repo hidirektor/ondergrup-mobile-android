@@ -1,6 +1,7 @@
 package me.t3sl4.ondergrup.Screens.QR;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -11,17 +12,23 @@ import androidx.core.content.ContextCompat;
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Screens.Support.SupportScreen;
 
 public class QRScanner extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 1001;
     private ZXingScannerView scannerView;
 
+    private String fromScreen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         scannerView = new ZXingScannerView(this);
         setContentView(scannerView);
+
+        Intent intent = getIntent();
+        fromScreen = intent.getStringExtra("fromScreen");
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
@@ -38,7 +45,11 @@ public class QRScanner extends AppCompatActivity implements ZXingScannerView.Res
 
         finish();
         if (scannedResult != null && SupportScreen.scannedQRCodeEditText != null) {
-            SupportScreen.scannedQRCodeEditText.setText(scannedResult);
+            if(fromScreen.equals("SubUser")) {
+                SubUserScreen.scannedQRCodeEditText.setText(scannedResult);
+            } else if(fromScreen.equals("Support")) {
+                SupportScreen.scannedQRCodeEditText.setText(scannedResult);
+            }
         }
     }
 

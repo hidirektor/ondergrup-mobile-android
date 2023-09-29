@@ -1,5 +1,6 @@
 package me.t3sl4.ondergrup.Screens.Dashboard;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,12 +41,15 @@ public class DashboardUserScreen extends AppCompatActivity {
 
     public User receivedUser;
 
+    private Dialog uyariDiyalog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_user);
 
         util = new Util(getApplicationContext());
+        uyariDiyalog = new Dialog(this);
 
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
@@ -85,9 +89,13 @@ public class DashboardUserScreen extends AppCompatActivity {
         });
 
         subUserButton.setOnClickListener(v -> {
-            Intent settingsIntent = new Intent(DashboardUserScreen.this, SubUserScreen.class);
-            settingsIntent.putExtra("user", receivedUser);
-            startActivity(settingsIntent);
+            if(receivedUser.getOwnerName() != null) {
+                Intent settingsIntent = new Intent(DashboardUserScreen.this, SubUserScreen.class);
+                settingsIntent.putExtra("user", receivedUser);
+                startActivity(settingsIntent);
+            } else {
+                util.showErrorPopup(uyariDiyalog, "Alt kullanıcıları yalnızca yöneticiniz görüntüleyebilir.");
+            }
         });
 
         setUserInfo();

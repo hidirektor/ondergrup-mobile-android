@@ -77,7 +77,7 @@
                     android:layout_below="@id/mobile_title"
                     android:layout_toRightOf="@id/mobile_icon"
                     android:fontFamily="@font/muli"
-                    android:text="Fabrika ve Showroom adreslerini görüntüleyebilirsin."
+                    android:text="Fabrika ve Showroom adreslerine bakabilirsin."
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -127,7 +127,7 @@
                     android:layout_below="@id/mail_title"
                     android:layout_toRightOf="@id/mail_icon"
                     android:fontFamily="@font/muli"
-                    android:text="Bize e-posta göndererek destek alabilirsiniz."
+                    android:text="E-Posta aracılığıyla destek alabilirsiniz."
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 

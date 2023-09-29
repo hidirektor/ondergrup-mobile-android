@@ -191,6 +191,7 @@ public class LoginScreen extends AppCompatActivity {
                 String nameSurname = response.getString("NameSurname");
                 String phoneNumber = response.getString("Phone");
                 String company = response.getString("CompanyName");
+                String ownerName = response.getString("Owner");
                 String createdAt = response.getString("CreatedAt");
                 Log.d("User", role + userName + eMail + nameSurname + phoneNumber + company + createdAt);
                 util.user = new User(role, userName, eMail, nameSurname, phoneNumber, company, createdAt);
@@ -200,9 +201,14 @@ public class LoginScreen extends AppCompatActivity {
                 util.user.seteMail(eMail);
                 util.user.setNameSurname(nameSurname);
                 util.user.setPhoneNumber(phoneNumber);
-                redirectBasedRole(role);
                 util.user.setCompanyName(company);
+                if(ownerName != null) {
+                    util.user.setOwnerName(ownerName);
+                } else {
+                    util.user.setOwnerName(null);
+                }
                 util.user.setCreatedAt(createdAt);
+                redirectBasedRole(role);
             }
 
             @Override
