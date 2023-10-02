@@ -18,12 +18,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import org.json.JSONObject;
 
@@ -34,6 +39,7 @@ import java.util.Map;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
+import me.t3sl4.ondergrup.Screens.Dashboard.DashboardTechnicianScreen;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.HTTP.VolleyMultipartRequest;
 import me.t3sl4.ondergrup.Util.User.User;
@@ -122,8 +128,27 @@ public class EditProfileScreen extends AppCompatActivity {
 
     public void setUserInfo() {
         String imageUrl = util.BASE_URL + util.getPhotoURLPrefix + receivedUser.getUserName() + ".jpg";
+        String imageUrl2 = util.BASE_URL + util.getPhotoURLPrefix + receivedUser.getUserName() + ".png";
 
-        Glide.with(this).load(imageUrl).override(100, 100).into(profilePhoto);
+        Glide.with(this)
+                .load(imageUrl)
+                .override(100, 100)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        Glide.with(EditProfileScreen.this)
+                                .load(imageUrl2)
+                                .override(100, 100)
+                                .into(profilePhoto);
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        return false;
+                    }
+                })
+                .into(profilePhoto);
         nameSurname.setText(receivedUser.getNameSurname());
         eMail.setText(receivedUser.geteMail());
         kullaniciAdi.setText(receivedUser.getUserName());
