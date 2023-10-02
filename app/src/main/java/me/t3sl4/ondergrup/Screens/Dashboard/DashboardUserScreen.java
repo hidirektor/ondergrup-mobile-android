@@ -90,11 +90,11 @@ public class DashboardUserScreen extends AppCompatActivity {
 
         subUserButton.setOnClickListener(v -> {
             if(receivedUser.getOwnerName() != null) {
+                util.showErrorPopup(uyariDiyalog, "Alt kullanıcıları yalnızca yöneticiniz görüntüleyebilir.");
+            } else {
                 Intent settingsIntent = new Intent(DashboardUserScreen.this, SubUserScreen.class);
                 settingsIntent.putExtra("user", receivedUser);
                 startActivity(settingsIntent);
-            } else {
-                util.showErrorPopup(uyariDiyalog, "Alt kullanıcıları yalnızca yöneticiniz görüntüleyebilir.");
             }
         });
 
