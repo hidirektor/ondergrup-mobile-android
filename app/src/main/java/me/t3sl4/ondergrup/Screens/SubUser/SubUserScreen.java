@@ -131,7 +131,7 @@ public class SubUserScreen extends AppCompatActivity {
                         case MotionEvent.ACTION_UP:
                             if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
                                 Intent qrIntent = new Intent(SubUserScreen.this, QRScanner.class);
-                                intent.putExtra("fromScreen", "SubUser");
+                                qrIntent.putExtra("fromScreen", "SubUser");
                                 startActivity(qrIntent);
                                 return true;
                             }

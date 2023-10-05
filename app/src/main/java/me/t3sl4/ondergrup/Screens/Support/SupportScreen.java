@@ -116,7 +116,7 @@ public class SupportScreen extends AppCompatActivity {
                         case MotionEvent.ACTION_UP:
                             if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
                                 Intent qrIntent = new Intent(SupportScreen.this, QRScanner.class);
-                                intent.putExtra("fromScreen", "Support");
+                                qrIntent.putExtra("fromScreen", "Support");
                                 startActivity(qrIntent);
                                 return true;
                             }

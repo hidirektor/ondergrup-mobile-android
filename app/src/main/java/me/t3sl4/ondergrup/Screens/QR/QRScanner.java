@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,8 @@ public class QRScanner extends AppCompatActivity implements ZXingScannerView.Res
         Intent intent = getIntent();
         fromScreen = intent.getStringExtra("fromScreen");
 
+        Log.e("fromUs", "1" + fromScreen);
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
         }
@@ -46,6 +49,7 @@ public class QRScanner extends AppCompatActivity implements ZXingScannerView.Res
         finish();
         if (scannedResult != null && SupportScreen.scannedQRCodeEditText != null) {
             if(fromScreen.equals("SubUser")) {
+                Log.e("fromUs", "2a" + fromScreen);
                 SubUserScreen.scannedQRCodeEditText.setText(scannedResult);
             } else if(fromScreen.equals("Support")) {
                 SupportScreen.scannedQRCodeEditText.setText(scannedResult);
