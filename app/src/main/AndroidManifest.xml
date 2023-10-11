@@ -126,6 +126,9 @@
         <activity
             android:name=".Screens.QR.QRScanner"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.Machine.MachineListScreen"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

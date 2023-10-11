@@ -19,6 +19,7 @@ import java.io.File;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Documents.DocumentsScreen;
+import me.t3sl4.ondergrup.Screens.Machine.MachineListScreen;
 import me.t3sl4.ondergrup.Screens.MainActivity;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
@@ -38,6 +39,7 @@ public class DashboardUserScreen extends AppCompatActivity {
     private ConstraintLayout settingsButton;
     private ConstraintLayout belgelerButton;
     private ConstraintLayout subUserButton;
+    private ConstraintLayout machineManageButton;
 
     public User receivedUser;
 
@@ -62,6 +64,7 @@ public class DashboardUserScreen extends AppCompatActivity {
         settingsButton = findViewById(R.id.settingsConstraint);
         belgelerButton = findViewById(R.id.belgelerConstraint);
         subUserButton = findViewById(R.id.subUserConstraint);
+        machineManageButton = findViewById(R.id.machineManageConstraint);
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(DashboardUserScreen.this, ProfileScreen.class);
@@ -96,6 +99,12 @@ public class DashboardUserScreen extends AppCompatActivity {
                 settingsIntent.putExtra("user", receivedUser);
                 startActivity(settingsIntent);
             }
+        });
+
+        machineManageButton.setOnClickListener(v -> {
+           Intent manageMachineIntent = new Intent(DashboardUserScreen.this, MachineListScreen.class);
+           manageMachineIntent.putExtra("user", receivedUser);
+           startActivity(manageMachineIntent);
         });
 
         setUserInfo();
