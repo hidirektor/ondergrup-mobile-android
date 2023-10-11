@@ -50,8 +50,7 @@ public class Util {
 
     public String uploadURLPrefix = "/api/fileSystem/upload";
     public String downloadPhotoURLPrefix = "/api/fileSystem/downloadPhoto";
-
-    public String manualPDFURLPrefix = "/api/fileSystem/view/manual.pdf";
+    public String manualPDFUrlPrefix = "https://manual.hidirektor.com.tr/index.html";
 
     public static String profilePhotoPath;
     public Util(Context context) {

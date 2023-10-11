@@ -33,19 +33,8 @@ public class ManualScreen extends AppCompatActivity {
         WebSettings webSettings = dataWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        dataWebView.loadUrl(util.BASE_URL + util.manualPDFURLPrefix);
+        dataWebView.loadUrl(util.manualPDFUrlPrefix);
 
-        closeButton.setOnClickListener(v -> {
-            finish();
-        });
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (dataWebView.canGoBack()) {
-            dataWebView.goBack();
-        } else {
-            super.onBackPressed();
-        }
+        closeButton.setOnClickListener(v -> finish());
     }
 }

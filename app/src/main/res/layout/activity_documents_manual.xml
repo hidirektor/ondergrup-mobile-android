@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screens.MainActivity"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".Screens.MainActivity">
 
-    <ImageView
-        android:id="@+id/closeImageView"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_margin="16dp"
-        android:src="@drawable/general_close_icon"
-        android:clickable="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/make_selection_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/muli_black"
-        android:text="Kullanma Kılavuzu"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:layout_toEndOf="@+id/closeImageView"/>
+        <ImageView
+            android:id="@+id/closeImageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/general_close_icon"
+            android:clickable="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"/>
+
+        <TextView
+            android:id="@+id/make_selection_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/muli_black"
+            android:text="Kullanma Kılavuzu"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:layout_toEndOf="@+id/closeImageView"/>
+    </LinearLayout>
 
     <WebView
         android:id="@+id/webview"
@@ -35,4 +42,4 @@
         android:layout_height="match_parent"
         android:layout_below="@id/closeImageView"/>
 
-</RelativeLayout>
+</LinearLayout>
