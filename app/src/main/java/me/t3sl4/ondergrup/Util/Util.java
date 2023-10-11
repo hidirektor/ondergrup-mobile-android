@@ -51,6 +51,8 @@ public class Util {
     public String uploadURLPrefix = "/api/fileSystem/upload";
     public String downloadPhotoURLPrefix = "/api/fileSystem/downloadPhoto";
 
+    public String manualPDFURLPrefix = "/api/fileSystem/view/manual.pdf";
+
     public static String profilePhotoPath;
     public Util(Context context) {
         this.context = context;

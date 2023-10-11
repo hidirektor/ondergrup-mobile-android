@@ -433,12 +433,12 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/myMachine"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2">
 
                     <ImageView
-                        android:id="@+id/imageView22"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/machineicon"
@@ -467,6 +467,7 @@
             </LinearLayout>
         </com.google.android.material.bottomappbar.BottomAppBar>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/qrConstraint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:pointerIcon="wait"

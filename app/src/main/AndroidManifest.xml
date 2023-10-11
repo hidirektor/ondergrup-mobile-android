@@ -10,11 +10,6 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -101,6 +96,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Screens.Documents.DocumentsScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Screens.Documents.ManualScreen"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Screens.Documents.KVKKScreen"

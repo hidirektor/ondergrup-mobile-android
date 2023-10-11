@@ -28,10 +28,8 @@ public class DocumentsScreen extends AppCompatActivity {
         manualButton = findViewById(R.id.manualButton);
 
         manualButton.setOnClickListener(v -> {
-            //TODO
-            //User manual screen:
-            //Intent manualIntent = new Intent(DocumentsScreen.this, ManualScreen.class);
-            //startActivity(manualIntent);
+            Intent manualIntent = new Intent(DocumentsScreen.this, ManualScreen.class);
+            startActivity(manualIntent);
         });
 
         dataButton.setOnClickListener(v -> {
