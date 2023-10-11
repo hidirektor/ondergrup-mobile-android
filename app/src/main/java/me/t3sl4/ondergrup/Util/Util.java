@@ -45,6 +45,7 @@ public class Util {
     public String getPhotoURLPrefix = "/api/fileSystem/getPhoto/";
 
     public String addMachineURL = "/api/machine/add";
+    public String getMachineURL = "/api/machine/getMachines";
 
 
     public String uploadURLPrefix = "/api/fileSystem/upload";

@@ -3,6 +3,8 @@ package me.t3sl4.ondergrup.Screens.Machine;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +18,6 @@ import java.util.ArrayList;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Machine.Adapter.Machine;
 import me.t3sl4.ondergrup.Screens.Machine.Adapter.MachineAdapter;
-import me.t3sl4.ondergrup.Screens.SubUser.Adapter.SubUser;
-import me.t3sl4.ondergrup.Screens.SubUser.Adapter.SubUserAdapter;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
@@ -45,11 +45,20 @@ public class MachineListScreen extends AppCompatActivity {
 
         machineListView = findViewById(R.id.machineListView);
         machineList = getMachineList();
+
+        machineListView.setOnItemClickListener((parent, view, position, id) -> {
+            Machine selectedMachine = machineList.get(position);
+
+            Intent machineIntent = new Intent(MachineListScreen.this, MachineScreen.class);
+            machineIntent.putExtra("machine", selectedMachine);
+            machineIntent.putExtra("user", receivedUser);
+            startActivity(machineIntent);
+        });
     }
 
     private ArrayList<Machine> getMachineList() {
         ArrayList<Machine> machines = new ArrayList<>();
-        String reqURL = util.BASE_URL + util.getSubUsersPrefix;
+        String reqURL = util.BASE_URL + util.getMachineURL;
         String jsonSubUserBody = "{\"username\": \"" + receivedUser.getUserName() + "\"}";
 
         HTTP http = new HTTP(this);
@@ -59,56 +68,58 @@ public class MachineListScreen extends AppCompatActivity {
                 try {
                     JSONArray machineArray = response.getJSONArray("machines");
                     for (int i = 0; i < machineArray.length(); i++) {
-                        JSONObject machineObj = machineArray.getJSONObject(i);
-                        String ownerUser = machineObj.getString("ownerUser");
-                        String lastUpdate = machineObj.getString("lastUpdate");
-                        String machineType = machineObj.getString("machineType");
-                        String machineID = machineObj.getString("machineID");
-                        String devirmeYuruyusSecim = machineObj.getString("devirmeYuruyusSecim");
-                        String calismaSekli = machineObj.getString("calismaSekli");
-                        String emniyetCercevesi = machineObj.getString("emniyetCercevesi");
-                        String yavaslamaLimit = machineObj.getString("yavaslamaLimit");
-                        String altLimit = machineObj.getString("altLimit");
-                        String kapiTablaAcKonum = machineObj.getString("kapiTablaAcKonum");
-                        String basincSalteri = machineObj.getString("basincSalteri");
-                        String kapiSecimleri = machineObj.getString("kapiSecimleri");
-                        String kapiAcTipi = machineObj.getString("kapiAcTipi");
-                        String kapi1Tip = machineObj.getString("kapi1Tip");
-                        String kapi1AcSure = machineObj.getString("kapi1AcSure");
-                        String kapi2Tip = machineObj.getString("kapi2Tip");
-                        String kapi2AcSure = machineObj.getString("kapi2AcSure");
-                        String kapitablaTip = machineObj.getString("kapitablaTip");
-                        String kapiTablaAcSure = machineObj.getString("kapiTablaAcSure");
-                        String yukariYavasLimit = machineObj.getString("yukariYavasLimit");
-                        String devirmeYukariIleriLimit = machineObj.getString("devirmeYukariIleriLimit");
-                        String devirmeAsagiGeriLimit = machineObj.getString("devirmeAsagiGeriLimit");
-                        String devirmeSilindirTipi = machineObj.getString("devirmeSilindirTipi");
-                        String platformSilindirTipi = machineObj.getString("platformSilindirTipi");
-                        String yukariValfTmr = machineObj.getString("yukariValfTmr");
-                        String asagiValfTmr = machineObj.getString("asagiValfTmr");
-                        String devirmeYukariIleriTmr = machineObj.getString("devirmeYukariIleriTmr");
-                        String devirmeAsagiGeriTmr = machineObj.getString("devirmeAsagiGeriTmr");
-                        String makineCalismaTmr = machineObj.getString("makineCalismaTmr");
-                        String buzzer = machineObj.getString("buzzer");
-                        String demoMode = machineObj.getString("demoMode");
-                        String calismaSayisi1 = machineObj.getString("calismaSayisi1");
-                        String calismaSayisi10 = machineObj.getString("calismaSayisi10");
-                        String calismaSayisi100 = machineObj.getString("calismaSayisi100");
-                        String calismaSayisi1000 = machineObj.getString("calismaSayisi1000");
-                        String calismaSayisi10000 = machineObj.getString("calismaSayisi10000");
-                        String dilSecim = machineObj.getString("dilSecim");
-                        String eepromData37 = machineObj.getString("eepromData37");
-                        String eepromData38 = machineObj.getString("eepromData38");
-                        String eepromData39 = machineObj.getString("eepromData39");
-                        String eepromData40 = machineObj.getString("eepromData40");
-                        String eepromData41 = machineObj.getString("eepromData41");
-                        String eepromData42 = machineObj.getString("eepromData42");
-                        String eepromData43 = machineObj.getString("eepromData43");
-                        String eepromData44 = machineObj.getString("eepromData44");
-                        String eepromData45 = machineObj.getString("eepromData45");
-                        String eepromData46 = machineObj.getString("eepromData46");
-                        String eepromData47 = machineObj.getString("eepromData47");
-                        String lcdBacklightSure = machineObj.getString("lcdBacklightSure");
+                        JSONObject machineInfoObj = machineArray.getJSONObject(i).getJSONObject("MachineInfo");
+                        JSONObject machineDataObj = machineArray.getJSONObject(i).getJSONArray("MachineData").getJSONObject(0);
+
+                        String ownerUser = machineInfoObj.getString("Owner_UserName");
+                        String lastUpdate = machineInfoObj.getString("LastUpdate");
+                        String machineType = machineInfoObj.getString("MachineType");
+                        String machineID = machineInfoObj.getString("MachineID");
+                        String devirmeYuruyusSecim = machineDataObj.getString("devirmeYuruyusSecim");
+                        String calismaSekli = machineDataObj.getString("calismaSekli");
+                        String emniyetCercevesi = machineDataObj.getString("emniyetCercevesi");
+                        String yavaslamaLimit = machineDataObj.getString("yavaslamaLimit");
+                        String altLimit = machineDataObj.getString("altLimit");
+                        String kapiTablaAcKonum = machineDataObj.getString("kapiTablaAcKonum");
+                        String basincSalteri = machineDataObj.getString("basincSalteri");
+                        String kapiSecimleri = machineDataObj.getString("kapiSecimleri");
+                        String kapiAcTipi = machineDataObj.getString("kapiAcTipi");
+                        String kapi1Tip = machineDataObj.getString("kapi1Tip");
+                        String kapi1AcSure = machineDataObj.getString("kapi1AcSure");
+                        String kapi2Tip = machineDataObj.getString("kapi2Tip");
+                        String kapi2AcSure = machineDataObj.getString("kapi2AcSure");
+                        String kapitablaTip = machineDataObj.getString("kapitablaTip");
+                        String kapiTablaAcSure = machineDataObj.getString("kapiTablaAcSure");
+                        String yukariYavasLimit = machineDataObj.getString("yukariYavasLimit");
+                        String devirmeYukariIleriLimit = machineDataObj.getString("devirmeYukariIleriLimit");
+                        String devirmeAsagiGeriLimit = machineDataObj.getString("devirmeAsagiGeriLimit");
+                        String devirmeSilindirTipi = machineDataObj.getString("devirmeSilindirTipi");
+                        String platformSilindirTipi = machineDataObj.getString("platformSilindirTipi");
+                        String yukariValfTmr = machineDataObj.getString("yukariValfTmr");
+                        String asagiValfTmr = machineDataObj.getString("asagiValfTmr");
+                        String devirmeYukariIleriTmr = machineDataObj.getString("devirmeYukariIleriTmr");
+                        String devirmeAsagiGeriTmr = machineDataObj.getString("devirmeAsagiGeriTmr");
+                        String makineCalismaTmr = machineDataObj.getString("makineCalismaTmr");
+                        String buzzer = machineDataObj.getString("buzzer");
+                        String demoMode = machineDataObj.getString("demoMode");
+                        String calismaSayisi1 = machineDataObj.getString("calismaSayisi1");
+                        String calismaSayisi10 = machineDataObj.getString("calismaSayisi10");
+                        String calismaSayisi100 = machineDataObj.getString("calismaSayisi100");
+                        String calismaSayisi1000 = machineDataObj.getString("calismaSayisi1000");
+                        String calismaSayisi10000 = machineDataObj.getString("calismaSayisi10000");
+                        String dilSecim = machineDataObj.getString("dilSecim");
+                        String eepromData37 = machineDataObj.getString("eepromData37");
+                        String eepromData38 = machineDataObj.getString("eepromData38");
+                        String eepromData39 = machineDataObj.getString("eepromData39");
+                        String eepromData40 = machineDataObj.getString("eepromData40");
+                        String eepromData41 = machineDataObj.getString("eepromData41");
+                        String eepromData42 = machineDataObj.getString("eepromData42");
+                        String eepromData43 = machineDataObj.getString("eepromData43");
+                        String eepromData44 = machineDataObj.getString("eepromData44");
+                        String eepromData45 = machineDataObj.getString("eepromData45");
+                        String eepromData46 = machineDataObj.getString("eepromData46");
+                        String eepromData47 = machineDataObj.getString("eepromData47");
+                        String lcdBacklightSure = machineDataObj.getString("lcdBacklightSure");
 
                         Machine selectedMachine = new Machine(ownerUser, lastUpdate, machineType, machineID, devirmeYuruyusSecim, calismaSekli, emniyetCercevesi,
                                 yavaslamaLimit, altLimit, kapiTablaAcKonum, basincSalteri, kapiSecimleri,

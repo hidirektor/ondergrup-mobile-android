@@ -81,7 +81,7 @@ public class MachineAdapter extends BaseAdapter {
             machineStat = "Aktif Değil";
         }
         holder.machineImage.setImageDrawable(drawable);
-        holder.machineOwnerName.setText(machine.getOwnerUser());
+        holder.machineOwnerName.setText(machine.getMachineID() + " - " + machine.getOwnerUser() + " - " + machine.getMachineType());
         holder.machineSelectedLanguage.setText(secilenDil);
         holder.machineStatus.setText(machineStat);
 
