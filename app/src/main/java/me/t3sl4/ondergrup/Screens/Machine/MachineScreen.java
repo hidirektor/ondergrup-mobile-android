@@ -140,7 +140,7 @@ public class MachineScreen extends AppCompatActivity {
 
     private void initMachineData() {
         String machineType = selectedMachine.getMachineType();
-        String cycleCount = selectedMachine.getCalismaSayisi1() + selectedMachine.getCalismaSayisi10() + selectedMachine.getCalismaSayisi100() + selectedMachine.getCalismaSayisi1000() + selectedMachine.getCalismaSayisi10000();
+        String cycleCount = selectedMachine.getCalismaSayisi10000() + selectedMachine.getCalismaSayisi1000() + selectedMachine.getCalismaSayisi100() + selectedMachine.getCalismaSayisi10() + selectedMachine.getCalismaSayisi1();
         String secilenDil = selectedMachine.getDilSecim();
         Drawable drawable = null;
         Drawable selectedLang = null;
