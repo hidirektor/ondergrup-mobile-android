@@ -44,6 +44,7 @@ import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.QR.QRScanner;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Screens.Support.SupportScreen;
+import me.t3sl4.ondergrup.Screens.Weather.model.Weather;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
@@ -63,6 +64,7 @@ public class DashboardUserScreen extends AppCompatActivity {
     private ConstraintLayout machineManageButton;
     private ConstraintLayout myMachineButton;
     private FloatingActionButton qrButton;
+    private ImageView weatherButton;
 
     public User receivedUser;
 
@@ -87,6 +89,7 @@ public class DashboardUserScreen extends AppCompatActivity {
 
         isimSoyisim = findViewById(R.id.textView4);
         profilePhotoView = findViewById(R.id.imageView4);
+        weatherButton = findViewById(R.id.weatherView);
 
         profileButton = findViewById(R.id.profileConstraint);
         destekButton = findViewById(R.id.destekButton);
@@ -96,6 +99,11 @@ public class DashboardUserScreen extends AppCompatActivity {
         machineManageButton = findViewById(R.id.machineManageConstraint);
         myMachineButton = findViewById(R.id.myMachine);
         qrButton = findViewById(R.id.qrConstraint);
+
+        weatherButton.setOnClickListener(v -> {
+            Intent weatherIntent = new Intent(DashboardUserScreen.this, Weather.class);
+            startActivity(weatherIntent);
+        });
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(DashboardUserScreen.this, ProfileScreen.class);

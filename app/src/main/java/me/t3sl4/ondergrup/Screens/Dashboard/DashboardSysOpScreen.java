@@ -24,7 +24,7 @@ import me.t3sl4.ondergrup.Screens.MainActivity;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.Support.SupportScreen;
-import me.t3sl4.ondergrup.Screens.Weather.Weather;
+import me.t3sl4.ondergrup.Screens.Weather.model.Weather;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -39,6 +39,7 @@ public class DashboardSysOpScreen extends AppCompatActivity {
     private ConstraintLayout profileButton;
     private ConstraintLayout settingsButton;
     private ConstraintLayout belgelerButton;
+    private ImageView weatherButton;
 
     public User receivedUser;
 
@@ -54,11 +55,17 @@ public class DashboardSysOpScreen extends AppCompatActivity {
 
         isimSoyisim = findViewById(R.id.textView4);
         profilePhotoView = findViewById(R.id.imageView4);
+        weatherButton = findViewById(R.id.weatherView);
 
         profileButton = findViewById(R.id.profileConstraint);
         destekButton = findViewById(R.id.destekButton);
         settingsButton = findViewById(R.id.settingsConstraint);
         belgelerButton = findViewById(R.id.belgelerConstraint);
+
+        weatherButton.setOnClickListener(v -> {
+            Intent weatherIntent = new Intent(DashboardSysOpScreen.this, Weather.class);
+            startActivity(weatherIntent);
+        });
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(DashboardSysOpScreen.this, ProfileScreen.class);
