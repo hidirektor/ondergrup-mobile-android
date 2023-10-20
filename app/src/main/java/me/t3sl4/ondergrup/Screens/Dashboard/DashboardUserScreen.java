@@ -2,11 +2,15 @@ package me.t3sl4.ondergrup.Screens.Dashboard;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Gravity;
@@ -45,6 +49,7 @@ import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class DashboardUserScreen extends AppCompatActivity {
+    private static final String TARGET_WIFI_SSID = "OnderGrup_IoT";
     public Util util;
 
     private TextView isimSoyisim;
@@ -145,6 +150,7 @@ public class DashboardUserScreen extends AppCompatActivity {
                 qrDiyalog.setContentView(R.layout.activity_machine_add);
 
                 ImageView cancelButton = qrDiyalog.findViewById(R.id.cancelButton);
+                ImageView wifiButton = qrDiyalog.findViewById(R.id.wifiButton);
                 Button addButton = qrDiyalog.findViewById(R.id.makineEkleButton);
                 Spinner machineTypeSpinner = qrDiyalog.findViewById(R.id.machineTypeSpinner);
 
@@ -167,6 +173,13 @@ public class DashboardUserScreen extends AppCompatActivity {
                 });
 
                 cancelButton.setOnClickListener(view -> qrDiyalog.dismiss());
+
+                wifiButton.setOnClickListener(view -> {
+                    if (!isConnectedToTargetWifi()) {
+                        openWifiSettings();
+                        wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.wifi_green));
+                    }
+                });
 
                 addButton.setOnClickListener(view -> makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCode));
 
@@ -217,5 +230,26 @@ public class DashboardUserScreen extends AppCompatActivity {
                 util.showErrorPopup(uyariDiyalog, "Kullanıcı adı veya şifreniz hatalı. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
             }
         });
+    }
+
+    private boolean isConnectedToTargetWifi() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected()) {
+                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                if (wifiManager != null) {
+                    String ssid = wifiManager.getConnectionInfo().getSSID().replace("\"", ""); // Remove quotes from SSID
+                    return ssid.equals(TARGET_WIFI_SSID);
+                }
+            }
+        }
+        return false;
+    }
+
+    private void openWifiSettings() {
+        Intent intent = new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK);
+        startActivity(intent);
+        finish();
     }
 }
