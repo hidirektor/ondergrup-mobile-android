@@ -177,9 +177,25 @@ public class DashboardUserScreen extends AppCompatActivity {
                 wifiButton.setOnClickListener(view -> {
                     if (!isConnectedToTargetWifi()) {
                         openWifiSettings();
+
+                        new Thread(() -> {
+                            while (!isConnectedToTargetWifi()) {
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            runOnUiThread(() -> {
+                                wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.wifi_green));
+                            });
+                        }).start();
+                    } else {
                         wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.wifi_green));
                     }
                 });
+
 
                 addButton.setOnClickListener(view -> makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCode));
 
