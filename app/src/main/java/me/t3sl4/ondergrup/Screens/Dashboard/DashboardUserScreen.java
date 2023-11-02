@@ -44,6 +44,7 @@ import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.QR.QRScanner;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Screens.Support.SupportScreen;
+import me.t3sl4.ondergrup.Screens.Weather.WeatherScreen;
 import me.t3sl4.ondergrup.Screens.Weather.model.Weather;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.User.User;
@@ -101,7 +102,7 @@ public class DashboardUserScreen extends AppCompatActivity {
         qrButton = findViewById(R.id.qrConstraint);
 
         weatherButton.setOnClickListener(v -> {
-            Intent weatherIntent = new Intent(DashboardUserScreen.this, Weather.class);
+            Intent weatherIntent = new Intent(DashboardUserScreen.this, WeatherScreen.class);
             startActivity(weatherIntent);
         });
 

@@ -14,7 +14,7 @@ import me.t3sl4.ondergrup.R;
 
 import java.util.ArrayList;
 
-public class Weather extends AppCompatActivity {
+public class WeatherScreen extends AppCompatActivity {
     private RecyclerView.Adapter adapterHourly;
     private RecyclerView recyclerView;
 
@@ -29,7 +29,7 @@ public class Weather extends AppCompatActivity {
 
     private void setVaribla() {
         TextView next7dayBtn = findViewById(R.id.nextBtn);
-        next7dayBtn.setOnClickListener(v -> startActivity(new Intent(Weather.this, Future.class)));
+        next7dayBtn.setOnClickListener(v -> startActivity(new Intent(WeatherScreen.this, Future.class)));
     }
 
     private void initRecyclerview() {

@@ -89,7 +89,7 @@
             android:name=".Screens.Auth.ResetPassword.ForgetPasswordSuccess"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Screens.Weather.Weather"
+            android:name=".Screens.Weather.WeatherScreen"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Screens.Weather.Future"

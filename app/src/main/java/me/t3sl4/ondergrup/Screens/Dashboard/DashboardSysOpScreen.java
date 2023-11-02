@@ -24,6 +24,7 @@ import me.t3sl4.ondergrup.Screens.MainActivity;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.Support.SupportScreen;
+import me.t3sl4.ondergrup.Screens.Weather.WeatherScreen;
 import me.t3sl4.ondergrup.Screens.Weather.model.Weather;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
@@ -63,7 +64,7 @@ public class DashboardSysOpScreen extends AppCompatActivity {
         belgelerButton = findViewById(R.id.belgelerConstraint);
 
         weatherButton.setOnClickListener(v -> {
-            Intent weatherIntent = new Intent(DashboardSysOpScreen.this, Weather.class);
+            Intent weatherIntent = new Intent(DashboardSysOpScreen.this, WeatherScreen.class);
             startActivity(weatherIntent);
         });
 
