@@ -33,8 +33,6 @@ public class SubUserScreen extends AppCompatActivity {
     private Button subUsterEkleButton;
     private ImageView backButton;
 
-    public static EditText scannedQRCodeEditText;
-
 
     @SuppressLint("ClickableViewAccessibility")
     @Override

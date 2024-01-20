@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -21,12 +22,18 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
+
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.zxing.client.android.Intents;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +49,7 @@ import me.t3sl4.ondergrup.Screens.Machine.MachineListScreen;
 import me.t3sl4.ondergrup.Screens.Machine.MachineScreen;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
+import me.t3sl4.ondergrup.Screens.QR.QRScanner;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
@@ -71,6 +79,25 @@ public class User extends AppCompatActivity {
 
     public static String scannedQRCode;
     public static EditText scannedQRCodeEditText;
+
+    private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
+            result -> {
+                if(result.getContents() == null) {
+                    Intent originalIntent = result.getOriginalIntent();
+                    if (originalIntent == null) {
+                        Log.d("MainActivity", "Cancelled scan");
+                        Toast.makeText(User.this, "Cancelled", Toast.LENGTH_LONG).show();
+                    } else if(originalIntent.hasExtra(Intents.Scan.MISSING_CAMERA_PERMISSION)) {
+                        Log.d("MainActivity", "Cancelled scan due to missing camera permission");
+                        Toast.makeText(User.this, "Cancelled due to missing camera permission", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Log.d("MainActivity", "Scanned");
+                    scannedQRCode = result.getContents();
+                    scannedQRCodeEditText.setText(scannedQRCode);
+                    Toast.makeText(User.this, "ID: " + result.getContents(), Toast.LENGTH_LONG).show();
+                }
+            });
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -159,9 +186,7 @@ public class User extends AppCompatActivity {
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_UP:
                             if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
-                                //Intent qrIntent = new Intent(User.this, QRScanner.class);
-                                //qrIntent.putExtra("fromScreen", "Support");
-                                //startActivity(qrIntent);
+                                scanBarcodeCustomLayout();
                                 return true;
                             }
                     }
@@ -353,5 +378,10 @@ public class User extends AppCompatActivity {
         machineList = machines;
         machineListAdapter = new MachineAdapter(getApplicationContext(), machineList);
         machineListView.setAdapter(machineListAdapter);
+    }
+
+    public void scanBarcodeCustomLayout() {
+        ScanOptions options = new ScanOptions().setOrientationLocked(false).setCaptureActivity(QRScanner.class);
+        barcodeLauncher.launch(options);
     }
 }

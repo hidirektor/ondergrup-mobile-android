@@ -25,9 +25,6 @@ public class SupportScreen extends AppCompatActivity {
     private Button mailButton;
     private Button callButton;
 
-    public static String scannedQRCode;
-    public static EditText scannedQRCodeEditText;
-
     private Dialog uyariDiyalog;
     private Dialog qrDiyalog;
 
