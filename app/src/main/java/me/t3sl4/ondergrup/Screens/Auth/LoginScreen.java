@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,7 +32,7 @@ import me.t3sl4.ondergrup.Util.Util;
 
 public class LoginScreen extends AppCompatActivity {
     //General Components
-    private Button resetPassButton;
+    private TextView resetPassButton;
     private LinearLayout loginSection;
     private Button loginSectionButton;
     private LinearLayout registerSection;

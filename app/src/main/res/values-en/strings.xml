@@ -5,6 +5,7 @@
     <string name="register">Register</string>
     <string name="next_btn">Next</string>
     <string name="forget_password">Forget Password</string>
+    <string name="rememberme">Remember Me</string>
     <string name="skip">Skip</string>
     <string name="okay">Okay</string>
     <string name="warning">WARNING !</string>

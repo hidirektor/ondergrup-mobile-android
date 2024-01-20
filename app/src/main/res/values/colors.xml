@@ -23,4 +23,5 @@
     <color name="colorAccent">#0c83e5</color>
     <color name="atlaTextColor">#111111</color>
     <color name="lacivert">#222f5a</color>
+    <color name="checkBoxColor">#D9D9D9</color>
 </resources>
