@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -85,8 +86,10 @@ public class User extends AppCompatActivity {
     private LinearLayout logoutButton;
 
     //Hamburger Restriction
+    private ConstraintLayout headerConstraint;
     private LinearLayout headerLayout;
     private LinearLayout machineLayout;
+    private LinearLayout machineInnerLayout;
     private CoordinatorLayout subLayout;
 
 
@@ -147,13 +150,13 @@ public class User extends AppCompatActivity {
         qrButton = findViewById(R.id.qrConstraint);
 
         //restriction
+        headerConstraint = findViewById(R.id.headerConstraint);
         headerLayout = findViewById(R.id.headerLayout);
         machineLayout = findViewById(R.id.machineLayout);
+        machineInnerLayout = findViewById(R.id.machineInnerLayout);
         subLayout = findViewById(R.id.subLayout);
 
         hamburgerButton.setOnClickListener(v -> NavigationManager.showNavigationViewWithAnimation(hamburgerMenu, this));
-
-        hamburgerEffect();
 
         //hamburgerButtons
         View hamburgerView = hamburgerMenu.getHeaderView(0);
@@ -180,6 +183,11 @@ public class User extends AppCompatActivity {
         });
         navAddMachineButton.setOnClickListener(v -> addMachine());
         logoutButton.setOnClickListener(v -> logoutProcess());
+        feedbackButton.setOnClickListener(v -> {
+            String url = "https://play.google.com/store/apps/details?id=me.t3sl4.ondergrup&hl=tr&gl=US";
+            Intent playStoreIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(playStoreIntent);
+        });
 
         machineListView = findViewById(R.id.machineListView);
         machineList = getMachineList();
@@ -230,6 +238,8 @@ public class User extends AppCompatActivity {
         });
 
         setUserInfo();
+
+        hamburgerEffect();
     }
 
     public void setUserInfo() {
@@ -381,6 +391,14 @@ public class User extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void hamburgerEffect() {
+        headerConstraint.setOnTouchListener((view, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
+                NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+                return true;
+            }
+            return false;
+        });
+
         headerLayout.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
@@ -390,6 +408,22 @@ public class User extends AppCompatActivity {
         });
 
         machineLayout.setOnTouchListener((view, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
+                NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+                return true;
+            }
+            return false;
+        });
+
+        machineInnerLayout.setOnTouchListener((view, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
+                NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+                return true;
+            }
+            return false;
+        });
+
+        machineListView.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
                 return true;
