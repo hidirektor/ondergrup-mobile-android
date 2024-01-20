@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
+import me.t3sl4.ondergrup.Util.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -37,6 +40,7 @@ public class LoginScreen extends AppCompatActivity {
     private Button loginSectionButton;
     private LinearLayout registerSection;
     private Button registerSectionButton;
+    private CheckBox rememberMe;
 
 
     //Login Components
@@ -55,7 +59,7 @@ public class LoginScreen extends AppCompatActivity {
     private Button registerButton;
 
     //Register variables:
-    boolean isPhotoSelected = false;
+    boolean isLogged = false;
 
     //General variables:
     private Dialog uyariDiyalog;
@@ -75,12 +79,34 @@ public class LoginScreen extends AppCompatActivity {
 
         registerButton.setOnClickListener(v -> sendRegisterRequest());
 
-        loginButton.setOnClickListener(v -> sendLoginRequest());
+        loginButton.setOnClickListener(v -> {
+            sendLoginRequest();
+        });
 
         resetPassButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginScreen.this, ForgetPassword.class);
             startActivity(intent);
             finish();
+        });
+
+        String username = SharedPreferencesManager.getSharedPref("username", this, "");
+
+        if (!TextUtils.isEmpty(username)) {
+            String password = SharedPreferencesManager.getSharedPref("username", this, "");
+            String role = SharedPreferencesManager.getSharedPref("role", this, "");
+            initUser(username, role);
+        }
+
+        rememberMe.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isLogged) {
+                String cipheredPass = getCipheredPass();
+
+                String enteredUsername = userNameField_login.getText().toString();
+
+                SharedPreferencesManager.writeSharedPref("username", enteredUsername, this);
+                SharedPreferencesManager.writeSharedPref("password", cipheredPass, this);
+                SharedPreferencesManager.writeSharedPref("role", util.user.getRole(), this);
+            }
         });
 
         PasswordFieldTouchListener.setChangeablePasswordField(passwordField_login, getApplicationContext());
@@ -109,6 +135,7 @@ public class LoginScreen extends AppCompatActivity {
         loginSectionButton = findViewById(R.id.loginSectionButton);
         registerSection = findViewById(R.id.registerSection);
         registerSectionButton = findViewById(R.id.registerSectionButton);
+        rememberMe = findViewById(R.id.beniHatirlaCheckBox);
 
         //Login Components
         userNameField_login = findViewById(R.id.userNameField_login);
@@ -136,7 +163,9 @@ public class LoginScreen extends AppCompatActivity {
         HTTP.sendRequest(authenticationUrl, jsonLoginBody, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
+                isLogged = true;
                 getUserType(username);
+                saveCredentials();
             }
 
             @Override
@@ -145,6 +174,44 @@ public class LoginScreen extends AppCompatActivity {
                 util.showErrorPopup(uyariDiyalog, "Kullanıcı adı veya şifreniz hatalı. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
             }
         }, Volley.newRequestQueue(this));
+    }
+
+    private void saveCredentials() {
+        if(rememberMe.isChecked()) {
+            String cipheredPass = getCipheredPass();
+
+            String enteredUsername = userNameField_login.getText().toString();
+
+            SharedPreferencesManager.writeSharedPref("username", enteredUsername, this);
+            SharedPreferencesManager.writeSharedPref("password", cipheredPass, this);
+            SharedPreferencesManager.writeSharedPref("role", util.user.getRole(), this);
+        }
+    }
+
+    private String getCipheredPass() {
+        final String[] cipheredPass = {""};
+
+        String enteredPass = passwordField_login.getText().toString();
+        String cipheredPassUrl = util.BASE_URL + util.getPassURLPrefix;
+
+        String jsonLoginBody = "{\"Password\": \"" + enteredPass + "\"}";
+
+        HTTP.sendRequest(cipheredPassUrl, jsonLoginBody, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) throws JSONException {
+                try {
+                    cipheredPass[0] = response.getString("pass");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                //util.showErrorPopup(uyariDiyalog, "Kullanıcı adı veya şifreniz hatalı. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
+            }
+        }, Volley.newRequestQueue(this));
+        return cipheredPass[0];
     }
 
     private void getUserType(String username) {
@@ -215,11 +282,11 @@ public class LoginScreen extends AppCompatActivity {
         Intent intent = null;
 
         switch (role) {
-            /*case "NORMAL":
-                intent = new Intent(LoginScreen.this, DashboardUserScreen.class);
+            case "NORMAL":
+                intent = new Intent(LoginScreen.this, me.t3sl4.ondergrup.Screens.Dashboard.User.class);
                 intent.putExtra("user", util.user);
                 break;
-            case "TECHNICIAN":
+            /*case "TECHNICIAN":
                 intent = new Intent(LoginScreen.this, DashboardTechnicianScreen.class);
                 intent.putExtra("user", util.user);
                 break;
@@ -232,9 +299,7 @@ public class LoginScreen extends AppCompatActivity {
                 intent.putExtra("user", util.user);
                 break;*/
             default:
-                intent = new Intent(LoginScreen.this, me.t3sl4.ondergrup.Screens.Dashboard.User.class);
-                intent.putExtra("user", util.user);
-                //util.showErrorPopup(uyariDiyalog, "Desteklenmeyen bir kullanıcı rolüne sahipsin. Lütfen iletişime geç.");
+                util.showErrorPopup(uyariDiyalog, "Desteklenmeyen bir kullanıcı rolüne sahipsin. Lütfen iletişime geç.");
                 break;
         }
 
