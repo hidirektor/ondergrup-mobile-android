@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/hamburgerMenu"
+            android:id="@+id/hamburgerMenuBttn"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginEnd="6dp"
@@ -38,6 +38,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/machineLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -219,6 +220,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"/>
     </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/hamburgerMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@drawable/background_hamburger"
+        app:headerLayout="@layout/nav_hamburger"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible"/>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/subLayout"

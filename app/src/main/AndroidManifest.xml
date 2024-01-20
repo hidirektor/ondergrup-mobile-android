@@ -78,6 +78,9 @@
             android:name=".Screens.Machine.MachineScreen"
             android:screenOrientation="unspecified" />
         <activity
+            android:name=".Screens.Machine.MachineListScreen"
+            android:screenOrientation="unspecified" />
+        <activity
             android:name=".Screens.Dashboard.User"
             android:screenOrientation="unspecified" />
         <activity
@@ -109,6 +112,15 @@
             android:screenOrientation="unspecified"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".Screens.Profile.ProfileScreen"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".Screens.Profile.EditProfileScreen"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".Screens.Profile.EditSubScreen"
+            android:screenOrientation="unspecified" />
     </application>
 
 </manifest>

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Önder Grup</string>
+    <string name="developer">Halil İbrahim Direktör</string>
+    <string name="welcome">Merhabalar</string>
 
     <string name="login">Giriş Yap</string>
     <string name="register">Kayıt Ol</string>
@@ -11,6 +13,11 @@
     <string name="edit">Düzenle</string>
     <string name="okay">Tamam</string>
     <string name="warning">HATA !</string>
+
+    <string name="button_profile">Profil</string>
+    <string name="button_settings">Ayarlar</string>
+    <string name="button_feedback">Bize Bildirin !</string>
+    <string name="button_logout">Çıkış Yap</string>
 
     <string name="lang_turkish">Türkçe</string>
     <string name="lang_english">İngilizce</string>

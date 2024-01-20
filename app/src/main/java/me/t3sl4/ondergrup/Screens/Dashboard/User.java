@@ -13,23 +13,27 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,6 +46,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.Documents.DocumentsScreen;
 import me.t3sl4.ondergrup.Screens.Machine.Adapter.Machine;
 import me.t3sl4.ondergrup.Screens.Machine.Adapter.MachineAdapter;
@@ -51,7 +56,9 @@ import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.QR.QRScanner;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
+import me.t3sl4.ondergrup.Util.Component.Navigation.NavigationManager;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
+import me.t3sl4.ondergrup.Util.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class User extends AppCompatActivity {
@@ -60,12 +67,28 @@ public class User extends AppCompatActivity {
 
     private TextView isimSoyisim;
 
+    private ImageView hamburgerButton;
+    private NavigationView hamburgerMenu;
     private ConstraintLayout profileButton;
     private ConstraintLayout settingsButton;
     private ConstraintLayout belgelerButton;
     private ConstraintLayout subUserButton;
     private ConstraintLayout myMachineButton;
     private FloatingActionButton qrButton;
+
+    //hamburgerButtons
+    private Button navAddMachineButton;
+    private LinearLayout navProfileButton;
+    private LinearLayout navDocsButton;
+    private LinearLayout navSettingsButton;
+    private LinearLayout feedbackButton;
+    private LinearLayout logoutButton;
+
+    //Hamburger Restriction
+    private LinearLayout headerLayout;
+    private LinearLayout machineLayout;
+    private CoordinatorLayout subLayout;
+
 
     //Machine List View Section:
     private ListView machineListView;
@@ -114,12 +137,49 @@ public class User extends AppCompatActivity {
 
         isimSoyisim = findViewById(R.id.loggedUserName);
 
+        hamburgerButton = findViewById(R.id.hamburgerMenuBttn);
+        hamburgerMenu = findViewById(R.id.hamburgerMenu);
         profileButton = findViewById(R.id.profileConstraint);
         settingsButton = findViewById(R.id.settingsConstraint);
         belgelerButton = findViewById(R.id.belgelerConstraint);
         subUserButton = findViewById(R.id.subUserConstraint);
         myMachineButton = findViewById(R.id.myMachine);
         qrButton = findViewById(R.id.qrConstraint);
+
+        //restriction
+        headerLayout = findViewById(R.id.headerLayout);
+        machineLayout = findViewById(R.id.machineLayout);
+        subLayout = findViewById(R.id.subLayout);
+
+        hamburgerButton.setOnClickListener(v -> NavigationManager.showNavigationViewWithAnimation(hamburgerMenu, this));
+
+        hamburgerEffect();
+
+        //hamburgerButtons
+        View hamburgerView = hamburgerMenu.getHeaderView(0);
+        navAddMachineButton = hamburgerView.findViewById(R.id.navAddMachineButton);
+        navProfileButton = hamburgerView.findViewById(R.id.navProfileButton);
+        navDocsButton = hamburgerView.findViewById(R.id.navDocsButton);
+        navSettingsButton = hamburgerView.findViewById(R.id.navSettingsButton);
+        feedbackButton = hamburgerView.findViewById(R.id.feedbackButton);
+        logoutButton = hamburgerView.findViewById(R.id.logoutButton);
+
+        navProfileButton.setOnClickListener(v -> {
+            Intent profileIntent = new Intent(User.this, ProfileScreen.class);
+            profileIntent.putExtra("user", util.user);
+            startActivity(profileIntent);
+        });
+        navSettingsButton.setOnClickListener(v -> {
+            Intent settingsIntent = new Intent(User.this, EditProfileScreen.class);
+            settingsIntent.putExtra("user", receivedUser);
+            startActivity(settingsIntent);
+        });
+        navDocsButton.setOnClickListener(v -> {
+            Intent belgelerIntent = new Intent(User.this, DocumentsScreen.class);
+            startActivity(belgelerIntent);
+        });
+        navAddMachineButton.setOnClickListener(v -> addMachine());
+        logoutButton.setOnClickListener(v -> logoutProcess());
 
         machineListView = findViewById(R.id.machineListView);
         machineList = getMachineList();
@@ -136,14 +196,12 @@ public class User extends AppCompatActivity {
             Intent profileIntent = new Intent(User.this, ProfileScreen.class);
             profileIntent.putExtra("user", util.user);
             startActivity(profileIntent);
-            finish();
         });
 
         settingsButton.setOnClickListener(v -> {
             Intent settingsIntent = new Intent(User.this, EditProfileScreen.class);
             settingsIntent.putExtra("user", receivedUser);
             startActivity(settingsIntent);
-            finish();
         });
 
         belgelerButton.setOnClickListener(v -> {
@@ -168,70 +226,7 @@ public class User extends AppCompatActivity {
         });
 
         qrButton.setOnClickListener(v -> {
-            if(receivedUser.getRole().equals("NORMAL")) {
-                qrDiyalog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                qrDiyalog.setContentView(R.layout.activity_machine_add);
-
-                ImageView cancelButton = qrDiyalog.findViewById(R.id.cancelButton);
-                ImageView wifiButton = qrDiyalog.findViewById(R.id.wifiButton);
-                Button addButton = qrDiyalog.findViewById(R.id.makineEkleButton);
-                Spinner machineTypeSpinner = qrDiyalog.findViewById(R.id.machineTypeSpinner);
-
-                scannedQRCodeEditText = qrDiyalog.findViewById(R.id.editTextID);
-                if (scannedQRCode != null) {
-                    scannedQRCodeEditText.setText(scannedQRCode);
-                }
-
-                scannedQRCodeEditText.setOnTouchListener((vi, event) -> {
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_UP:
-                            if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
-                                scanBarcodeCustomLayout();
-                                return true;
-                            }
-                    }
-                    return false;
-                });
-
-                cancelButton.setOnClickListener(view -> qrDiyalog.dismiss());
-
-                wifiButton.setOnClickListener(view -> {
-                    if (!isConnectedToTargetWifi()) {
-                        openWifiSettings();
-
-                        new Thread(() -> {
-                            while (!isConnectedToTargetWifi()) {
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            runOnUiThread(() -> {
-                                wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
-                            });
-                        }).start();
-                    } else {
-                        wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
-                    }
-                });
-
-
-                addButton.setOnClickListener(view -> makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCode));
-
-                String[] machineTypes = getResources().getStringArray(R.array.machineType);
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, machineTypes);
-                machineTypeSpinner.setAdapter(adapter);
-
-                qrDiyalog.show();
-                qrDiyalog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                qrDiyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-                qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
-            } else {
-                util.showErrorPopup(uyariDiyalog, "Sadece NORMAL kullanıcılar doğrudan makine ekleyebilir.");
-            }
+            addMachine();
         });
 
         setUserInfo();
@@ -280,7 +275,6 @@ public class User extends AppCompatActivity {
     private void openWifiSettings() {
         Intent intent = new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK);
         startActivity(intent);
-        finish();
     }
 
     private ArrayList<Machine> getMachineList() {
@@ -383,5 +377,114 @@ public class User extends AppCompatActivity {
     public void scanBarcodeCustomLayout() {
         ScanOptions options = new ScanOptions().setOrientationLocked(false).setCaptureActivity(QRScanner.class);
         barcodeLauncher.launch(options);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void hamburgerEffect() {
+        headerLayout.setOnTouchListener((view, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
+                NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+                return true;
+            }
+            return false;
+        });
+
+        machineLayout.setOnTouchListener((view, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
+                NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+                return true;
+            }
+            return false;
+        });
+
+        subLayout.setOnTouchListener((view, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
+                NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+                return true;
+            }
+            return false;
+        });
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void addMachine() {
+        if(receivedUser.getRole().equals("NORMAL")) {
+            qrDiyalog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            qrDiyalog.setContentView(R.layout.activity_machine_add);
+
+            ImageView cancelButton = qrDiyalog.findViewById(R.id.cancelButton);
+            ImageView wifiButton = qrDiyalog.findViewById(R.id.wifiButton);
+            Button addButton = qrDiyalog.findViewById(R.id.makineEkleButton);
+            Spinner machineTypeSpinner = qrDiyalog.findViewById(R.id.machineTypeSpinner);
+
+            scannedQRCodeEditText = qrDiyalog.findViewById(R.id.editTextID);
+            if (scannedQRCode != null) {
+                scannedQRCodeEditText.setText(scannedQRCode);
+            }
+
+            scannedQRCodeEditText.setOnTouchListener((vi, event) -> {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_UP:
+                        if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
+                            scanBarcodeCustomLayout();
+                            return true;
+                        }
+                }
+                return false;
+            });
+
+            cancelButton.setOnClickListener(view -> qrDiyalog.dismiss());
+
+            wifiButton.setOnClickListener(view -> {
+                if (!isConnectedToTargetWifi()) {
+                    openWifiSettings();
+
+                    new Thread(() -> {
+                        while (!isConnectedToTargetWifi()) {
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        runOnUiThread(() -> {
+                            wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
+                        });
+                    }).start();
+                } else {
+                    wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
+                }
+            });
+
+
+            addButton.setOnClickListener(view -> makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCode));
+
+            String[] machineTypes = getResources().getStringArray(R.array.machineType);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, machineTypes);
+            machineTypeSpinner.setAdapter(adapter);
+
+            qrDiyalog.show();
+            qrDiyalog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            qrDiyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+            qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
+        } else {
+            util.showErrorPopup(uyariDiyalog, "Sadece NORMAL kullanıcılar doğrudan makine ekleyebilir.");
+        }
+    }
+
+    private void logoutProcess() {
+        String username = SharedPreferencesManager.getSharedPref("username", this, "");
+
+        if(!username.isEmpty()) {
+            SharedPreferencesManager.writeSharedPref("username", "", this);
+            SharedPreferencesManager.writeSharedPref("password", "", this);
+            SharedPreferencesManager.writeSharedPref("role", "", this);
+
+            Intent loginIntent = new Intent(User.this, LoginScreen.class);
+            startActivity(loginIntent);
+            finish();
+        }
     }
 }
