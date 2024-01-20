@@ -112,12 +112,6 @@ public class User extends AppCompatActivity {
             finish();
         });
 
-        /*destekButton.setOnClickListener(v -> {
-            Intent destekIntent = new Intent(User.this, SupportScreen.class);
-            destekIntent.putExtra("user", util.user);
-            startActivity(destekIntent);
-        });*/
-
         settingsButton.setOnClickListener(v -> {
             Intent settingsIntent = new Intent(User.this, EditProfileScreen.class);
             settingsIntent.putExtra("user", receivedUser);
