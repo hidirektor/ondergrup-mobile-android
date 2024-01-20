@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screens.MainActivity"
+    tools:context=".Screens.Documents.KVKKScreen"
     android:fitsSystemWindows="true">
 
     <ImageView
@@ -12,7 +12,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="16dp"
-        android:src="@drawable/general_close_icon"
+        android:src="@drawable/ikon_close"
         android:clickable="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"/>
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/muli_black"
-        android:text="KVKK Politikası"
+        android:text="@string/kvkk"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="25sp"

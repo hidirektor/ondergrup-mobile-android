@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/muli"
-                android:text="Lütfen bizimle kurmak istediğin irtibat yöntemini seç."
+                android:text="@string/support_desc"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -56,7 +56,7 @@
                     android:layout_height="60dp"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/map" />
+                    android:src="@drawable/ikon_map" />
 
 
                 <TextView
@@ -64,9 +64,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
-                    android:layout_toRightOf="@id/mobile_icon"
+                    android:layout_toEndOf="@id/mobile_icon"
                     android:fontFamily="@font/muli"
-                    android:text="Konum"
+                    android:text="@string/support_location"
                     android:textSize="20sp" />
 
 
@@ -75,9 +75,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/mobile_title"
-                    android:layout_toRightOf="@id/mobile_icon"
+                    android:layout_toEndOf="@id/mobile_icon"
                     android:fontFamily="@font/muli"
-                    android:text="Fabrika ve Showroom adreslerine bakabilirsin."
+                    android:text="@string/support_location_desc"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -86,7 +86,7 @@
                     android:id="@+id/mapButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/transparent" />
+                    android:background="@android:color/transparent" />
 
 
             </RelativeLayout>
@@ -106,7 +106,7 @@
                     android:layout_height="55dp"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/mailus" />
+                    android:src="@drawable/ikon_mailus" />
 
 
                 <TextView
@@ -114,9 +114,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
-                    android:layout_toRightOf="@id/mail_icon"
+                    android:layout_toEndOf="@id/mail_icon"
                     android:fontFamily="@font/muli"
-                    android:text="E-Posta Gönder"
+                    android:text="@string/support_mail"
                     android:textSize="20sp" />
 
 
@@ -125,9 +125,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/mail_title"
-                    android:layout_toRightOf="@id/mail_icon"
+                    android:layout_toEndOf="@id/mail_icon"
                     android:fontFamily="@font/muli"
-                    android:text="E-Posta aracılığıyla destek alabilirsiniz."
+                    android:text="@string/support_mail_desc"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -136,7 +136,7 @@
                     android:id="@+id/mailButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/transparent" />
+                    android:background="@android:color/transparent" />
 
             </RelativeLayout>
 
@@ -154,8 +154,8 @@
                     android:layout_width="60dp"
                     android:layout_height="55dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:src="@drawable/call" />
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ikon_call" />
 
 
                 <TextView
@@ -163,9 +163,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
-                    android:layout_toRightOf="@id/call_icon"
+                    android:layout_toEndOf="@id/call_icon"
                     android:fontFamily="@font/muli"
-                    android:text="Bizi Ara"
+                    android:text="@string/support_call"
                     android:textSize="20sp" />
 
 
@@ -174,9 +174,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/call_title"
-                    android:layout_toRightOf="@id/call_icon"
+                    android:layout_toEndOf="@id/call_icon"
                     android:fontFamily="@font/muli"
-                    android:text="Bizi arayarak destek alabilirsiniz."
+                    android:text="@string/support_call_desc"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -185,7 +185,7 @@
                     android:id="@+id/callButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/transparent" />
+                    android:background="@android:color/transparent" />
 
             </RelativeLayout>
 
@@ -199,121 +199,4 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="@+id/mainScroll"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:layout_width="match_parent"
-            android:id="@+id/app_bar"
-            android:layout_height="60dp"
-            android:layout_gravity="bottom"
-            app:fabCradleMargin="8dp"
-            app:fabCradleRoundedCornerRadius="50dp"
-            app:fabCradleVerticalOffset="6dp"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/mainConstraint"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2">
-
-                    <ImageView
-                        android:id="@+id/imageView19"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/homeicon"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/profileConstraint"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/usericon"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:visibility="invisible">
-
-                    <ImageView
-                        android:id="@+id/imageView21"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/bottom_btn3"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/machineConstraint"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2">
-
-                    <ImageView
-                        android:id="@+id/imageView22"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/machineicon"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/settingsConstraint"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2">
-
-                    <ImageView
-                        android:id="@+id/imageView23"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/settingsicon"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-        </com.google.android.material.bottomappbar.BottomAppBar>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/qrConstraint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:pointerIcon="wait"
-            android:src="@drawable/qrcode"
-            app:maxImageSize="25dp"
-            app:tint="@color/white"
-            app:layout_anchor="@id/app_bar"
-            app:backgroundTint="@color/lacivert"/>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

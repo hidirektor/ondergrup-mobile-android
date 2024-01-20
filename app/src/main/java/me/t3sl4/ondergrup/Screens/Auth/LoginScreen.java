@@ -3,44 +3,61 @@ package me.t3sl4.ondergrup.Screens.Auth;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
-import me.t3sl4.ondergrup.Screens.Dashboard.DashboardEngineerScreen;
-import me.t3sl4.ondergrup.Screens.Dashboard.DashboardSysOpScreen;
-import me.t3sl4.ondergrup.Screens.Dashboard.DashboardTechnicianScreen;
-import me.t3sl4.ondergrup.Screens.Dashboard.DashboardUserScreen;
+import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
+import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class LoginScreen extends AppCompatActivity {
-
-    private EditText editTextTextPersonName;
-    private EditText editTextTextPassword;
-    private Button registerButton;
+    //General Components
     private Button resetPassButton;
-    private ImageView loginButton;
+    private LinearLayout loginSection;
+    private Button loginSectionButton;
+    private LinearLayout registerSection;
+    private Button registerSectionButton;
 
+
+    //Login Components
+    private EditText userNameField_login;
+    private EditText passwordField_login;
+    private Button loginButton;
+
+
+    //Register Section:
+    private EditText nameSurnameField_register;
+    private EditText userNameField_register;
+    private EditText passwordField_register;
+    private EditText mailField_register;
+    private EditText phoneField_register;
+    private EditText companyField_register;
+    private Button registerButton;
+
+    //Register variables:
+    boolean isPhotoSelected = false;
+
+    //General variables:
     private Dialog uyariDiyalog;
-    private boolean isPasswordVisible = false;
 
     public Util util;
 
@@ -53,39 +70,11 @@ public class LoginScreen extends AppCompatActivity {
         util = new Util(getApplicationContext());
         uyariDiyalog = new Dialog(this);
 
-        editTextTextPersonName = findViewById(R.id.editTextTextPersonName);
-        editTextTextPassword = findViewById(R.id.editTextTextPassword);
-        loginButton = findViewById(R.id.loginButton);
-        registerButton = findViewById(R.id.registerButton);
-        resetPassButton = findViewById(R.id.resetPassButton);
+        initializeComponents();
+
+        registerButton.setOnClickListener(v -> sendRegisterRequest());
 
         loginButton.setOnClickListener(v -> sendLoginRequest());
-
-        loginButton.setOnTouchListener((v, event) -> {
-
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN: {
-                    ImageView view = (ImageView) v;
-                    view.getDrawable().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-                    view.invalidate();
-                    break;
-                }
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL: {
-                    ImageView view = (ImageView) v;
-                    view.getDrawable().clearColorFilter();
-                    view.invalidate();
-                    break;
-                }
-            }
-
-            return false;
-        });
-
-        registerButton.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginScreen.this, RegisterScreen.class);
-            startActivity(intent);
-        });
 
         resetPassButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginScreen.this, ForgetPassword.class);
@@ -93,53 +82,57 @@ public class LoginScreen extends AppCompatActivity {
             finish();
         });
 
-        editTextTextPassword.setOnTouchListener(new View.OnTouchListener() {
-            final int DRAWABLE_RIGHT = 2;
+        PasswordFieldTouchListener.setChangeablePasswordField(passwordField_login, getApplicationContext());
 
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= (editTextTextPassword.getRight() - editTextTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        togglePasswordVisibility();
-                        return true;
-                    }
-                }
-                return false;
-            }
+        sectionPager();
+    }
+
+    private void sectionPager() {
+        loginSectionButton.setOnClickListener(v -> {
+            ButtonManager.orderButtonColorEffect(1, loginSectionButton, registerSectionButton, this);
+            loginSection.setVisibility(View.VISIBLE);
+            registerSection.setVisibility(View.GONE);
+        });
+
+        registerSectionButton.setOnClickListener(v -> {
+            ButtonManager.orderButtonColorEffect(2, loginSectionButton, registerSectionButton, this);
+            registerSection.setVisibility(View.VISIBLE);
+            loginSection.setVisibility(View.GONE);
         });
     }
 
-    private void togglePasswordVisibility() {
-        isPasswordVisible = !isPasswordVisible;
-        int drawableResId = isPasswordVisible ? R.drawable.field_password_hide : R.drawable.field_password_show;
-        setPasswordVisibility(isPasswordVisible);
-        updatePasswordToggleIcon(drawableResId);
-    }
+    private void initializeComponents() {
+        //General Components
+        resetPassButton = findViewById(R.id.resetPassButton);
+        loginSection = findViewById(R.id.loginSection);
+        loginSectionButton = findViewById(R.id.loginSectionButton);
+        registerSection = findViewById(R.id.registerSection);
+        registerSectionButton = findViewById(R.id.registerSectionButton);
 
-    private void setPasswordVisibility(boolean visible) {
-        int inputType = visible ? android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                : android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
-        editTextTextPassword.setInputType(inputType);
-        editTextTextPassword.setSelection(editTextTextPassword.getText().length());
-    }
+        //Login Components
+        userNameField_login = findViewById(R.id.userNameField_login);
+        passwordField_login = findViewById(R.id.passwordField_login);
+        loginButton = findViewById(R.id.loginButton);
 
-    private void updatePasswordToggleIcon(@DrawableRes int drawableResId) {
-        Drawable[] drawables = editTextTextPassword.getCompoundDrawablesRelative();
-        drawables[2] = getResources().getDrawable(drawableResId, getApplicationContext().getTheme());
-        editTextTextPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                drawables[0], drawables[1], drawables[2], drawables[3]);
+        //Register Section:
+        nameSurnameField_register = findViewById(R.id.nameSurnameField_register);
+        userNameField_register = findViewById(R.id.userNameField_register);
+        passwordField_register = findViewById(R.id.passwordField_register);
+        mailField_register = findViewById(R.id.mailField_register);
+        phoneField_register = findViewById(R.id.phoneField_register);
+        companyField_register = findViewById(R.id.companyField_register);
+        registerButton = findViewById(R.id.registerButton);
     }
 
     private void sendLoginRequest() {
-        String username = editTextTextPersonName.getText().toString();
-        String password = editTextTextPassword.getText().toString();
+        String username = userNameField_login.getText().toString();
+        String password = passwordField_login.getText().toString();
 
         String authenticationUrl = util.BASE_URL + util.loginURLPrefix;
 
         String jsonLoginBody = "{\"Username\": \"" + username + "\", \"Password\": \"" + password + "\"}";
 
-        HTTP http = new HTTP(this);
-        http.sendRequest(authenticationUrl, jsonLoginBody, new HTTP.HttpRequestCallback() {
+        HTTP.sendRequest(authenticationUrl, jsonLoginBody, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
                 getUserType(username);
@@ -147,17 +140,17 @@ public class LoginScreen extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMessage) {
+                Log.d("login", authenticationUrl + " " + jsonLoginBody);
                 util.showErrorPopup(uyariDiyalog, "Kullanıcı adı veya şifreniz hatalı. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
             }
-        });
+        }, Volley.newRequestQueue(this));
     }
 
     private void getUserType(String username) {
         String userTypeUrl = util.BASE_URL + util.profileInfoURLPrefix + ":Role";
         String jsonProfileInfoBody = "{\"Username\": \"" + username + "\"}";
 
-        HTTP http = new HTTP(this);
-        http.sendRequest(userTypeUrl, jsonProfileInfoBody, new HTTP.HttpRequestCallback() {
+        HTTP.sendRequest(userTypeUrl, jsonProfileInfoBody, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
                 try {
@@ -172,7 +165,7 @@ public class LoginScreen extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Profil bilgileri alınırken hata meydana geldi. Lütfen tekrar dene.");
             }
-        });
+        }, Volley.newRequestQueue(this));
     }
 
     public void initUser(String username, String role) {
@@ -180,8 +173,7 @@ public class LoginScreen extends AppCompatActivity {
 
         String jsonLoginBody = "{\"username\": \"" + username + "\"}";
 
-        HTTP http = new HTTP(this);
-        http.sendRequest(reqUrl, jsonLoginBody, new HTTP.HttpRequestCallback() {
+        HTTP.sendRequest(reqUrl, jsonLoginBody, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) throws JSONException {
                 Log.d("Resp", String.valueOf(response));
@@ -215,14 +207,14 @@ public class LoginScreen extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Girmiş olduğun kullanıcı adı veya şifre hatalı. Lütfen kontrol edip tekrar dene.");
             }
-        });
+        }, Volley.newRequestQueue(this));
     }
 
     public void redirectBasedRole(String role) {
         Intent intent = null;
 
         switch (role) {
-            case "NORMAL":
+            /*case "NORMAL":
                 intent = new Intent(LoginScreen.this, DashboardUserScreen.class);
                 intent.putExtra("user", util.user);
                 break;
@@ -237,9 +229,11 @@ public class LoginScreen extends AppCompatActivity {
             case "SYSOP":
                 intent = new Intent(LoginScreen.this, DashboardSysOpScreen.class);
                 intent.putExtra("user", util.user);
-                break;
+                break;*/
             default:
-                util.showErrorPopup(uyariDiyalog, "Desteklenmeyen bir kullanıcı rolüne sahipsin. Lütfen iletişime geç.");
+                intent = new Intent(LoginScreen.this, me.t3sl4.ondergrup.Screens.Dashboard.User.class);
+                intent.putExtra("user", util.user);
+                //util.showErrorPopup(uyariDiyalog, "Desteklenmeyen bir kullanıcı rolüne sahipsin. Lütfen iletişime geç.");
                 break;
         }
 
@@ -247,5 +241,57 @@ public class LoginScreen extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    private void sendRegisterRequest() {
+        String userName = userNameField_register.getText().toString();
+        String email = mailField_register.getText().toString();
+        String password = passwordField_register.getText().toString();
+        String nameSurname = nameSurnameField_register.getText().toString();
+        String phone = phoneField_register.getText().toString();
+        String companyName = companyField_register.getText().toString();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String createdAt = sdf.format(new Date());
+
+        if(checkFields(userName, email, password, nameSurname, phone, companyName)) {
+            String profilePhotoPath = userName + ".jpg";
+            String registerJsonBody =
+                    "{" +
+                            "\"Role\":\"" + "NORMAL" + "\"," +
+                            "\"UserName\":\"" + userName + "\"," +
+                            "\"Email\":\"" + email + "\"," +
+                            "\"Password\":\"" + password + "\"," +
+                            "\"NameSurname\":\"" + nameSurname + "\"," +
+                            "\"Phone\":\"" + phone + "\"," +
+                            "\"Profile_Photo\":\"" + profilePhotoPath + "\"," +
+                            "\"CompanyName\":\"" + companyName + "\"," +
+                            "\"Created_At\":\"" + createdAt + "\"" +
+                            "}";
+
+            sendRegisterRequestFinal(registerJsonBody, userName);
+        } else {
+            util.showErrorPopup(uyariDiyalog, "Kayıt olmak için tüm alanları doldurmalısın.");
+        }
+    }
+
+    private void sendRegisterRequestFinal(String jsonBody, String userName) {
+        String registerUrl = util.BASE_URL + util.registerURLPrefix;
+
+        HTTP.sendRequest(registerUrl, jsonBody, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                util.showSuccessPopup(uyariDiyalog, "Kayıt başarılı giriş yapabilirsiniz.");
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                util.showErrorPopup(uyariDiyalog, "Kayıt olurken hata meydana geldi. Lütfen tekrar dene.");
+            }
+        }, Volley.newRequestQueue(this));
+    }
+
+    private boolean checkFields(String userName, String email, String password, String nameSurname, String phone, String companyName) {
+        return !userName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !nameSurname.isEmpty() && !phone.isEmpty() && !companyName.isEmpty();
     }
 }

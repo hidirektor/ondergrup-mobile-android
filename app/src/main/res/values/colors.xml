@@ -5,22 +5,22 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#000000</color>
-    <color name="white">#FFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
     <color name="lightWhite">#FFFFF7</color>
-    <color name="blue">#408ce2</color>
-    <color name="lacivert">#222f5a</color>
-    <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#FFFFFF</color>
 
+    <color name="backgroundColor">#F9F871</color>
     <color name="tanitimekrani1">#FFB760</color>
     <color name="tanitimekrani2">#F07E6E</color>
     <color name="tanitimekrani3">#A575B0</color>
 
-    <color name="mainColor">#3B608C</color>
+    <color name="editTextTopColor">#1A1A35</color>
+    <color name="filterColor">#EEEEFF</color>
+    <color name="darkButtonColor">#2828A5</color>
+
+    <color name="blue">#408ce2</color>
     <color name="buttonColor">#64acdb</color>
-    <color name="backgroundColor">#F9F871</color>
-    <color name="transparent">#00000000</color>
     <color name="colorAccent">#0c83e5</color>
-    <color name="colorGrey2">#737373</color>
+    <color name="atlaTextColor">#111111</color>
+    <color name="lacivert">#222f5a</color>
 </resources>

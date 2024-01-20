@@ -4,12 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-
-import androidx.annotation.DrawableRes;
 
 import com.google.android.material.textfield.TextInputEditText;
 

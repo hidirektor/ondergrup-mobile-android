@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -64,21 +64,25 @@ public class MachineAdapter extends BaseAdapter {
         String secilenDil = "";
         String machineStat = "";
         if(Objects.equals(machine.getMachineType(), "ESP")) {
-            drawable = context.getResources().getDrawable(R.drawable.tanitimekrani_esp1);
+            drawable = ContextCompat.getDrawable(context, R.drawable.tanitimekrani_esp1);
         } else if(Objects.equals(machine.getMachineType(), "CSP-D")) {
-            drawable = context.getResources().getDrawable(R.drawable.tanitimekrani_csp1);
+            drawable = ContextCompat.getDrawable(context, R.drawable.tanitimekrani_csp1);
         }
 
         if(Objects.equals(machine.getDilSecim(), "0")) {
-            secilenDil = "Türkçe";
+            String language = context.getResources().getString(R.string.lang_turkish);
+            secilenDil = language;
         } else if(Objects.equals(machine.getDilSecim(), "1")) {
-            secilenDil = "İngilizce";
+            String language = context.getResources().getString(R.string.lang_english);
+            secilenDil = language;
         }
 
         if(Objects.nonNull(machine.getLastUpdate())) {
-            machineStat = "Aktif";
+            String status = context.getResources().getString(R.string.machine_active);
+            machineStat = status;
         } else {
-            machineStat = "Aktif Değil";
+            String status = context.getResources().getString(R.string.machine_deactive);
+            machineStat = status;
         }
         holder.machineImage.setImageDrawable(drawable);
         holder.machineOwnerName.setText(machine.getMachineID() + " - " + machine.getOwnerUser() + " - " + machine.getMachineType());

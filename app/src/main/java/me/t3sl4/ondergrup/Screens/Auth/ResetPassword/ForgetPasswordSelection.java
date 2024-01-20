@@ -4,9 +4,10 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,8 +47,7 @@ public class ForgetPasswordSelection extends AppCompatActivity {
             String userTypeUrl = util.BASE_URL + util.profileInfoURLPrefix + ":Email";
             String jsonProfileInfoBody = "{\"Username\": \"" + userName + "\"}";
 
-            HTTP http = new HTTP(this);
-            http.sendRequest(userTypeUrl, jsonProfileInfoBody, new HTTP.HttpRequestCallback() {
+            HTTP.sendRequest(userTypeUrl, jsonProfileInfoBody, new HTTP.HttpRequestCallback() {
                 @Override
                 public void onSuccess(JSONObject response) {
                     try {
@@ -67,7 +67,7 @@ public class ForgetPasswordSelection extends AppCompatActivity {
                 public void onFailure(String errorMessage) {
                     util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen bilgilerini kontrol edip tekrar dene.");
                 }
-            });
+            }, Volley.newRequestQueue(this));
         } else {
             util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen bilgilerini kontrol edip tekrar dene.");
         }
@@ -77,8 +77,7 @@ public class ForgetPasswordSelection extends AppCompatActivity {
         String otpUrl = util.BASE_URL + util.otpURLPrefix;
         String jsonOTPBody = "{\"Email\": \"" + email + "\"}";
 
-        HTTP http = new HTTP(this);
-        http.sendRequest(otpUrl, jsonOTPBody, new HTTP.HttpRequestCallback() {
+        HTTP.sendRequest(otpUrl, jsonOTPBody, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
                 try {
@@ -102,7 +101,7 @@ public class ForgetPasswordSelection extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen bilgilerini kontrol edip tekrar dene.");
             }
-        });
+        }, Volley.newRequestQueue(this));
     }
 
     public void callBackScreenFromMakeSelection(View view) {

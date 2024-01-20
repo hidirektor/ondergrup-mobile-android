@@ -23,6 +23,8 @@ public class MachineScreen extends AppCompatActivity {
 
     private Dialog uyariDiyalog;
 
+    private ImageView backButton;
+
     private ImageView machineImage;
     private TextView ownerName;
     private TextView machineID;
@@ -88,6 +90,8 @@ public class MachineScreen extends AppCompatActivity {
             selectedMachine = intent.getParcelableExtra("machine");
         }
 
+        backButton = findViewById(R.id.backIconImageView);
+
         machineImage = findViewById(R.id.makineGorsel);
         ownerName = findViewById(R.id.ownerNameText);
         machineID = findViewById(R.id.machineIDText);
@@ -136,6 +140,10 @@ public class MachineScreen extends AppCompatActivity {
         lcdBacklightSure = findViewById(R.id.lcdBacklightSure);
 
         initMachineData();
+
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
     }
 
     private void initMachineData() {
@@ -196,9 +204,9 @@ public class MachineScreen extends AppCompatActivity {
         lcdBacklightSure.setText(selectedMachine.getLcdBacklightSure() + " sn.");
 
         if(Objects.equals(secilenDil, "0")) {
-            selectedLang = getResources().getDrawable(R.drawable.turkish);
+            selectedLang = getResources().getDrawable(R.drawable.ikon_turkish);
         } else if(Objects.equals(secilenDil, "1")) {
-            selectedLang = getResources().getDrawable(R.drawable.english);
+            selectedLang = getResources().getDrawable(R.drawable.ikon_english);
         }
 
         dilSecimImage.setImageDrawable(selectedLang);

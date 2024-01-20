@@ -8,6 +8,8 @@ import android.widget.PopupMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,19 +58,18 @@ public class SubUserListScreen extends AppCompatActivity {
             popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
 
             popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case R.id.menu_option1:
-                        deleteAndUpdateSubUser(selectedSubUser, subUserList);
-                        return true;
-                    case R.id.menu_option2:
-                        Intent editSubIntent = new Intent(SubUserListScreen.this, EditSubScreen.class);
-                        editSubIntent.putExtra("user", receivedUser);
-                        editSubIntent.putExtra("subuser", selectedSubUser);
-                        startActivity(editSubIntent);
-                        finish();
-                        return true;
-                    default:
-                        return false;
+                if(item.getItemId() == R.id.deleteSub) {
+                    deleteAndUpdateSubUser(selectedSubUser, subUserList);
+                    return true;
+                } else if(item.getItemId() == R.id.editSub) {
+                    Intent editSubIntent = new Intent(SubUserListScreen.this, EditSubScreen.class);
+                    editSubIntent.putExtra("user", receivedUser);
+                    editSubIntent.putExtra("subuser", selectedSubUser);
+                    startActivity(editSubIntent);
+                    finish();
+                    return true;
+                } else {
+                    return false;
                 }
             });
 
@@ -83,8 +84,7 @@ public class SubUserListScreen extends AppCompatActivity {
         String reqURL = util.BASE_URL + util.getSubUsersPrefix;
         String jsonSubUserBody = "{\"username\": \"" + receivedUser.getUserName() + "\"}";
 
-        HTTP http = new HTTP(this);
-        http.sendRequest(reqURL, jsonSubUserBody, new HTTP.HttpRequestCallback() {
+        HTTP.sendRequest(reqURL, jsonSubUserBody, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
                 try {
@@ -114,7 +114,7 @@ public class SubUserListScreen extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
             }
-        });
+        }, Volley.newRequestQueue(this));
         return subUsers;
     }
 
@@ -131,8 +131,7 @@ public class SubUserListScreen extends AppCompatActivity {
         String ownerName = receivedUser.getUserName();
         String jsonSubUserBody = "{\"username\": \"" + selectedSubUsername + "\", \"OwnerName\": \"" + ownerName + "\"}";
 
-        HTTP http = new HTTP(this);
-        http.sendRequest(reqURL, jsonSubUserBody, new HTTP.HttpRequestCallback() {
+        HTTP.sendRequest(reqURL, jsonSubUserBody, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
                 util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde silindi !");
@@ -142,7 +141,7 @@ public class SubUserListScreen extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Kullanıcı silinmeedi. \nLütfen birazdan tekrar deneyin.");
             }
-        });
+        }, Volley.newRequestQueue(this));
 
         subUsers.remove(selectedSubUser);
         updateListView(subUsers);

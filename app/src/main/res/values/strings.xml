@@ -1,27 +1,156 @@
 <resources>
-    <string name="versionCode">20.09.2023</string>
-    <string name="versionName">T3SL4</string>
     <string name="app_name">Önder Grup</string>
-    <string name="forget_password_detail">Şifrenizi sıfırlamak istediğiniz hesabın e-postasını girin</string>
+
+    <string name="login">Giriş Yap</string>
+    <string name="register">Kayıt Ol</string>
     <string name="next_btn">İlerle</string>
+    <string name="forget_password">Şifremi Unuttum</string>
+    <string name="skip">Atla</string>
+    <string name="delete">Sil</string>
+    <string name="edit">Düzenle</string>
+    <string name="okay">Tamam</string>
+    <string name="warning">HATA !</string>
+
+    <string name="lang_turkish">Türkçe</string>
+    <string name="lang_english">İngilizce</string>
+    <string name="machine_active">Aktif</string>
+    <string name="machine_deactive">Aktif Değil</string>
+
     <string name="enter_username">Kullanıcı Adı</string>
+    <string name="enter_password">Şifre</string>
+    <string name="enter_namesurname">İsim Soyisim</string>
+    <string name="enter_mail">E-Posta</string>
+    <string name="enter_phone">Telefon</string>
+    <string name="enter_sirket">Şirket</string>
+
+    <string name="resetPass">Şİfrenİ\nSıfırla</string>
+    <string name="forget_password_detail">Şifrenizi sıfırlamak istediğiniz hesabın e-postasını girin</string>
+
+    <string name="new_credentials">Yenİ Şİfren</string>
+    <string name="new_credentials_detail">Eski şifrenden farklı bir şifre belirleyerek aşağıdaki alana yazabilirsin</string>
+    <string name="new_credentials_2">Yeni Şifren</string>
+    <string name="new_credentials_2_repeat">Şifreni Doğrula</string>
+    <string name="new_credentials_reset">Sıfırla</string>
+
     <string name="make_selection">Seçİmİnİ Yap</string>
     <string name="make_selection_detail">Lütfen şifreni sıfırlamak istediğin yönetmi seç</string>
     <string name="via_sms">SMS ile Sıfırla</string>
+    <string name="via_sms_detail">Telefonuna gelecek kod ile şifreni sıfırlayabilirsin.</string>
     <string name="via_mail">E-Posta ile Sıfırla</string>
-    <string name="todo">Onay Kodu</string>
+    <string name="via_mail_detail">E-Postana gelecek kod ile şifreni sıfırlayabilirsin.</string>
+
+    <string name="password_updated">BAŞARILI</string>
+    <string name="password_updated_success_message">Tebrikler şifren değiştirildi. Artık yeni şifren ile giriş yapabilirsin</string>
+
     <string name="otp_code_text">On\nay</string>
     <string name="otp_verification_text">Doğrulama Aşaması</string>
     <string name="otp_description_text">Seçtiğiniz doğrulama yöntemine gelen onay kodunu girin</string>
-    <string name="verify_code">İlerle</string>
-    <string name="new_credentials">Yenİ Şİfren</string>
-    <string name="new_credentials_detail">Eski şifrenden farklı bir şifre belirleyerek aşağıdaki alana yazabilirsin</string>
-    <string name="password_updated">BAŞARILI</string>
-    <string name="password_updated_success_message">Tebrikler şifren değiştirildi. Artık yeni şifren ile giriş yapabilirsin</string>
-    <string name="login">Giriş Yap</string>
+
+
+    <string name="machine_owner">Sahibi: </string>
+    <string name="machine_id">Makine ID: </string>
+    <string name="machine_cycle">Cycle: </string>
+    <string name="machine_language">Dil: </string>
+    <string name="machine_devirmeYuruyusSecim">devirmeYuruyusSecim</string>
+    <string name="machine_calismaSekli">calismaSekli</string>
+    <string name="machine_emniyetCercevesi">emniyetCercevesi</string>
+    <string name="machine_yavaslamaLimit">yavaslamaLimit</string>
+    <string name="machine_altLimit">altLimit</string>
+    <string name="machine_kapiTablaAcKonum">kapiTablaAcKonum</string>
+    <string name="machine_basincSalteri">basincSalteri</string>
+    <string name="machine_kapiSecimleri">kapiSecimleri</string>
+    <string name="machine_kapiAcTipi">kapiAcTipi</string>
+    <string name="machine_kapi1Tip">kapi1Tip</string>
+    <string name="machine_kapi1AcSure">kapi1AcSure</string>
+    <string name="machine_kapi2Tip">kapi2Tip</string>
+    <string name="machine_kapi2AcSure">kapi2AcSure</string>
+    <string name="machine_kapitablaTip">kapitablaTip</string>
+    <string name="machine_kapiTablaAcSure">kapiTablaAcSure</string>
+    <string name="machine_yukariYavasLimit">yukariYavasLimit</string>
+    <string name="machine_devirmeYukariIleriLimit">devirmeYukariIleriLimit</string>
+    <string name="machine_devirmeAsagiGeriLimit">devirmeAsagiGeriLimit</string>
+    <string name="machine_devirmeSilindirTipi">devirmeSilindirTipi</string>
+    <string name="machine_platformSilindirTipi">platformSilindirTipi</string>
+    <string name="machine_yukariValfTmr">yukariValfTmr</string>
+    <string name="machine_asagiValfTmr">asagiValfTmr</string>
+    <string name="machine_devirmeYukariIleriTmr">devirmeYukariIleriTmr</string>
+    <string name="machine_devirmeAsagiGeriTmr">devirmeAsagiGeriTmr</string>
+    <string name="machine_makineCalismaTmr">makineCalismaTmr</string>
+    <string name="machine_buzzer">buzzer</string>
+    <string name="machine_demoMode">demoMode</string>
+    <string name="machine_dilSecim">dilSecim</string>
+    <string name="machine_eepromData37">eepromData37</string>
+    <string name="machine_eepromData38">eepromData38</string>
+    <string name="machine_eepromData39">eepromData39</string>
+    <string name="machine_eepromData40">eepromData40</string>
+    <string name="machine_eepromData41">eepromData41</string>
+    <string name="machine_eepromData42">eepromData42</string>
+    <string name="machine_eepromData43">eepromData43</string>
+    <string name="machine_eepromData44">eepromData44</string>
+    <string name="machine_eepromData45">eepromData45</string>
+    <string name="machine_eepromData46">eepromData46</string>
+    <string name="machine_eepromData47">eepromData47</string>
+    <string name="machine_lcdBacklightSure">lcdBacklightSure</string>
+
+    <string name="hello_template">Merhaba\nHalil İbrahim Direktör</string>
+    <string name="hello_prefix">Merhaba\n</string>
+    <string name="subusers">Alt Kullanıcılar</string>
+    <string name="hatalog">Hata Log</string>
+    <string name="maintenance">Bakım Geçmişi</string>
+    <string name="docs">Belgeler</string>
+
+    <string name="onboard_1_title_1">Bütüncül</string>
+    <string name="onboard_1_title_2">Kontrol</string>
+    <string name="onboard_1_desc">ÖnderGrup çatısı altındaki ürünlerinizi ve ürünlerle yetkili tüm alt kullanıcıları uygulama üzerinden kontrol edebilirsiniz.</string>
+
+    <string name="onboard_2_title_1">ESP</string>
+    <string name="onboard_2_title_2">Yönetimi</string>
+    <string name="onboard_2_desc">Satın almış olduğunuz tüm ESP cihazlarınızı tek bir platformdan kontrol edebilirsiniz.</string>
+
+    <string name="onboard_3_title_1">CSP-D</string>
+    <string name="onboard_3_title_2">Yönetimi</string>
+    <string name="onboard_3_desc">Satın almış olduğunuz tüm CSP-D cihazlarınızı tek bir platformdan kontrol edebilirsiniz.</string>
+
+    <string name="documents_desc">İncelemek istediğin dokümanı aşağıdan seçebilirsin.</string>
+    <string name="user_manual">Kullanma Kılavuzu</string>
+    <string name="user_manual_desc">ESP ve CSP-D makineleriniz için kullanma kılavuzuna ulaşın.</string>
+    <string name="kvkk">KVKK Politikası</string>
+    <string name="kvkk_desc">KVKK politikamızı bu butonu kullanarak inceleyebilirsiniz.</string>
+    <string name="privacy">Gizlilik Politikası</string>
+    <string name="privacy_desc">Gizlilik politikamızı bu butonu kullanarak inceleyebilirsiniz.</string>
+    <string name="data_storage">Veri Saklama ve İmha</string>
+    <string name="data_storage_desc">Veri saklama ve imha politikamızı bu butonu kullanarak inceleyebilirsiniz.</string>
+
+    <string name="subuser_desc">Alt kullanıcıların için yapmak istediğin işlemi aşağıdan seçebilirsin.</string>
+    <string name="subuser_list">Alt Kullanıcıları Listele</string>
+    <string name="subuser_list_desc">Eklediğin alt kullanıcıları buradan görüntüleyebilirsiniz.</string>
+    <string name="subuser_add">Alt Kullanıcı Ekle</string>
+    <string name="subuser_add_desc">Alt kullanıcı ekleme işlemini buradan yapabilirsiniz.</string>
+
+    <string name="subuser_create">Alt Kullanıcı \nOluştur</string>
+    <string name="subuser_create_button">Oluştur</string>
+
+    <string name="subuser_update">Alt Kullanıcıyı Güncelle</string>
+
+    <string name="role">Kullanıcı Rolü</string>
+    <string name="create_date">Oluşturma Tarihi</string>
+    <string name="create_date_template">28.05.2001 17:50</string>
+
+    <string name="profile_update">Profili Güncelle</string>
 
     <string-array name="machineType">
         <item>ESP</item>
         <item>CSP</item>
     </string-array>
+
+    <string name="support_desc">Lütfen bizimle kurmak istediğin irtibat yöntemini seç.</string>
+    <string name="support_location">Konum</string>
+    <string name="support_location_desc">Fabrika ve Showroom adreslerine bakabilirsin.</string>
+    <string name="support_mail">E-Posta Gönder</string>
+    <string name="support_mail_desc">E-Posta aracılığıyla destek alabilirsiniz.</string>
+    <string name="support_call">Bizi Ara</string>
+    <string name="support_call_desc">Bizi arayarak destek alabilirsiniz.</string>
+
+    <string name="machine_add">Makine Ekle</string>
+    <string name="machine_type">Makine Türü</string>
 </resources>

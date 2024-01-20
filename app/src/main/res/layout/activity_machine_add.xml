@@ -3,53 +3,51 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dialogbg">
+    android:background="@drawable/background_dialog">
 
     <ImageView
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_round_remove_24"
+        android:src="@drawable/ikon_line"
         android:layout_gravity="center|top"
         android:scaleType="centerCrop"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center|center_vertical">
 
         <TextView
             android:id="@+id/createText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.8"
             android:layout_height="wrap_content"
             android:textAlignment="viewStart"
-            android:text="Makine Ekle"
+            android:text="@string/machine_add"
             android:padding="8dp"
             android:textColor="@color/lacivert"
             android:layout_marginStart="12dp"
             android:layout_marginTop="5dp"
             android:textSize="25dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <ImageView
+            android:id="@+id/wifiButton"
+            android:layout_width="0dp"
+            android:layout_weight="0.1"
+            android:layout_height="32dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ikon_wifi_red" />
 
-            <ImageView
-                android:id="@+id/cancelButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:scaleType="fitEnd"
-                android:src="@drawable/ic_baseline_clear_24" />
-
-            <ImageView
-                android:id="@+id/wifiButton"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_marginBottom="10dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/wifi_red" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/cancelButton"
+            android:layout_width="0dp"
+            android:layout_weight="0.1"
+            android:layout_height="32dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="fitEnd"
+            android:src="@drawable/ikon_dialog_cross" />
 
     </LinearLayout>
 
@@ -68,7 +66,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:text="Makine Türü"
+            android:text="@string/machine_type"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -92,7 +90,7 @@
                 android:text="ESP"
                 android:textColor="#182693"
                 android:textSize="18sp"
-                android:drawableStart="@drawable/machine_add_icon"
+                android:drawableStart="@drawable/ikon_machine_add_icon"
                 android:drawablePadding="10dp"/>
         </LinearLayout>
 
@@ -122,7 +120,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="32dp"
-            android:text="Makine ID"
+            android:text="@string/machine_id"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -134,12 +132,11 @@
             android:id="@+id/editTextID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="48dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="32dp"
-            android:drawableEnd="@drawable/machine_add_camera"
-            android:hint="Makine ID"
+            android:drawableEnd="@drawable/ikon_machine_add_camera"
+            android:hint="@string/machine_id"
             android:inputType="text" />
     </LinearLayout>
 
@@ -154,12 +151,11 @@
             android:id="@+id/makineEkleButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="48dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="32dp"
             android:backgroundTint="@color/lacivert"
-            android:text="Makine Ekle"
+            android:text="@string/machine_add"
             android:textAllCaps="false"
             android:textColor="@color/white"/>
     </LinearLayout>

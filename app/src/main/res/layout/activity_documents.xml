@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -42,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/muli"
-                    android:text="İncelemek istediğin dokümanı aşağıdan seçebilirsin."
+                    android:text="@string/documents_desc"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -61,7 +60,7 @@
                         android:layout_height="60dp"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
-                        android:src="@drawable/usermanual" />
+                        android:src="@drawable/ikon_manual" />
 
 
                     <TextView
@@ -71,7 +70,7 @@
                         android:layout_marginTop="48dp"
                         android:layout_toRightOf="@id/manual_icon"
                         android:fontFamily="@font/muli"
-                        android:text="Kullanma Kılavuzu"
+                        android:text="@string/user_manual"
                         android:textSize="20sp" />
 
 
@@ -82,7 +81,7 @@
                         android:layout_below="@id/manual_title"
                         android:layout_toRightOf="@id/manual_icon"
                         android:fontFamily="@font/muli"
-                        android:text="ESP ve CSP-D makineleriniz için kullanma kılavuzuna ulaşın."
+                        android:text="@string/user_manual_desc"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -91,7 +90,7 @@
                         android:id="@+id/manualButton"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/transparent" />
+                        android:background="@android:color/transparent" />
 
 
                 </RelativeLayout>
@@ -111,7 +110,7 @@
                         android:layout_height="60dp"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
-                        android:src="@drawable/dataicon" />
+                        android:src="@drawable/ikon_data" />
 
 
                     <TextView
@@ -121,7 +120,7 @@
                         android:layout_marginTop="48dp"
                         android:layout_toRightOf="@id/mobile_icon"
                         android:fontFamily="@font/muli"
-                        android:text="KVKK Politikası"
+                        android:text="@string/kvkk"
                         android:textSize="20sp" />
 
 
@@ -132,7 +131,7 @@
                         android:layout_below="@id/mobile_title"
                         android:layout_toRightOf="@id/mobile_icon"
                         android:fontFamily="@font/muli"
-                        android:text="KVKK politikamızı bu butonu kullanarak inceleyebilirsiniz."
+                        android:text="@string/kvkk_desc"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -140,7 +139,7 @@
                         android:id="@+id/dataButton"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/transparent" />
+                        android:background="@android:color/transparent" />
 
                 </RelativeLayout>
 
@@ -159,7 +158,7 @@
                         android:layout_height="55dp"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
-                        android:src="@drawable/privacyicon" />
+                        android:src="@drawable/ikon_privacy" />
 
 
                     <TextView
@@ -169,7 +168,7 @@
                         android:layout_marginTop="48dp"
                         android:layout_toRightOf="@id/mail_icon"
                         android:fontFamily="@font/muli"
-                        android:text="Gizlilik Politikası"
+                        android:text="@string/privacy"
                         android:textSize="20sp" />
 
 
@@ -180,7 +179,7 @@
                         android:layout_below="@id/mail_title"
                         android:layout_toRightOf="@id/mail_icon"
                         android:fontFamily="@font/muli"
-                        android:text="Gizlilik politikamızı bu butonu kullanarak inceleyebilirsiniz."
+                        android:text="@string/privacy_desc"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
@@ -189,7 +188,7 @@
                         android:id="@+id/privacyButton"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/transparent" />
+                        android:background="@android:color/transparent" />
 
                 </RelativeLayout>
 
@@ -207,8 +206,8 @@
                         android:layout_width="60dp"
                         android:layout_height="55dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
-                        android:src="@drawable/imhaicon" />
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/ikon_imha" />
 
 
                     <TextView
@@ -216,9 +215,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="48dp"
-                        android:layout_toRightOf="@id/call_icon"
+                        android:layout_toEndOf="@id/call_icon"
                         android:fontFamily="@font/muli"
-                        android:text="Veri Saklama ve İmha"
+                        android:text="@string/data_storage"
                         android:textSize="20sp" />
 
 
@@ -227,9 +226,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/call_title"
-                        android:layout_toRightOf="@id/call_icon"
+                        android:layout_toEndOf="@id/call_icon"
                         android:fontFamily="@font/muli"
-                        android:text="Veri saklama ve imha politikamızı bu butonu kullanarak inceleyebilirsiniz."
+                        android:text="@string/data_storage_desc"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
@@ -238,7 +237,7 @@
                         android:id="@+id/imhaButton"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/transparent" />
+                        android:background="@android:color/transparent" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -259,7 +258,11 @@
             android:layout_gravity="bottom"
             app:fabCradleMargin="8dp"
             app:fabCradleRoundedCornerRadius="50dp"
-            app:fabCradleVerticalOffset="6dp">
+            app:fabCradleVerticalOffset="6dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -275,11 +278,12 @@
                         android:id="@+id/imageView19"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/homeicon"
+                        android:src="@drawable/ikon_home"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/atlaTextColor" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -291,11 +295,12 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/usericon"
+                        android:src="@drawable/ikon_user"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/atlaTextColor" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -308,11 +313,11 @@
                         android:id="@+id/imageView21"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/bottom_btn3"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/atlaTextColor" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -325,11 +330,12 @@
                         android:id="@+id/imageView22"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/machineicon"
+                        android:src="@drawable/ikon_machine"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/atlaTextColor" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -342,11 +348,12 @@
                         android:id="@+id/imageView23"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/settingsicon"
+                        android:src="@drawable/ikon_settings"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/atlaTextColor" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </com.google.android.material.bottomappbar.BottomAppBar>
@@ -354,10 +361,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:pointerIcon="wait"
-            android:src="@drawable/qrcode"
+            android:src="@drawable/ikon_qr"
             app:maxImageSize="25dp"
             app:tint="@color/white"
             app:layout_anchor="@id/app_bar"
-            app:backgroundTint="@color/lacivert"/>
+            app:backgroundTint="@color/editTextTopColor" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

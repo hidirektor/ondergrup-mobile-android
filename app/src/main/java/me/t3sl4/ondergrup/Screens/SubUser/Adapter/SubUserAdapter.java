@@ -8,8 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 import me.t3sl4.ondergrup.R;
@@ -58,8 +56,6 @@ public class SubUserAdapter extends BaseAdapter {
         }
 
         SubUser subUser = subUserList.get(position);
-        String imageUrl = util.BASE_URL + util.getPhotoURLPrefix + subUser.getUserName() + ".jpg";
-        Glide.with(context).load(imageUrl).override(100, 100).into(holder.profilePhoto);
         holder.nameSurname.setText(subUser.getNameSurname());
         holder.userName.setText(subUser.getUserName());
         holder.companyName.setText(subUser.getCompanyName());

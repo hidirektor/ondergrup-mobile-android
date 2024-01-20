@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
-    tools:context=".Screens.MainActivity"
+    tools:context=".Screens.Profile.ProfileScreen"
     android:fitsSystemWindows="true">
 
     <ScrollView
@@ -15,7 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -28,83 +29,38 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="360dp"
-                        android:background="@drawable/top_background4"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardViewPhoto"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="32dp"
-                        app:cardCornerRadius="50dp"
-                        app:cardBackgroundColor="@color/transparent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                            android:id="@+id/imageView"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginEnd="32dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ondergrup_ikon" />
-                    </androidx.cardview.widget.CardView>
-
                     <TextView
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="Kullanıcı İsim Soyisim"
-                        android:textColor="#ffffff"
+                        android:textColor="@color/atlaTextColor"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/cardViewPhoto"
-                        app:layout_constraintStart_toStartOf="@+id/cardViewPhoto"
-                        app:layout_constraintTop_toBottomOf="@+id/cardViewPhoto" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kullanıcı E-Posta Adresi"
-                        android:textColor="#ffffff"
+                        android:textColor="@color/atlaTextColor"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="@+id/textView"
                         app:layout_constraintStart_toStartOf="@+id/textView"
                         app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:scaleType="centerCrop"
-                        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/circles" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        android:layout_marginTop="60dp"
+                        android:layout_marginTop="24dp"
                         android:layout_marginEnd="24dp"
                         android:layout_marginBottom="24dp"
-                        android:background="@drawable/white_background"
                         android:elevation="3dp"
                         android:orientation="vertical"
                         android:paddingBottom="10dp"
@@ -124,7 +80,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="10dp"
                                 android:layout_weight="0.3333"
-                                android:background="@drawable/grey_background"
+                                android:background="@drawable/background_grey"
                                 android:elevation="5dp"
                                 android:orientation="vertical">
 
@@ -133,7 +89,7 @@
                                     android:layout_height="60dp"
                                     android:layout_gravity="center_horizontal"
                                     android:layout_margin="12dp"
-                                    android:background="@drawable/circle_background">
+                                    android:background="@drawable/background_circle">
 
                                     <ImageView
                                         android:id="@+id/imageView22"
@@ -143,7 +99,7 @@
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toTopOf="parent"
-                                        app:srcCompat="@drawable/group" />
+                                        app:srcCompat="@drawable/ikon_subuserstemp" />
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                                 <TextView
@@ -151,47 +107,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8dp"
-                                    android:text="Alt Kullanıcılar"
-                                    android:textAlignment="center"
-
-                                    android:textColor="#000000"
-                                    android:textSize="13sp"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_margin="10dp"
-                                android:layout_weight="0.3333"
-                                android:background="@drawable/grey_background"
-                                android:elevation="5dp"
-                                android:orientation="vertical">
-
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_margin="12dp"
-                                    android:background="@drawable/circle_background">
-
-                                    <ImageView
-                                        android:id="@+id/imageView24"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:srcCompat="@drawable/notification2" />
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                                <TextView
-                                    android:id="@+id/textView17"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8dp"
-                                    android:text="Bildirim Merkezi"
+                                    android:text="@string/subusers"
                                     android:textAlignment="center"
 
                                     android:textColor="#000000"
@@ -214,7 +130,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Kullanıcı Rolü"
+                                android:text="@string/role"
                                 android:textColor="#182693"
                                 android:textSize="18sp" />
 
@@ -223,7 +139,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Kullanıcı Rolü"
+                                android:text="@string/role"
                                 android:textAlignment="viewEnd"
                                 android:textColor="#5B5B5B"
                                 android:textSize="16sp" />
@@ -251,7 +167,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Kullanıcı Adı"
+                                android:text="@string/enter_username"
                                 android:textColor="#182693"
                                 android:textSize="18sp" />
 
@@ -260,7 +176,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Kullanıcı Adı"
+                                android:text="@string/enter_username"
                                 android:textAlignment="viewEnd"
                                 android:textColor="#5B5B5B"
                                 android:textSize="16sp" />
@@ -288,7 +204,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Telefon"
+                                android:text="@string/enter_phone"
                                 android:textColor="#182693"
                                 android:textSize="18sp" />
 
@@ -297,7 +213,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Telefon No"
+                                android:text="@string/enter_phone"
                                 android:textAlignment="viewEnd"
                                 android:textColor="#5B5B5B"
                                 android:textSize="16sp" />
@@ -325,7 +241,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Şirket"
+                                android:text="@string/enter_sirket"
                                 android:textColor="#182693"
                                 android:textSize="18sp" />
 
@@ -334,7 +250,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Şirket İsmi"
+                                android:text="@string/enter_sirket"
                                 android:textAlignment="viewEnd"
                                 android:textColor="#5B5B5B"
                                 android:textSize="16sp" />
@@ -362,7 +278,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Oluşturma Tarihi"
+                                android:text="@string/create_date"
                                 android:textColor="#182693"
                                 android:textSize="18sp" />
 
@@ -371,7 +287,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="28.05.2001 17:50"
+                                android:text="@string/create_date_template"
                                 android:textAlignment="viewEnd"
                                 android:textColor="#5B5B5B"
                                 android:textSize="16sp" />
@@ -390,11 +306,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
-                android:background="@drawable/background_button"
+                android:background="@drawable/button_main"
                 android:textColor="#ffffff"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:text="Profili Güncelle"
+                android:text="@string/edit"
                 style="@android:style/Widget.Button"/>
 
         </LinearLayout>

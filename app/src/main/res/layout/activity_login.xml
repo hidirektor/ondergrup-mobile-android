@@ -20,63 +20,214 @@
 
             <ImageView
                 android:id="@+id/imageView"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/logo_inapp" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/top_background1" />
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/loginSectionButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/button_filter_start_dark"
+                    android:fontFamily="@font/outfit_bold"
+                    android:text="@string/login"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:layout_marginEnd="2dp"
+                    android:shadowColor="@android:color/transparent"/>
 
-            <TextView
-                android:id="@+id/textView"
+                <Button
+                    android:id="@+id/registerSectionButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/button_filter_end"
+                    android:fontFamily="@font/outfit_bold"
+                    android:text="@string/register"
+                    android:textSize="12sp"
+                    android:textColor="@color/editTextTopColor"
+                    android:textAllCaps="false"
+                    android:shadowColor="@android:color/transparent"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/loginSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:text="Tekrar \nHoşgeldin"
-                android:textColor="#EA6D35"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:layout_marginTop="32dp">
+                <EditText
+                    android:id="@+id/userNameField_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_edittext"
+                    android:drawableStart="@drawable/ikon_kullaniciadi"
+                    android:drawablePadding="16dp"
+                    android:ems="10"
+                    android:hint="@string/enter_username"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:textColorHint="#756C6C" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName"
+                <EditText
+                    android:id="@+id/passwordField_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/background_edittext"
+                    android:drawableStart="@drawable/ikon_password"
+                    android:drawableEnd="@drawable/ikon_passshow"
+                    android:drawablePadding="16dp"
+                    android:ems="10"
+                    android:hint="@string/enter_password"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:textColorHint="#756C6C" />
+
+                <Button
+                    android:id="@+id/loginButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="@string/login"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_main"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/registerSection"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edittext_background"
-                android:drawableStart="@drawable/kullaniciadi"
-                android:drawablePadding="16dp"
-                android:ems="10"
-                android:hint="Kullanıcı Adı"
-                android:inputType="textPersonName"
-                android:padding="8dp"
-                android:textColorHint="#756C6C" />
-
-            <EditText
-                android:id="@+id/editTextTextPassword"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/edittext_background"
-                android:drawableStart="@drawable/password"
-                android:drawableEnd="@drawable/field_password_show"
-                android:drawablePadding="16dp"
-                android:ems="10"
-                android:hint="Şifre"
-                android:inputType="textPassword"
-                android:padding="8dp"
-                android:textColorHint="#756C6C" />
-
-            <ImageView
-                android:id="@+id/loginButton"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="16sp"
-                android:layout_marginEnd="32dp"
-                app:srcCompat="@drawable/btn_arraw1" />
+                android:orientation="vertical"
+                android:layout_marginTop="32dp"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/nameSurnameField_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/background_edittext"
+                    android:drawableStart="@drawable/ikon_name"
+                    android:drawablePadding="16dp"
+                    android:ems="10"
+                    android:hint="@string/enter_namesurname"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:textColorHint="#756C6C" />
+
+                <EditText
+                    android:id="@+id/userNameField_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/background_edittext"
+                    android:drawableStart="@drawable/ikon_kullaniciadi"
+                    android:drawablePadding="16dp"
+                    android:ems="10"
+                    android:hint="@string/enter_username"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:textColorHint="#756C6C" />
+
+                <EditText
+                    android:id="@+id/passwordField_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/background_edittext"
+                    android:drawableStart="@drawable/ikon_password"
+                    android:drawableEnd="@drawable/ikon_passshow"
+                    android:drawablePadding="16dp"
+                    android:ems="10"
+                    android:hint="@string/enter_password"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:textColorHint="#756C6C" />
+
+                <EditText
+                    android:id="@+id/mailField_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/background_edittext"
+                    android:drawableStart="@drawable/ikon_email"
+                    android:drawablePadding="16dp"
+                    android:ems="10"
+                    android:hint="@string/enter_mail"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:textColorHint="#756C6C" />
+
+                <EditText
+                    android:id="@+id/phoneField_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/background_edittext"
+                    android:drawableStart="@drawable/ikon_phone"
+                    android:drawablePadding="16dp"
+                    android:ems="10"
+                    android:hint="@string/enter_phone"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:textColorHint="#756C6C" />
+
+                <EditText
+                    android:id="@+id/companyField_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/background_edittext"
+                    android:drawableStart="@drawable/ikon_sirket"
+                    android:drawablePadding="16dp"
+                    android:ems="10"
+                    android:hint="@string/enter_sirket"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:textColorHint="#756C6C" />
+
+                <Button
+                    android:id="@+id/registerButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="@string/register"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_main"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,31 +241,13 @@
                     android:id="@+id/resetPassButton"
                     style="@android:style/Widget.Button"
                     android:layout_width="wrap_content"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_background"
-                    android:drawableStart="@drawable/resetpassicon"
+                    android:background="@drawable/button_resetpass"
+                    android:drawableStart="@drawable/ikon_resetpass"
                     android:drawablePadding="2dp"
                     android:padding="16dp"
-                    android:text="Şifremi Unuttum"
-                    android:textColor="#3b608c"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/registerButton"
-                    style="@android:style/Widget.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="24dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_background"
-                    android:drawableStart="@drawable/registericon"
-                    android:drawablePadding="2dp"
-                    android:padding="16dp"
-                    android:text="Kayıt Ol"
+                    android:text="@string/forget_password"
                     android:textColor="#3b608c"
                     android:textSize="16sp"
                     android:textStyle="bold" />

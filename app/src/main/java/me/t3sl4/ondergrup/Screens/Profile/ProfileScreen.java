@@ -4,24 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
-import me.t3sl4.ondergrup.Screens.Dashboard.DashboardEngineerScreen;
-import me.t3sl4.ondergrup.Screens.Dashboard.DashboardSysOpScreen;
-import me.t3sl4.ondergrup.Screens.Dashboard.DashboardTechnicianScreen;
-import me.t3sl4.ondergrup.Screens.Dashboard.DashboardUserScreen;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
@@ -30,7 +18,6 @@ public class ProfileScreen extends AppCompatActivity {
     public Util util;
     public User receivedUser;
 
-    private ImageView profilePhoto;
     private TextView nameSurname;
     private TextView eMail;
     private TextView kullaniciRolu;
@@ -52,7 +39,6 @@ public class ProfileScreen extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
-        profilePhoto = findViewById(R.id.imageView);
         nameSurname = findViewById(R.id.textView);
         eMail = findViewById(R.id.textView2);
         kullaniciRolu = findViewById(R.id.textView18);
@@ -82,14 +68,15 @@ public class ProfileScreen extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         String userRole = receivedUser.getRole();
         Log.d("Rol", " " + userRole);
-        if(userRole.equals("NORMAL")) {
-            Intent profileIntent = new Intent(ProfileScreen.this, DashboardUserScreen.class);
+        if (userRole.equals("NORMAL")) {
+            Intent profileIntent = new Intent(ProfileScreen.this, me.t3sl4.ondergrup.Screens.Dashboard.User.class);
             profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
             finish();
-        } else if(userRole.equals("TECHNICIAN")) {
+        } /*else if(userRole.equals("TECHNICIAN")) {
             Intent profileIntent = new Intent(ProfileScreen.this, DashboardTechnicianScreen.class);
             profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
@@ -104,15 +91,12 @@ public class ProfileScreen extends AppCompatActivity {
             profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
             finish();
-        }
+        }*/
     }
 
     public void setUserInfo() {
-        String imageUrl = util.BASE_URL + util.getPhotoURLPrefix + receivedUser.getUserName() + ".jpg";
-
         String createdAtString = receivedUser.getCreatedAt();
 
-        Glide.with(this).load(imageUrl).override(100, 100).into(profilePhoto);
         nameSurname.setText(receivedUser.getNameSurname());
         eMail.setText(receivedUser.geteMail());
         kullaniciRolu.setText(receivedUser.getRole());

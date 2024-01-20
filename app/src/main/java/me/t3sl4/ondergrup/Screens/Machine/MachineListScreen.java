@@ -3,11 +3,11 @@ package me.t3sl4.ondergrup.Screens.Machine;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,8 +61,7 @@ public class MachineListScreen extends AppCompatActivity {
         String reqURL = util.BASE_URL + util.getMachineURL;
         String jsonSubUserBody = "{\"username\": \"" + receivedUser.getUserName() + "\"}";
 
-        HTTP http = new HTTP(this);
-        http.sendRequest(reqURL, jsonSubUserBody, new HTTP.HttpRequestCallback() {
+        HTTP.sendRequest(reqURL, jsonSubUserBody, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
                 try {
@@ -144,7 +143,7 @@ public class MachineListScreen extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
             }
-        });
+        }, Volley.newRequestQueue(this));
         return machines;
     }
 

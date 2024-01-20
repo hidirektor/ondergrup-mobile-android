@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -54,8 +55,7 @@ public class ForgetPassword extends AppCompatActivity {
         String userTypeUrl = util.BASE_URL + util.profileInfoURLPrefix + ":Role";
         String jsonProfileInfoBody = "{\"Username\": \"" + username + "\"}";
 
-        HTTP http = new HTTP(this);
-        http.sendRequest(userTypeUrl, jsonProfileInfoBody, new HTTP.HttpRequestCallback() {
+        HTTP.sendRequest(userTypeUrl, jsonProfileInfoBody, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
                 try {
@@ -78,7 +78,7 @@ public class ForgetPassword extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. İstersen tekrar deneyebilirsin.");
             }
-        });
+        }, Volley.newRequestQueue(this));
     }
 
     public void callBackScreenFromForgetPassword(View view) {

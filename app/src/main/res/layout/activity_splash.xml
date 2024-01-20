@@ -17,7 +17,7 @@
             android:layout_height="250dp"
             android:layout_gravity="center"
             android:elevation="3dp"
-            android:src="@drawable/ondergrup_main" />
+            android:src="@drawable/logo_inapp" />
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

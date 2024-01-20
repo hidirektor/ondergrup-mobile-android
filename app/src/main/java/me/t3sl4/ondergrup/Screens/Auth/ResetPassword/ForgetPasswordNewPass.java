@@ -4,12 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -18,6 +17,7 @@ import org.json.JSONObject;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
+import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -55,36 +55,8 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
         editTextConfirmNewPass = findViewById(R.id.editTextConfirmNewPass);
         editTextConfirmNewPassText = editTextConfirmNewPass.findViewById(R.id.editTextConfirmNewPassText);
 
-        editTextNewPass.setEndIconOnClickListener(v -> {
-            isPasswordVisibleNormal = !isPasswordVisibleNormal;
-            updatePasswordVisibilityNormal(editTextNewPassText);
-        });
-        editTextConfirmNewPass.setEndIconOnClickListener(v -> {
-            isPasswordVisibleConfirm = !isPasswordVisibleConfirm;
-            updatePasswordVisibilityConfirm(editTextConfirmNewPassText);
-        });
-    }
-
-    private void updatePasswordVisibilityNormal(TextInputEditText editText) {
-        if (isPasswordVisibleNormal) {
-            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            editTextNewPass.setEndIconDrawable(R.drawable.field_password_hide);
-        } else {
-            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            editTextNewPass.setEndIconDrawable(R.drawable.field_password_show);
-        }
-        editText.setSelection(editText.getText().length());
-    }
-
-    private void updatePasswordVisibilityConfirm(TextInputEditText editText) {
-        if (isPasswordVisibleConfirm) {
-            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            editTextConfirmNewPass.setEndIconDrawable(R.drawable.field_password_hide);
-        } else {
-            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            editTextConfirmNewPass.setEndIconDrawable(R.drawable.field_password_show);
-        }
-        editText.setSelection(editText.getText().length());
+        PasswordFieldTouchListener.setChangeablePasswordFieldLayout(editTextNewPass, getApplicationContext());
+        PasswordFieldTouchListener.setChangeablePasswordFieldLayout(editTextConfirmNewPass, getApplicationContext());
     }
 
     public void setNewPassword(View view) {
@@ -99,8 +71,7 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
                 String otpUrl = util.BASE_URL + util.updatePassURLPrefix;
                 String jsonUpdatePassBody = "{\"Email\": \"" + eMail + "\", \"Password\": \"" + firstPass + "\"}";
 
-                HTTP http = new HTTP(this);
-                http.sendRequest(otpUrl, jsonUpdatePassBody, new HTTP.HttpRequestCallback() {
+                HTTP.sendRequest(otpUrl, jsonUpdatePassBody, new HTTP.HttpRequestCallback() {
                     @Override
                     public void onSuccess(JSONObject response) {
                         try {
@@ -122,7 +93,7 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
                     public void onFailure(String errorMessage) {
                         util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen tekrar dene.");
                     }
-                });
+                }, Volley.newRequestQueue(this));
             } else {
                 util.showErrorPopup(uyariDiyalog, "Girilen şifreler birbirleriyle uyuşmuyor. Lütfen tekrar dene.");
             }
