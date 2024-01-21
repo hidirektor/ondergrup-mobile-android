@@ -161,4 +161,6 @@
 
     <string name="machine_add">Makine Ekle</string>
     <string name="machine_type">Makine Türü</string>
+
+    <string name="camera_permission_error">Lütfen ÖnderGrup uygulaması için kamera izinlerini aktif edin.</string>
 </resources>

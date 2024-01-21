@@ -111,14 +111,15 @@ public class User extends AppCompatActivity {
                 if(result.getContents() == null) {
                     Intent originalIntent = result.getOriginalIntent();
                     if (originalIntent == null) {
-                        Log.d("MainActivity", "Cancelled scan");
-                        Toast.makeText(User.this, "Cancelled", Toast.LENGTH_LONG).show();
+                        Log.d("MainActivity", "Tarama iptal edildi");
+                        Toast.makeText(User.this, "Tarama kapatıldı", Toast.LENGTH_LONG).show();
                     } else if(originalIntent.hasExtra(Intents.Scan.MISSING_CAMERA_PERMISSION)) {
-                        Log.d("MainActivity", "Cancelled scan due to missing camera permission");
-                        Toast.makeText(User.this, "Cancelled due to missing camera permission", Toast.LENGTH_LONG).show();
+                        Log.d("MainActivity", "Kamera yetkisi eksik");
+                        String cameraPerm = getResources().getString(R.string.camera_permission_error);
+                        util.showErrorPopup(uyariDiyalog, cameraPerm);
                     }
                 } else {
-                    Log.d("MainActivity", "Scanned");
+                    Log.d("MainActivity", "Taramam tamamlandı");
                     scannedQRCode = result.getContents();
                     scannedQRCodeEditText.setText(scannedQRCode);
                     Toast.makeText(User.this, "ID: " + result.getContents(), Toast.LENGTH_LONG).show();
