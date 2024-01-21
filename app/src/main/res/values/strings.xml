@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Önder Grup</string>
     <string name="developer">Halil İbrahim Direktör</string>
+    <string name="developer_mail">hidirektor@gmail.com</string>
     <string name="welcome">Merhabalar</string>
 
     <string name="login">Giriş Yap</string>
@@ -103,7 +104,7 @@
     <string name="hello_template">Merhaba\nHalil İbrahim Direktör</string>
     <string name="hello_prefix">Merhaba\n</string>
     <string name="subusers">Alt Kullanıcılar</string>
-    <string name="hatalog">Hata Log</string>
+    <string name="hatalog">Hata Kayıtları</string>
     <string name="maintenance">Bakım Geçmişi</string>
     <string name="docs">Belgeler</string>
 

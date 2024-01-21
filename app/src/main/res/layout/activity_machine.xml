@@ -52,12 +52,13 @@
             android:id="@+id/startSection"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.9"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:orientation="horizontal"
                 android:layout_gravity="start">
 
@@ -83,20 +84,19 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginStart="5dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/atlaTextColor"
-                            android:text="@string/machine_owner"
-                            android:fontFamily="@font/raleway"
-                            android:textSize="20dp" />
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center">
+                            android:orientation="vertical"
+                            android:layout_marginTop="3dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/atlaTextColor"
+                                android:text="@string/machine_owner"
+                                android:fontFamily="@font/raleway"
+                                android:textSize="20dp" />
 
                             <TextView
                                 android:id="@+id/ownerNameText"
@@ -109,21 +109,20 @@
                                 android:layout_marginLeft="10dp" />
                         </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/atlaTextColor"
-                            android:text="@string/machine_id"
-                            android:fontFamily="@font/raleway"
-                            android:textSize="20dp"
-                            android:layout_marginTop="6dp" />
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center">
+                            android:orientation="vertical"
+                            android:layout_marginTop="3dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/atlaTextColor"
+                                android:text="@string/machine_id"
+                                android:fontFamily="@font/raleway"
+                                android:textSize="20dp"
+                                android:layout_marginTop="6dp" />
 
                             <TextView
                                 android:id="@+id/machineIDText"
@@ -138,21 +137,20 @@
 
                         </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/machine_cycle"
-                            android:fontFamily="@font/raleway"
-                            android:textColor="@color/atlaTextColor"
-                            android:textSize="21dp"
-                            android:layout_marginTop="6dp" />
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center">
+                            android:orientation="vertical"
+                            android:layout_marginTop="3dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/machine_cycle"
+                                android:fontFamily="@font/raleway"
+                                android:textColor="@color/atlaTextColor"
+                                android:textSize="21dp"
+                                android:layout_marginTop="6dp" />
 
                             <TextView
                                 android:id="@+id/machineCycleText"
@@ -186,72 +184,94 @@
                                 android:layout_gravity="center_vertical"
                                 android:src="@drawable/ikon_turkish"/>
                         </LinearLayout>
-
                     </LinearLayout>
-
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/recv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/atlaTextColor"
-                    android:textSize="15dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="vertical"
-                android:gravity="center" >
+                android:layout_height="0dp"
+                android:layout_weight="0.72"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/bildirimBolumu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center" >
+                    android:id="@+id/machineMaintenanceLogLayout"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/background_grey"
+                    android:elevation="5dp"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="12dp"
+                        android:background="@drawable/background_circle">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ikon_maintenance" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/maintenance"
+                        android:textAlignment="center"
 
-                        <LinearLayout
-                            android:visibility="visible"
-                            android:id="@+id/notification_off"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:orientation="vertical"
-                            android:background="@drawable/background_notifications"
-                            android:gravity="center" >
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@drawable/ikon_notifications" />
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:visibility="gone"
-                            android:id="@+id/notification_on"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:orientation="vertical"
-                            android:background="@drawable/background_notifications_blue"
-                            android:gravity="center">
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@drawable/ikon_notifications_normal" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-
+                        android:textColor="@color/atlaTextColor"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/machineErrorLogLayout"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/background_grey"
+                    android:elevation="5dp"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="12dp"
+                        android:background="@drawable/background_circle">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ikon_errorlog" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/hatalog"
+                        android:textAlignment="center"
+
+                        android:textColor="@color/atlaTextColor"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

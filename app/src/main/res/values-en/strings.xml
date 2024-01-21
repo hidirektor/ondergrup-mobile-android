@@ -135,4 +135,5 @@
     <string name="button_feedback">Feedback</string>
     <string name="button_logout">Logout</string>
     <string name="camera_permission_error">Please allow camera acces for ÖnderGrup application.</string>
+    <string name="developer_mail">hidirektor@gmail.com</string>
 </resources>
