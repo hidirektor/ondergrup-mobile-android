@@ -157,7 +157,10 @@ public class User extends AppCompatActivity {
         machineInnerLayout = findViewById(R.id.machineInnerLayout);
         subLayout = findViewById(R.id.subLayout);
 
-        hamburgerButton.setOnClickListener(v -> NavigationManager.showNavigationViewWithAnimation(hamburgerMenu, this));
+        hamburgerButton.setOnClickListener(v -> {
+            NavigationManager.showNavigationViewWithAnimation(hamburgerMenu, this);
+            minimizeMainLayout();
+        });
 
         //hamburgerButtons
         View hamburgerView = hamburgerMenu.getHeaderView(0);
@@ -395,6 +398,7 @@ public class User extends AppCompatActivity {
         headerConstraint.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+                expandMainLayout();
                 return true;
             }
             return false;
@@ -403,6 +407,7 @@ public class User extends AppCompatActivity {
         headerLayout.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+                expandMainLayout();
                 return true;
             }
             return false;
@@ -411,6 +416,7 @@ public class User extends AppCompatActivity {
         machineLayout.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+                expandMainLayout();
                 return true;
             }
             return false;
@@ -419,6 +425,7 @@ public class User extends AppCompatActivity {
         machineInnerLayout.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+                expandMainLayout();
                 return true;
             }
             return false;
@@ -427,6 +434,7 @@ public class User extends AppCompatActivity {
         machineListView.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+                expandMainLayout();
                 return true;
             }
             return false;
@@ -435,6 +443,7 @@ public class User extends AppCompatActivity {
         subLayout.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+                expandMainLayout();
                 return true;
             }
             return false;
@@ -521,5 +530,17 @@ public class User extends AppCompatActivity {
             startActivity(loginIntent);
             finish();
         }
+    }
+
+    private void minimizeMainLayout() {
+        subLayout.setPadding(200, 200, 200, 200);
+        machineLayout.setPadding(200, 200, 200, 200);
+        headerLayout.setPadding(200, 200, 200, 200);
+    }
+
+    private void expandMainLayout() {
+        subLayout.setPadding(0, 0, 0, 0);
+        machineLayout.setPadding(0, 0, 0, 0);
+        headerLayout.setPadding(0, 0, 0, 0);
     }
 }
