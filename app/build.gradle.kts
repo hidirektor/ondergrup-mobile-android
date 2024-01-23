@@ -10,7 +10,7 @@ android {
         applicationId = "me.t3sl4.ondergrup"
         minSdk = 29
         targetSdk = 34
-        versionCode = 22
+        versionCode = 24
         versionName = "T3SL4_22.01.2024"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
