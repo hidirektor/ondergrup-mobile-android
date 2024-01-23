@@ -136,4 +136,12 @@
     <string name="button_logout">Logout</string>
     <string name="camera_permission_error">Please allow camera acces for ÖnderGrup application.</string>
     <string name="developer_mail">hidirektor@gmail.com</string>
+    <string name="machine_screen">Return Machine Screen</string>
+    <string name="acilstop">Emergency Stop Error</string>
+    <string name="emniyetcercevesi">Safety Frame Error</string>
+    <string name="basincasiriyuk">Pressure Overload Error</string>
+    <string name="kapiswitch">Door Switch Error</string>
+    <string name="tablakapiswitch">Tray Door Switch Error</string>
+    <string name="maximumcalisma">Maximum Running Error</string>
+    <string name="hatayok">The machine has not gone into any error state so far.</string>
 </resources>

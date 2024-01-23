@@ -5,13 +5,17 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import java.util.Objects;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Log.ErrorLog;
+import me.t3sl4.ondergrup.Screens.Log.MachineError.MachineError;
 import me.t3sl4.ondergrup.Screens.Machine.Adapter.Machine;
 import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
@@ -24,6 +28,8 @@ public class MachineScreen extends AppCompatActivity {
     private Dialog uyariDiyalog;
 
     private ImageView backButton;
+    private LinearLayout errorLogButton;
+    private LinearLayout maintenanceLogButton;
 
     private ImageView machineImage;
     private TextView ownerName;
@@ -91,6 +97,8 @@ public class MachineScreen extends AppCompatActivity {
         }
 
         backButton = findViewById(R.id.backIconImageView);
+        errorLogButton = findViewById(R.id.machineErrorLogLayout);
+        maintenanceLogButton = findViewById(R.id.machineMaintenanceLogLayout);
 
         machineImage = findViewById(R.id.makineGorsel);
         ownerName = findViewById(R.id.ownerNameText);
@@ -143,6 +151,12 @@ public class MachineScreen extends AppCompatActivity {
 
         backButton.setOnClickListener(v -> {
             finish();
+        });
+
+        errorLogButton.setOnClickListener(v -> {
+            Intent machineErrorIntent = new Intent(MachineScreen.this, ErrorLog.class);
+            machineErrorIntent.putExtra("currentmachine", selectedMachine.getMachineID());
+            startActivity(machineErrorIntent);
         });
     }
 
@@ -204,9 +218,9 @@ public class MachineScreen extends AppCompatActivity {
         lcdBacklightSure.setText(selectedMachine.getLcdBacklightSure() + " sn.");
 
         if(Objects.equals(secilenDil, "0")) {
-            selectedLang = getResources().getDrawable(R.drawable.ikon_turkish);
+            selectedLang = ContextCompat.getDrawable(this, R.drawable.ikon_turkish);
         } else if(Objects.equals(secilenDil, "1")) {
-            selectedLang = getResources().getDrawable(R.drawable.ikon_english);
+            selectedLang = ContextCompat.getDrawable(this, R.drawable.ikon_english);
         }
 
         dilSecimImage.setImageDrawable(selectedLang);
