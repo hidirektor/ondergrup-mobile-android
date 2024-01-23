@@ -176,4 +176,43 @@
     <string name="hatayok">Makine şuana kadar hiç hata durumuna geçmemiş.</string>
 
     <string name="show_profile">Profili Görüntüle</string>
+
+    <string name="hataSebep">Hata Sebepleri</string>
+    <string name="hataCozum">Hata Çözümü</string>
+
+    <string name="error_acilstop_sebep1">Kontak Geçirmezliği</string>
+    <string name="error_acilstop_cozum1">Acil stop butonunun arka kısmında bulunan kontağında bağlı kabloların geçirgenliğinin kontrol edilmesi.</string>
+    <string name="error_acilstop_sebep2">Basılı Kalma Durumu</string>
+    <string name="error_acilstop_cozum2">Butonun basılı kalıp kalmadığı kontrol edilmeli. Basılı ise buton saat yönünde döndürülüp bırakılmalı.</string>
+
+    <string name="error_emniyetcerceve_sebep1">Kablo Kopukluğu Durumu</string>
+    <string name="error_emniyetcerceve_cozum1">Emniyet çerçevesi sinyalinin geri dönüşü kontrol edilmelidir. Geri dönüş yoksa kablosu kontrol edilmelidir.</string>
+    <string name="error_emniyetcerceve_sebep2">Çerçevenin Takılı Kalma Durumu</string>
+    <string name="error_emniyetcerceve_cozum2">Çerçeveye basıldığında takılı kalıyor ise takılı kalan yer düzeltilmelidir.</string>
+    <string name="error_emniyetcerceve_sebep3">Switch Arızası</string>
+    <string name="error_emniyetcerceve_cozum3">Switch kontrol edilmelidir.</string>
+
+    <string name="error_basinc_sebep1">Aşırı Yük Arızası</string>
+    <string name="error_basinc_cozum1">Üzerinde bulunan kapasite üzeri yük alınmalıdır.</string>
+    <string name="error_basinc_sebep2">Basınç Şalteri Arızası</string>
+    <string name="error_basinc_cozum2">Basınç şalteri kontrol edilmeli gerektiği durumda değiştirilmelidir.</string>
+
+    <string name="error_kapiswitch_sebep1">Switch Kırılması</string>
+    <string name="error_kapiswitch_cozum1">Switch kontrolü sağlayınız. Gerekli durumda switch değiştiriniz.</string>
+    <string name="error_kapiswitch_sebep2">Kapı Açıkken Makinenin Hareket Ettirilmeye Çalışılması</string>
+    <string name="error_kapiswitch_cozum2">Kapıları kontrol ediniz. Kapı açık ise kapının kapatılması gerekmektedir.</string>
+
+    <string name="error_tablakapiswitch_sebep1">Switch Kırılması</string>
+    <string name="error_tablakapiswitch_cozum1">Switch kontrolü sağlayınız. Gerekli durumda switch değiştiriniz.</string>
+    <string name="error_tablakapiswitch_sebep2">Kapı Açıkken Makinenin Hareket Ettirilmeye Çalışılması</string>
+    <string name="error_tablakapiswitch_cozum2">Kapıları kontrol ediniz. Kapı açık ise kapının kapatılması gerekmektedir.</string>
+
+    <string name="error_maxcalisma_sebep1">Maksimum Yukarıya Ulaşma Süresinde Makinenin Yukarıda Durmaması</string>
+    <string name="error_maxcalisma_cozum1">Üst limit switchini kontrol ediniz.</string>
+    <string name="error_maxcalisma_sebep2">Maksimum Aşağı Varma Süresinde Makinenin Aşağıda Durmaması</string>
+    <string name="error_maxcalisma_cozum2">Alt limit switchini kontrol ediniz.</string>
+    <string name="error_maxcalisma_sebep3">Karta Tetik Gelmesi Ancak Motorun Çalışmama Durumu</string>
+    <string name="error_maxcalisma_cozum3">Kontaktörleri ve motor koruma şalterini kontrol ediniz.</string>
+    <string name="error_maxcalisma_sebep4">Makine Aşağı İnerken Işık Yandığı Halde Makinenin Aşağı Hareket Etmemesi</string>
+    <string name="error_maxcalisma_cozum4">İndirme popetini kontrol ediniz ve temizleyiniz.</string>
 </resources>

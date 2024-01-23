@@ -12,6 +12,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.TimeZone;
 
 import me.t3sl4.ondergrup.R;
@@ -56,7 +57,7 @@ public class Util {
     }
 
     public boolean isEmpty(TextInputEditText etText) {
-        if (etText.getText().toString().trim().length() > 0)
+        if (Objects.requireNonNull(etText.getText()).toString().trim().length() > 0)
             return false;
 
         return true;
@@ -70,7 +71,7 @@ public class Util {
         hataMesajiTextView.setText(hataMesaji);
         close.setOnClickListener(v -> diyalog.dismiss());
 
-        diyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(diyalog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         diyalog.show();
     }
 
@@ -82,7 +83,7 @@ public class Util {
         hataMesajiTextView.setText(hataMesaji);
         close.setOnClickListener(v -> diyalog.dismiss());
 
-        diyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(diyalog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         diyalog.show();
     }
 
@@ -93,6 +94,7 @@ public class Util {
 
         try {
             Date date = inputDateFormat.parse(inputDate);
+            assert date != null;
             return outputDateFormat.format(date);
         } catch (ParseException e) {
             e.printStackTrace();

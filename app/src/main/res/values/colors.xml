@@ -24,4 +24,7 @@
     <color name="atlaTextColor">#111111</color>
     <color name="lacivert">#222f5a</color>
     <color name="checkBoxColor">#D9D9D9</color>
+
+    <color name="errorcause">#d01818</color>
+    <color name="errorsolution">#6fc276</color>
 </resources>
