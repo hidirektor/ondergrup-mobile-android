@@ -84,7 +84,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8dp"
-                                    android:text="Profili Görüntüle"
+                                    android:text="@string/show_profile"
                                     android:textAlignment="center"
 
                                     android:textColor="#000000"
@@ -104,7 +104,7 @@
                             android:drawableStart="@drawable/ikon_name"
                             android:drawablePadding="16dp"
                             android:ems="10"
-                            android:hint="İsim Soyisim"
+                            android:hint="@string/enter_namesurname"
                             android:inputType="textPersonName"
                             android:padding="8dp"
                             android:textColorHint="#756C6C" />
@@ -121,7 +121,7 @@
                             android:drawablePadding="16dp"
                             android:ems="10"
                             android:enabled="false"
-                            android:hint="Kullanıcı Adı"
+                            android:hint="@string/enter_username"
                             android:inputType="textPersonName"
                             android:padding="8dp"
                             android:textColorHint="#756C6C" />
@@ -138,7 +138,7 @@
                             android:drawableEnd="@drawable/ikon_passshow"
                             android:drawablePadding="16dp"
                             android:ems="10"
-                            android:hint="Şifre"
+                            android:hint="@string/enter_password"
                             android:inputType="textPassword"
                             android:padding="8dp"
                             android:textColorHint="#756C6C" />
@@ -154,7 +154,7 @@
                             android:drawableStart="@drawable/ikon_email"
                             android:drawablePadding="16dp"
                             android:ems="10"
-                            android:hint="E-Posta"
+                            android:hint="@string/enter_mail"
                             android:inputType="textPersonName"
                             android:padding="8dp"
                             android:textColorHint="#756C6C" />
@@ -170,8 +170,8 @@
                             android:drawableStart="@drawable/ikon_phone"
                             android:drawablePadding="16dp"
                             android:ems="10"
-                            android:hint="Telefon"
-                            android:inputType="textPersonName"
+                            android:hint="@string/enter_phone"
+                            android:inputType="phone"
                             android:padding="8dp"
                             android:textColorHint="#756C6C" />
 
@@ -186,7 +186,7 @@
                             android:drawableStart="@drawable/ikon_sirket"
                             android:drawablePadding="16dp"
                             android:ems="10"
-                            android:hint="Şirket"
+                            android:hint="@string/enter_sirket"
                             android:inputType="textPersonName"
                             android:padding="8dp"
                             android:textColorHint="#756C6C" />

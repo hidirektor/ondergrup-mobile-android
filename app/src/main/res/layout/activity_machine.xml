@@ -96,7 +96,7 @@
                                 android:textColor="@color/atlaTextColor"
                                 android:text="@string/machine_owner"
                                 android:fontFamily="@font/raleway"
-                                android:textSize="20dp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/ownerNameText"
@@ -105,8 +105,8 @@
                                 android:textColor="@color/atlaTextColor"
                                 android:text="92fc1b35-9b99"
                                 android:fontFamily="@font/raleway"
-                                android:textSize="18dp"
-                                android:layout_marginLeft="10dp" />
+                                android:textSize="18sp"
+                                android:layout_marginStart="10dp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -121,7 +121,7 @@
                                 android:textColor="@color/atlaTextColor"
                                 android:text="@string/machine_id"
                                 android:fontFamily="@font/raleway"
-                                android:textSize="20dp"
+                                android:textSize="20sp"
                                 android:layout_marginTop="6dp" />
 
                             <TextView
@@ -132,7 +132,7 @@
                                 android:text="92fc1b35-9b99"
                                 android:fontFamily="@font/raleway"
                                 android:textSize="18dp"
-                                android:layout_marginLeft="10dp" />
+                                android:layout_marginStart="10dp" />
 
 
                         </LinearLayout>
@@ -149,7 +149,7 @@
                                 android:text="@string/machine_cycle"
                                 android:fontFamily="@font/raleway"
                                 android:textColor="@color/atlaTextColor"
-                                android:textSize="21dp"
+                                android:textSize="21sp"
                                 android:layout_marginTop="6dp" />
 
                             <TextView
@@ -159,8 +159,8 @@
                                 android:textColor="@color/atlaTextColor"
                                 android:text="1700"
                                 android:fontFamily="@font/raleway"
-                                android:textSize="15dp"
-                                android:layout_marginLeft="10dp" />
+                                android:textSize="15sp"
+                                android:layout_marginStart="10dp" />
                         </LinearLayout>
 
                         <LinearLayout

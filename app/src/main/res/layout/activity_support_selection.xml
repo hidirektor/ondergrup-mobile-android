@@ -53,7 +53,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
                     android:src="@drawable/ikon_map" />
 
 
@@ -103,7 +103,7 @@
                     android:layout_width="60dp"
                     android:layout_height="55dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
                     android:src="@drawable/ikon_mailus" />
 
 

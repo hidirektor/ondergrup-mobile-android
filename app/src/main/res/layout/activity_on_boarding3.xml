@@ -85,7 +85,7 @@
         android:src="@drawable/tanitimekrani_ayrac_tab3"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintVertical_bias=".6"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/textView4"

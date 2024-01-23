@@ -144,4 +144,5 @@
     <string name="tablakapiswitch">Tray Door Switch Error</string>
     <string name="maximumcalisma">Maximum Running Error</string>
     <string name="hatayok">The machine has not gone into any error state so far.</string>
+    <string name="show_profile">Show Profile</string>
 </resources>

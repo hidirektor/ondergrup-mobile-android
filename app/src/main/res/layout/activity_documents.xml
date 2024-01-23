@@ -59,7 +59,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginEnd="20dp"
                         android:src="@drawable/ikon_manual" />
 
 
@@ -68,7 +68,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="48dp"
-                        android:layout_toRightOf="@id/manual_icon"
+                        android:layout_toEndOf="@id/manual_icon"
                         android:fontFamily="@font/muli"
                         android:text="@string/user_manual"
                         android:textSize="20sp" />
@@ -79,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/manual_title"
-                        android:layout_toRightOf="@id/manual_icon"
+                        android:layout_toEndOf="@id/manual_icon"
                         android:fontFamily="@font/muli"
                         android:text="@string/user_manual_desc"
                         android:textColor="@color/black"
@@ -109,7 +109,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginEnd="20dp"
                         android:src="@drawable/ikon_data" />
 
 
@@ -118,7 +118,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="48dp"
-                        android:layout_toRightOf="@id/mobile_icon"
+                        android:layout_toEndOf="@id/mobile_icon"
                         android:fontFamily="@font/muli"
                         android:text="@string/kvkk"
                         android:textSize="20sp" />
@@ -129,7 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/mobile_title"
-                        android:layout_toRightOf="@id/mobile_icon"
+                        android:layout_toEndOf="@id/mobile_icon"
                         android:fontFamily="@font/muli"
                         android:text="@string/kvkk_desc"
                         android:textColor="@color/black"
@@ -157,7 +157,7 @@
                         android:layout_width="60dp"
                         android:layout_height="55dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginEnd="20dp"
                         android:src="@drawable/ikon_privacy" />
 
 
@@ -166,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="48dp"
-                        android:layout_toRightOf="@id/mail_icon"
+                        android:layout_toEndOf="@id/mail_icon"
                         android:fontFamily="@font/muli"
                         android:text="@string/privacy"
                         android:textSize="20sp" />
@@ -177,7 +177,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/mail_title"
-                        android:layout_toRightOf="@id/mail_icon"
+                        android:layout_toEndOf="@id/mail_icon"
                         android:fontFamily="@font/muli"
                         android:text="@string/privacy_desc"
                         android:textColor="@color/black"

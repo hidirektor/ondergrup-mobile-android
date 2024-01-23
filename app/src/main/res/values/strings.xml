@@ -174,4 +174,6 @@
     <string name="tablakapiswitch">Tabla Kapı Switch Hatası</string>
     <string name="maximumcalisma">Maximum Çalışma Hatası</string>
     <string name="hatayok">Makine şuana kadar hiç hata durumuna geçmemiş.</string>
+
+    <string name="show_profile">Profili Görüntüle</string>
 </resources>

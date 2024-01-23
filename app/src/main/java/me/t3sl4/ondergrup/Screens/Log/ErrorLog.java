@@ -58,9 +58,7 @@ public class ErrorLog extends AppCompatActivity {
         machineErrorList = getMachineErrorList();
 
         machineErrors.setOnItemClickListener((parent, view, position, id) -> {
-            MachineError selectedMachine = machineErrorList.get(position);
-
-            //popup eklenecek
+            MachineError selectedError = machineErrorList.get(position);
 
             /*Intent machineIntent = new Intent(ErrorLog.this, MachineScreen.class);
             machineIntent.putExtra("machine", selectedMachine);

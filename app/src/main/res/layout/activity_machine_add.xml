@@ -30,7 +30,7 @@
             android:textColor="@color/lacivert"
             android:layout_marginStart="12dp"
             android:layout_marginTop="5dp"
-            android:textSize="25dp" />
+            android:textSize="25sp" />
 
         <ImageView
             android:id="@+id/wifiButton"
@@ -85,7 +85,7 @@
 
             <Spinner
                 android:id="@+id/machineTypeSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="ESP"
