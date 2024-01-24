@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,7 +35,8 @@ public class SubUserAddScreen extends AppCompatActivity {
     private EditText editTextNameSurname;
     private EditText editTextPhone;
     private EditText editTextCompany;
-    private boolean isPasswordVisible = false;
+
+    private ImageView backButton;
 
     private Dialog uyariDiyalog;
 
@@ -60,6 +62,9 @@ public class SubUserAddScreen extends AppCompatActivity {
 
         signUp = findViewById(R.id.signUp);
         signUp.setOnClickListener(v -> sendRegisterRequest());
+
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
 
         PasswordFieldTouchListener.setChangeablePasswordField(editTextPassword, getApplicationContext());
     }

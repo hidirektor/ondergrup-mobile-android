@@ -189,7 +189,11 @@ public class User extends AppCompatActivity {
             Intent belgelerIntent = new Intent(User.this, DocumentsScreen.class);
             startActivity(belgelerIntent);
         });
-        navAddMachineButton.setOnClickListener(v -> addMachine());
+        navAddMachineButton.setOnClickListener(v -> {
+            NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
+            expandMainLayout();
+            addMachine();
+        });
         logoutButton.setOnClickListener(v -> logoutProcess());
         feedbackButton.setOnClickListener(v -> {
             String url = "https://play.google.com/store/apps/details?id=me.t3sl4.ondergrup&hl=tr&gl=US";

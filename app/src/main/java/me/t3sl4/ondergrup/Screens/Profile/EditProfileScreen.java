@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,8 @@ import me.t3sl4.ondergrup.Util.Util;
 public class EditProfileScreen extends AppCompatActivity {
     public Util util;
     public User receivedUser;
+
+    private ImageView backButton;
 
     private EditText nameSurname;
     private EditText eMail;
@@ -49,6 +52,8 @@ public class EditProfileScreen extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
+        backButton = findViewById(R.id.backButton);
+
         nameSurname = findViewById(R.id.editTextNameSurname);
         eMail = findViewById(R.id.editTextMail);
         kullaniciAdi = findViewById(R.id.editTextNickname);
@@ -69,6 +74,8 @@ public class EditProfileScreen extends AppCompatActivity {
         updateProfileButton.setOnClickListener(v -> {
             updateWholeProfile();
         });
+
+        backButton.setOnClickListener(v -> finish());
 
         PasswordFieldTouchListener.setChangeablePasswordField(passwordEditText, getApplicationContext());
 

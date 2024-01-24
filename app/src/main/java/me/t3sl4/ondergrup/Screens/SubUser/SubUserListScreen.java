@@ -2,7 +2,10 @@ package me.t3sl4.ondergrup.Screens.SubUser;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 
@@ -32,6 +35,8 @@ public class SubUserListScreen extends AppCompatActivity {
     private SubUserAdapter subUserListAdapter;
     private ArrayList<SubUser> subUserList;
 
+    private ImageView backButton;
+
     private Dialog uyariDiyalog;
 
     @Override
@@ -44,6 +49,9 @@ public class SubUserListScreen extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
         uyariDiyalog = new Dialog(this);
+
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
 
         subUserListView = findViewById(R.id.subUserListView);
         subUserList = getSubUserList();

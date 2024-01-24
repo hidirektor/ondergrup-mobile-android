@@ -1,9 +1,11 @@
 package me.t3sl4.ondergrup.Screens.Profile;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +19,8 @@ import me.t3sl4.ondergrup.Util.Util;
 public class ProfileScreen extends AppCompatActivity {
     public Util util;
     public User receivedUser;
+
+    private ImageView backButton;
 
     private TextView nameSurname;
     private TextView eMail;
@@ -38,6 +42,8 @@ public class ProfileScreen extends AppCompatActivity {
 
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
+
+        backButton = findViewById(R.id.backButton);
 
         nameSurname = findViewById(R.id.textView);
         eMail = findViewById(R.id.textView2);
@@ -62,6 +68,8 @@ public class ProfileScreen extends AppCompatActivity {
             settingsIntent.putExtra("user", receivedUser);
             startActivity(settingsIntent);
         });
+
+        backButton.setOnClickListener(v -> finish());
 
         setUserInfo();
     }

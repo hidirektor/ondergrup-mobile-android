@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +17,8 @@ public class DocumentsScreen extends AppCompatActivity {
     private Button imhaButton;
     private Button manualButton;
 
+    private ImageView backButton;
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class DocumentsScreen extends AppCompatActivity {
         privacyButton = findViewById(R.id.privacyButton);
         imhaButton = findViewById(R.id.imhaButton);
         manualButton = findViewById(R.id.manualButton);
+        backButton = findViewById(R.id.backButton);
 
         manualButton.setOnClickListener(v -> {
             Intent manualIntent = new Intent(DocumentsScreen.this, ManualScreen.class);
@@ -46,5 +50,7 @@ public class DocumentsScreen extends AppCompatActivity {
             Intent privacyIntent = new Intent(DocumentsScreen.this, DestructionScreen.class);
             startActivity(privacyIntent);
         });
+
+        backButton.setOnClickListener(v -> finish());
     }
 }

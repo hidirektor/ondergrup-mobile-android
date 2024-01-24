@@ -3,6 +3,7 @@ package me.t3sl4.ondergrup.Screens.Machine;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,8 @@ public class MachineListScreen extends AppCompatActivity {
     public Util util;
     public User receivedUser;
 
+    private ImageView backButton;
+
     private ListView machineListView;
     private MachineAdapter machineListAdapter;
     private ArrayList<Machine> machineList;
@@ -43,6 +46,8 @@ public class MachineListScreen extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
+        backButton = findViewById(R.id.backButton);
+
         machineListView = findViewById(R.id.machineListView);
         machineList = getMachineList();
 
@@ -54,6 +59,8 @@ public class MachineListScreen extends AppCompatActivity {
             machineIntent.putExtra("user", receivedUser);
             startActivity(machineIntent);
         });
+
+        backButton.setOnClickListener(v -> finish());
     }
 
     private ArrayList<Machine> getMachineList() {

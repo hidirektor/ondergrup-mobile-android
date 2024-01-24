@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +35,8 @@ public class EditSubScreen extends AppCompatActivity {
     private EditText companyName;
     private EditText passwordEditText;
     private LinearLayout showSubUsers;
+
+    private ImageView backButton;
 
     private Dialog uyariDiyalog;
 
@@ -66,6 +69,9 @@ public class EditSubScreen extends AppCompatActivity {
             startActivity(subUserIntent);
             finish();
         });
+
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
 
         PasswordFieldTouchListener.setChangeablePasswordField(passwordEditText, getApplicationContext());
 

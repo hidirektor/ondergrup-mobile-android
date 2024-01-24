@@ -177,4 +177,5 @@
     <string name="error_maxcalisma_cozum3">Check the contactors and motor protection switch.</string>
     <string name="error_maxcalisma_sebep4">Although the light is on while the machine is going down, the machine does not move down</string>
     <string name="error_maxcalisma_cozum4">Check and clean the download poppet.</string>
+    <string name="mymachines">Paired Machines</string>
 </resources>

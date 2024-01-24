@@ -215,4 +215,6 @@
     <string name="error_maxcalisma_cozum3">Kontaktörleri ve motor koruma şalterini kontrol ediniz.</string>
     <string name="error_maxcalisma_sebep4">Makine Aşağı İnerken Işık Yandığı Halde Makinenin Aşağı Hareket Etmemesi</string>
     <string name="error_maxcalisma_cozum4">İndirme popetini kontrol ediniz ve temizleyiniz.</string>
+
+    <string name="mymachines">Makinelerim</string>
 </resources>
