@@ -67,6 +67,7 @@ public class User extends AppCompatActivity {
     public Util util;
 
     private TextView isimSoyisim;
+    private ConstraintLayout maintenanceLog;
 
     private ImageView hamburgerButton;
     private NavigationView hamburgerMenu;
@@ -149,6 +150,9 @@ public class User extends AppCompatActivity {
         subUserButton = findViewById(R.id.subUserConstraint);
         myMachineButton = findViewById(R.id.myMachine);
         qrButton = findViewById(R.id.qrConstraint);
+        maintenanceLog = findViewById(R.id.maintenanceLog);
+
+        maintenanceLog.setOnClickListener(v -> util.showErrorPopup(uyariDiyalog, "Bakım kaydı sistemimiz şuan aktif değil !"));
 
         //restriction
         headerConstraint = findViewById(R.id.headerConstraint);

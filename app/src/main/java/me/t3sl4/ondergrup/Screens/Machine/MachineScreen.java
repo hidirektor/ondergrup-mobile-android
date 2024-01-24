@@ -100,6 +100,8 @@ public class MachineScreen extends AppCompatActivity {
         errorLogButton = findViewById(R.id.machineErrorLogLayout);
         maintenanceLogButton = findViewById(R.id.machineMaintenanceLogLayout);
 
+        maintenanceLogButton.setOnClickListener(v -> util.showErrorPopup(uyariDiyalog, "Bakım kaydı sistemimiz şuan aktif değil !"));
+
         machineImage = findViewById(R.id.makineGorsel);
         ownerName = findViewById(R.id.ownerNameText);
         machineID = findViewById(R.id.machineIDText);
