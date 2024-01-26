@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import androidx.core.content.res.ResourcesCompat;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -90,11 +91,7 @@ public class MachineScreen extends AppCompatActivity {
 
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
-
-        if (intent != null) {
-            receivedUser = intent.getParcelableExtra("user");
-            selectedMachine = intent.getParcelableExtra("machine");
-        }
+        selectedMachine = intent.getParcelableExtra("machine");
 
         backButton = findViewById(R.id.backIconImageView);
         errorLogButton = findViewById(R.id.machineErrorLogLayout);
@@ -173,9 +170,9 @@ public class MachineScreen extends AppCompatActivity {
         Drawable drawable = null;
         Drawable selectedLang = null;
         if(Objects.equals(machineType, "ESP")) {
-            drawable = getResources().getDrawable(R.drawable.tanitimekrani_esp1);
+            drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.tanitimekrani_esp1, null);
         } else if(Objects.equals(machineType, "CSP-D")) {
-            drawable = getResources().getDrawable(R.drawable.tanitimekrani_csp1);
+            drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.tanitimekrani_csp1, null);
         }
         machineImage.setImageDrawable(drawable);
         ownerName.setText(selectedMachine.getOwnerUser());

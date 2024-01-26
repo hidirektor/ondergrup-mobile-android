@@ -29,4 +29,27 @@ public class ButtonManager {
                 Log.e("ButtonManager", "Unsupported button color change type !");
         }
     }
+
+    public static void resetAll(Context context, Button first, Button second, Button thirth, Button fourth, Button fifth, Button sixth, Button seventh, Button eighth, Button nineth) {
+        first.setBackgroundResource(R.drawable.button_filter_start);
+        first.setTextColor(ContextCompat.getColor(context, R.color.editTextTopColor));
+        second.setBackgroundResource(R.drawable.button_filter_mid);
+        second.setTextColor(ContextCompat.getColor(context, R.color.editTextTopColor));
+        thirth.setBackgroundResource(R.drawable.button_filter_end);
+        thirth.setTextColor(ContextCompat.getColor(context, R.color.editTextTopColor));
+
+        fourth.setBackgroundResource(R.drawable.button_filter_start);
+        fourth.setTextColor(ContextCompat.getColor(context, R.color.editTextTopColor));
+        fifth.setBackgroundResource(R.drawable.button_filter_mid);
+        fifth.setTextColor(ContextCompat.getColor(context, R.color.editTextTopColor));
+        sixth.setBackgroundResource(R.drawable.button_filter_end);
+        sixth.setTextColor(ContextCompat.getColor(context, R.color.editTextTopColor));
+
+        seventh.setBackgroundResource(R.drawable.button_filter_start);
+        seventh.setTextColor(ContextCompat.getColor(context, R.color.editTextTopColor));
+        eighth.setBackgroundResource(R.drawable.button_filter_mid);
+        eighth.setTextColor(ContextCompat.getColor(context, R.color.editTextTopColor));
+        nineth.setBackgroundResource(R.drawable.button_filter_end);
+        nineth.setTextColor(ContextCompat.getColor(context, R.color.editTextTopColor));
+    }
 }

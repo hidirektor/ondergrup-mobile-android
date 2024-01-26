@@ -127,6 +127,9 @@
         <activity
             android:name=".Screens.Log.Maintenance.MaintenanceLog"
             android:screenOrientation="unspecified" />
+        <activity
+            android:name=".Screens.Log.Maintenance.MaintenanceSingle"
+            android:screenOrientation="unspecified" />
     </application>
 
 </manifest>

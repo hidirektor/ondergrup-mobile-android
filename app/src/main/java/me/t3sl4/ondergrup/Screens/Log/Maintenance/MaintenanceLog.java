@@ -34,6 +34,8 @@ import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Model.MachineError.MachineError;
 import me.t3sl4.ondergrup.Model.MachineError.Adapter.MachineErrorAdapter;
+import me.t3sl4.ondergrup.Screens.Machine.MachineListScreen;
+import me.t3sl4.ondergrup.Screens.Machine.MachineScreen;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -71,8 +73,9 @@ public class MaintenanceLog extends AppCompatActivity {
         machineMaintenances.setOnItemClickListener((parent, view, position, id) -> {
             Maintenance selectedMaintenance = machineMaintenanceList.get(position);
 
-            //kontrol listesi için ana ekranı aç
-            //showErroDetail(uyariDiyalog, selectedError.getErrorCode());
+            Intent machineIntent = new Intent(MaintenanceLog.this, MaintenanceSingle.class);
+            machineIntent.putExtra("currentMaintenance", selectedMaintenance);
+            startActivity(machineIntent);
         });
 
         backToMachine.setOnClickListener(v -> {
