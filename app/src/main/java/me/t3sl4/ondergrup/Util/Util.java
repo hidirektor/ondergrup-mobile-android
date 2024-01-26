@@ -21,6 +21,8 @@ import java.util.TimeZone;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Model.User.User;
+import me.t3sl4.ondergrup.SplashActivity;
+import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 
 public class Util {
     public Context context;
@@ -125,5 +127,11 @@ public class Util {
         applicationConf.setLocale(newLocale);
         applicationRes.updateConfiguration(applicationConf,
                 applicationRes.getDisplayMetrics());
+    }
+
+    public static void loadNewTranslations(Context context) {
+        String currentLanguage = SharedPreferencesManager.getSharedPref("language", context, "en");
+
+        Util.setLocale(context, currentLanguage);
     }
 }

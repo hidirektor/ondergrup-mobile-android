@@ -231,4 +231,5 @@
     <string name="maintenance_duzeltme">Will be Fixed</string>
     <string name="maintenance_yok">None</string>
     <string name="active_language">Language:</string>
+    <string name="time">scnd.</string>
 </resources>

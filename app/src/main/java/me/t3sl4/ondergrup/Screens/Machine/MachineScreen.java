@@ -218,7 +218,8 @@ public class MachineScreen extends AppCompatActivity {
         eepromData45.setText(selectedMachine.getEepromData45());
         eepromData46.setText(selectedMachine.getEepromData46());
         eepromData47.setText(selectedMachine.getEepromData47());
-        lcdBacklightSure.setText(selectedMachine.getLcdBacklightSure() + " sn.");
+        String sure = selectedMachine.getLcdBacklightSure() + " " + this.getResources().getString(R.string.time);
+        lcdBacklightSure.setText(sure);
 
         if(Objects.equals(secilenDil, "0")) {
             selectedLang = ContextCompat.getDrawable(this, R.drawable.ikon_turkish);

@@ -12,6 +12,8 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import java.util.Objects;
+
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.Util.Util;
@@ -84,7 +86,7 @@ public class SupportScreen extends AppCompatActivity {
 
     public void geriDon() {
         String role = receivedUser.getRole();
-        if(role == "NORMAL") {
+        if(Objects.equals(role, "NORMAL")) {
             Intent mainIntent = new Intent(SupportScreen.this, me.t3sl4.ondergrup.Screens.Dashboard.User.class);
             startActivity(mainIntent);
             finish();

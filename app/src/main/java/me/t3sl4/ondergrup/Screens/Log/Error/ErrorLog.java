@@ -53,7 +53,7 @@ public class ErrorLog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_errorlog);
 
-        util = new Util(getApplicationContext());
+        util = new Util(this);
         uyariDiyalog = new Dialog(this);
 
         Intent intent = getIntent();
@@ -109,7 +109,7 @@ public class ErrorLog extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMessage) {
-                String hatasizMesaj = getApplicationContext().getResources().getString(R.string.hatayok);
+                String hatasizMesaj = ErrorLog.this.getResources().getString(R.string.hatayok);
                 util.showSuccessPopup(uyariDiyalog, hatasizMesaj);
             }
         }, Volley.newRequestQueue(this));
@@ -118,7 +118,7 @@ public class ErrorLog extends AppCompatActivity {
 
     private void updateListView(ArrayList<MachineError> machineErrorsTemp) {
         machineErrorList = machineErrorsTemp;
-        machineErrorAdapter = new MachineErrorAdapter(getApplicationContext(), machineErrorList);
+        machineErrorAdapter = new MachineErrorAdapter(this, machineErrorList);
         machineErrors.setAdapter(machineErrorAdapter);
     }
 
@@ -141,12 +141,12 @@ public class ErrorLog extends AppCompatActivity {
 
         if(errorCode == 1) {
             drawable = ContextCompat.getDrawable(this, R.drawable.ikon_hata_acilstop);
-            errorDesc = getApplicationContext().getResources().getString(R.string.acilstop);
+            errorDesc = this.getResources().getString(R.string.acilstop);
 
-            String sebep1 = getApplicationContext().getResources().getString(R.string.error_acilstop_sebep1);
-            String cozum1 = getApplicationContext().getResources().getString(R.string.error_acilstop_cozum1);
-            String sebep2 = getApplicationContext().getResources().getString(R.string.error_acilstop_sebep2);
-            String cozum2 = getApplicationContext().getResources().getString(R.string.error_acilstop_cozum2);
+            String sebep1 = this.getResources().getString(R.string.error_acilstop_sebep1);
+            String cozum1 = this.getResources().getString(R.string.error_acilstop_cozum1);
+            String sebep2 = this.getResources().getString(R.string.error_acilstop_sebep2);
+            String cozum2 = this.getResources().getString(R.string.error_acilstop_cozum2);
 
             data = new String[][]{
                     {sebep1, cozum1},
@@ -154,14 +154,14 @@ public class ErrorLog extends AppCompatActivity {
             };
         } else if(errorCode == 2) {
             drawable = ContextCompat.getDrawable(this, R.drawable.ikon_hata_emniyetcerceve);
-            errorDesc = getApplicationContext().getResources().getString(R.string.emniyetcercevesi);
+            errorDesc = this.getResources().getString(R.string.emniyetcercevesi);
 
-            String sebep1 = getApplicationContext().getResources().getString(R.string.error_emniyetcerceve_sebep1);
-            String cozum1 = getApplicationContext().getResources().getString(R.string.error_emniyetcerceve_cozum1);
-            String sebep2 = getApplicationContext().getResources().getString(R.string.error_emniyetcerceve_sebep2);
-            String cozum2 = getApplicationContext().getResources().getString(R.string.error_emniyetcerceve_cozum2);
-            String sebep3 = getApplicationContext().getResources().getString(R.string.error_emniyetcerceve_sebep3);
-            String cozum3 = getApplicationContext().getResources().getString(R.string.error_emniyetcerceve_cozum3);
+            String sebep1 = this.getResources().getString(R.string.error_emniyetcerceve_sebep1);
+            String cozum1 = this.getResources().getString(R.string.error_emniyetcerceve_cozum1);
+            String sebep2 = this.getResources().getString(R.string.error_emniyetcerceve_sebep2);
+            String cozum2 = this.getResources().getString(R.string.error_emniyetcerceve_cozum2);
+            String sebep3 = this.getResources().getString(R.string.error_emniyetcerceve_sebep3);
+            String cozum3 = this.getResources().getString(R.string.error_emniyetcerceve_cozum3);
 
             data = new String[][]{
                     {sebep1, cozum1},
@@ -170,12 +170,12 @@ public class ErrorLog extends AppCompatActivity {
             };
         } else if(errorCode == 3) {
             drawable = ContextCompat.getDrawable(this, R.drawable.ikon_hata_basincasiriyuk);
-            errorDesc = getApplicationContext().getResources().getString(R.string.basincasiriyuk);
+            errorDesc = this.getResources().getString(R.string.basincasiriyuk);
 
-            String sebep1 = getApplicationContext().getResources().getString(R.string.error_basinc_sebep1);
-            String cozum1 = getApplicationContext().getResources().getString(R.string.error_basinc_cozum1);
-            String sebep2 = getApplicationContext().getResources().getString(R.string.error_basinc_sebep2);
-            String cozum2 = getApplicationContext().getResources().getString(R.string.error_basinc_cozum2);
+            String sebep1 = this.getResources().getString(R.string.error_basinc_sebep1);
+            String cozum1 = this.getResources().getString(R.string.error_basinc_cozum1);
+            String sebep2 = this.getResources().getString(R.string.error_basinc_sebep2);
+            String cozum2 = this.getResources().getString(R.string.error_basinc_cozum2);
 
             data = new String[][]{
                     {sebep1, cozum1},
@@ -183,12 +183,12 @@ public class ErrorLog extends AppCompatActivity {
             };
         } else if(errorCode == 4) {
             drawable = ContextCompat.getDrawable(this, R.drawable.ikon_hata_kapiswitch);
-            errorDesc = getApplicationContext().getResources().getString(R.string.kapiswitch);
+            errorDesc = this.getResources().getString(R.string.kapiswitch);
 
-            String sebep1 = getApplicationContext().getResources().getString(R.string.error_kapiswitch_sebep1);
-            String cozum1 = getApplicationContext().getResources().getString(R.string.error_kapiswitch_cozum1);
-            String sebep2 = getApplicationContext().getResources().getString(R.string.error_kapiswitch_sebep2);
-            String cozum2 = getApplicationContext().getResources().getString(R.string.error_kapiswitch_cozum2);
+            String sebep1 = this.getResources().getString(R.string.error_kapiswitch_sebep1);
+            String cozum1 = this.getResources().getString(R.string.error_kapiswitch_cozum1);
+            String sebep2 = this.getResources().getString(R.string.error_kapiswitch_sebep2);
+            String cozum2 = this.getResources().getString(R.string.error_kapiswitch_cozum2);
 
             data = new String[][]{
                     {sebep1, cozum1},
@@ -196,12 +196,12 @@ public class ErrorLog extends AppCompatActivity {
             };
         } else if(errorCode == 5) {
             drawable = ContextCompat.getDrawable(this, R.drawable.ikon_hata_tablakapiswitch);
-            errorDesc = getApplicationContext().getResources().getString(R.string.tablakapiswitch);
+            errorDesc = this.getResources().getString(R.string.tablakapiswitch);
 
-            String sebep1 = getApplicationContext().getResources().getString(R.string.error_tablakapiswitch_sebep1);
-            String cozum1 = getApplicationContext().getResources().getString(R.string.error_tablakapiswitch_cozum1);
-            String sebep2 = getApplicationContext().getResources().getString(R.string.error_tablakapiswitch_sebep2);
-            String cozum2 = getApplicationContext().getResources().getString(R.string.error_tablakapiswitch_cozum2);
+            String sebep1 = this.getResources().getString(R.string.error_tablakapiswitch_sebep1);
+            String cozum1 = this.getResources().getString(R.string.error_tablakapiswitch_cozum1);
+            String sebep2 = this.getResources().getString(R.string.error_tablakapiswitch_sebep2);
+            String cozum2 = this.getResources().getString(R.string.error_tablakapiswitch_cozum2);
 
             data = new String[][]{
                     {sebep1, cozum1},
@@ -209,16 +209,16 @@ public class ErrorLog extends AppCompatActivity {
             };
         } else if(errorCode == 6) {
             drawable = ContextCompat.getDrawable(this, R.drawable.ikon_hata_maximumcalisma);
-            errorDesc = getApplicationContext().getResources().getString(R.string.maximumcalisma);
+            errorDesc = this.getResources().getString(R.string.maximumcalisma);
 
-            String sebep1 = getApplicationContext().getResources().getString(R.string.error_maxcalisma_sebep1);
-            String cozum1 = getApplicationContext().getResources().getString(R.string.error_maxcalisma_cozum1);
-            String sebep2 = getApplicationContext().getResources().getString(R.string.error_maxcalisma_sebep2);
-            String cozum2 = getApplicationContext().getResources().getString(R.string.error_maxcalisma_cozum2);
-            String sebep3 = getApplicationContext().getResources().getString(R.string.error_maxcalisma_sebep3);
-            String cozum3 = getApplicationContext().getResources().getString(R.string.error_maxcalisma_cozum3);
-            String sebep4 = getApplicationContext().getResources().getString(R.string.error_maxcalisma_sebep4);
-            String cozum4 = getApplicationContext().getResources().getString(R.string.error_maxcalisma_cozum4);
+            String sebep1 = this.getResources().getString(R.string.error_maxcalisma_sebep1);
+            String cozum1 = this.getResources().getString(R.string.error_maxcalisma_cozum1);
+            String sebep2 = this.getResources().getString(R.string.error_maxcalisma_sebep2);
+            String cozum2 = this.getResources().getString(R.string.error_maxcalisma_cozum2);
+            String sebep3 = this.getResources().getString(R.string.error_maxcalisma_sebep3);
+            String cozum3 = this.getResources().getString(R.string.error_maxcalisma_cozum3);
+            String sebep4 = this.getResources().getString(R.string.error_maxcalisma_sebep4);
+            String cozum4 = this.getResources().getString(R.string.error_maxcalisma_cozum4);
 
             data = new String[][]{
                     {sebep1, cozum1},

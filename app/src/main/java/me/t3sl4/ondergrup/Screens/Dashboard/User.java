@@ -74,7 +74,7 @@ public class User extends AppCompatActivity {
 
     private ImageView hamburgerButton;
     private NavigationView hamburgerMenu;
-    private ConstraintLayout subErrorButton;
+    private ConstraintLayout subLanguage;
     private ConstraintLayout profileButton;
     private ConstraintLayout settingsButton;
     private ConstraintLayout belgelerButton;
@@ -141,7 +141,7 @@ public class User extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_user);
 
-        util = new Util(getApplicationContext());
+        util = new Util(this);
         uyariDiyalog = new Dialog(this);
         qrDiyalog = new Dialog(this);
 
@@ -154,7 +154,7 @@ public class User extends AppCompatActivity {
 
         hamburgerButton = findViewById(R.id.hamburgerMenuBttn);
         hamburgerMenu = findViewById(R.id.hamburgerMenu);
-        subErrorButton = findViewById(R.id.errorConstraint);
+        subLanguage = findViewById(R.id.languageConstraint);
         profileButton = findViewById(R.id.profileConstraint);
         settingsButton = findViewById(R.id.settingsConstraint);
         belgelerButton = findViewById(R.id.belgelerConstraint);
@@ -190,21 +190,20 @@ public class User extends AppCompatActivity {
 
         String activeText = "";
         if(Objects.equals(currentLang, "tr")) {
-            activeText = getApplicationContext().getResources().getString(R.string.active_language) + " " + getApplicationContext().getResources().getString(R.string.lang_turkish);
+            activeText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_turkish);
         } else {
-            activeText = getApplicationContext().getResources().getString(R.string.active_language) + " " + getApplicationContext().getResources().getString(R.string.lang_english);
+            activeText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_english);
         }
 
         navCurrentLang.setText(activeText);
-
-        subErrorButton.setOnClickListener(v -> {
-            
-        });
 
         navProfileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(User.this, ProfileScreen.class);
             profileIntent.putExtra("user", util.user);
             startActivity(profileIntent);
+        });
+        subLanguage.setOnClickListener(v -> {
+            switchLanguage();
         });
         navSettingsButton.setOnClickListener(v -> {
             Intent settingsIntent = new Intent(User.this, EditProfileScreen.class);
@@ -222,21 +221,7 @@ public class User extends AppCompatActivity {
         });
 
         navLanguageButton.setOnClickListener((View.OnClickListener) v -> {
-            String currentLanguage = SharedPreferencesManager.getSharedPref("language", User.this, "en");
-            String nextLang = "";
-
-            if (currentLanguage.equals("tr")) {
-                SharedPreferencesManager.writeSharedPref("language", "en", User.this);
-                nextLang = "en";
-            } else {
-                SharedPreferencesManager.writeSharedPref("language", "tr", User.this);
-                String trText = getApplicationContext().getResources().getString(R.string.active_language) + " " + getApplicationContext().getResources().getString(R.string.lang_turkish);
-                navCurrentLang.setText(trText);
-                nextLang = "tr";
-            }
-
-            Util.setLocale(User.this, nextLang);
-            recreate();
+            switchLanguage();
         });
 
         logoutButton.setOnClickListener(v -> logoutProcess());
@@ -300,7 +285,7 @@ public class User extends AppCompatActivity {
     }
 
     public void setUserInfo() {
-        isimSoyisim.setText(getResources().getString(R.string.hello_prefix) + receivedUser.getNameSurname());
+        isimSoyisim.setText(this.getResources().getString(R.string.hello_prefix) + receivedUser.getNameSurname());
     }
 
     public void makineEkle(String machineType, String machineID) {
@@ -329,7 +314,7 @@ public class User extends AppCompatActivity {
         if (connectivityManager != null) {
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isConnected()) {
-                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
                 if (wifiManager != null) {
                     String ssid = wifiManager.getConnectionInfo().getSSID().replace("\"", ""); // Remove quotes from SSID
                     return ssid.equals(TARGET_WIFI_SSID);
@@ -437,7 +422,7 @@ public class User extends AppCompatActivity {
 
     private void updateListView(ArrayList<Machine> machines) {
         machineList = machines;
-        machineListAdapter = new MachineAdapter(getApplicationContext(), machineList);
+        machineListAdapter = new MachineAdapter(this, machineList);
         machineListView.setAdapter(machineListAdapter);
     }
 
@@ -595,5 +580,23 @@ public class User extends AppCompatActivity {
         subLayout.setPadding(0, 0, 0, 0);
         machineLayout.setPadding(0, 0, 0, 0);
         headerLayout.setPadding(0, 0, 0, 0);
+    }
+
+    private void switchLanguage() {
+        String currentLanguage = SharedPreferencesManager.getSharedPref("language", User.this, "en");
+        String nextLang = "";
+
+        if (currentLanguage.equals("tr")) {
+            SharedPreferencesManager.writeSharedPref("language", "en", User.this);
+            nextLang = "en";
+        } else {
+            SharedPreferencesManager.writeSharedPref("language", "tr", User.this);
+            String trText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_turkish);
+            navCurrentLang.setText(trText);
+            nextLang = "tr";
+        }
+
+        Util.setLocale(User.this, nextLang);
+        recreate();
     }
 }

@@ -17,7 +17,9 @@ import java.util.Objects;
 
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.SplashActivity;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
+import me.t3sl4.ondergrup.Util.Util;
 
 public class MaintenanceSingle extends AppCompatActivity {
 
@@ -85,10 +87,10 @@ public class MaintenanceSingle extends AppCompatActivity {
     private void fonksiyonlarVeKontrolProcess() {
         enableSection(1);
         String[][] data = {
-                {getApplicationContext().getResources().getString(R.string.maintenance1_1), maintenanceFromCode(currentMaintenance.getKontrol11())},
-                {getApplicationContext().getResources().getString(R.string.maintenance1_2), maintenanceFromCode(currentMaintenance.getKontrol12())},
-                {getApplicationContext().getResources().getString(R.string.maintenance1_3), maintenanceFromCode(currentMaintenance.getKontrol13())},
-                {getApplicationContext().getResources().getString(R.string.maintenance1_4), maintenanceFromCode(currentMaintenance.getKontrol14())}
+                {this.getResources().getString(R.string.maintenance1_1), maintenanceFromCode(currentMaintenance.getKontrol11())},
+                {this.getResources().getString(R.string.maintenance1_2), maintenanceFromCode(currentMaintenance.getKontrol12())},
+                {this.getResources().getString(R.string.maintenance1_3), maintenanceFromCode(currentMaintenance.getKontrol13())},
+                {this.getResources().getString(R.string.maintenance1_4), maintenanceFromCode(currentMaintenance.getKontrol14())}
         };
 
         fillTableWithData(tableLayout, data);
@@ -97,10 +99,10 @@ public class MaintenanceSingle extends AppCompatActivity {
     private void platformMontajProcess() {
         enableSection(2);
         String[][] data = {
-                {getApplicationContext().getResources().getString(R.string.maintenance2_1), maintenanceFromCode(currentMaintenance.getKontrol21())},
-                {getApplicationContext().getResources().getString(R.string.maintenance2_2), maintenanceFromCode(currentMaintenance.getKontrol22())},
-                {getApplicationContext().getResources().getString(R.string.maintenance2_3), maintenanceFromCode(currentMaintenance.getKontrol23())},
-                {getApplicationContext().getResources().getString(R.string.maintenance2_4), maintenanceFromCode(currentMaintenance.getKontrol24())}
+                {this.getResources().getString(R.string.maintenance2_1), maintenanceFromCode(currentMaintenance.getKontrol21())},
+                {this.getResources().getString(R.string.maintenance2_2), maintenanceFromCode(currentMaintenance.getKontrol22())},
+                {this.getResources().getString(R.string.maintenance2_3), maintenanceFromCode(currentMaintenance.getKontrol23())},
+                {this.getResources().getString(R.string.maintenance2_4), maintenanceFromCode(currentMaintenance.getKontrol24())}
         };
 
         fillTableWithData(tableLayout, data);
@@ -109,12 +111,12 @@ public class MaintenanceSingle extends AppCompatActivity {
     private void makaslarProcess() {
         enableSection(3);
         String[][] data = {
-                {getApplicationContext().getResources().getString(R.string.maintenance3_1), maintenanceFromCode(currentMaintenance.getKontrol31())},
-                {getApplicationContext().getResources().getString(R.string.maintenance3_2), maintenanceFromCode(currentMaintenance.getKontrol32())},
-                {getApplicationContext().getResources().getString(R.string.maintenance3_3), maintenanceFromCode(currentMaintenance.getKontrol33())},
-                {getApplicationContext().getResources().getString(R.string.maintenance3_4), maintenanceFromCode(currentMaintenance.getKontrol34())},
-                {getApplicationContext().getResources().getString(R.string.maintenance3_5), maintenanceFromCode(currentMaintenance.getKontrol35())},
-                {getApplicationContext().getResources().getString(R.string.maintenance3_6), maintenanceFromCode(currentMaintenance.getKontrol36())}
+                {this.getResources().getString(R.string.maintenance3_1), maintenanceFromCode(currentMaintenance.getKontrol31())},
+                {this.getResources().getString(R.string.maintenance3_2), maintenanceFromCode(currentMaintenance.getKontrol32())},
+                {this.getResources().getString(R.string.maintenance3_3), maintenanceFromCode(currentMaintenance.getKontrol33())},
+                {this.getResources().getString(R.string.maintenance3_4), maintenanceFromCode(currentMaintenance.getKontrol34())},
+                {this.getResources().getString(R.string.maintenance3_5), maintenanceFromCode(currentMaintenance.getKontrol35())},
+                {this.getResources().getString(R.string.maintenance3_6), maintenanceFromCode(currentMaintenance.getKontrol36())}
         };
 
         fillTableWithData(tableLayout, data);
@@ -123,12 +125,12 @@ public class MaintenanceSingle extends AppCompatActivity {
     private void genelProcess() {
         enableSection(4);
         String[][] data = {
-                {getApplicationContext().getResources().getString(R.string.maintenance4_1), maintenanceFromCode(currentMaintenance.getKontrol41())},
-                {getApplicationContext().getResources().getString(R.string.maintenance4_2), maintenanceFromCode(currentMaintenance.getKontrol42())},
-                {getApplicationContext().getResources().getString(R.string.maintenance4_3), maintenanceFromCode(currentMaintenance.getKontrol43())},
-                {getApplicationContext().getResources().getString(R.string.maintenance4_4), maintenanceFromCode(currentMaintenance.getKontrol44())},
-                {getApplicationContext().getResources().getString(R.string.maintenance4_5), maintenanceFromCode(currentMaintenance.getKontrol45())},
-                {getApplicationContext().getResources().getString(R.string.maintenance4_6), maintenanceFromCode(currentMaintenance.getKontrol46())}
+                {this.getResources().getString(R.string.maintenance4_1), maintenanceFromCode(currentMaintenance.getKontrol41())},
+                {this.getResources().getString(R.string.maintenance4_2), maintenanceFromCode(currentMaintenance.getKontrol42())},
+                {this.getResources().getString(R.string.maintenance4_3), maintenanceFromCode(currentMaintenance.getKontrol43())},
+                {this.getResources().getString(R.string.maintenance4_4), maintenanceFromCode(currentMaintenance.getKontrol44())},
+                {this.getResources().getString(R.string.maintenance4_5), maintenanceFromCode(currentMaintenance.getKontrol45())},
+                {this.getResources().getString(R.string.maintenance4_6), maintenanceFromCode(currentMaintenance.getKontrol46())}
         };
 
         fillTableWithData(tableLayout, data);
@@ -137,12 +139,12 @@ public class MaintenanceSingle extends AppCompatActivity {
     private void hidrolikProcess() {
         enableSection(5);
         String[][] data = {
-                {getApplicationContext().getResources().getString(R.string.maintenance5_1), maintenanceFromCode(currentMaintenance.getKontrol51())},
-                {getApplicationContext().getResources().getString(R.string.maintenance5_2), maintenanceFromCode(currentMaintenance.getKontrol52())},
-                {getApplicationContext().getResources().getString(R.string.maintenance5_3), maintenanceFromCode(currentMaintenance.getKontrol53())},
-                {getApplicationContext().getResources().getString(R.string.maintenance5_4), maintenanceFromCode(currentMaintenance.getKontrol54())},
-                {getApplicationContext().getResources().getString(R.string.maintenance5_5), maintenanceFromCode(currentMaintenance.getKontrol55())},
-                {getApplicationContext().getResources().getString(R.string.maintenance5_6), maintenanceFromCode(currentMaintenance.getKontrol56())}
+                {this.getResources().getString(R.string.maintenance5_1), maintenanceFromCode(currentMaintenance.getKontrol51())},
+                {this.getResources().getString(R.string.maintenance5_2), maintenanceFromCode(currentMaintenance.getKontrol52())},
+                {this.getResources().getString(R.string.maintenance5_3), maintenanceFromCode(currentMaintenance.getKontrol53())},
+                {this.getResources().getString(R.string.maintenance5_4), maintenanceFromCode(currentMaintenance.getKontrol54())},
+                {this.getResources().getString(R.string.maintenance5_5), maintenanceFromCode(currentMaintenance.getKontrol55())},
+                {this.getResources().getString(R.string.maintenance5_6), maintenanceFromCode(currentMaintenance.getKontrol56())}
         };
 
         fillTableWithData(tableLayout, data);
@@ -151,9 +153,9 @@ public class MaintenanceSingle extends AppCompatActivity {
     private void elektrikProcess() {
         enableSection(6);
         String[][] data = {
-                {getApplicationContext().getResources().getString(R.string.maintenance6_1), maintenanceFromCode(currentMaintenance.getKontrol61())},
-                {getApplicationContext().getResources().getString(R.string.maintenance6_2), maintenanceFromCode(currentMaintenance.getKontrol62())},
-                {getApplicationContext().getResources().getString(R.string.maintenance6_3), maintenanceFromCode(currentMaintenance.getKontrol63())}
+                {this.getResources().getString(R.string.maintenance6_1), maintenanceFromCode(currentMaintenance.getKontrol61())},
+                {this.getResources().getString(R.string.maintenance6_2), maintenanceFromCode(currentMaintenance.getKontrol62())},
+                {this.getResources().getString(R.string.maintenance6_3), maintenanceFromCode(currentMaintenance.getKontrol63())}
         };
         fillTableWithData(tableLayout, data);
     }
@@ -161,8 +163,8 @@ public class MaintenanceSingle extends AppCompatActivity {
     private void kilavuzVeEtiketProcess() {
         enableSection(7);
         String[][] data = {
-                {getApplicationContext().getResources().getString(R.string.maintenance7_1), maintenanceFromCode(currentMaintenance.getKontrol71())},
-                {getApplicationContext().getResources().getString(R.string.maintenance7_2), maintenanceFromCode(currentMaintenance.getKontrol72())}
+                {this.getResources().getString(R.string.maintenance7_1), maintenanceFromCode(currentMaintenance.getKontrol71())},
+                {this.getResources().getString(R.string.maintenance7_2), maintenanceFromCode(currentMaintenance.getKontrol72())}
         };
 
         fillTableWithData(tableLayout, data);
@@ -171,9 +173,9 @@ public class MaintenanceSingle extends AppCompatActivity {
     private void saseProcess() {
         enableSection(8);
         String[][] data = {
-                {getApplicationContext().getResources().getString(R.string.maintenance8_1), maintenanceFromCode(currentMaintenance.getKontrol81())},
-                {getApplicationContext().getResources().getString(R.string.maintenance8_2), maintenanceFromCode(currentMaintenance.getKontrol82())},
-                {getApplicationContext().getResources().getString(R.string.maintenance8_3), maintenanceFromCode(currentMaintenance.getKontrol83())}
+                {this.getResources().getString(R.string.maintenance8_1), maintenanceFromCode(currentMaintenance.getKontrol81())},
+                {this.getResources().getString(R.string.maintenance8_2), maintenanceFromCode(currentMaintenance.getKontrol82())},
+                {this.getResources().getString(R.string.maintenance8_3), maintenanceFromCode(currentMaintenance.getKontrol83())}
         };
 
         fillTableWithData(tableLayout, data);
@@ -262,13 +264,13 @@ public class MaintenanceSingle extends AppCompatActivity {
     private String maintenanceFromCode(String maintenanceCode) {
         String maintenanceStatus = "";
         if(Objects.equals(maintenanceCode, "1")) {
-            maintenanceStatus = getApplicationContext().getResources().getString(R.string.maintenance_tamam);
+            maintenanceStatus = this.getResources().getString(R.string.maintenance_tamam);
         } else if(Objects.equals(maintenanceCode, "2")) {
-            maintenanceStatus = getApplicationContext().getResources().getString(R.string.maintenance_hayir);
+            maintenanceStatus = this.getResources().getString(R.string.maintenance_hayir);
         } else if(Objects.equals(maintenanceCode, "3")) {
-            maintenanceStatus = getApplicationContext().getResources().getString(R.string.maintenance_duzeltme);
+            maintenanceStatus = this.getResources().getString(R.string.maintenance_duzeltme);
         } else {
-            maintenanceStatus = getApplicationContext().getResources().getString(R.string.maintenance_yok);
+            maintenanceStatus = this.getResources().getString(R.string.maintenance_yok);
         }
 
         return maintenanceStatus;

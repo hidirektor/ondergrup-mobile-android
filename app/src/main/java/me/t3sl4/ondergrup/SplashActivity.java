@@ -26,9 +26,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         boolean isFirstTime = SharedPreferencesManager.getSharedPref("isFirstTime", this, false);
-        String currentLanguage = SharedPreferencesManager.getSharedPref("language", this, "en");
-
-        Util.setLocale(SplashActivity.this, currentLanguage);
+        Util.loadNewTranslations(SplashActivity.this);
 
         if (isFirstTime) {
             setupOnboarding();
