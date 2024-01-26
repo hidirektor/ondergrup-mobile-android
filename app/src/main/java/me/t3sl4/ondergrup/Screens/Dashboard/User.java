@@ -74,6 +74,7 @@ public class User extends AppCompatActivity {
 
     private ImageView hamburgerButton;
     private NavigationView hamburgerMenu;
+    private ConstraintLayout subErrorButton;
     private ConstraintLayout profileButton;
     private ConstraintLayout settingsButton;
     private ConstraintLayout belgelerButton;
@@ -153,6 +154,7 @@ public class User extends AppCompatActivity {
 
         hamburgerButton = findViewById(R.id.hamburgerMenuBttn);
         hamburgerMenu = findViewById(R.id.hamburgerMenu);
+        subErrorButton = findViewById(R.id.errorConstraint);
         profileButton = findViewById(R.id.profileConstraint);
         settingsButton = findViewById(R.id.settingsConstraint);
         belgelerButton = findViewById(R.id.belgelerConstraint);
@@ -194,6 +196,10 @@ public class User extends AppCompatActivity {
         }
 
         navCurrentLang.setText(activeText);
+
+        subErrorButton.setOnClickListener(v -> {
+            
+        });
 
         navProfileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(User.this, ProfileScreen.class);
