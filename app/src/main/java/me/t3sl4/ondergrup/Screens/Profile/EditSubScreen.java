@@ -16,11 +16,11 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Screens.SubUser.Adapter.SubUser;
+import me.t3sl4.ondergrup.Model.SubUser.SubUser;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserListScreen;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
-import me.t3sl4.ondergrup.Util.User.User;
+import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class EditSubScreen extends AppCompatActivity {

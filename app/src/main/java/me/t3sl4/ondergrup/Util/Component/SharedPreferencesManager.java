@@ -1,4 +1,4 @@
-package me.t3sl4.ondergrup.Util;
+package me.t3sl4.ondergrup.Util.Component;
 
 import android.content.Context;
 import android.content.SharedPreferences;

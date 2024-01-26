@@ -1,4 +1,4 @@
-package me.t3sl4.ondergrup.Util.User;
+package me.t3sl4.ondergrup.Model.User;
 
 import android.os.Parcel;
 import android.os.Parcelable;

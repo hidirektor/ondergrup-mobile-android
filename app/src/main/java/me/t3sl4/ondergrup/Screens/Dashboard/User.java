@@ -49,8 +49,8 @@ import java.util.ArrayList;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.Documents.DocumentsScreen;
-import me.t3sl4.ondergrup.Screens.Machine.Adapter.Machine;
-import me.t3sl4.ondergrup.Screens.Machine.Adapter.MachineAdapter;
+import me.t3sl4.ondergrup.Model.Machine.Machine;
+import me.t3sl4.ondergrup.Model.Machine.Adapter.MachineAdapter;
 import me.t3sl4.ondergrup.Screens.Machine.MachineListScreen;
 import me.t3sl4.ondergrup.Screens.Machine.MachineScreen;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
@@ -59,7 +59,7 @@ import me.t3sl4.ondergrup.Screens.QR.QRScanner;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Util.Component.Navigation.NavigationManager;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
-import me.t3sl4.ondergrup.Util.SharedPreferencesManager;
+import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class User extends AppCompatActivity {
@@ -99,7 +99,7 @@ public class User extends AppCompatActivity {
     private MachineAdapter machineListAdapter;
     private ArrayList<Machine> machineList;
 
-    public me.t3sl4.ondergrup.Util.User.User receivedUser;
+    public me.t3sl4.ondergrup.Model.User.User receivedUser;
 
     private Dialog uyariDiyalog;
     private Dialog qrDiyalog;

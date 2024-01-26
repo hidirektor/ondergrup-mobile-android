@@ -122,7 +122,10 @@
             android:name=".Screens.Profile.EditSubScreen"
             android:screenOrientation="unspecified" />
         <activity
-            android:name=".Screens.Log.ErrorLog"
+            android:name=".Screens.Log.Error.ErrorLog"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".Screens.Log.Maintenance.MaintenanceLog"
             android:screenOrientation="unspecified" />
     </application>
 

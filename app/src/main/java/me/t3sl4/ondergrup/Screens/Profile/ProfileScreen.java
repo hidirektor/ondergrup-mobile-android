@@ -1,7 +1,6 @@
 package me.t3sl4.ondergrup.Screens.Profile;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -13,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
-import me.t3sl4.ondergrup.Util.User.User;
+import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class ProfileScreen extends AppCompatActivity {

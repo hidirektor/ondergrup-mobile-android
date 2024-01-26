@@ -1,4 +1,4 @@
-package me.t3sl4.ondergrup.Screens.Machine.Adapter;
+package me.t3sl4.ondergrup.Model.Machine.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import me.t3sl4.ondergrup.Model.Machine.Machine;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.Util;
 

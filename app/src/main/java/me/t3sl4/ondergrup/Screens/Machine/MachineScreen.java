@@ -14,10 +14,10 @@ import androidx.core.content.ContextCompat;
 import java.util.Objects;
 
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Screens.Log.ErrorLog;
-import me.t3sl4.ondergrup.Screens.Log.MachineError.MachineError;
-import me.t3sl4.ondergrup.Screens.Machine.Adapter.Machine;
-import me.t3sl4.ondergrup.Util.User.User;
+import me.t3sl4.ondergrup.Screens.Log.Error.ErrorLog;
+import me.t3sl4.ondergrup.Model.Machine.Machine;
+import me.t3sl4.ondergrup.Model.User.User;
+import me.t3sl4.ondergrup.Screens.Log.Maintenance.MaintenanceLog;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class MachineScreen extends AppCompatActivity {
@@ -100,8 +100,6 @@ public class MachineScreen extends AppCompatActivity {
         errorLogButton = findViewById(R.id.machineErrorLogLayout);
         maintenanceLogButton = findViewById(R.id.machineMaintenanceLogLayout);
 
-        maintenanceLogButton.setOnClickListener(v -> util.showErrorPopup(uyariDiyalog, "Bakım kaydı sistemimiz şuan aktif değil !"));
-
         machineImage = findViewById(R.id.makineGorsel);
         ownerName = findViewById(R.id.ownerNameText);
         machineID = findViewById(R.id.machineIDText);
@@ -159,6 +157,12 @@ public class MachineScreen extends AppCompatActivity {
             Intent machineErrorIntent = new Intent(MachineScreen.this, ErrorLog.class);
             machineErrorIntent.putExtra("currentmachine", selectedMachine.getMachineID());
             startActivity(machineErrorIntent);
+        });
+
+        maintenanceLogButton.setOnClickListener(v -> {
+            Intent machineMaintenanceLogIntent = new Intent(MachineScreen.this, MaintenanceLog.class);
+            machineMaintenanceLogIntent.putExtra("currentmachine", selectedMachine.getMachineID());
+            startActivity(machineMaintenanceLogIntent);
         });
     }
 

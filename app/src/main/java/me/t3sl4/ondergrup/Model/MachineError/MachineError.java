@@ -1,9 +1,7 @@
-package me.t3sl4.ondergrup.Screens.Log.MachineError;
+package me.t3sl4.ondergrup.Model.MachineError;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.security.Timestamp;
 
 public class MachineError implements Parcelable {
 

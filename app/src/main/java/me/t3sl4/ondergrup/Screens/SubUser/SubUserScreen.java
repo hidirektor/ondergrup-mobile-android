@@ -1,28 +1,15 @@
 package me.t3sl4.ondergrup.Screens.SubUser;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONObject;
-
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
-import me.t3sl4.ondergrup.Util.User.User;
+import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SubUserScreen extends AppCompatActivity {

@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.TimeZone;
 
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Util.User.User;
+import me.t3sl4.ondergrup.Model.User.User;
 
 public class Util {
     public Context context;
@@ -44,11 +44,12 @@ public class Util {
     public String addMachineURL = "/api/machine/add";
     public String getMachineURL = "/api/machine/getMachines";
     public String getMachineErrorURL = "/api/machine/getMachineErrors";
+    public String getMachineMaintenanceURL = "/api/machine/getMachineMaintenances";
 
 
     public String uploadURLPrefix = "/api/fileSystem/upload";
     public String downloadPhotoURLPrefix = "/api/fileSystem/downloadPhoto";
-    public String manualPDFUrlPrefix = "https://manual.hidirektor.com.tr/manual.pdf";
+    public String manualPDFUrlPrefix = "https://hidirektor.com.tr/manual/manual.pdf";
 
     public static String profilePhotoPath;
     public Util(Context context) {

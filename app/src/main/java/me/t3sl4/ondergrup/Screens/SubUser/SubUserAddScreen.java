@@ -21,7 +21,7 @@ import java.util.Locale;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
-import me.t3sl4.ondergrup.Util.User.User;
+import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SubUserAddScreen extends AppCompatActivity {

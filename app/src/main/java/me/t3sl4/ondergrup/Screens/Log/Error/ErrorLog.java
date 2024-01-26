@@ -1,4 +1,4 @@
-package me.t3sl4.ondergrup.Screens.Log;
+package me.t3sl4.ondergrup.Screens.Log.Error;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -11,9 +11,7 @@ import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -32,12 +30,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Screens.Log.MachineError.MachineError;
-import me.t3sl4.ondergrup.Screens.Log.MachineError.MachineErrorAdapter;
-import me.t3sl4.ondergrup.Screens.Machine.Adapter.Machine;
-import me.t3sl4.ondergrup.Screens.Machine.Adapter.MachineAdapter;
+import me.t3sl4.ondergrup.Model.MachineError.MachineError;
+import me.t3sl4.ondergrup.Model.MachineError.Adapter.MachineErrorAdapter;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
-import me.t3sl4.ondergrup.Util.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class ErrorLog extends AppCompatActivity {

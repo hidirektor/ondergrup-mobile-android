@@ -1,4 +1,4 @@
-package me.t3sl4.ondergrup.Screens.SubUser.Adapter;
+package me.t3sl4.ondergrup.Model.SubUser.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import me.t3sl4.ondergrup.Model.SubUser.SubUser;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.Util;
 

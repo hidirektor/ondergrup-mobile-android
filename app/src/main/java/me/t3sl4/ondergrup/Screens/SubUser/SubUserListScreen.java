@@ -2,10 +2,8 @@ package me.t3sl4.ondergrup.Screens.SubUser;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 
@@ -21,10 +19,10 @@ import java.util.ArrayList;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Profile.EditSubScreen;
-import me.t3sl4.ondergrup.Screens.SubUser.Adapter.SubUser;
-import me.t3sl4.ondergrup.Screens.SubUser.Adapter.SubUserAdapter;
+import me.t3sl4.ondergrup.Model.SubUser.SubUser;
+import me.t3sl4.ondergrup.Model.SubUser.Adapter.SubUserAdapter;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
-import me.t3sl4.ondergrup.Util.User.User;
+import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SubUserListScreen extends AppCompatActivity {

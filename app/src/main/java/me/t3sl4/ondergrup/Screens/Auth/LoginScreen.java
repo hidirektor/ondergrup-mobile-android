@@ -29,8 +29,8 @@ import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
-import me.t3sl4.ondergrup.Util.SharedPreferencesManager;
-import me.t3sl4.ondergrup.Util.User.User;
+import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
+import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class LoginScreen extends AppCompatActivity {

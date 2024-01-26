@@ -1,4 +1,4 @@
-package me.t3sl4.ondergrup.Screens.Log.MachineError;
+package me.t3sl4.ondergrup.Model.MachineError.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -11,11 +11,9 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import java.time.Instant;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Objects;
 
+import me.t3sl4.ondergrup.Model.MachineError.MachineError;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -50,7 +48,7 @@ public class MachineErrorAdapter extends BaseAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.activity_machine_error_list_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.activity_errorlog_list_item, parent, false);
             holder = new ViewHolder();
             holder.machineErrorImage = convertView.findViewById(R.id.machineErrorImage);
             holder.errorName = convertView.findViewById(R.id.errorName);

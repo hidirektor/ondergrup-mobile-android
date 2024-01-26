@@ -217,4 +217,58 @@
     <string name="error_maxcalisma_cozum4">İndirme popetini kontrol ediniz ve temizleyiniz.</string>
 
     <string name="mymachines">Makinelerim</string>
+
+    <string name="functionsandcontrol">Fonksiyonlar\n&amp;\nKontrol</string>
+    <string name="platformmontaj">Platform Montajı</string>
+    <string name="makaslar">Makaslar</string>
+    <string name="genel">Genel</string>
+    <string name="hidroliksistem">Hidrolik Sistem</string>
+    <string name="elektriksistemi">Elektrik Sistemi</string>
+    <string name="kilavuzveetiket">Kılavuzlar\n&amp;\nEtiketler</string>
+    <string name="sase">Şase</string>
+    <string name="aciklamanot">Açıklama\n&amp;\nNot</string>
+
+    <string name="incharge">Sorumlu Yetkili: </string>
+    <string name="maintenance_id">Bakım Numarası: </string>
+    <string name="maintenance_date">Bakım Tarihi: </string>
+
+    <string name="maintenance1_1">Kumanda butonları çalışıyor</string>
+    <string name="maintenance1_2">Acil stop butonu kontrol</string>
+    <string name="maintenance1_3">Kaldırma, indirme butonları</string>
+    <string name="maintenance1_4">Acil indirme sistemi</string>
+    <string name="maintenance2_1">Platform güvenli,</string>
+    <string name="maintenance2_2">Platform korkulukları güvenli,</string>
+    <string name="maintenance2_3">Platform tekmelikleri güvenli,</string>
+    <string name="maintenance2_4">Platform zemin sacı güvenli,</string>
+    <string name="maintenance3_1">Makaslar hasarsız, sağlam ve güvenli</string>
+    <string name="maintenance3_2">Emniyet çubuğu yerinde, çalışır durumda.</string>
+    <string name="maintenance3_3">Tüm somunlar, cıvatalar, permolar, rulmanlar, segmanlar, bağlantı elemanlarının yerinde, hasarsız ve sıkılı olduğunu kontrol edin.</string>
+    <string name="maintenance3_4">Silindir permolarının ve diğer bağlantı elemanlarının, hasarsız ve sıkılı olduğunu kontrol edin.</string>
+    <string name="maintenance3_5">Makas bağlantı permolarının, yataklamaların ve diğer bağlantı elemanlarının, hasarsız ve sıkılı olduğunu kontrol edin.</string>
+    <string name="maintenance3_6">Makaslar üzerindeki tüm malzemelerin hasarsız, sağlam, güvenli ve çalışır durumda olduğunu kontrol edin.</string>
+    <string name="maintenance4_1">Platform üzerinde izinsiz tadilat yapılmamış</string>
+    <string name="maintenance4_2">Boya ve genel görünüş</string>
+    <string name="maintenance4_3">Konstrüksiyon hasarsız, kaynaklar sağlam.</string>
+    <string name="maintenance4_4">Gresörlükler periyodik olarak yağlandı.</string>
+    <string name="maintenance4_5">Platformun tüm fonksiyonları emniyetli çalışır durumda.</string>
+    <string name="maintenance4_6">Yapılan kontroller kayıt altına alındı.</string>
+    <string name="maintenance5_1">Silindirler hasarsız, sızıntısız ve çalışır durumda.</string>
+    <string name="maintenance5_2">Hidrolik kabin içerisinde, pompa ve sistemde yağ sızıntısı, kaçak yok.</string>
+    <string name="maintenance5_3">Emiş ve dönüş filtreleri yeterli.</string>
+    <string name="maintenance5_4">Tanktaki hidrolik yağ seviyesi yeterli.</string>
+    <string name="maintenance5_5">Tank havalandırma kapağı yerinde ve sıkılı.</string>
+    <string name="maintenance5_6">Tüm hidrolik bağlantı elemanları, hortumlar hasarsız, güvenli, yağ sızıntısı ve aşınma yok.</string>
+    <string name="maintenance6_1">Tüm elektrik bağlantıları güvenli ve hasarsız.</string>
+    <string name="maintenance6_2">Butonlar, switchler, korna, ışıklar ve diğer ekipmanlar çalışır, hasarsız.</string>
+    <string name="maintenance6_3">Boy sensörü kontrolü.</string>
+    <string name="maintenance7_1">Kullanım ve bakım kılavuzu yerinde.</string>
+    <string name="maintenance7_2">Kapasite, kullanım, emniyet ve güvenlik ikaz işaret ve etiketleri yerinde ve görülebilir durumda.</string>
+    <string name="maintenance8_1">Hidrolik ünite kabinleri hasarsız ve şaseye bağlı.</string>
+    <string name="maintenance8_2">Elektrik ünite kabinleri hasarsız ve şaseye bağlı.</string>
+    <string name="maintenance8_3">Şase hasarsız ve çalışır durumda.</string>
+
+    <string name="maintenance_tamam">Tamam</string>
+    <string name="maintenance_hayir">Hayır</string>
+    <string name="maintenance_duzeltme">Düzeltilecek</string>
+    <string name="maintenance_yok">Yok</string>
 </resources>

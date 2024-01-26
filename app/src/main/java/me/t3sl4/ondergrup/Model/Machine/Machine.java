@@ -1,4 +1,4 @@
-package me.t3sl4.ondergrup.Screens.Machine.Adapter;
+package me.t3sl4.ondergrup.Model.Machine;
 
 import android.os.Parcel;
 import android.os.Parcelable;

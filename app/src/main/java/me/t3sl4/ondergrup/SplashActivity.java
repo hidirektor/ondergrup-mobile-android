@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.OnBoard.OnBoarding1;
-import me.t3sl4.ondergrup.Util.SharedPreferencesManager;
+import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 
 public class SplashActivity extends AppCompatActivity {
     private final int WAITING_TIME = 1500;

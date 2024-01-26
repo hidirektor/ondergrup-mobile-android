@@ -1,4 +1,4 @@
-package me.t3sl4.ondergrup.Screens.SubUser.Adapter;
+package me.t3sl4.ondergrup.Model.SubUser;
 
 import android.os.Parcel;
 import android.os.Parcelable;
