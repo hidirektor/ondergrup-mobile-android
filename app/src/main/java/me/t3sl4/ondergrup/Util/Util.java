@@ -3,8 +3,10 @@ package me.t3sl4.ondergrup.Util;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -111,11 +113,17 @@ public class Util {
         return dateFormat.format(date);
     }
 
-    public static void setLocale(Context context, String lang){
-        Locale locale=new Locale(lang);
-        Locale.setDefault(locale);
-        Configuration configuration=new Configuration();
-        configuration.locale=locale;
-        context.getResources().updateConfiguration(configuration, context.getResources().getDisplayMetrics());
+    public static void setLocale(Context context, String newLanguage) {
+        Resources activityRes = context.getResources();
+        Configuration activityConf = activityRes.getConfiguration();
+        Locale newLocale = new Locale(newLanguage);
+        activityConf.setLocale(newLocale);
+        activityRes.updateConfiguration(activityConf, activityRes.getDisplayMetrics());
+
+        Resources applicationRes = context.getResources();
+        Configuration applicationConf = applicationRes.getConfiguration();
+        applicationConf.setLocale(newLocale);
+        applicationRes.updateConfiguration(applicationConf,
+                applicationRes.getDisplayMetrics());
     }
 }
