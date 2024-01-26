@@ -224,8 +224,11 @@
     <string name="maintenance8_1">Hydraulic unit cabins are undamaged and connected to the chassis.</string>
     <string name="maintenance8_2">Electrical unit cabinets are undamaged and connected to the chassis.</string>
     <string name="maintenance8_3">The chassis is undamaged and in working order.</string>
+    <string name="maintenance_milestone">Maintenance</string>
+    <string name="maintenance_status">Status</string>
     <string name="maintenance_tamam">Okay</string>
     <string name="maintenance_hayir">No</string>
     <string name="maintenance_duzeltme">Will be Fixed</string>
     <string name="maintenance_yok">None</string>
+    <string name="active_language">Language:</string>
 </resources>

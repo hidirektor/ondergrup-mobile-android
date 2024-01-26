@@ -267,8 +267,12 @@
     <string name="maintenance8_2">Elektrik ünite kabinleri hasarsız ve şaseye bağlı.</string>
     <string name="maintenance8_3">Şase hasarsız ve çalışır durumda.</string>
 
+    <string name="maintenance_milestone">Bakım</string>
+    <string name="maintenance_status">Bakım Durumu</string>
     <string name="maintenance_tamam">Tamam</string>
     <string name="maintenance_hayir">Hayır</string>
     <string name="maintenance_duzeltme">Düzeltilecek</string>
     <string name="maintenance_yok">Yok</string>
+
+    <string name="active_language">Dil: </string>
 </resources>

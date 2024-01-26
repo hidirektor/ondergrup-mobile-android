@@ -2,11 +2,18 @@ package me.t3sl4.ondergrup.Screens.Log.Maintenance;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
+
+import java.util.Objects;
 
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.R;
@@ -27,6 +34,8 @@ public class MaintenanceSingle extends AppCompatActivity {
     private Button kilavuzVeEtiket;
     private Button sase;
     private Button aciklamaNot;
+
+    private TableLayout tableLayout;
 
     private Maintenance currentMaintenance;
 
@@ -52,6 +61,8 @@ public class MaintenanceSingle extends AppCompatActivity {
         sase = findViewById(R.id.sase);
         aciklamaNot = findViewById(R.id.aciklamaNot);
 
+        tableLayout = findViewById(R.id.tableLayout);
+
         backToMachine.setOnClickListener(v -> {
             finish();
         });
@@ -67,46 +78,128 @@ public class MaintenanceSingle extends AppCompatActivity {
         kilavuzVeEtiket.setOnClickListener(v -> kilavuzVeEtiketProcess());
         sase.setOnClickListener(v -> saseProcess());
         aciklamaNot.setOnClickListener(v -> aciklamaNotProcess());
+
+        fonksiyonlarVeKontrolProcess();
     }
 
     private void fonksiyonlarVeKontrolProcess() {
         enableSection(1);
+        String[][] data = {
+                {getApplicationContext().getResources().getString(R.string.maintenance1_1), maintenanceFromCode(currentMaintenance.getKontrol11())},
+                {getApplicationContext().getResources().getString(R.string.maintenance1_2), maintenanceFromCode(currentMaintenance.getKontrol12())},
+                {getApplicationContext().getResources().getString(R.string.maintenance1_3), maintenanceFromCode(currentMaintenance.getKontrol13())},
+                {getApplicationContext().getResources().getString(R.string.maintenance1_4), maintenanceFromCode(currentMaintenance.getKontrol14())}
+        };
+
+        fillTableWithData(tableLayout, data);
     }
 
     private void platformMontajProcess() {
         enableSection(2);
+        String[][] data = {
+                {getApplicationContext().getResources().getString(R.string.maintenance2_1), maintenanceFromCode(currentMaintenance.getKontrol21())},
+                {getApplicationContext().getResources().getString(R.string.maintenance2_2), maintenanceFromCode(currentMaintenance.getKontrol22())},
+                {getApplicationContext().getResources().getString(R.string.maintenance2_3), maintenanceFromCode(currentMaintenance.getKontrol23())},
+                {getApplicationContext().getResources().getString(R.string.maintenance2_4), maintenanceFromCode(currentMaintenance.getKontrol24())}
+        };
+
+        fillTableWithData(tableLayout, data);
     }
 
     private void makaslarProcess() {
         enableSection(3);
+        String[][] data = {
+                {getApplicationContext().getResources().getString(R.string.maintenance3_1), maintenanceFromCode(currentMaintenance.getKontrol31())},
+                {getApplicationContext().getResources().getString(R.string.maintenance3_2), maintenanceFromCode(currentMaintenance.getKontrol32())},
+                {getApplicationContext().getResources().getString(R.string.maintenance3_3), maintenanceFromCode(currentMaintenance.getKontrol33())},
+                {getApplicationContext().getResources().getString(R.string.maintenance3_4), maintenanceFromCode(currentMaintenance.getKontrol34())},
+                {getApplicationContext().getResources().getString(R.string.maintenance3_5), maintenanceFromCode(currentMaintenance.getKontrol35())},
+                {getApplicationContext().getResources().getString(R.string.maintenance3_6), maintenanceFromCode(currentMaintenance.getKontrol36())}
+        };
+
+        fillTableWithData(tableLayout, data);
     }
 
     private void genelProcess() {
         enableSection(4);
+        String[][] data = {
+                {getApplicationContext().getResources().getString(R.string.maintenance4_1), maintenanceFromCode(currentMaintenance.getKontrol41())},
+                {getApplicationContext().getResources().getString(R.string.maintenance4_2), maintenanceFromCode(currentMaintenance.getKontrol42())},
+                {getApplicationContext().getResources().getString(R.string.maintenance4_3), maintenanceFromCode(currentMaintenance.getKontrol43())},
+                {getApplicationContext().getResources().getString(R.string.maintenance4_4), maintenanceFromCode(currentMaintenance.getKontrol44())},
+                {getApplicationContext().getResources().getString(R.string.maintenance4_5), maintenanceFromCode(currentMaintenance.getKontrol45())},
+                {getApplicationContext().getResources().getString(R.string.maintenance4_6), maintenanceFromCode(currentMaintenance.getKontrol46())}
+        };
+
+        fillTableWithData(tableLayout, data);
     }
 
     private void hidrolikProcess() {
         enableSection(5);
+        String[][] data = {
+                {getApplicationContext().getResources().getString(R.string.maintenance5_1), maintenanceFromCode(currentMaintenance.getKontrol51())},
+                {getApplicationContext().getResources().getString(R.string.maintenance5_2), maintenanceFromCode(currentMaintenance.getKontrol52())},
+                {getApplicationContext().getResources().getString(R.string.maintenance5_3), maintenanceFromCode(currentMaintenance.getKontrol53())},
+                {getApplicationContext().getResources().getString(R.string.maintenance5_4), maintenanceFromCode(currentMaintenance.getKontrol54())},
+                {getApplicationContext().getResources().getString(R.string.maintenance5_5), maintenanceFromCode(currentMaintenance.getKontrol55())},
+                {getApplicationContext().getResources().getString(R.string.maintenance5_6), maintenanceFromCode(currentMaintenance.getKontrol56())}
+        };
+
+        fillTableWithData(tableLayout, data);
     }
 
     private void elektrikProcess() {
         enableSection(6);
+        String[][] data = {
+                {getApplicationContext().getResources().getString(R.string.maintenance6_1), maintenanceFromCode(currentMaintenance.getKontrol61())},
+                {getApplicationContext().getResources().getString(R.string.maintenance6_2), maintenanceFromCode(currentMaintenance.getKontrol62())},
+                {getApplicationContext().getResources().getString(R.string.maintenance6_3), maintenanceFromCode(currentMaintenance.getKontrol63())}
+        };
+        fillTableWithData(tableLayout, data);
     }
 
     private void kilavuzVeEtiketProcess() {
         enableSection(7);
+        String[][] data = {
+                {getApplicationContext().getResources().getString(R.string.maintenance7_1), maintenanceFromCode(currentMaintenance.getKontrol71())},
+                {getApplicationContext().getResources().getString(R.string.maintenance7_2), maintenanceFromCode(currentMaintenance.getKontrol72())}
+        };
+
+        fillTableWithData(tableLayout, data);
     }
 
     private void saseProcess() {
         enableSection(8);
+        String[][] data = {
+                {getApplicationContext().getResources().getString(R.string.maintenance8_1), maintenanceFromCode(currentMaintenance.getKontrol81())},
+                {getApplicationContext().getResources().getString(R.string.maintenance8_2), maintenanceFromCode(currentMaintenance.getKontrol82())},
+                {getApplicationContext().getResources().getString(R.string.maintenance8_3), maintenanceFromCode(currentMaintenance.getKontrol83())}
+        };
+
+        fillTableWithData(tableLayout, data);
     }
 
     private void aciklamaNotProcess() {
         enableSection(9);
+        String[][] data = {
+                {currentMaintenance.getKontrol91(), " "},
+                {currentMaintenance.getKontrol92(), " "},
+                {currentMaintenance.getKontrol93(), " "},
+                {currentMaintenance.getKontrol94(), " "},
+                {currentMaintenance.getKontrol95(), " "},
+                {currentMaintenance.getKontrol96(), " "},
+                {currentMaintenance.getKontrol97(), " "},
+                {currentMaintenance.getKontrol98(), " "},
+                {currentMaintenance.getKontrol99(), " "},
+                {currentMaintenance.getKontrol910(), " "}
+        };
+
+        fillTableWithData(tableLayout, data);
     }
 
     private void enableSection(int type) {
         ButtonManager.resetAll(this, fonksiyonlarVeKontrol, platformMontaj, makaslar, genel, hidrolik, elektrik, kilavuzVeEtiket, sase, aciklamaNot);
+        tableLayout.removeAllViews();
 
         if(type == 1) {
             fonksiyonlarVeKontrol.setBackgroundResource(R.drawable.button_filter_start_dark);
@@ -136,5 +229,48 @@ public class MaintenanceSingle extends AppCompatActivity {
             aciklamaNot.setBackgroundResource(R.drawable.button_filter_end_dark);
             aciklamaNot.setTextColor(ContextCompat.getColor(this, R.color.white));
         }
+    }
+
+    private void fillTableWithData(TableLayout tableLayout, String[][] data) {
+        for (String[] rowData : data) {
+            TableRow tableRow = new TableRow(this);
+
+            for (String item : rowData) {
+                TextView textView = new TextView(this);
+                textView.setLayoutParams(new TableRow.LayoutParams(
+                        0, // width
+                        TableRow.LayoutParams.WRAP_CONTENT,
+                        1f // weight
+                ));
+                textView.setText(item);
+                textView.setTypeface(ResourcesCompat.getFont(this, R.font.outfit_medium));
+                textView.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                textView.setTextColor(getResources().getColor(android.R.color.black));
+                textView.setGravity(Gravity.CENTER);
+                tableRow.addView(textView);
+            }
+
+            int paddingInDp = 10;
+            float scale = getResources().getDisplayMetrics().density;
+            int paddingInPixels = (int) (paddingInDp * scale + 0.5f);
+            tableRow.setPadding(0, 0, 0, paddingInPixels);
+
+            tableLayout.addView(tableRow);
+        }
+    }
+
+    private String maintenanceFromCode(String maintenanceCode) {
+        String maintenanceStatus = "";
+        if(Objects.equals(maintenanceCode, "1")) {
+            maintenanceStatus = getApplicationContext().getResources().getString(R.string.maintenance_tamam);
+        } else if(Objects.equals(maintenanceCode, "2")) {
+            maintenanceStatus = getApplicationContext().getResources().getString(R.string.maintenance_hayir);
+        } else if(Objects.equals(maintenanceCode, "3")) {
+            maintenanceStatus = getApplicationContext().getResources().getString(R.string.maintenance_duzeltme);
+        } else {
+            maintenanceStatus = getApplicationContext().getResources().getString(R.string.maintenance_yok);
+        }
+
+        return maintenanceStatus;
     }
 }

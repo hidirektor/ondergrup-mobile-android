@@ -2,6 +2,7 @@ package me.t3sl4.ondergrup.Util;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
@@ -107,5 +109,13 @@ public class Util {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    public static void setLocale(Context context, String lang){
+        Locale locale=new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration=new Configuration();
+        configuration.locale=locale;
+        context.getResources().updateConfiguration(configuration, context.getResources().getDisplayMetrics());
     }
 }

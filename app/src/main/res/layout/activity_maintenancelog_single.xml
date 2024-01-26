@@ -187,5 +187,43 @@
             </LinearLayout>
         </LinearLayout>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/maintenance_milestone"
+                android:fontFamily="@font/gilroy_bold"
+                android:background="@drawable/background_error_cause"
+                android:textColor="@android:color/white"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/maintenance_status"
+                android:fontFamily="@font/gilroy_bold"
+                android:background="@drawable/background_error_solution"
+                android:textColor="@android:color/white"
+                android:gravity="center"/>
+        </TableRow>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*">
+            </TableLayout>
+
+        </ScrollView>
     </LinearLayout>
 </RelativeLayout>

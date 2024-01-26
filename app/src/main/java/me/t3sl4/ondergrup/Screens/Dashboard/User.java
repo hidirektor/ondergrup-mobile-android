@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
@@ -45,6 +46,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Objects;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
@@ -83,6 +86,8 @@ public class User extends AppCompatActivity {
     private LinearLayout navProfileButton;
     private LinearLayout navDocsButton;
     private LinearLayout navSettingsButton;
+    private LinearLayout navLanguageButton;
+    private TextView navCurrentLang;
     private LinearLayout feedbackButton;
     private LinearLayout logoutButton;
 
@@ -106,6 +111,8 @@ public class User extends AppCompatActivity {
 
     public static String scannedQRCode;
     public static EditText scannedQRCodeEditText;
+
+    private String currentLang;
 
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
             result -> {
@@ -140,6 +147,8 @@ public class User extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
+        currentLang = SharedPreferencesManager.getSharedPref("language", User.this, "en");
+
         isimSoyisim = findViewById(R.id.loggedUserName);
 
         hamburgerButton = findViewById(R.id.hamburgerMenuBttn);
@@ -172,8 +181,19 @@ public class User extends AppCompatActivity {
         navProfileButton = hamburgerView.findViewById(R.id.navProfileButton);
         navDocsButton = hamburgerView.findViewById(R.id.navDocsButton);
         navSettingsButton = hamburgerView.findViewById(R.id.navSettingsButton);
+        navLanguageButton = hamburgerView.findViewById(R.id.navLanguageButton);
+        navCurrentLang = hamburgerView.findViewById(R.id.current_lang);
         feedbackButton = hamburgerView.findViewById(R.id.feedbackButton);
         logoutButton = hamburgerView.findViewById(R.id.logoutButton);
+
+        String activeText = "";
+        if(Objects.equals(currentLang, "tr")) {
+            activeText = getApplicationContext().getResources().getString(R.string.active_language) + " " + getApplicationContext().getResources().getString(R.string.lang_turkish);
+        } else {
+            activeText = getApplicationContext().getResources().getString(R.string.active_language) + " " + getApplicationContext().getResources().getString(R.string.lang_english);
+        }
+
+        navCurrentLang.setText(activeText);
 
         navProfileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(User.this, ProfileScreen.class);
@@ -194,6 +214,25 @@ public class User extends AppCompatActivity {
             expandMainLayout();
             addMachine();
         });
+
+        navLanguageButton.setOnClickListener((View.OnClickListener) v -> {
+            String currentLanguage = SharedPreferencesManager.getSharedPref("language", User.this, "en");
+            String nextLang = "";
+
+            if (currentLanguage.equals("tr")) {
+                SharedPreferencesManager.writeSharedPref("language", "en", User.this);
+                nextLang = "en";
+            } else {
+                SharedPreferencesManager.writeSharedPref("language", "tr", User.this);
+                String trText = getApplicationContext().getResources().getString(R.string.active_language) + " " + getApplicationContext().getResources().getString(R.string.lang_turkish);
+                navCurrentLang.setText(trText);
+                nextLang = "tr";
+            }
+
+            Util.setLocale(User.this, nextLang);
+            recreate();
+        });
+
         logoutButton.setOnClickListener(v -> logoutProcess());
         feedbackButton.setOnClickListener(v -> {
             String url = "https://play.google.com/store/apps/details?id=me.t3sl4.ondergrup&hl=tr&gl=US";
