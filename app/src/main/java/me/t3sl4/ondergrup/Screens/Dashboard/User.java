@@ -54,6 +54,7 @@ import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.Documents.DocumentsScreen;
 import me.t3sl4.ondergrup.Model.Machine.Machine;
 import me.t3sl4.ondergrup.Model.Machine.Adapter.MachineAdapter;
+import me.t3sl4.ondergrup.Screens.Log.Error.ErrorLogAll;
 import me.t3sl4.ondergrup.Screens.Machine.MachineListScreen;
 import me.t3sl4.ondergrup.Screens.Machine.MachineScreen;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
@@ -79,6 +80,7 @@ public class User extends AppCompatActivity {
     private ConstraintLayout settingsButton;
     private ConstraintLayout belgelerButton;
     private ConstraintLayout subUserButton;
+    private ConstraintLayout allErrorsButton;
     private ConstraintLayout myMachineButton;
     private FloatingActionButton qrButton;
 
@@ -159,6 +161,7 @@ public class User extends AppCompatActivity {
         settingsButton = findViewById(R.id.settingsConstraint);
         belgelerButton = findViewById(R.id.belgelerConstraint);
         subUserButton = findViewById(R.id.subUserConstraint);
+        allErrorsButton = findViewById(R.id.allErrorsConstraint);
         myMachineButton = findViewById(R.id.myMachine);
         qrButton = findViewById(R.id.qrConstraint);
         maintenanceLog = findViewById(R.id.maintenanceLog);
@@ -267,6 +270,12 @@ public class User extends AppCompatActivity {
                 settingsIntent.putExtra("user", receivedUser);
                 startActivity(settingsIntent);
             }
+        });
+
+        allErrorsButton.setOnClickListener(v -> {
+            Intent profileIntent = new Intent(User.this, ErrorLogAll.class);
+            profileIntent.putExtra("user", receivedUser);
+            startActivity(profileIntent);
         });
 
         myMachineButton.setOnClickListener(v -> {
