@@ -55,6 +55,7 @@ import me.t3sl4.ondergrup.Screens.Documents.DocumentsScreen;
 import me.t3sl4.ondergrup.Model.Machine.Machine;
 import me.t3sl4.ondergrup.Model.Machine.Adapter.MachineAdapter;
 import me.t3sl4.ondergrup.Screens.Log.Error.ErrorLogAll;
+import me.t3sl4.ondergrup.Screens.Log.Maintenance.MaintenanceLogAll;
 import me.t3sl4.ondergrup.Screens.Machine.MachineListScreen;
 import me.t3sl4.ondergrup.Screens.Machine.MachineScreen;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
@@ -71,7 +72,6 @@ public class User extends AppCompatActivity {
     public Util util;
 
     private TextView isimSoyisim;
-    private ConstraintLayout maintenanceLog;
 
     private ImageView hamburgerButton;
     private NavigationView hamburgerMenu;
@@ -81,6 +81,7 @@ public class User extends AppCompatActivity {
     private ConstraintLayout belgelerButton;
     private ConstraintLayout subUserButton;
     private ConstraintLayout allErrorsButton;
+    private ConstraintLayout allMaintenancesButton;
     private ConstraintLayout myMachineButton;
     private FloatingActionButton qrButton;
 
@@ -162,11 +163,9 @@ public class User extends AppCompatActivity {
         belgelerButton = findViewById(R.id.belgelerConstraint);
         subUserButton = findViewById(R.id.subUserConstraint);
         allErrorsButton = findViewById(R.id.allErrorsConstraint);
+        allMaintenancesButton = findViewById(R.id.allMaintenancesConstraint);
         myMachineButton = findViewById(R.id.myMachine);
         qrButton = findViewById(R.id.qrConstraint);
-        maintenanceLog = findViewById(R.id.maintenanceLog);
-
-        maintenanceLog.setOnClickListener(v -> util.showErrorPopup(uyariDiyalog, "Bakım kaydı sistemimiz şuan aktif değil !"));
 
         //restriction
         headerConstraint = findViewById(R.id.headerConstraint);
@@ -274,6 +273,12 @@ public class User extends AppCompatActivity {
 
         allErrorsButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(User.this, ErrorLogAll.class);
+            profileIntent.putExtra("user", receivedUser);
+            startActivity(profileIntent);
+        });
+
+        allMaintenancesButton.setOnClickListener(v -> {
+            Intent profileIntent = new Intent(User.this, MaintenanceLogAll.class);
             profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
         });

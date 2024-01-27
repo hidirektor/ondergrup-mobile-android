@@ -30,7 +30,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Adapter.MaintenanceAdapter;
+import me.t3sl4.ondergrup.Model.MachineMaintenance.Adapter.MaintenanceAllAdapter;
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
+import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Model.MachineError.MachineError;
 import me.t3sl4.ondergrup.Model.MachineError.Adapter.MachineErrorAdapter;
@@ -40,57 +42,52 @@ import me.t3sl4.ondergrup.SplashActivity;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
-public class MaintenanceLog extends AppCompatActivity {
+public class MaintenanceLogAll extends AppCompatActivity {
     public Util util;
 
-    private LinearLayout backToMachine;
+    private ImageView backToMain;
 
     private ListView machineMaintenances;
-    private MaintenanceAdapter machineMaintenanceAdapter;
+    private MaintenanceAllAdapter machineMaintenanceAdapter;
     private ArrayList<Maintenance> machineMaintenanceList;
 
     private Dialog uyariDiyalog;
 
-    String currentMachineID;
+    public User receivedUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maintenancelog);
+        setContentView(R.layout.activity_maintenancelog_all);
 
         util = new Util(this);
         uyariDiyalog = new Dialog(this);
 
         Intent intent = getIntent();
-        if(intent != null) {
-            currentMachineID = intent.getStringExtra("currentmachine");
-        }
+        receivedUser = intent.getParcelableExtra("user");
 
-        backToMachine = findViewById(R.id.backToMachine);
+        backToMain = findViewById(R.id.backToMain);
 
-        machineMaintenances = findViewById(R.id.machineMaintenances);
+        machineMaintenances = findViewById(R.id.machineMaintenancesAll);
         machineMaintenanceList = getMachineErrorList();
 
         machineMaintenances.setOnItemClickListener((parent, view, position, id) -> {
             Maintenance selectedMaintenance = machineMaintenanceList.get(position);
 
-            Intent machineIntent = new Intent(MaintenanceLog.this, MaintenanceSingle.class);
+            Intent machineIntent = new Intent(MaintenanceLogAll.this, MaintenanceSingle.class);
             machineIntent.putExtra("currentMaintenance", selectedMaintenance);
             startActivity(machineIntent);
         });
 
-        backToMachine.setOnClickListener(v -> {
+        backToMain.setOnClickListener(v -> {
             finish();
         });
     }
 
     private ArrayList<Maintenance> getMachineErrorList() {
         ArrayList<Maintenance> machineErrorsTemp = new ArrayList<>();
-        String reqURL = util.BASE_URL + util.getMachineMaintenanceURL;
-        String jsonErrorBody = "{\"machineID\": \"" + currentMachineID + "\"}";
-
-        Log.d("ErrorLog-URL", reqURL);
-        Log.d("ErrorLog-Body", jsonErrorBody);
+        String reqURL = util.BASE_URL + util.getMachineMaintenanceAllURL;
+        String jsonErrorBody = "{\"username\": \"" + receivedUser.getUserName() + "\"}";
 
         HTTP.sendRequest(reqURL, jsonErrorBody, new HTTP.HttpRequestCallback() {
             @Override
@@ -160,7 +157,7 @@ public class MaintenanceLog extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMessage) {
-                String hatasizMesaj = MaintenanceLog.this.getResources().getString(R.string.hatayok);
+                String hatasizMesaj = MaintenanceLogAll.this.getResources().getString(R.string.hatayok);
                 util.showSuccessPopup(uyariDiyalog, hatasizMesaj);
             }
         }, Volley.newRequestQueue(this));
@@ -169,7 +166,7 @@ public class MaintenanceLog extends AppCompatActivity {
 
     private void updateListView(ArrayList<Maintenance> machineMaintenancesTemp) {
         machineMaintenanceList = machineMaintenancesTemp;
-        machineMaintenanceAdapter = new MaintenanceAdapter(this, machineMaintenanceList);
+        machineMaintenanceAdapter = new MaintenanceAllAdapter(this, machineMaintenanceList);
         machineMaintenances.setAdapter(machineMaintenanceAdapter);
     }
 
@@ -195,6 +192,5 @@ public class MaintenanceLog extends AppCompatActivity {
             tableLayout.addView(tableRow);
         }
     }
-
 
 }
