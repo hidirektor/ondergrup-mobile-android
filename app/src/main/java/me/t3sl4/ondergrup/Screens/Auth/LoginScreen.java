@@ -26,6 +26,7 @@ import java.util.Locale;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
+import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
@@ -286,11 +287,11 @@ public class LoginScreen extends AppCompatActivity {
                 intent = new Intent(LoginScreen.this, me.t3sl4.ondergrup.Screens.Dashboard.User.class);
                 intent.putExtra("user", util.user);
                 break;
-            /*case "TECHNICIAN":
-                intent = new Intent(LoginScreen.this, DashboardTechnicianScreen.class);
+            case "TECHNICIAN":
+                intent = new Intent(LoginScreen.this, Technician.class);
                 intent.putExtra("user", util.user);
                 break;
-            case "ENGINEER":
+            /*case "ENGINEER":
                 intent = new Intent(LoginScreen.this, DashboardEngineerScreen.class);
                 intent.putExtra("user", util.user);
                 break;

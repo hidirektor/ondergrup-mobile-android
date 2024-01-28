@@ -2,23 +2,11 @@ package me.t3sl4.ondergrup.Screens.Log.Maintenance;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.android.volley.toolbox.Volley;
 
@@ -27,18 +15,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
-import me.t3sl4.ondergrup.Model.MachineMaintenance.Adapter.MaintenanceAdapter;
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Adapter.MaintenanceAllAdapter;
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Model.MachineError.MachineError;
-import me.t3sl4.ondergrup.Model.MachineError.Adapter.MachineErrorAdapter;
-import me.t3sl4.ondergrup.Screens.Machine.MachineListScreen;
-import me.t3sl4.ondergrup.Screens.Machine.MachineScreen;
-import me.t3sl4.ondergrup.SplashActivity;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -169,28 +150,4 @@ public class MaintenanceLogAll extends AppCompatActivity {
         machineMaintenanceAdapter = new MaintenanceAllAdapter(this, machineMaintenanceList);
         machineMaintenances.setAdapter(machineMaintenanceAdapter);
     }
-
-    private void fillTableWithData(TableLayout tableLayout, String[][] data) {
-        for (String[] rowData : data) {
-            TableRow tableRow = new TableRow(this);
-
-            for (String item : rowData) {
-                TextView textView = new TextView(this);
-                textView.setLayoutParams(new TableRow.LayoutParams(
-                        0, // width
-                        TableRow.LayoutParams.WRAP_CONTENT,
-                        1f // weight
-                ));
-                textView.setText(item);
-                textView.setTypeface(ResourcesCompat.getFont(this, R.font.outfit_medium));
-                textView.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                textView.setTextColor(getResources().getColor(android.R.color.black));
-                textView.setGravity(Gravity.CENTER);
-                tableRow.addView(textView);
-            }
-
-            tableLayout.addView(tableRow);
-        }
-    }
-
 }
