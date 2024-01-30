@@ -142,7 +142,7 @@ public class Technician extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_user);
+        setContentView(R.layout.activity_main_technician);
 
         util = new Util(this);
         uyariDiyalog = new Dialog(this);
@@ -222,7 +222,7 @@ public class Technician extends AppCompatActivity {
             addMachine();
         });
 
-        navLanguageButton.setOnClickListener((View.OnClickListener) v -> {
+        navLanguageButton.setOnClickListener(v -> {
             switchLanguage();
         });
 

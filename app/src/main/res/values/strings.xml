@@ -276,4 +276,6 @@
 
     <string name="active_language">Dil: </string>
     <string name="time">sn.</string>
+
+    <string name="allmachines">Tüm Makineler</string>
 </resources>
