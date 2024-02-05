@@ -42,7 +42,6 @@ public class Machine implements Parcelable {
     private String calismaSayisi1000;
     private String calismaSayisi10000;
     private String dilSecim;
-    private String eepromData37;
     private String eepromData38;
     private String eepromData39;
     private String eepromData40;
@@ -62,7 +61,7 @@ public class Machine implements Parcelable {
                    String devirmeSilindirTipi, String platformSilindirTipi, String yukariValfTmr, String asagiValfTmr,
                    String devirmeYukariIleriTmr, String devirmeAsagiGeriTmr, String makineCalismaTmr, String buzzer, String demoMode,
                    String calismaSayisi1, String calismaSayisi10, String calismaSayisi100, String calismaSayisi1000, String calismaSayisi10000,
-                   String dilSecim, String eepromData37, String eepromData38, String eepromData39, String eepromData40, String eepromData41,
+                   String dilSecim, String eepromData38, String eepromData39, String eepromData40, String eepromData41,
                    String eepromData42, String eepromData43, String eepromData44, String eepromData45, String eepromData46, String eepromData47,
                    String lcdBacklightSure) {
         this.ownerUser = ownerUser;
@@ -102,7 +101,6 @@ public class Machine implements Parcelable {
         this.calismaSayisi1000 = calismaSayisi1000;
         this.calismaSayisi10000 = calismaSayisi10000;
         this.dilSecim = dilSecim;
-        this.eepromData37 = eepromData37;
         this.eepromData38 = eepromData38;
         this.eepromData39 = eepromData39;
         this.eepromData40 = eepromData40;
@@ -154,7 +152,6 @@ public class Machine implements Parcelable {
         calismaSayisi1000 = in.readString();
         calismaSayisi10000 = in.readString();
         dilSecim = in.readString();
-        eepromData37 = in.readString();
         eepromData38 = in.readString();
         eepromData39 = in.readString();
         eepromData40 = in.readString();
@@ -224,7 +221,6 @@ public class Machine implements Parcelable {
         dest.writeString(calismaSayisi1000);
         dest.writeString(calismaSayisi10000);
         dest.writeString(dilSecim);
-        dest.writeString(eepromData37);
         dest.writeString(eepromData38);
         dest.writeString(eepromData39);
         dest.writeString(eepromData40);
@@ -532,14 +528,6 @@ public class Machine implements Parcelable {
 
     public void setDilSecim(String dilSecim) {
         this.dilSecim = dilSecim;
-    }
-
-    public String getEepromData37() {
-        return eepromData37;
-    }
-
-    public void setEepromData37(String eepromData37) {
-        this.eepromData37 = eepromData37;
     }
 
     public String getEepromData38() {

@@ -280,4 +280,14 @@
     <string name="allmachines">Tüm Makineler</string>
 
     <string name="wifiFailure">Lütfen internet bağlantınızı kontrol edin!</string>
+    <string name="error_code_1">1. Hata Kodu</string>
+    <string name="error_code_2">2. Hata Kodu</string>
+    <string name="error_code_3">3. Hata Kodu</string>
+    <string name="error_code_4">4. Hata Kodu</string>
+    <string name="error_code_5">5. Hata Kodu</string>
+    <string name="error_code_6">6. Hata Kodu</string>
+    <string name="error_code_7">7. Hata Kodu</string>
+    <string name="error_code_8">8. Hata Kodu</string>
+    <string name="error_code_9">9. Hata Kodu</string>
+    <string name="error_code_10">10. Hata Kodu</string>
 </resources>

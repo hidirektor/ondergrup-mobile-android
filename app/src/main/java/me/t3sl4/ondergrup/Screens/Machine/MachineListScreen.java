@@ -114,7 +114,6 @@ public class MachineListScreen extends AppCompatActivity {
                         String calismaSayisi1000 = machineDataObj.getString("calismaSayisi1000");
                         String calismaSayisi10000 = machineDataObj.getString("calismaSayisi10000");
                         String dilSecim = machineDataObj.getString("dilSecim");
-                        String eepromData37 = machineDataObj.getString("eepromData37");
                         String eepromData38 = machineDataObj.getString("eepromData38");
                         String eepromData39 = machineDataObj.getString("eepromData39");
                         String eepromData40 = machineDataObj.getString("eepromData40");
@@ -134,7 +133,7 @@ public class MachineListScreen extends AppCompatActivity {
                                 devirmeSilindirTipi, platformSilindirTipi, yukariValfTmr, asagiValfTmr,
                                 devirmeYukariIleriTmr, devirmeAsagiGeriTmr, makineCalismaTmr, buzzer, demoMode,
                                 calismaSayisi1, calismaSayisi10, calismaSayisi100, calismaSayisi1000, calismaSayisi10000,
-                                dilSecim, eepromData37, eepromData38, eepromData39, eepromData40, eepromData41,
+                                dilSecim, eepromData38, eepromData39, eepromData40, eepromData41,
                                 eepromData42, eepromData43, eepromData44, eepromData45, eepromData46, eepromData47,
                                 lcdBacklightSure);
                         machines.add(selectedMachine);

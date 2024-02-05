@@ -234,4 +234,14 @@
     <string name="time">scnd.</string>
     <string name="allmachines">All Machines</string>
     <string name="wifiFailure">Please check your WiFi connection!</string>
+    <string name="error_code_1">1st Error</string>
+    <string name="error_code_2">2nd Error</string>
+    <string name="error_code_3">3rd Error</string>
+    <string name="error_code_4">4th Error</string>
+    <string name="error_code_5">5th Error</string>
+    <string name="error_code_6">6th Error</string>
+    <string name="error_code_7">7th Error</string>
+    <string name="error_code_8">8th Error</string>
+    <string name="error_code_9">9th Error</string>
+    <string name="error_code_10">10th Error</string>
 </resources>
