@@ -78,6 +78,8 @@ public class LoginScreen extends AppCompatActivity {
 
         initializeComponents();
 
+        checkWifiStatus();
+
         registerButton.setOnClickListener(v -> sendRegisterRequest());
 
         loginButton.setOnClickListener(v -> {
@@ -89,14 +91,6 @@ public class LoginScreen extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-
-        String username = SharedPreferencesManager.getSharedPref("username", this, "");
-
-        if (!TextUtils.isEmpty(username)) {
-            String password = SharedPreferencesManager.getSharedPref("username", this, "");
-            String role = SharedPreferencesManager.getSharedPref("role", this, "");
-            initUser(username, role);
-        }
 
         rememberMe.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isLogged) {
@@ -360,5 +354,23 @@ public class LoginScreen extends AppCompatActivity {
 
     private boolean checkFields(String userName, String email, String password, String nameSurname, String phone, String companyName) {
         return !userName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !nameSurname.isEmpty() && !phone.isEmpty() && !companyName.isEmpty();
+    }
+
+    private void checkWifiStatus() {
+        boolean networkStatus = Util.isNetworkAvailable(LoginScreen.this);
+        String wifiFailureMessage = LoginScreen.this.getResources().getString(R.string.wifiFailure);
+
+        if(!networkStatus) {
+            util.showErrorPopup(uyariDiyalog, wifiFailureMessage);
+            //Service başlat ve wifi ağına bağlı olup olmadığını kontrol etsin.
+        } else {
+            String username = SharedPreferencesManager.getSharedPref("username", this, "");
+
+            if (!TextUtils.isEmpty(username)) {
+                String password = SharedPreferencesManager.getSharedPref("username", this, "");
+                String role = SharedPreferencesManager.getSharedPref("role", this, "");
+                initUser(username, role);
+            }
+        }
     }
 }

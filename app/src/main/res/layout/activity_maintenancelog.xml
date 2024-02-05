@@ -27,6 +27,17 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/logo_inapp" />
 
+            <ImageView
+                android:id="@+id/backToMachine"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignStart="@id/logoImageView"
+                android:layout_alignTop="@id/logoImageView"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="0dp"
+                android:foregroundGravity="center_vertical"
+                android:src="@drawable/ikon_back" />
+
         </RelativeLayout>
 
     </LinearLayout>
@@ -37,50 +48,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_below="@+id/headerSection">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/backToMachine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/background_grey"
-                android:elevation="5dp"
-                android:orientation="vertical">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="12dp"
-                    android:background="@drawable/background_circle">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ikon_machine" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/machine_screen"
-                    android:textAlignment="center"
-
-                    android:textColor="@color/atlaTextColor"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </LinearLayout>
 
         <ListView
             android:id="@+id/machineMaintenances"

@@ -233,4 +233,5 @@
     <string name="active_language">Language:</string>
     <string name="time">scnd.</string>
     <string name="allmachines">All Machines</string>
+    <string name="wifiFailure">Please check your WiFi connection!</string>
 </resources>

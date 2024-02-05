@@ -278,4 +278,6 @@
     <string name="time">sn.</string>
 
     <string name="allmachines">Tüm Makineler</string>
+
+    <string name="wifiFailure">Lütfen internet bağlantınızı kontrol edin!</string>
 </resources>
