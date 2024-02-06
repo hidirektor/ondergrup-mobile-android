@@ -1301,41 +1301,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="@string/machine_eepromData37"
-                                android:textColor="@color/white"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/eepromData37"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="0"
-                                android:textAlignment="viewEnd"
-                                android:textColor="@color/white"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="6dp"
-                            android:background="#D9D9D9" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="@string/machine_eepromData38"
                                 android:textColor="@color/white"
                                 android:textSize="18sp" />
