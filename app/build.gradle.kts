@@ -47,4 +47,5 @@ dependencies {
     implementation("io.github.chaosleung:pinview:1.4.4")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation("com.google.zxing:core:3.4.1")
+    implementation("com.github.Z-P-J:ZCheckBox:1.0.0")
 }

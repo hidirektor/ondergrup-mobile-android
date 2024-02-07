@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.toolbox.Volley;
+import com.zpj.widget.checkbox.ZCheckBox;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +42,7 @@ public class LoginScreen extends AppCompatActivity {
     private Button loginSectionButton;
     private LinearLayout registerSection;
     private Button registerSectionButton;
-    private CheckBox rememberMe;
+    private ZCheckBox rememberMe;
 
 
     //Login Components
@@ -82,9 +83,7 @@ public class LoginScreen extends AppCompatActivity {
 
         registerButton.setOnClickListener(v -> sendRegisterRequest());
 
-        loginButton.setOnClickListener(v -> {
-            sendLoginRequest();
-        });
+        loginButton.setOnClickListener(v -> sendLoginRequest());
 
         resetPassButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginScreen.this, ForgetPassword.class);
@@ -121,6 +120,18 @@ public class LoginScreen extends AppCompatActivity {
             registerSection.setVisibility(View.VISIBLE);
             loginSection.setVisibility(View.GONE);
         });
+    }
+
+    private void swipeSections(int selectedSection) {
+        if(selectedSection == 1) {
+            ButtonManager.orderButtonColorEffect(1, loginSectionButton, registerSectionButton, this);
+            loginSection.setVisibility(View.VISIBLE);
+            registerSection.setVisibility(View.GONE);
+        } else {
+            ButtonManager.orderButtonColorEffect(2, loginSectionButton, registerSectionButton, this);
+            registerSection.setVisibility(View.VISIBLE);
+            loginSection.setVisibility(View.GONE);
+        }
     }
 
     private void initializeComponents() {
@@ -342,6 +353,7 @@ public class LoginScreen extends AppCompatActivity {
         HTTP.sendRequest(registerUrl, jsonBody, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
+                swipeSections(1);
                 util.showSuccessPopup(uyariDiyalog, "Kayıt başarılı giriş yapabilirsiniz.");
             }
 
