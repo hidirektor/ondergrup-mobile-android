@@ -51,6 +51,7 @@ public class Util {
 
     public String addMachineURL = "/api/machine/add";
     public String getMachineURL = "/api/machine/getMachines";
+    public String getAllMachinesURL = "/api/machine/getAllMachines";
     public String getMachineErrorURL = "/api/machine/getMachineErrors";
     public String getMachineMaintenanceURL = "/api/machine/getMachineMaintenances";
     public String getMachineErrorAllURL = "/api/machine/getMachineErrorsAll";

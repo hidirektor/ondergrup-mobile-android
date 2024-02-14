@@ -3,6 +3,7 @@
     <string name="developer">Halil İbrahim Direktör</string>
     <string name="developer_mail">hidirektor@gmail.com</string>
     <string name="welcome">Merhabalar</string>
+    <string name="developedby">Designed &amp; Developed by\nHalil İbrahim Direktör</string>
 
     <string name="login">Giriş Yap</string>
     <string name="register">Kayıt Ol</string>

@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Önder Grup</string>
     <string name="developer">Halil İbrahim Direktör</string>
+    <string name="developedby">Designed &amp; Developed by\nHalil İbrahim Direktör</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="next_btn">Next</string>

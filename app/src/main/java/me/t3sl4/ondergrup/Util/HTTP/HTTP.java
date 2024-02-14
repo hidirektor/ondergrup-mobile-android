@@ -58,7 +58,7 @@ public class HTTP {
         Log.d(TAG, "İstek gönderildi: " + requestURL);
     }
 
-    public void sendRequestNormal(String requestURL, HttpRequestCallback callback, RequestQueue requestQueue) {
+    public static void sendRequestNormal(String requestURL, HttpRequestCallback callback, RequestQueue requestQueue) {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, requestURL, null,
                 response -> {
                     if (callback != null) {
