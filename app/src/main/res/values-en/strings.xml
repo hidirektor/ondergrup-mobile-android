@@ -234,6 +234,7 @@
     <string name="active_language">Language:</string>
     <string name="time">scnd.</string>
     <string name="allmachines">All Machines</string>
+    <string name="allusers">All Users</string>
     <string name="wifiFailure">Please check your WiFi connection!</string>
     <string name="error_code_1">1st Error</string>
     <string name="error_code_2">2nd Error</string>

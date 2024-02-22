@@ -57,6 +57,8 @@ public class Util {
     public String getMachineErrorAllURL = "/api/machine/getMachineErrorsAll";
     public String getMachineMaintenanceAllURL = "/api/machine/getMachineMaintenancesAll";
 
+    public String getAllUsersURL = "/api/users/getAllUsers";
+
 
     public String uploadURLPrefix = "/api/fileSystem/upload";
     public String downloadPhotoURLPrefix = "/api/fileSystem/downloadPhoto";

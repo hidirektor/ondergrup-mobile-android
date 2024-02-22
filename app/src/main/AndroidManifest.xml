@@ -139,6 +139,9 @@
         <activity
             android:name=".Screens.Dashboard.Technician"
             android:screenOrientation="unspecified" />
+        <activity
+            android:name=".Screens.Dashboard.SysOp"
+            android:screenOrientation="unspecified" />
     </application>
 
 </manifest>

@@ -279,6 +279,7 @@
     <string name="time">sn.</string>
 
     <string name="allmachines">Tüm Makineler</string>
+    <string name="allusers">Tüm Kullanıcılar</string>
 
     <string name="wifiFailure">Lütfen internet bağlantınızı kontrol edin!</string>
     <string name="error_code_1">1. Hata Kodu</string>

@@ -27,6 +27,7 @@ import java.util.Locale;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
+import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
 import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
@@ -299,11 +300,11 @@ public class LoginScreen extends AppCompatActivity {
             /*case "ENGINEER":
                 intent = new Intent(LoginScreen.this, DashboardEngineerScreen.class);
                 intent.putExtra("user", util.user);
-                break;
-            case "SYSOP":
-                intent = new Intent(LoginScreen.this, DashboardSysOpScreen.class);
-                intent.putExtra("user", util.user);
                 break;*/
+            case "SYSOP":
+                intent = new Intent(LoginScreen.this, SysOp.class);
+                intent.putExtra("user", util.user);
+                break;
             default:
                 util.showErrorPopup(uyariDiyalog, "Desteklenmeyen bir kullanıcı rolüne sahipsin. Lütfen iletişime geç.");
                 break;
