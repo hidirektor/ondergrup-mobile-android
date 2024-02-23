@@ -4,13 +4,17 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.toolbox.Volley;
@@ -89,7 +93,42 @@ public class SysOp extends AppCompatActivity {
 
         //ListView Definitians:
         machineListView = findViewById(R.id.machineListView);
+        userListView = findViewById(R.id.userListView);
+
         machineList = getMachineList();
+        userList = getUserList();
+
+        userListView.setOnItemClickListener((parent, view, position, id) -> {
+            User selectedUser = (User) parent.getItemAtPosition(position);
+
+            PopupMenu popup = new PopupMenu(SysOp.this, view);
+            popup.getMenuInflater().inflate(R.menu.user_operations_menu, popup.getMenu());
+
+            popup.setOnMenuItemClickListener(item -> {
+                if(item.getItemId() == R.id.deleteUser) {
+                    //Kullanıcı silme işlemi
+
+                    userList.remove(selectedUser);
+                } else if(item.getItemId() == R.id.editUser) {
+                    //Kullanıcı düzenleme işlemi
+
+                    userList = getUserList();
+                    updateUserListView(userList);
+                } else if(item.getItemId() == R.id.editRole) {
+                    //Kullanıcı rol yükseltme işlemi
+
+                    userList = getUserList();
+                    updateUserListView(userList);
+                } else {
+                    return false;
+                }
+
+                return true;
+            });
+
+            popup.show();
+        });
+
         machineListView.setOnItemClickListener((parent, view, position, id) -> {
             Machine selectedMachine = machineList.get(position);
 
@@ -99,20 +138,10 @@ public class SysOp extends AppCompatActivity {
             startActivity(machineIntent);
         });
 
-        userListView = findViewById(R.id.userListView);
-        userList = getUserList();
-
-        //Top Buttons:
-        logoutButton.setOnClickListener(v -> logoutProcess());
-
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(SysOp.this, ProfileScreen.class);
             profileIntent.putExtra("user", util.user);
             startActivity(profileIntent);
-        });
-
-        subLanguage.setOnClickListener(v -> {
-            switchLanguage();
         });
 
         settingsButton.setOnClickListener(v -> {
@@ -121,8 +150,13 @@ public class SysOp extends AppCompatActivity {
             startActivity(settingsIntent);
         });
 
-        sectionPager();
+        logoutButton.setOnClickListener(v -> logoutProcess());
 
+        subLanguage.setOnClickListener(v -> {
+            switchLanguage();
+        });
+
+        sectionPager();
         setUserInfo();
     }
 

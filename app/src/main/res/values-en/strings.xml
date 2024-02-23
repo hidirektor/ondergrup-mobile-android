@@ -117,6 +117,7 @@
     <string name="subuser_update">Update Sub User</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="changerole">Promote / Demote</string>
     <string name="role">Role</string>
     <string name="create_date">Creation Date</string>
     <string name="create_date_template">28.05.2001 17:50</string>
