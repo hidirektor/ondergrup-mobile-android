@@ -45,11 +45,9 @@ public class SysOp extends AppCompatActivity {
     private TextView isimSoyisim;
     private TextView allText;
 
-    private ConstraintLayout subLanguage;
+    private ImageView subLanguage;
     private ConstraintLayout profileButton;
     private ConstraintLayout settingsButton;
-    private ConstraintLayout myMachineButton;
-    private FloatingActionButton qrButton;
 
     private ImageView logoutButton;
 
@@ -79,11 +77,9 @@ public class SysOp extends AppCompatActivity {
         isimSoyisim = findViewById(R.id.loggedUserName);
         allText = findViewById(R.id.allText);
 
-        subLanguage = findViewById(R.id.languageConstraint);
+        subLanguage = findViewById(R.id.languageImageView);
         profileButton = findViewById(R.id.profileConstraint);
-        settingsButton = findViewById(R.id.settingsConstraint);
-        myMachineButton = findViewById(R.id.myMachine);
-        qrButton = findViewById(R.id.qrConstraint);
+        settingsButton = findViewById(R.id.profileUpdateConstraint);
 
         //Top buttons:
         logoutButton = findViewById(R.id.logoutButton);

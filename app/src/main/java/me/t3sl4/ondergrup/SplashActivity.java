@@ -18,7 +18,7 @@ import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SplashActivity extends AppCompatActivity {
-    private final int WAITING_TIME = 1500;
+    private final int WAITING_TIME = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
