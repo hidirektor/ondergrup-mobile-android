@@ -107,8 +107,9 @@ public class SysOp extends AppCompatActivity {
             popup.setOnMenuItemClickListener(item -> {
                 if(item.getItemId() == R.id.deleteUser) {
                     //Kullanıcı silme işlemi
-
+                    deleteUser(selectedUser.getUserName());
                     userList.remove(selectedUser);
+                    updateUserListView(userList);
                 } else if(item.getItemId() == R.id.editUser) {
                     //Kullanıcı düzenleme işlemi
 
@@ -182,6 +183,23 @@ public class SysOp extends AppCompatActivity {
             userList = getUserList();
             updateUserListView(userList);
         });
+    }
+
+    private void deleteUser(String userName) {
+        String reqURL = util.BASE_URL + util.deleteUser;
+        String jsonDeleteBody = "{\"Username\": \"" + userName + "\"}";
+
+        HTTP.sendRequest(reqURL, jsonDeleteBody, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                util.showSuccessPopup(uyariDiyalog, "Kullanıcı silindi !");
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
+            }
+        }, Volley.newRequestQueue(this));
     }
 
     private ArrayList<Machine> getMachineList() {

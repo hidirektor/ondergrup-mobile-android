@@ -58,6 +58,7 @@ public class Util {
     public String getMachineMaintenanceAllURL = "/api/machine/getMachineMaintenancesAll";
 
     public String getAllUsersURL = "/api/users/getAllUsers";
+    public String deleteUser = "/api/users/deleteUser";
 
 
     public String uploadURLPrefix = "/api/fileSystem/upload";
