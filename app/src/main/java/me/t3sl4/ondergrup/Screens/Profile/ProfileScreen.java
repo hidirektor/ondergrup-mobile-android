@@ -11,6 +11,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
+import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
+import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.Util.Util;
@@ -83,22 +86,22 @@ public class ProfileScreen extends AppCompatActivity {
             profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
             finish();
-        } /*else if(userRole.equals("TECHNICIAN")) {
-            Intent profileIntent = new Intent(ProfileScreen.this, DashboardTechnicianScreen.class);
+        } else if(userRole.equals("TECHNICIAN")) {
+            Intent profileIntent = new Intent(ProfileScreen.this, Technician.class);
             profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
             finish();
         } else if(userRole.equals("ENGINEER")) {
-            Intent profileIntent = new Intent(ProfileScreen.this, DashboardEngineerScreen.class);
+            Intent profileIntent = new Intent(ProfileScreen.this, Engineer.class);
             profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
             finish();
         } else if(userRole.equals("SYSOP")) {
-            Intent profileIntent = new Intent(ProfileScreen.this, DashboardSysOpScreen.class);
+            Intent profileIntent = new Intent(ProfileScreen.this, SysOp.class);
             profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
             finish();
-        }*/
+        }
     }
 
     public void setUserInfo() {

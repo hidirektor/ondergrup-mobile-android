@@ -1,18 +1,12 @@
 package me.t3sl4.ondergrup;
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Locale;
-
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
-import me.t3sl4.ondergrup.Screens.Dashboard.User;
 import me.t3sl4.ondergrup.Screens.OnBoard.OnBoarding1;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.Util;

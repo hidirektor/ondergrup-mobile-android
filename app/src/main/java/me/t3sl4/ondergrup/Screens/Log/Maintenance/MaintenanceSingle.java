@@ -2,6 +2,7 @@ package me.t3sl4.ondergrup.Screens.Log.Maintenance;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,13 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
-import java.util.Objects;
-
+import me.t3sl4.ondergrup.Model.Machine.Machine;
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.SplashActivity;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
-import me.t3sl4.ondergrup.Util.Util;
 
 public class MaintenanceSingle extends AppCompatActivity {
 
@@ -263,11 +261,12 @@ public class MaintenanceSingle extends AppCompatActivity {
 
     private String maintenanceFromCode(String maintenanceCode) {
         String maintenanceStatus = "";
-        if(Objects.equals(maintenanceCode, "1")) {
+        Log.d("gelen", maintenanceCode + " test");
+        if(maintenanceCode.equals("1")) {
             maintenanceStatus = this.getResources().getString(R.string.maintenance_tamam);
-        } else if(Objects.equals(maintenanceCode, "2")) {
+        } else if(maintenanceCode.equals("2")) {
             maintenanceStatus = this.getResources().getString(R.string.maintenance_hayir);
-        } else if(Objects.equals(maintenanceCode, "3")) {
+        } else if(maintenanceCode.equals("3")) {
             maintenanceStatus = this.getResources().getString(R.string.maintenance_duzeltme);
         } else {
             maintenanceStatus = this.getResources().getString(R.string.maintenance_yok);

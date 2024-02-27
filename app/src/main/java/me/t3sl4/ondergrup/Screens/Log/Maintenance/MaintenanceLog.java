@@ -63,7 +63,7 @@ public class MaintenanceLog extends AppCompatActivity {
         }
 
         machineMaintenances = findViewById(R.id.machineMaintenances);
-        machineMaintenanceList = getMachineErrorList();
+        machineMaintenanceList = getMachineMaintenanceList();
 
         machineMaintenances.setOnItemClickListener((parent, view, position, id) -> {
             Maintenance selectedMaintenance = machineMaintenanceList.get(position);
@@ -86,7 +86,7 @@ public class MaintenanceLog extends AppCompatActivity {
         });
     }
 
-    private ArrayList<Maintenance> getMachineErrorList() {
+    private ArrayList<Maintenance> getMachineMaintenanceList() {
         ArrayList<Maintenance> machineErrorsTemp = new ArrayList<>();
         String reqURL = util.BASE_URL + util.getMachineMaintenanceURL;
         String jsonErrorBody = "{\"machineID\": \"" + currentMachineID + "\"}";

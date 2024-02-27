@@ -16,6 +16,9 @@ import java.util.Objects;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Model.User.User;
+import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
+import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
+import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SupportScreen extends AppCompatActivity {
@@ -90,18 +93,18 @@ public class SupportScreen extends AppCompatActivity {
             Intent mainIntent = new Intent(SupportScreen.this, me.t3sl4.ondergrup.Screens.Dashboard.User.class);
             startActivity(mainIntent);
             finish();
-        } /*else if(role == "TECHNICIAN") {
-            Intent mainIntent = new Intent(SupportScreen.this, DashboardTechnicianScreen.class);
+        } else if(role == "TECHNICIAN") {
+            Intent mainIntent = new Intent(SupportScreen.this, Technician.class);
             startActivity(mainIntent);
             finish();
         } else if(role == "ENGINEER") {
-            Intent mainIntent = new Intent(SupportScreen.this, DashboardEngineerScreen.class);
+            Intent mainIntent = new Intent(SupportScreen.this, Engineer.class);
             startActivity(mainIntent);
             finish();
         } else {
-            Intent mainIntent = new Intent(SupportScreen.this, DashboardSysOpScreen.class);
+            Intent mainIntent = new Intent(SupportScreen.this, SysOp.class);
             startActivity(mainIntent);
             finish();
-        }*/
+        }
     }
 }

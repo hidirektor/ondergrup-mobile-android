@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -23,7 +22,6 @@ import java.util.TimeZone;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Model.User.User;
-import me.t3sl4.ondergrup.SplashActivity;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 
 public class Util {

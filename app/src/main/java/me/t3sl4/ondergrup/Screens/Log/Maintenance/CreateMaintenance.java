@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,21 +21,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
-import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.SplashActivity;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
@@ -547,17 +540,18 @@ public class CreateMaintenance extends AppCompatActivity {
 
     private String maintenanceFromString(String maintenanceCode) {
         String maintenanceStatus = "";
-        String tamamText = this.getResources().getString(R.string.maintenance_tamam);
-        String hayirText = this.getResources().getString(R.string.maintenance_hayir);
-        String duzeltText = this.getResources().getString(R.string.maintenance_duzeltme);
-        String yokText = this.getResources().getString(R.string.maintenance_yok);
-        if(Objects.equals(maintenanceCode, tamamText)) {
+        String tamamText = CreateMaintenance.this.getResources().getString(R.string.maintenance_tamam);
+        String hayirText = CreateMaintenance.this.getResources().getString(R.string.maintenance_hayir);
+        String duzeltText = CreateMaintenance.this.getResources().getString(R.string.maintenance_duzeltme);
+        String yokText = CreateMaintenance.this.getResources().getString(R.string.maintenance_yok);
+
+        if(maintenanceCode.equals(tamamText)) {
             maintenanceStatus = "1";
-        } else if(Objects.equals(maintenanceCode, hayirText)) {
+        } else if(maintenanceCode.equals(hayirText)) {
             maintenanceStatus = "2";
-        } else if(Objects.equals(maintenanceCode, duzeltText)) {
+        } else if(maintenanceCode.equals(duzeltText)) {
             maintenanceStatus = "3";
-        } else {
+        } else if(maintenanceCode.equals(yokText)) {
             maintenanceStatus = "4";
         }
 

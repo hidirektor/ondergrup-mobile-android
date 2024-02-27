@@ -3,7 +3,6 @@ package me.t3sl4.ondergrup.Screens.Log.Maintenance;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -51,7 +50,7 @@ public class MaintenanceLogAll extends AppCompatActivity {
         backToMain = findViewById(R.id.backToMain);
 
         machineMaintenances = findViewById(R.id.machineMaintenancesAll);
-        machineMaintenanceList = getMachineErrorList();
+        machineMaintenanceList = getMachineMaintenancesList();
 
         machineMaintenances.setOnItemClickListener((parent, view, position, id) -> {
             Maintenance selectedMaintenance = machineMaintenanceList.get(position);
@@ -66,7 +65,7 @@ public class MaintenanceLogAll extends AppCompatActivity {
         });
     }
 
-    private ArrayList<Maintenance> getMachineErrorList() {
+    private ArrayList<Maintenance> getMachineMaintenancesList() {
         ArrayList<Maintenance> machineErrorsTemp = new ArrayList<>();
         String reqURL = util.BASE_URL + util.getMachineMaintenanceAllURL;
         String jsonErrorBody = "{\"username\": \"" + receivedUser.getUserName() + "\"}";
@@ -139,7 +138,7 @@ public class MaintenanceLogAll extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMessage) {
-                String hatasizMesaj = MaintenanceLogAll.this.getResources().getString(R.string.hatayok);
+                String hatasizMesaj = MaintenanceLogAll.this.getResources().getString(R.string.bakimyok);
                 util.showSuccessPopup(uyariDiyalog, hatasizMesaj);
             }
         }, Volley.newRequestQueue(this));

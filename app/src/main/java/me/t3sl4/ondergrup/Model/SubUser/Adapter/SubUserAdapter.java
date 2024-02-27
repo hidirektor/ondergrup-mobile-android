@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 
 import me.t3sl4.ondergrup.Model.SubUser.SubUser;
@@ -57,6 +59,7 @@ public class SubUserAdapter extends BaseAdapter {
         }
 
         SubUser subUser = subUserList.get(position);
+        holder.profilePhoto.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ikon_profilephoto));
         holder.nameSurname.setText(subUser.getNameSurname());
         holder.userName.setText(subUser.getUserName());
         holder.companyName.setText(subUser.getCompanyName());

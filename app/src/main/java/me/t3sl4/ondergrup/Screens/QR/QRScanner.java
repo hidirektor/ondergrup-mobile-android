@@ -13,8 +13,6 @@ import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.journeyapps.barcodescanner.ViewfinderView;
 
-import java.util.Random;
-
 import me.t3sl4.ondergrup.R;
 
 public class QRScanner extends Activity implements

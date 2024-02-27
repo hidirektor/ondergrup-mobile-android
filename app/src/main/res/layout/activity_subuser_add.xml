@@ -98,7 +98,7 @@
                 android:drawablePadding="16dp"
                 android:ems="10"
                 android:hint="@string/enter_mail"
-                android:inputType="textPersonName"
+                android:inputType="textEmailAddress"
                 android:padding="8dp"
                 android:textColorHint="#756C6C" />
 

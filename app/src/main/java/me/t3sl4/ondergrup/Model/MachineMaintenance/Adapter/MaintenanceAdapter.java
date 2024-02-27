@@ -13,10 +13,8 @@ import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
-import me.t3sl4.ondergrup.Model.MachineError.MachineError;
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Screens.Log.Maintenance.MaintenanceLog;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class MaintenanceAdapter extends BaseAdapter {
