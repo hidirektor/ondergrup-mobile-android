@@ -1,12 +1,16 @@
 package me.t3sl4.ondergrup.Screens.Log.Maintenance;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -40,6 +45,8 @@ import me.t3sl4.ondergrup.Util.Util;
 public class CreateMaintenance extends AppCompatActivity {
     public Util util;
     public User receivedUser;
+
+    private ArrayList<EditText> editTextList = new ArrayList<>();
 
     private Dialog uyariDiyalog;
 
@@ -63,18 +70,16 @@ public class CreateMaintenance extends AppCompatActivity {
 
     private Button createMaintenanceLog;
 
-    EditText editText;
+    private String maintenance1_1="1", maintenance1_2="1", maintenance1_3="1", maintenance1_4="1";
+    private String maintenance2_1="1", maintenance2_2="1", maintenance2_3="1", maintenance2_4="1";
+    private String maintenance3_1="1", maintenance3_2="1", maintenance3_3="1", maintenance3_4="1", maintenance3_5="1", maintenance3_6="1";
+    private String maintenance4_1="1", maintenance4_2="1", maintenance4_3="1", maintenance4_4="1", maintenance4_5="1", maintenance4_6="1";
+    private String maintenance5_1="1", maintenance5_2="1", maintenance5_3="1", maintenance5_4="1", maintenance5_5="1", maintenance5_6="1";
+    private String maintenance6_1="1", maintenance6_2="1", maintenance6_3="1";
+    private String maintenance7_1="1", maintenance7_2="1";
+    private String maintenance8_1="1", maintenance8_2="1", maintenance8_3="1";
 
-    String maintenance1_1="1", maintenance1_2="1", maintenance1_3="1", maintenance1_4="1";
-    String maintenance2_1="1", maintenance2_2="1", maintenance2_3="1", maintenance2_4="1";
-    String maintenance3_1="1", maintenance3_2="1", maintenance3_3="1", maintenance3_4="1", maintenance3_5="1", maintenance3_6="1";
-    String maintenance4_1="1", maintenance4_2="1", maintenance4_3="1", maintenance4_4="1", maintenance4_5="1", maintenance4_6="1";
-    String maintenance5_1="1", maintenance5_2="1", maintenance5_3="1", maintenance5_4="1", maintenance5_5="1", maintenance5_6="1";
-    String maintenance6_1="1", maintenance6_2="1", maintenance6_3="1";
-    String maintenance7_1="1", maintenance7_2="1";
-    String maintenance8_1="1", maintenance8_2="1", maintenance8_3="1";
-
-    String note1="", note2="", note3="", note4="", note5="", note6="", note7="", note8="", note9="", note10="";
+    private String note1="", note2="", note3="", note4="", note5="", note6="", note7="", note8="", note9="", note10="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +92,6 @@ public class CreateMaintenance extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
         machineID = intent.getStringExtra("currentMahine");
-
-        editText = new EditText(this);
 
         backToMachine = findViewById(R.id.backButton);
         createMaintenanceLog = findViewById(R.id.createMaintenanceLog);
@@ -122,6 +125,14 @@ public class CreateMaintenance extends AppCompatActivity {
         aciklamaNot.setOnClickListener(v -> aciklamaNotProcess());
 
         createMaintenanceLog.setOnClickListener(v -> {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            View view = getCurrentFocus();
+            if (view == null) {
+                view = new View(this);
+            }
+
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             if(checkIfAnyMaintenanceVariableIsNull()) {
                 createMaintenanceRequest(machineID, receivedUser.getUserName());
             } else {
@@ -289,8 +300,62 @@ public class CreateMaintenance extends AppCompatActivity {
             textView.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tableRow.addView(textView);
 
+            int tempIndex = i;
             if (state == 9) {
+                EditText editText = new EditText(this);
                 editText.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+
+                editText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        String text = editText.getText().toString();
+
+                        switch (tempIndex) {
+                            case 0:
+                                note1 = text;
+                                break;
+                            case 1:
+                                note2 = text;
+                                break;
+                            case 2:
+                                note3 = text;
+                                break;
+                            case 3:
+                                note4 = text;
+                                break;
+                            case 4:
+                                note5 = text;
+                                break;
+                            case 5:
+                                note6 = text;
+                                break;
+                            case 6:
+                                note7 = text;
+                                break;
+                            case 7:
+                                note8 = text;
+                                break;
+                            case 8:
+                                note9 = text;
+                                break;
+                            case 9:
+                                note10 = text;
+                                break;
+                            default:
+                                Log.d("EditTextLog", "Unknown index: " + tempIndex);
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        Log.d("EditTextLog", "Metin: " + s.toString());
+                    }
+                });
                 tableRow.addView(editText);
             } else {
                 Spinner spinner = new Spinner(this);
@@ -316,41 +381,6 @@ public class CreateMaintenance extends AppCompatActivity {
                     public void onNothingSelected(AdapterView<?> parent) {
                     }
                 });
-
-                if(editText.getText() != null) {
-                    switch (index) {
-                        case 0:
-                            note1 = editText.getText().toString();
-                            break;
-                        case 1:
-                            note2 = editText.getText().toString();
-                            break;
-                        case 2:
-                            note3 = editText.getText().toString();
-                            break;
-                        case 3:
-                            note4 = editText.getText().toString();
-                            break;
-                        case 4:
-                            note5 = editText.getText().toString();
-                            break;
-                        case 5:
-                            note6 = editText.getText().toString();
-                            break;
-                        case 6:
-                            note7 = editText.getText().toString();
-                            break;
-                        case 7:
-                            note8 = editText.getText().toString();
-                            break;
-                        case 8:
-                            note9 = editText.getText().toString();
-                            break;
-                        case 9:
-                            note10 = editText.getText().toString();
-                            break;
-                    }
-                }
 
                 tableRow.addView(spinner);
             }
@@ -586,5 +616,4 @@ public class CreateMaintenance extends AppCompatActivity {
                 maintenance7_1 != null && maintenance7_2 != null &&
                 maintenance8_1 != null && maintenance8_2 != null && maintenance8_3 != null;
     }
-
 }
