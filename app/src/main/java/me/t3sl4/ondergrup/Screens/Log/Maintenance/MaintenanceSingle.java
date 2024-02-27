@@ -2,6 +2,7 @@ package me.t3sl4.ondergrup.Screens.Log.Maintenance;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -39,7 +40,7 @@ public class MaintenanceSingle extends AppCompatActivity {
 
     private TableLayout tableLayout;
 
-    private Maintenance currentMaintenance;
+    public Maintenance currentMaintenance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class MaintenanceSingle extends AppCompatActivity {
         setContentView(R.layout.activity_maintenancelog_single);
 
         Intent intent = getIntent();
-        currentMaintenance = intent.getParcelableExtra("currentmaint");
+        currentMaintenance = intent.getParcelableExtra("currentMaintenance");
 
         backToMachine = findViewById(R.id.backButton);
 
@@ -269,7 +270,7 @@ public class MaintenanceSingle extends AppCompatActivity {
             maintenanceStatus = this.getResources().getString(R.string.maintenance_hayir);
         } else if(Objects.equals(maintenanceCode, "3")) {
             maintenanceStatus = this.getResources().getString(R.string.maintenance_duzeltme);
-        } else {
+        } else if(Objects.equals(maintenanceCode, "4")) {
             maintenanceStatus = this.getResources().getString(R.string.maintenance_yok);
         }
 

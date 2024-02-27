@@ -69,7 +69,7 @@ public class MaintenanceLog extends AppCompatActivity {
             Maintenance selectedMaintenance = machineMaintenanceList.get(position);
 
             Intent maintenanceIntent = new Intent(MaintenanceLog.this, MaintenanceSingle.class);
-            maintenanceIntent.putExtra("currentmaint", selectedMaintenance);
+            maintenanceIntent.putExtra("currentMaintenance", selectedMaintenance);
             startActivity(maintenanceIntent);
         });
 
