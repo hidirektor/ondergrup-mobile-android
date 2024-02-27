@@ -408,11 +408,11 @@ public class Engineer extends AppCompatActivity {
             SharedPreferencesManager.writeSharedPref("username", "", this);
             SharedPreferencesManager.writeSharedPref("password", "", this);
             SharedPreferencesManager.writeSharedPref("role", "", this);
-
-            Intent loginIntent = new Intent(Engineer.this, LoginScreen.class);
-            startActivity(loginIntent);
-            finish();
         }
+
+        Intent loginIntent = new Intent(Engineer.this, LoginScreen.class);
+        startActivity(loginIntent);
+        finish();
     }
 
     private void switchLanguage() {

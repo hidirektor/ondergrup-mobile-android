@@ -225,6 +225,7 @@ public class User extends AppCompatActivity {
         });
 
         logoutButton.setOnClickListener(v -> logoutProcess());
+
         feedbackButton.setOnClickListener(v -> {
             String url = "https://play.google.com/store/apps/details?id=me.t3sl4.ondergrup&hl=tr&gl=US";
             Intent playStoreIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -574,11 +575,11 @@ public class User extends AppCompatActivity {
             SharedPreferencesManager.writeSharedPref("username", "", this);
             SharedPreferencesManager.writeSharedPref("password", "", this);
             SharedPreferencesManager.writeSharedPref("role", "", this);
-
-            Intent loginIntent = new Intent(User.this, LoginScreen.class);
-            startActivity(loginIntent);
-            finish();
         }
+
+        Intent loginIntent = new Intent(User.this, LoginScreen.class);
+        startActivity(loginIntent);
+        finish();
     }
 
     private void minimizeMainLayout() {

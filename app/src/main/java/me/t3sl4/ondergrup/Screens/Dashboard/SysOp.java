@@ -415,11 +415,11 @@ public class SysOp extends AppCompatActivity {
             SharedPreferencesManager.writeSharedPref("username", "", this);
             SharedPreferencesManager.writeSharedPref("password", "", this);
             SharedPreferencesManager.writeSharedPref("role", "", this);
-
-            Intent loginIntent = new Intent(SysOp.this, LoginScreen.class);
-            startActivity(loginIntent);
-            finish();
         }
+
+        Intent loginIntent = new Intent(SysOp.this, LoginScreen.class);
+        startActivity(loginIntent);
+        finish();
     }
 
     private void switchLanguage() {
