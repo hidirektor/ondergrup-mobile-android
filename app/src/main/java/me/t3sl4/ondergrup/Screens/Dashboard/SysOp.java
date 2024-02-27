@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -122,6 +124,7 @@ public class SysOp extends AppCompatActivity {
                     updateUserListView(userList);
                 } else if(item.getItemId() == R.id.editRole) {
                     //Kullanıcı rol yükseltme işlemi
+                    roleUpdate(selectedUser);
 
                     userList = getUserList();
                     updateUserListView(userList);
@@ -203,6 +206,59 @@ public class SysOp extends AppCompatActivity {
             @Override
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
+            }
+        }, Volley.newRequestQueue(this));
+    }
+
+    private void roleUpdate(User selectedUser) {
+        Dialog roleDialog = new Dialog(this);
+        roleDialog.setContentView(R.layout.activity_popup_role);
+        roleDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        Button normalRoleButton = roleDialog.findViewById(R.id.normalRole);
+        Button technicianRoleButton = roleDialog.findViewById(R.id.technicianRole);
+        Button engineerRoleButton = roleDialog.findViewById(R.id.engineerRole);
+        Button sysopRoleButton = roleDialog.findViewById(R.id.sysopRole);
+
+        normalRoleButton.setOnClickListener(v -> {
+            String updateRoleBody = "{\"Username\": \"" + selectedUser.getUserName() + "\", \"Role\": \"" + "NORMAL" + "\"}";
+            sendRoleRequest(updateRoleBody);
+            roleDialog.dismiss();
+        });
+
+        technicianRoleButton.setOnClickListener(v -> {
+            String updateRoleBody = "{\"Username\": \"" + selectedUser.getUserName() + "\", \"Role\": \"" + "TECHNICIAN" + "\"}";
+            sendRoleRequest(updateRoleBody);
+            roleDialog.dismiss();
+        });
+
+        engineerRoleButton.setOnClickListener(v -> {
+            String updateRoleBody = "{\"Username\": \"" + selectedUser.getUserName() + "\", \"Role\": \"" + "ENGINEER" + "\"}";
+            sendRoleRequest(updateRoleBody);
+            roleDialog.dismiss();
+        });
+
+        sysopRoleButton.setOnClickListener(v -> {
+            String updateRoleBody = "{\"Username\": \"" + selectedUser.getUserName() + "\", \"Role\": \"" + "SYSOP" + "\"}";
+            sendRoleRequest(updateRoleBody);
+            roleDialog.dismiss();
+        });
+
+        roleDialog.show();
+    }
+
+    private void sendRoleRequest(String updateBody) {
+        String updateRoleURL = util.BASE_URL + util.updateRolePrefix;
+        HTTP.sendRequest(updateRoleURL, updateBody, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                util.showSuccessPopup(uyariDiyalog, "Rol başarılı bir şekilde güncellendi.");
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Log.d("updateRole", updateRoleURL + " " + updateBody);
+                util.showErrorPopup(uyariDiyalog, "Rol güncellenemedi. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
             }
         }, Volley.newRequestQueue(this));
     }

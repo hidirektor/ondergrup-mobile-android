@@ -247,4 +247,6 @@
     <string name="error_code_8">8th Error</string>
     <string name="error_code_9">9th Error</string>
     <string name="error_code_10">10th Error</string>
+    <string name="select_role">Select Role</string>
+    <string name="role_update">Update Role</string>
 </resources>

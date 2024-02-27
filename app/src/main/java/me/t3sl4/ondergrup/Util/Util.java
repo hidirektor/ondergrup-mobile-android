@@ -48,6 +48,7 @@ public class Util {
     public String updateProfileURLPrefix = "/api/users/updateProfile";
     public String wholeProfileURLPrefix = "/api/users/getWholeProfileInfo";
     public String getPhotoURLPrefix = "/api/fileSystem/getPhoto/";
+    public String updateRolePrefix = "/api/users/updateRole";
 
     public String addMachineURL = "/api/machine/add";
     public String getMachineURL = "/api/machine/getMachines";

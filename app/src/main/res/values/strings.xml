@@ -293,4 +293,7 @@
     <string name="error_code_8">8. Hata Kodu</string>
     <string name="error_code_9">9. Hata Kodu</string>
     <string name="error_code_10">10. Hata Kodu</string>
+
+    <string name="select_role">Lütfen Rol Seçin</string>
+    <string name="role_update">Rolü Güncelle</string>
 </resources>
