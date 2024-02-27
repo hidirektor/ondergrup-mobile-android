@@ -176,7 +176,7 @@ public class User extends AppCompatActivity {
 
         hamburgerButton.setOnClickListener(v -> {
             NavigationManager.showNavigationViewWithAnimation(hamburgerMenu, this);
-            minimizeMainLayout();
+            //minimizeMainLayout();
         });
 
         //hamburgerButtons
@@ -218,7 +218,7 @@ public class User extends AppCompatActivity {
         });
         navAddMachineButton.setOnClickListener(v -> {
             NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-            expandMainLayout();
+            //expandMainLayout();
             addMachine();
         });
 
@@ -449,7 +449,7 @@ public class User extends AppCompatActivity {
         headerConstraint.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-                expandMainLayout();
+                //expandMainLayout();
                 return true;
             }
             return false;
@@ -458,7 +458,7 @@ public class User extends AppCompatActivity {
         headerLayout.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-                expandMainLayout();
+                //expandMainLayout();
                 return true;
             }
             return false;
@@ -467,7 +467,7 @@ public class User extends AppCompatActivity {
         machineLayout.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-                expandMainLayout();
+                //expandMainLayout();
                 return true;
             }
             return false;
@@ -476,7 +476,7 @@ public class User extends AppCompatActivity {
         machineInnerLayout.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-                expandMainLayout();
+                //expandMainLayout();
                 return true;
             }
             return false;
@@ -485,7 +485,7 @@ public class User extends AppCompatActivity {
         machineListView.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-                expandMainLayout();
+                //expandMainLayout();
                 return true;
             }
             return false;
@@ -494,7 +494,7 @@ public class User extends AppCompatActivity {
         subLayout.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
                 NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-                expandMainLayout();
+                //expandMainLayout();
                 return true;
             }
             return false;

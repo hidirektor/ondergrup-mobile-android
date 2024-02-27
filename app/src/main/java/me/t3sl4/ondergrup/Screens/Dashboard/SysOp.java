@@ -112,7 +112,12 @@ public class SysOp extends AppCompatActivity {
                     updateUserListView(userList);
                 } else if(item.getItemId() == R.id.editUser) {
                     //Kullanıcı düzenleme işlemi
+                    Intent userEditIntent = new Intent(SysOp.this, EditProfileScreen.class);
+                    userEditIntent.putExtra("user", selectedUser);
+                    userEditIntent.putExtra("mainUser", receivedUser);
+                    userEditIntent.putExtra("incomeScreen", "sysop");
 
+                    startActivity(userEditIntent);
                     userList = getUserList();
                     updateUserListView(userList);
                 } else if(item.getItemId() == R.id.editRole) {

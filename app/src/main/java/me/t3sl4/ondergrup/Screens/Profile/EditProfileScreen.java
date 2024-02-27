@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Model.User.User;
@@ -25,6 +27,9 @@ import me.t3sl4.ondergrup.Util.Util;
 public class EditProfileScreen extends AppCompatActivity {
     public Util util;
     public User receivedUser;
+    public User mainUser;
+
+    public String incomeScreen;
 
     private ImageView backButton;
 
@@ -51,6 +56,8 @@ public class EditProfileScreen extends AppCompatActivity {
         uyariDiyalog = new Dialog(this);
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
+        mainUser = intent.getParcelableExtra("mainUser");
+        incomeScreen = intent.getStringExtra("incomeScreen");
 
         backButton = findViewById(R.id.backButton);
 
@@ -64,9 +71,18 @@ public class EditProfileScreen extends AppCompatActivity {
         showProfile = findViewById(R.id.showProfileLayout);
         updateProfileButton = findViewById(R.id.button3);
 
+        if(mainUser != null) {
+            showProfile.setVisibility(View.GONE);
+        }
+
         showProfile.setOnClickListener(v -> {
             Intent profileIntent = new Intent(EditProfileScreen.this, ProfileScreen.class);
-            profileIntent.putExtra("user", receivedUser);
+            if(mainUser != null) {
+                profileIntent.putExtra("user", mainUser);
+            } else {
+                profileIntent.putExtra("user", receivedUser);
+            }
+
             startActivity(profileIntent);
             finish();
         });
@@ -133,8 +149,15 @@ public class EditProfileScreen extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent profileIntent = new Intent(EditProfileScreen.this, ProfileScreen.class);
-        profileIntent.putExtra("user", receivedUser);
+        Intent profileIntent = null;
+        if(incomeScreen != null) {
+            profileIntent = new Intent(EditProfileScreen.this, SysOp.class);
+            profileIntent.putExtra("user", mainUser);
+        } else {
+            profileIntent = new Intent(EditProfileScreen.this, ProfileScreen.class);
+            profileIntent.putExtra("user", receivedUser);
+        }
+
         startActivity(profileIntent);
         finish();
     }

@@ -244,10 +244,11 @@
         android:id="@+id/hamburgerMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
         android:background="@drawable/background_hamburger"
         app:headerLayout="@layout/nav_hamburger"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="invisible"/>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
