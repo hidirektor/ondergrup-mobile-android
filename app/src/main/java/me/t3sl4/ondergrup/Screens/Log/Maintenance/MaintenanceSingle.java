@@ -2,7 +2,6 @@ package me.t3sl4.ondergrup.Screens.Log.Maintenance;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,10 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
-import me.t3sl4.ondergrup.Model.Machine.Machine;
+import java.util.Objects;
+
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.SplashActivity;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
+import me.t3sl4.ondergrup.Util.Util;
 
 public class MaintenanceSingle extends AppCompatActivity {
 
@@ -45,7 +47,7 @@ public class MaintenanceSingle extends AppCompatActivity {
         setContentView(R.layout.activity_maintenancelog_single);
 
         Intent intent = getIntent();
-        currentMaintenance = intent.getParcelableExtra("currentMaintenance");
+        currentMaintenance = intent.getParcelableExtra("currentmaint");
 
         backToMachine = findViewById(R.id.backButton);
 
@@ -261,12 +263,11 @@ public class MaintenanceSingle extends AppCompatActivity {
 
     private String maintenanceFromCode(String maintenanceCode) {
         String maintenanceStatus = "";
-        Log.d("gelen", maintenanceCode + " test");
-        if(maintenanceCode.equals("1")) {
+        if(Objects.equals(maintenanceCode, "1")) {
             maintenanceStatus = this.getResources().getString(R.string.maintenance_tamam);
-        } else if(maintenanceCode.equals("2")) {
+        } else if(Objects.equals(maintenanceCode, "2")) {
             maintenanceStatus = this.getResources().getString(R.string.maintenance_hayir);
-        } else if(maintenanceCode.equals("3")) {
+        } else if(Objects.equals(maintenanceCode, "3")) {
             maintenanceStatus = this.getResources().getString(R.string.maintenance_duzeltme);
         } else {
             maintenanceStatus = this.getResources().getString(R.string.maintenance_yok);

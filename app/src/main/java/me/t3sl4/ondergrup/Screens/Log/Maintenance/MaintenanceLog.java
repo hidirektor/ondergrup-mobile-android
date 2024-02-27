@@ -68,14 +68,12 @@ public class MaintenanceLog extends AppCompatActivity {
         machineMaintenances.setOnItemClickListener((parent, view, position, id) -> {
             Maintenance selectedMaintenance = machineMaintenanceList.get(position);
 
-            Intent machineIntent = new Intent(MaintenanceLog.this, MaintenanceSingle.class);
-            machineIntent.putExtra("currentMaintenance", selectedMaintenance);
-            startActivity(machineIntent);
+            Intent maintenanceIntent = new Intent(MaintenanceLog.this, MaintenanceSingle.class);
+            maintenanceIntent.putExtra("currentmaint", selectedMaintenance);
+            startActivity(maintenanceIntent);
         });
 
-        backToMachine.setOnClickListener(v -> {
-            finish();
-        });
+        backToMachine.setOnClickListener(v -> finish());
 
         createMaintenance.setOnClickListener(v -> {
             //Bakım kaydı oluşturma
@@ -87,7 +85,7 @@ public class MaintenanceLog extends AppCompatActivity {
     }
 
     private ArrayList<Maintenance> getMachineMaintenanceList() {
-        ArrayList<Maintenance> machineErrorsTemp = new ArrayList<>();
+        ArrayList<Maintenance> machineMaintenancesTemp = new ArrayList<>();
         String reqURL = util.BASE_URL + util.getMachineMaintenanceURL;
         String jsonErrorBody = "{\"machineID\": \"" + currentMachineID + "\"}";
 
@@ -151,10 +149,10 @@ public class MaintenanceLog extends AppCompatActivity {
                         selectedMaintenance.setKontrol98(maintenanceInfoObj.getString("kontrol9-8"));
                         selectedMaintenance.setKontrol99(maintenanceInfoObj.getString("kontrol9-9"));
                         selectedMaintenance.setKontrol910(maintenanceInfoObj.getString("kontrol9-10"));
-                        machineErrorsTemp.add(selectedMaintenance);
+                        machineMaintenancesTemp.add(selectedMaintenance);
                     }
 
-                    updateListView(machineErrorsTemp);
+                    updateListView(machineMaintenancesTemp);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -166,7 +164,7 @@ public class MaintenanceLog extends AppCompatActivity {
                 util.showSuccessPopup(uyariDiyalog, hatasizMesaj);
             }
         }, Volley.newRequestQueue(this));
-        return machineErrorsTemp;
+        return machineMaintenancesTemp;
     }
 
     private void updateListView(ArrayList<Maintenance> machineMaintenancesTemp) {
