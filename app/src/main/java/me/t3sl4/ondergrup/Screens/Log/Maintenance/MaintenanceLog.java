@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -16,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Adapter.MaintenanceAdapter;
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
@@ -25,6 +28,7 @@ import me.t3sl4.ondergrup.Util.Util;
 
 public class MaintenanceLog extends AppCompatActivity {
     public Util util;
+    public me.t3sl4.ondergrup.Model.User.User receivedUser;
 
     private ImageView backToMachine;
 
@@ -35,6 +39,7 @@ public class MaintenanceLog extends AppCompatActivity {
     private Dialog uyariDiyalog;
 
     String currentMachineID;
+    private Button createMaintenance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +52,15 @@ public class MaintenanceLog extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent != null) {
             currentMachineID = intent.getStringExtra("currentmachine");
+            receivedUser = intent.getParcelableExtra("user");
         }
 
         backToMachine = findViewById(R.id.backToMachine);
+        createMaintenance = findViewById(R.id.createMaintenanceLog);
+
+        if(Objects.equals(receivedUser.getRole(), "NORMAL")) {
+            createMaintenance.setVisibility(View.GONE);
+        }
 
         machineMaintenances = findViewById(R.id.machineMaintenances);
         machineMaintenanceList = getMachineErrorList();
@@ -64,6 +75,13 @@ public class MaintenanceLog extends AppCompatActivity {
 
         backToMachine.setOnClickListener(v -> {
             finish();
+        });
+
+        createMaintenance.setOnClickListener(v -> {
+            //Bakım kaydı oluşturma
+            Intent machineIntent = new Intent(MaintenanceLog.this, CreateMaintenance.class);
+            machineIntent.putExtra("currentMahine", currentMachineID);
+            startActivity(machineIntent);
         });
     }
 

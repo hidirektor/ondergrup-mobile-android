@@ -145,6 +145,9 @@
         <activity
             android:name=".Screens.Machine.RestrictedMachineScreen"
             android:screenOrientation="unspecified" />
+        <activity
+            android:name=".Screens.Log.Maintenance.CreateMaintenance"
+            android:screenOrientation="unspecified" />
     </application>
 
 </manifest>

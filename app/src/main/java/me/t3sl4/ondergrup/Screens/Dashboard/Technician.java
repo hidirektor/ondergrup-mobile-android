@@ -58,6 +58,7 @@ import me.t3sl4.ondergrup.Screens.Log.Error.ErrorLogAll;
 import me.t3sl4.ondergrup.Screens.Log.Maintenance.MaintenanceLogAll;
 import me.t3sl4.ondergrup.Screens.Machine.MachineListScreen;
 import me.t3sl4.ondergrup.Screens.Machine.MachineScreen;
+import me.t3sl4.ondergrup.Screens.Machine.RestrictedMachineScreen;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.QR.QRScanner;
@@ -150,7 +151,7 @@ public class Technician extends AppCompatActivity {
         machineListView.setOnItemClickListener((parent, view, position, id) -> {
             Machine selectedMachine = machineList.get(position);
 
-            Intent machineIntent = new Intent(Technician.this, MachineScreen.class);
+            Intent machineIntent = new Intent(Technician.this, RestrictedMachineScreen.class);
             machineIntent.putExtra("machine", selectedMachine);
             machineIntent.putExtra("user", receivedUser);
             startActivity(machineIntent);

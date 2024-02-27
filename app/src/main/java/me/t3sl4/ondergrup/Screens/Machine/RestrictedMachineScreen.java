@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -107,6 +108,10 @@ public class RestrictedMachineScreen extends AppCompatActivity {
         maintenanceLogButton = findViewById(R.id.machineMaintenanceLogLayout);
         changeOwner = findViewById(R.id.changeMachineOwnerLayout);
 
+        if(Objects.equals(receivedUser.getRole(), "TECHNICIAN")) {
+            changeOwner.setVisibility(View.GONE);
+        }
+
         machineImage = findViewById(R.id.makineGorsel);
         ownerName = findViewById(R.id.ownerNameText);
         machineID = findViewById(R.id.machineIDText);
@@ -167,6 +172,7 @@ public class RestrictedMachineScreen extends AppCompatActivity {
 
         maintenanceLogButton.setOnClickListener(v -> {
             Intent machineMaintenanceLogIntent = new Intent(RestrictedMachineScreen.this, MaintenanceLog.class);
+            machineMaintenanceLogIntent.putExtra("user", receivedUser);
             machineMaintenanceLogIntent.putExtra("currentmachine", selectedMachine.getMachineID());
             startActivity(machineMaintenanceLogIntent);
         });

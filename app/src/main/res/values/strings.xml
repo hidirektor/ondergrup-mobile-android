@@ -299,4 +299,6 @@
 
     <string name="changeowner">Sahibini Güncelle</string>
     <string name="cantbenull">Yeni makine sahibi null olamaz.</string>
+
+    <string name="createmaintenance">Bakım Kaydı Oluştur</string>
 </resources>

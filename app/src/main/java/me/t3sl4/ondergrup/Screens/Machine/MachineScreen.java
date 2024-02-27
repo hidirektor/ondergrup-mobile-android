@@ -99,6 +99,7 @@ public class MachineScreen extends AppCompatActivity {
 
         maintenanceLogButton.setOnClickListener(v -> {
             Intent machineMaintenanceLogIntent = new Intent(MachineScreen.this, MaintenanceLog.class);
+            machineMaintenanceLogIntent.putExtra("user", receivedUser);
             machineMaintenanceLogIntent.putExtra("currentmachine", selectedMachine.getMachineID());
             startActivity(machineMaintenanceLogIntent);
         });

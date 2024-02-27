@@ -251,4 +251,5 @@
     <string name="role_update">Update Role</string>
     <string name="changeowner">Update Owner</string>
     <string name="cantbenull">The new machine owner cannot be null.</string>
+    <string name="createmaintenance">Create Maintenance Log</string>
 </resources>

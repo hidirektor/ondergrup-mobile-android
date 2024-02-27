@@ -9,7 +9,7 @@
         android:id="@+id/headerSection"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="10dp">
 
         <RelativeLayout
@@ -37,7 +37,6 @@
                 android:src="@drawable/ikon_back" />
 
         </RelativeLayout>
-
     </LinearLayout>
 
     <LinearLayout
