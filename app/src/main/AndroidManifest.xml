@@ -148,6 +148,9 @@
         <activity
             android:name=".Screens.Log.Maintenance.CreateMaintenance"
             android:screenOrientation="unspecified" />
+        <activity
+            android:name=".Screens.Dashboard.Engineer"
+            android:screenOrientation="unspecified" />
     </application>
 
 </manifest>
