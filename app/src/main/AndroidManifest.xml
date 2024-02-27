@@ -58,7 +58,8 @@
             android:screenOrientation="unspecified" />
         <activity
             android:name=".Screens.Auth.LoginScreen"
-            android:screenOrientation="unspecified" />
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Screens.Auth.ResetPassword.ForgetPassword"
             android:screenOrientation="unspecified" />
@@ -70,7 +71,8 @@
             android:screenOrientation="unspecified" />
         <activity
             android:name=".Screens.Auth.ResetPassword.ForgetPasswordNewPass"
-            android:screenOrientation="unspecified" />
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Screens.Auth.ResetPassword.ForgetPasswordSuccess"
             android:screenOrientation="unspecified" />
