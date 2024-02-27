@@ -249,4 +249,6 @@
     <string name="error_code_10">10th Error</string>
     <string name="select_role">Select Role</string>
     <string name="role_update">Update Role</string>
+    <string name="changeowner">Update Owner</string>
+    <string name="cantbenull">The new machine owner cannot be null.</string>
 </resources>

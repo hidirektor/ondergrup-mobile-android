@@ -57,6 +57,7 @@ public class Util {
     public String getMachineMaintenanceURL = "/api/machine/getMachineMaintenances";
     public String getMachineErrorAllURL = "/api/machine/getMachineErrorsAll";
     public String getMachineMaintenanceAllURL = "/api/machine/getMachineMaintenancesAll";
+    public String updateMachineOwner = "/api/machine/updateOwner";
 
     public String getAllUsersURL = "/api/users/getAllUsers";
     public String deleteUser = "/api/users/deleteUser";

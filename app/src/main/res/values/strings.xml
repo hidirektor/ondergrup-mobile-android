@@ -296,4 +296,7 @@
 
     <string name="select_role">Lütfen Rol Seçin</string>
     <string name="role_update">Rolü Güncelle</string>
+
+    <string name="changeowner">Sahibini Güncelle</string>
+    <string name="cantbenull">Yeni makine sahibi null olamaz.</string>
 </resources>

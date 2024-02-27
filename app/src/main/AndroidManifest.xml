@@ -142,6 +142,9 @@
         <activity
             android:name=".Screens.Dashboard.SysOp"
             android:screenOrientation="unspecified" />
+        <activity
+            android:name=".Screens.Machine.RestrictedMachineScreen"
+            android:screenOrientation="unspecified" />
     </application>
 
 </manifest>

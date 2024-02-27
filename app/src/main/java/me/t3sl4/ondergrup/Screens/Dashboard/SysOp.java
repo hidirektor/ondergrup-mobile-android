@@ -35,6 +35,7 @@ import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.Machine.MachineScreen;
+import me.t3sl4.ondergrup.Screens.Machine.RestrictedMachineScreen;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
@@ -141,7 +142,7 @@ public class SysOp extends AppCompatActivity {
         machineListView.setOnItemClickListener((parent, view, position, id) -> {
             Machine selectedMachine = machineList.get(position);
 
-            Intent machineIntent = new Intent(SysOp.this, MachineScreen.class);
+            Intent machineIntent = new Intent(SysOp.this, RestrictedMachineScreen.class);
             machineIntent.putExtra("machine", selectedMachine);
             machineIntent.putExtra("user", receivedUser);
             startActivity(machineIntent);
