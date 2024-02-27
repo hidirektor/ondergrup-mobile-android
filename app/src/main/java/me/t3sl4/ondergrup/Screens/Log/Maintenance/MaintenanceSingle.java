@@ -184,16 +184,16 @@ public class MaintenanceSingle extends AppCompatActivity {
     private void aciklamaNotProcess() {
         enableSection(9);
         String[][] data = {
-                {currentMaintenance.getKontrol91(), " "},
-                {currentMaintenance.getKontrol92(), " "},
-                {currentMaintenance.getKontrol93(), " "},
-                {currentMaintenance.getKontrol94(), " "},
-                {currentMaintenance.getKontrol95(), " "},
-                {currentMaintenance.getKontrol96(), " "},
-                {currentMaintenance.getKontrol97(), " "},
-                {currentMaintenance.getKontrol98(), " "},
-                {currentMaintenance.getKontrol99(), " "},
-                {currentMaintenance.getKontrol910(), " "}
+                {this.getResources().getString(R.string.note) + " 1", currentMaintenance.getKontrol91()},
+                {this.getResources().getString(R.string.note) + " 2", currentMaintenance.getKontrol92()},
+                {this.getResources().getString(R.string.note) + " 3", currentMaintenance.getKontrol93()},
+                {this.getResources().getString(R.string.note) + " 4", currentMaintenance.getKontrol94()},
+                {this.getResources().getString(R.string.note) + " 5", currentMaintenance.getKontrol95()},
+                {this.getResources().getString(R.string.note) + " 6", currentMaintenance.getKontrol96()},
+                {this.getResources().getString(R.string.note) + " 7", currentMaintenance.getKontrol97()},
+                {this.getResources().getString(R.string.note) + " 8", currentMaintenance.getKontrol98()},
+                {this.getResources().getString(R.string.note) + " 9", currentMaintenance.getKontrol99()},
+                {this.getResources().getString(R.string.note) + " 10", currentMaintenance.getKontrol910()}
         };
 
         fillTableWithData(tableLayout, data);

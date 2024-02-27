@@ -3,8 +3,13 @@ package me.t3sl4.ondergrup.Screens.Log.Maintenance;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -13,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
@@ -22,6 +29,7 @@ import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class CreateMaintenance extends AppCompatActivity {
+    private Map<Integer, Integer> spinnerSelections = new HashMap<>();
 
     private ImageView backToMachine;
 
@@ -39,7 +47,9 @@ public class CreateMaintenance extends AppCompatActivity {
 
     private TableLayout tableLayout;
 
-    private Maintenance currentMaintenance;
+    private String machineID;
+
+    private Button createMaintenanceLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +57,10 @@ public class CreateMaintenance extends AppCompatActivity {
         setContentView(R.layout.activity_maintenancelog_create);
 
         Intent intent = getIntent();
-        currentMaintenance = intent.getParcelableExtra("currentMaintenance");
+        machineID = intent.getStringExtra("currentMahine");
 
         backToMachine = findViewById(R.id.backButton);
+        createMaintenanceLog = findViewById(R.id.createMaintenanceLog);
 
         fonksiyonlarVeKontrol = findViewById(R.id.fonksiyonlarVeKontrol);
         platformMontaj = findViewById(R.id.platformMontaj);
@@ -65,9 +76,7 @@ public class CreateMaintenance extends AppCompatActivity {
 
         tableLayout = findViewById(R.id.tableLayout);
 
-        backToMachine.setOnClickListener(v -> {
-            finish();
-        });
+        backToMachine.setOnClickListener(v -> finish());
 
         fonksiyonlarVeKontrol.setOnClickListener(v -> fonksiyonlarVeKontrolProcess());
         platformMontaj.setOnClickListener(v -> platformMontajProcess());
@@ -87,10 +96,10 @@ public class CreateMaintenance extends AppCompatActivity {
     private void fonksiyonlarVeKontrolProcess() {
         enableSection(1);
         String[][] data = {
-                {this.getResources().getString(R.string.maintenance1_1), maintenanceFromCode(currentMaintenance.getKontrol11())},
-                {this.getResources().getString(R.string.maintenance1_2), maintenanceFromCode(currentMaintenance.getKontrol12())},
-                {this.getResources().getString(R.string.maintenance1_3), maintenanceFromCode(currentMaintenance.getKontrol13())},
-                {this.getResources().getString(R.string.maintenance1_4), maintenanceFromCode(currentMaintenance.getKontrol14())}
+                {this.getResources().getString(R.string.maintenance1_1), ""},
+                {this.getResources().getString(R.string.maintenance1_2), ""},
+                {this.getResources().getString(R.string.maintenance1_3), ""},
+                {this.getResources().getString(R.string.maintenance1_4), ""}
         };
 
         fillTableWithData(tableLayout, data);
@@ -99,10 +108,10 @@ public class CreateMaintenance extends AppCompatActivity {
     private void platformMontajProcess() {
         enableSection(2);
         String[][] data = {
-                {this.getResources().getString(R.string.maintenance2_1), maintenanceFromCode(currentMaintenance.getKontrol21())},
-                {this.getResources().getString(R.string.maintenance2_2), maintenanceFromCode(currentMaintenance.getKontrol22())},
-                {this.getResources().getString(R.string.maintenance2_3), maintenanceFromCode(currentMaintenance.getKontrol23())},
-                {this.getResources().getString(R.string.maintenance2_4), maintenanceFromCode(currentMaintenance.getKontrol24())}
+                {this.getResources().getString(R.string.maintenance2_1), ""},
+                {this.getResources().getString(R.string.maintenance2_2), ""},
+                {this.getResources().getString(R.string.maintenance2_3), ""},
+                {this.getResources().getString(R.string.maintenance2_4), ""}
         };
 
         fillTableWithData(tableLayout, data);
@@ -111,12 +120,12 @@ public class CreateMaintenance extends AppCompatActivity {
     private void makaslarProcess() {
         enableSection(3);
         String[][] data = {
-                {this.getResources().getString(R.string.maintenance3_1), maintenanceFromCode(currentMaintenance.getKontrol31())},
-                {this.getResources().getString(R.string.maintenance3_2), maintenanceFromCode(currentMaintenance.getKontrol32())},
-                {this.getResources().getString(R.string.maintenance3_3), maintenanceFromCode(currentMaintenance.getKontrol33())},
-                {this.getResources().getString(R.string.maintenance3_4), maintenanceFromCode(currentMaintenance.getKontrol34())},
-                {this.getResources().getString(R.string.maintenance3_5), maintenanceFromCode(currentMaintenance.getKontrol35())},
-                {this.getResources().getString(R.string.maintenance3_6), maintenanceFromCode(currentMaintenance.getKontrol36())}
+                {this.getResources().getString(R.string.maintenance3_1), " "},
+                {this.getResources().getString(R.string.maintenance3_2), " "},
+                {this.getResources().getString(R.string.maintenance3_3), " "},
+                {this.getResources().getString(R.string.maintenance3_4), " "},
+                {this.getResources().getString(R.string.maintenance3_5), " "},
+                {this.getResources().getString(R.string.maintenance3_6), " "}
         };
 
         fillTableWithData(tableLayout, data);
@@ -125,12 +134,12 @@ public class CreateMaintenance extends AppCompatActivity {
     private void genelProcess() {
         enableSection(4);
         String[][] data = {
-                {this.getResources().getString(R.string.maintenance4_1), maintenanceFromCode(currentMaintenance.getKontrol41())},
-                {this.getResources().getString(R.string.maintenance4_2), maintenanceFromCode(currentMaintenance.getKontrol42())},
-                {this.getResources().getString(R.string.maintenance4_3), maintenanceFromCode(currentMaintenance.getKontrol43())},
-                {this.getResources().getString(R.string.maintenance4_4), maintenanceFromCode(currentMaintenance.getKontrol44())},
-                {this.getResources().getString(R.string.maintenance4_5), maintenanceFromCode(currentMaintenance.getKontrol45())},
-                {this.getResources().getString(R.string.maintenance4_6), maintenanceFromCode(currentMaintenance.getKontrol46())}
+                {this.getResources().getString(R.string.maintenance4_1), " "},
+                {this.getResources().getString(R.string.maintenance4_2), " "},
+                {this.getResources().getString(R.string.maintenance4_3), " "},
+                {this.getResources().getString(R.string.maintenance4_4), " "},
+                {this.getResources().getString(R.string.maintenance4_5), " "},
+                {this.getResources().getString(R.string.maintenance4_6), " "}
         };
 
         fillTableWithData(tableLayout, data);
@@ -139,12 +148,12 @@ public class CreateMaintenance extends AppCompatActivity {
     private void hidrolikProcess() {
         enableSection(5);
         String[][] data = {
-                {this.getResources().getString(R.string.maintenance5_1), maintenanceFromCode(currentMaintenance.getKontrol51())},
-                {this.getResources().getString(R.string.maintenance5_2), maintenanceFromCode(currentMaintenance.getKontrol52())},
-                {this.getResources().getString(R.string.maintenance5_3), maintenanceFromCode(currentMaintenance.getKontrol53())},
-                {this.getResources().getString(R.string.maintenance5_4), maintenanceFromCode(currentMaintenance.getKontrol54())},
-                {this.getResources().getString(R.string.maintenance5_5), maintenanceFromCode(currentMaintenance.getKontrol55())},
-                {this.getResources().getString(R.string.maintenance5_6), maintenanceFromCode(currentMaintenance.getKontrol56())}
+                {this.getResources().getString(R.string.maintenance5_1), " "},
+                {this.getResources().getString(R.string.maintenance5_2), " "},
+                {this.getResources().getString(R.string.maintenance5_3), " "},
+                {this.getResources().getString(R.string.maintenance5_4), " "},
+                {this.getResources().getString(R.string.maintenance5_5), " "},
+                {this.getResources().getString(R.string.maintenance5_6), " "}
         };
 
         fillTableWithData(tableLayout, data);
@@ -153,9 +162,9 @@ public class CreateMaintenance extends AppCompatActivity {
     private void elektrikProcess() {
         enableSection(6);
         String[][] data = {
-                {this.getResources().getString(R.string.maintenance6_1), maintenanceFromCode(currentMaintenance.getKontrol61())},
-                {this.getResources().getString(R.string.maintenance6_2), maintenanceFromCode(currentMaintenance.getKontrol62())},
-                {this.getResources().getString(R.string.maintenance6_3), maintenanceFromCode(currentMaintenance.getKontrol63())}
+                {this.getResources().getString(R.string.maintenance6_1), " "},
+                {this.getResources().getString(R.string.maintenance6_2), " "},
+                {this.getResources().getString(R.string.maintenance6_3), " "}
         };
         fillTableWithData(tableLayout, data);
     }
@@ -163,8 +172,8 @@ public class CreateMaintenance extends AppCompatActivity {
     private void kilavuzVeEtiketProcess() {
         enableSection(7);
         String[][] data = {
-                {this.getResources().getString(R.string.maintenance7_1), maintenanceFromCode(currentMaintenance.getKontrol71())},
-                {this.getResources().getString(R.string.maintenance7_2), maintenanceFromCode(currentMaintenance.getKontrol72())}
+                {this.getResources().getString(R.string.maintenance7_1), " "},
+                {this.getResources().getString(R.string.maintenance7_2), " "}
         };
 
         fillTableWithData(tableLayout, data);
@@ -173,9 +182,9 @@ public class CreateMaintenance extends AppCompatActivity {
     private void saseProcess() {
         enableSection(8);
         String[][] data = {
-                {this.getResources().getString(R.string.maintenance8_1), maintenanceFromCode(currentMaintenance.getKontrol81())},
-                {this.getResources().getString(R.string.maintenance8_2), maintenanceFromCode(currentMaintenance.getKontrol82())},
-                {this.getResources().getString(R.string.maintenance8_3), maintenanceFromCode(currentMaintenance.getKontrol83())}
+                {this.getResources().getString(R.string.maintenance8_1), " "},
+                {this.getResources().getString(R.string.maintenance8_2), " "},
+                {this.getResources().getString(R.string.maintenance8_3), " "}
         };
 
         fillTableWithData(tableLayout, data);
@@ -184,16 +193,16 @@ public class CreateMaintenance extends AppCompatActivity {
     private void aciklamaNotProcess() {
         enableSection(9);
         String[][] data = {
-                {currentMaintenance.getKontrol91(), " "},
-                {currentMaintenance.getKontrol92(), " "},
-                {currentMaintenance.getKontrol93(), " "},
-                {currentMaintenance.getKontrol94(), " "},
-                {currentMaintenance.getKontrol95(), " "},
-                {currentMaintenance.getKontrol96(), " "},
-                {currentMaintenance.getKontrol97(), " "},
-                {currentMaintenance.getKontrol98(), " "},
-                {currentMaintenance.getKontrol99(), " "},
-                {currentMaintenance.getKontrol910(), " "}
+                {this.getResources().getString(R.string.note) + " 1", " "},
+                {this.getResources().getString(R.string.note) + " 2", " "},
+                {this.getResources().getString(R.string.note) + " 3", " "},
+                {this.getResources().getString(R.string.note) + " 4", " "},
+                {this.getResources().getString(R.string.note) + " 5", " "},
+                {this.getResources().getString(R.string.note) + " 6", " "},
+                {this.getResources().getString(R.string.note) + " 7", " "},
+                {this.getResources().getString(R.string.note) + " 8", " "},
+                {this.getResources().getString(R.string.note) + " 9", " "},
+                {this.getResources().getString(R.string.note) + " 10", " "}
         };
 
         fillTableWithData(tableLayout, data);
@@ -234,29 +243,39 @@ public class CreateMaintenance extends AppCompatActivity {
     }
 
     private void fillTableWithData(TableLayout tableLayout, String[][] data) {
-        for (String[] rowData : data) {
+        for (int i = 0; i < data.length; i++) {
             TableRow tableRow = new TableRow(this);
+            TextView textView = new TextView(this);
+            textView.setText(data[i][0]);
+            textView.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tableRow.addView(textView);
 
-            for (String item : rowData) {
-                TextView textView = new TextView(this);
-                textView.setLayoutParams(new TableRow.LayoutParams(
-                        0, // width
-                        TableRow.LayoutParams.WRAP_CONTENT,
-                        1f // weight
-                ));
-                textView.setText(item);
-                textView.setTypeface(ResourcesCompat.getFont(this, R.font.outfit_medium));
-                textView.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                textView.setTextColor(getResources().getColor(android.R.color.black));
-                textView.setGravity(Gravity.CENTER);
-                tableRow.addView(textView);
-            }
+            Spinner spinner = new Spinner(this);
 
-            int paddingInDp = 10;
-            float scale = getResources().getDisplayMetrics().density;
-            int paddingInPixels = (int) (paddingInDp * scale + 0.5f);
-            tableRow.setPadding(0, 0, 0, paddingInPixels);
+            String[] options = {
+                    getResources().getString(R.string.maintenance_tamam),
+                    getResources().getString(R.string.maintenance_hayir),
+                    getResources().getString(R.string.maintenance_duzeltme),
+                    getResources().getString(R.string.maintenance_yok)
+            };
 
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, options);
+            spinner.setAdapter(adapter);
+            spinner.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+
+            final int index = i;
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    spinnerSelections.put(index, position + 1);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
+            tableRow.addView(spinner);
             tableLayout.addView(tableRow);
         }
     }

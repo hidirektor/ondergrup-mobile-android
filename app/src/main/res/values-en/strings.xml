@@ -146,6 +146,7 @@
     <string name="tablakapiswitch">Tray Door Switch Error</string>
     <string name="maximumcalisma">Maximum Running Error</string>
     <string name="hatayok">The machine has not gone into any error state so far.</string>
+    <string name="bakimyok">No maintenance records have been entered for the machine yet.</string>
     <string name="show_profile">Show Profile</string>
     <string name="hataSebep">Error Causes</string>
     <string name="hataCozum">Error Solution</string>
@@ -252,4 +253,5 @@
     <string name="changeowner">Update Owner</string>
     <string name="cantbenull">The new machine owner cannot be null.</string>
     <string name="createmaintenance">Create Maintenance Log</string>
+    <string name="note">Note</string>
 </resources>

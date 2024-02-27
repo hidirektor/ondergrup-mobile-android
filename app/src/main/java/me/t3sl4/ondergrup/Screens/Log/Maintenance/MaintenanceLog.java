@@ -161,7 +161,7 @@ public class MaintenanceLog extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMessage) {
-                String hatasizMesaj = MaintenanceLog.this.getResources().getString(R.string.hatayok);
+                String hatasizMesaj = MaintenanceLog.this.getResources().getString(R.string.bakimyok);
                 util.showSuccessPopup(uyariDiyalog, hatasizMesaj);
             }
         }, Volley.newRequestQueue(this));
