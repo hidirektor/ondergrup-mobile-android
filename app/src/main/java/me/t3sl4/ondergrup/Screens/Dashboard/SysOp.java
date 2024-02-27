@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import kotlin.OptionalExpectation;
 import me.t3sl4.ondergrup.Model.Machine.Adapter.MachineAdapter;
 import me.t3sl4.ondergrup.Model.Machine.Machine;
 import me.t3sl4.ondergrup.Model.User.Adapter.UserAdapter;
@@ -168,6 +169,14 @@ public class SysOp extends AppCompatActivity {
 
         sectionPager();
         setUserInfo();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        machineList = getMachineList();
+        updateListView(machineList);
     }
 
     public void setUserInfo() {

@@ -258,6 +258,7 @@ public class RestrictedMachineScreen extends AppCompatActivity {
             } else {
                 String updateOwnerBody = "{\"MachineID\": \"" + machineID + "\", \"Owner\": \"" + newOwner.getText().toString() + "\"}";
                 sendOwnerRequest(updateOwnerBody);
+                ownerName.setText(newOwner.getText().toString());
                 roleDialog.dismiss();
             }
         });
