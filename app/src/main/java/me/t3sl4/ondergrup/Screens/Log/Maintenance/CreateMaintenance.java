@@ -1,7 +1,9 @@
 package me.t3sl4.ondergrup.Screens.Log.Maintenance;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,18 +21,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
+import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.SplashActivity;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
+import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class CreateMaintenance extends AppCompatActivity {
-    private Map<Integer, Integer> spinnerSelections = new HashMap<>();
+    public Util util;
+    public User receivedUser;
+
+    private Dialog uyariDiyalog;
 
     private ImageView backToMachine;
 
@@ -52,13 +63,32 @@ public class CreateMaintenance extends AppCompatActivity {
 
     private Button createMaintenanceLog;
 
+    EditText editText;
+
+    String maintenance1_1="1", maintenance1_2="1", maintenance1_3="1", maintenance1_4="1";
+    String maintenance2_1="1", maintenance2_2="1", maintenance2_3="1", maintenance2_4="1";
+    String maintenance3_1="1", maintenance3_2="1", maintenance3_3="1", maintenance3_4="1", maintenance3_5="1", maintenance3_6="1";
+    String maintenance4_1="1", maintenance4_2="1", maintenance4_3="1", maintenance4_4="1", maintenance4_5="1", maintenance4_6="1";
+    String maintenance5_1="1", maintenance5_2="1", maintenance5_3="1", maintenance5_4="1", maintenance5_5="1", maintenance5_6="1";
+    String maintenance6_1="1", maintenance6_2="1", maintenance6_3="1";
+    String maintenance7_1="1", maintenance7_2="1";
+    String maintenance8_1="1", maintenance8_2="1", maintenance8_3="1";
+
+    String note1="", note2="", note3="", note4="", note5="", note6="", note7="", note8="", note9="", note10="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintenancelog_create);
 
+        util = new Util(getApplicationContext());
+        uyariDiyalog = new Dialog(this);
+
         Intent intent = getIntent();
+        receivedUser = intent.getParcelableExtra("user");
         machineID = intent.getStringExtra("currentMahine");
+
+        editText = new EditText(this);
 
         backToMachine = findViewById(R.id.backButton);
         createMaintenanceLog = findViewById(R.id.createMaintenanceLog);
@@ -91,6 +121,14 @@ public class CreateMaintenance extends AppCompatActivity {
         sase.setOnClickListener(v -> saseProcess());
         aciklamaNot.setOnClickListener(v -> aciklamaNotProcess());
 
+        createMaintenanceLog.setOnClickListener(v -> {
+            if(checkIfAnyMaintenanceVariableIsNull()) {
+                createMaintenanceRequest(machineID, receivedUser.getUserName());
+            } else {
+                util.showErrorPopup(uyariDiyalog, "Bakım kaydı oluşturulamadı. \nLütfen bilgileri kontrol edip tekrar deneyin.");
+            }
+        });
+
         fonksiyonlarVeKontrolProcess();
     }
 
@@ -103,7 +141,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance1_4), ""}
         };
 
-        fillTableWithData(tableLayout, data, false);
+        fillTableWithData(tableLayout, data, 1);
     }
 
     private void platformMontajProcess() {
@@ -115,7 +153,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance2_4), ""}
         };
 
-        fillTableWithData(tableLayout, data, false);
+        fillTableWithData(tableLayout, data, 2);
     }
 
     private void makaslarProcess() {
@@ -129,7 +167,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance3_6), " "}
         };
 
-        fillTableWithData(tableLayout, data, false);
+        fillTableWithData(tableLayout, data, 3);
     }
 
     private void genelProcess() {
@@ -143,7 +181,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance4_6), " "}
         };
 
-        fillTableWithData(tableLayout, data, false);
+        fillTableWithData(tableLayout, data, 4);
     }
 
     private void hidrolikProcess() {
@@ -157,7 +195,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance5_6), " "}
         };
 
-        fillTableWithData(tableLayout, data, false);
+        fillTableWithData(tableLayout, data, 5);
     }
 
     private void elektrikProcess() {
@@ -167,7 +205,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance6_2), " "},
                 {this.getResources().getString(R.string.maintenance6_3), " "}
         };
-        fillTableWithData(tableLayout, data, false);
+        fillTableWithData(tableLayout, data, 6);
     }
 
     private void kilavuzVeEtiketProcess() {
@@ -177,7 +215,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance7_2), " "}
         };
 
-        fillTableWithData(tableLayout, data, false);
+        fillTableWithData(tableLayout, data, 7);
     }
 
     private void saseProcess() {
@@ -188,7 +226,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance8_3), " "}
         };
 
-        fillTableWithData(tableLayout, data, false);
+        fillTableWithData(tableLayout, data, 8);
     }
 
     private void aciklamaNotProcess() {
@@ -206,7 +244,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.note) + " 10", " "}
         };
 
-        fillTableWithData(tableLayout, data, true);
+        fillTableWithData(tableLayout, data, 9);
     }
 
     private void enableSection(int type) {
@@ -243,7 +281,7 @@ public class CreateMaintenance extends AppCompatActivity {
         }
     }
 
-    private void fillTableWithData(TableLayout tableLayout, String[][] data, boolean isAciklamaNot) {
+    private void fillTableWithData(TableLayout tableLayout, String[][] data, int state) {
         for (int i = 0; i < data.length; i++) {
             TableRow tableRow = new TableRow(this);
             TextView textView = new TextView(this);
@@ -251,8 +289,7 @@ public class CreateMaintenance extends AppCompatActivity {
             textView.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tableRow.addView(textView);
 
-            if (isAciklamaNot) {
-                EditText editText = new EditText(this);
+            if (state == 9) {
                 editText.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
                 tableRow.addView(editText);
             } else {
@@ -272,7 +309,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        spinnerSelections.put(index, position + 1);
+                        updateMaintenanceVariables(state, index, options[position]);
                     }
 
                     @Override
@@ -280,24 +317,274 @@ public class CreateMaintenance extends AppCompatActivity {
                     }
                 });
 
+                if(editText.getText() != null) {
+                    switch (index) {
+                        case 0:
+                            note1 = editText.getText().toString();
+                            break;
+                        case 1:
+                            note2 = editText.getText().toString();
+                            break;
+                        case 2:
+                            note3 = editText.getText().toString();
+                            break;
+                        case 3:
+                            note4 = editText.getText().toString();
+                            break;
+                        case 4:
+                            note5 = editText.getText().toString();
+                            break;
+                        case 5:
+                            note6 = editText.getText().toString();
+                            break;
+                        case 6:
+                            note7 = editText.getText().toString();
+                            break;
+                        case 7:
+                            note8 = editText.getText().toString();
+                            break;
+                        case 8:
+                            note9 = editText.getText().toString();
+                            break;
+                        case 9:
+                            note10 = editText.getText().toString();
+                            break;
+                    }
+                }
+
                 tableRow.addView(spinner);
             }
             tableLayout.addView(tableRow);
         }
     }
 
-    private String maintenanceFromCode(String maintenanceCode) {
+    private void updateMaintenanceVariables(int state, int index, String selectedValue) {
+        switch (state) {
+            case 1:
+                switch(index) {
+                    case 0:
+                        maintenance1_1 = maintenanceFromString(selectedValue);
+                        break;
+                    case 1:
+                        maintenance1_2 = maintenanceFromString(selectedValue);
+                        break;
+                    case 2:
+                        maintenance1_3 = maintenanceFromString(selectedValue);
+                        break;
+                    case 3:
+                        maintenance1_4 = maintenanceFromString(selectedValue);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 2:
+                switch(index) {
+                    case 0:
+                        maintenance2_1 = maintenanceFromString(selectedValue);
+                        break;
+                    case 1:
+                        maintenance2_2 = maintenanceFromString(selectedValue);
+                        break;
+                    case 2:
+                        maintenance2_3 = maintenanceFromString(selectedValue);
+                        break;
+                    case 3:
+                        maintenance2_4 = maintenanceFromString(selectedValue);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 3:
+                switch(index) {
+                    case 0:
+                        maintenance3_1 = maintenanceFromString(selectedValue);
+                        break;
+                    case 1:
+                        maintenance3_2 = maintenanceFromString(selectedValue);
+                        break;
+                    case 2:
+                        maintenance3_3 = maintenanceFromString(selectedValue);
+                        break;
+                    case 3:
+                        maintenance3_4 = maintenanceFromString(selectedValue);
+                        break;
+                    case 4:
+                        maintenance3_5 = maintenanceFromString(selectedValue);
+                        break;
+                    case 5:
+                        maintenance3_6 = maintenanceFromString(selectedValue);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 4:
+                switch(index) {
+                    case 0:
+                        maintenance4_1 = maintenanceFromString(selectedValue);
+                        break;
+                    case 1:
+                        maintenance4_2 = maintenanceFromString(selectedValue);
+                        break;
+                    case 2:
+                        maintenance4_3 = maintenanceFromString(selectedValue);
+                        break;
+                    case 3:
+                        maintenance4_4 = maintenanceFromString(selectedValue);
+                        break;
+                    case 4:
+                        maintenance4_5 = maintenanceFromString(selectedValue);
+                        break;
+                    case 5:
+                        maintenance4_6 = maintenanceFromString(selectedValue);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 5:
+                switch(index) {
+                    case 0:
+                        maintenance5_1 = maintenanceFromString(selectedValue);
+                        break;
+                    case 1:
+                        maintenance5_2 = maintenanceFromString(selectedValue);
+                        break;
+                    case 2:
+                        maintenance5_3 = maintenanceFromString(selectedValue);
+                        break;
+                    case 3:
+                        maintenance5_4 = maintenanceFromString(selectedValue);
+                        break;
+                    case 4:
+                        maintenance5_5 = maintenanceFromString(selectedValue);
+                        break;
+                    case 5:
+                        maintenance5_6 = maintenanceFromString(selectedValue);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 6:
+                switch(index) {
+                    case 0:
+                        maintenance6_1 = maintenanceFromString(selectedValue);
+                        break;
+                    case 1:
+                        maintenance6_2 = maintenanceFromString(selectedValue);
+                        break;
+                    case 2:
+                        maintenance6_3 = maintenanceFromString(selectedValue);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 7:
+                switch(index) {
+                    case 0:
+                        maintenance7_1 = maintenanceFromString(selectedValue);
+                        break;
+                    case 1:
+                        maintenance7_2 = maintenanceFromString(selectedValue);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 8:
+                switch(index) {
+                    case 0:
+                        maintenance8_1 = maintenanceFromString(selectedValue);
+                        break;
+                    case 1:
+                        maintenance8_2 = maintenanceFromString(selectedValue);
+                        break;
+                    case 2:
+                        maintenance8_3 = maintenanceFromString(selectedValue);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private String maintenanceFromString(String maintenanceCode) {
         String maintenanceStatus = "";
-        if(Objects.equals(maintenanceCode, "1")) {
-            maintenanceStatus = this.getResources().getString(R.string.maintenance_tamam);
-        } else if(Objects.equals(maintenanceCode, "2")) {
-            maintenanceStatus = this.getResources().getString(R.string.maintenance_hayir);
-        } else if(Objects.equals(maintenanceCode, "3")) {
-            maintenanceStatus = this.getResources().getString(R.string.maintenance_duzeltme);
+        String tamamText = this.getResources().getString(R.string.maintenance_tamam);
+        String hayirText = this.getResources().getString(R.string.maintenance_hayir);
+        String duzeltText = this.getResources().getString(R.string.maintenance_duzeltme);
+        String yokText = this.getResources().getString(R.string.maintenance_yok);
+        if(Objects.equals(maintenanceCode, tamamText)) {
+            maintenanceStatus = "1";
+        } else if(Objects.equals(maintenanceCode, hayirText)) {
+            maintenanceStatus = "2";
+        } else if(Objects.equals(maintenanceCode, duzeltText)) {
+            maintenanceStatus = "3";
         } else {
-            maintenanceStatus = this.getResources().getString(R.string.maintenance_yok);
+            maintenanceStatus = "4";
         }
 
         return maintenanceStatus;
     }
+
+    private void createMaintenanceRequest(String machineID, String userName) {
+        String requestURL = util.BASE_URL + util.createMaintenancePrefix;
+
+        String requestBody = String.format(
+                "{\"MachineID\": \"%s\", \"Technician\": \"%s\", " +
+                        "\"maintenance1\": [\"%s\", \"%s\", \"%s\", \"%s\"], " +
+                        "\"maintenance2\": [\"%s\", \"%s\", \"%s\", \"%s\"], " +
+                        "\"maintenance3\": [\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"], " +
+                        "\"maintenance4\": [\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"], " +
+                        "\"maintenance5\": [\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"], " +
+                        "\"maintenance6\": [\"%s\", \"%s\", \"%s\"], " +
+                        "\"maintenance7\": [\"%s\", \"%s\"], " +
+                        "\"maintenance8\": [\"%s\", \"%s\", \"%s\"], " +
+                        "\"notes\": [\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"]}",
+                machineID, userName,
+                maintenance1_1, maintenance1_2, maintenance1_3, maintenance1_4,
+                maintenance2_1, maintenance2_2, maintenance2_3, maintenance2_4,
+                maintenance3_1, maintenance3_2, maintenance3_3, maintenance3_4, maintenance3_5, maintenance3_6,
+                maintenance4_1, maintenance4_2, maintenance4_3, maintenance4_4, maintenance4_5, maintenance4_6,
+                maintenance5_1, maintenance5_2, maintenance5_3, maintenance5_4, maintenance5_5, maintenance5_6,
+                maintenance6_1, maintenance6_2, maintenance6_3,
+                maintenance7_1, maintenance7_2,
+                maintenance8_1, maintenance8_2, maintenance8_3,
+                note1, note2, note3, note4, note5, note6, note7, note8, note9, note10
+        );
+
+        Log.d("maintenancelog", requestBody);
+
+        HTTP.sendRequest(requestURL, requestBody, new HTTP.HttpRequestCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                util.showSuccessPopup(uyariDiyalog, "Bakım kaydı başarılı bir şekilde oluşturuldu.");
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Log.d("createMaintenance", requestURL + " " + requestBody);
+                util.showErrorPopup(uyariDiyalog, "Bakım kaydı oluşturulamadı. \nLütfen bilgileri kontrol edip tekrar deneyin.");
+            }
+        }, Volley.newRequestQueue(this));
+    }
+
+    public boolean checkIfAnyMaintenanceVariableIsNull() {
+        return maintenance1_1 != null && maintenance1_2 != null && maintenance1_3 != null && maintenance1_4 != null &&
+                maintenance2_1 != null && maintenance2_2 != null && maintenance2_3 != null && maintenance2_4 != null &&
+                maintenance3_1 != null && maintenance3_2 != null && maintenance3_3 != null && maintenance3_4 != null && maintenance3_5 != null && maintenance3_6 != null &&
+                maintenance4_1 != null && maintenance4_2 != null && maintenance4_3 != null && maintenance4_4 != null && maintenance4_5 != null && maintenance4_6 != null &&
+                maintenance5_1 != null && maintenance5_2 != null && maintenance5_3 != null && maintenance5_4 != null && maintenance5_5 != null && maintenance5_6 != null &&
+                maintenance6_1 != null && maintenance6_2 != null && maintenance6_3 != null &&
+                maintenance7_1 != null && maintenance7_2 != null &&
+                maintenance8_1 != null && maintenance8_2 != null && maintenance8_3 != null;
+    }
+
 }

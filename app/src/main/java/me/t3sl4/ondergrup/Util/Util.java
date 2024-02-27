@@ -62,6 +62,8 @@ public class Util {
     public String getAllUsersURL = "/api/users/getAllUsers";
     public String deleteUser = "/api/users/deleteUser";
 
+    public String createMaintenancePrefix = "/api/machine/createMaintenance";
+
 
     public String uploadURLPrefix = "/api/fileSystem/upload";
     public String downloadPhotoURLPrefix = "/api/fileSystem/downloadPhoto";

@@ -80,6 +80,7 @@ public class MaintenanceLog extends AppCompatActivity {
         createMaintenance.setOnClickListener(v -> {
             //Bakım kaydı oluşturma
             Intent machineIntent = new Intent(MaintenanceLog.this, CreateMaintenance.class);
+            machineIntent.putExtra("user", receivedUser);
             machineIntent.putExtra("currentMahine", currentMachineID);
             startActivity(machineIntent);
         });
