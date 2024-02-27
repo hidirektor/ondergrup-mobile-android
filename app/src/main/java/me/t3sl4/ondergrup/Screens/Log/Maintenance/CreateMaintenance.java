@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -102,7 +103,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance1_4), ""}
         };
 
-        fillTableWithData(tableLayout, data);
+        fillTableWithData(tableLayout, data, false);
     }
 
     private void platformMontajProcess() {
@@ -114,7 +115,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance2_4), ""}
         };
 
-        fillTableWithData(tableLayout, data);
+        fillTableWithData(tableLayout, data, false);
     }
 
     private void makaslarProcess() {
@@ -128,7 +129,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance3_6), " "}
         };
 
-        fillTableWithData(tableLayout, data);
+        fillTableWithData(tableLayout, data, false);
     }
 
     private void genelProcess() {
@@ -142,7 +143,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance4_6), " "}
         };
 
-        fillTableWithData(tableLayout, data);
+        fillTableWithData(tableLayout, data, false);
     }
 
     private void hidrolikProcess() {
@@ -156,7 +157,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance5_6), " "}
         };
 
-        fillTableWithData(tableLayout, data);
+        fillTableWithData(tableLayout, data, false);
     }
 
     private void elektrikProcess() {
@@ -166,7 +167,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance6_2), " "},
                 {this.getResources().getString(R.string.maintenance6_3), " "}
         };
-        fillTableWithData(tableLayout, data);
+        fillTableWithData(tableLayout, data, false);
     }
 
     private void kilavuzVeEtiketProcess() {
@@ -176,7 +177,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance7_2), " "}
         };
 
-        fillTableWithData(tableLayout, data);
+        fillTableWithData(tableLayout, data, false);
     }
 
     private void saseProcess() {
@@ -187,7 +188,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.maintenance8_3), " "}
         };
 
-        fillTableWithData(tableLayout, data);
+        fillTableWithData(tableLayout, data, false);
     }
 
     private void aciklamaNotProcess() {
@@ -205,7 +206,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 {this.getResources().getString(R.string.note) + " 10", " "}
         };
 
-        fillTableWithData(tableLayout, data);
+        fillTableWithData(tableLayout, data, true);
     }
 
     private void enableSection(int type) {
@@ -242,7 +243,7 @@ public class CreateMaintenance extends AppCompatActivity {
         }
     }
 
-    private void fillTableWithData(TableLayout tableLayout, String[][] data) {
+    private void fillTableWithData(TableLayout tableLayout, String[][] data, boolean isAciklamaNot) {
         for (int i = 0; i < data.length; i++) {
             TableRow tableRow = new TableRow(this);
             TextView textView = new TextView(this);
@@ -250,32 +251,37 @@ public class CreateMaintenance extends AppCompatActivity {
             textView.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tableRow.addView(textView);
 
-            Spinner spinner = new Spinner(this);
+            if (isAciklamaNot) {
+                EditText editText = new EditText(this);
+                editText.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+                tableRow.addView(editText);
+            } else {
+                Spinner spinner = new Spinner(this);
+                String[] options = {
+                        getResources().getString(R.string.maintenance_tamam),
+                        getResources().getString(R.string.maintenance_hayir),
+                        getResources().getString(R.string.maintenance_duzeltme),
+                        getResources().getString(R.string.maintenance_yok)
+                };
 
-            String[] options = {
-                    getResources().getString(R.string.maintenance_tamam),
-                    getResources().getString(R.string.maintenance_hayir),
-                    getResources().getString(R.string.maintenance_duzeltme),
-                    getResources().getString(R.string.maintenance_yok)
-            };
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, options);
+                spinner.setAdapter(adapter);
+                spinner.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, options);
-            spinner.setAdapter(adapter);
-            spinner.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+                final int index = i;
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        spinnerSelections.put(index, position + 1);
+                    }
 
-            final int index = i;
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    spinnerSelections.put(index, position + 1);
-                }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
-
-            tableRow.addView(spinner);
+                tableRow.addView(spinner);
+            }
             tableLayout.addView(tableRow);
         }
     }
