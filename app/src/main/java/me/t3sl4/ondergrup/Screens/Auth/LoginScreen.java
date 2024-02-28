@@ -26,6 +26,7 @@ import java.util.Locale;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
+import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
 import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
 import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
@@ -296,10 +297,10 @@ public class LoginScreen extends AppCompatActivity {
                 intent = new Intent(LoginScreen.this, Technician.class);
                 intent.putExtra("user", util.user);
                 break;
-            /*case "ENGINEER":
-                intent = new Intent(LoginScreen.this, DashboardEngineerScreen.class);
+            case "ENGINEER":
+                intent = new Intent(LoginScreen.this, Engineer.class);
                 intent.putExtra("user", util.user);
-                break;*/
+                break;
             case "SYSOP":
                 intent = new Intent(LoginScreen.this, SysOp.class);
                 intent.putExtra("user", util.user);
