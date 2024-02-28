@@ -199,13 +199,17 @@ public class SysOp extends AppCompatActivity {
 
         HTTP.sendRequest(reqURL, jsonDeleteBody, new HTTP.HttpRequestCallback() {
             @Override
-            public void onSuccess(JSONObject response) {
-                util.showSuccessPopup(uyariDiyalog, "Kullanıcı silindi !");
+            public void onSuccess(JSONObject response) throws JSONException {
+                if(response.getString("error").contains("silinemez")) {
+                    util.showErrorPopup(uyariDiyalog, "Bu kullanıcının makinesi olduğu için kullanıcı silinemez.");
+                } else {
+                    util.showSuccessPopup(uyariDiyalog, "Kullanıcı silindi !");
+                }
             }
 
             @Override
             public void onFailure(String errorMessage) {
-                util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
+                util.showErrorPopup(uyariDiyalog, "Kullanıcı silinemedi.");
             }
         }, Volley.newRequestQueue(this));
     }

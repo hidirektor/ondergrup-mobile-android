@@ -130,7 +130,7 @@
                             android:ems="10"
                             android:enabled="false"
                             android:hint="@string/enter_username"
-                            android:inputType="textPersonName"
+                            android:inputType="textPersonName|textNoSuggestions"
                             android:padding="8dp"
                             android:textColorHint="#756C6C" />
 
@@ -163,7 +163,7 @@
                             android:drawablePadding="16dp"
                             android:ems="10"
                             android:hint="@string/enter_mail"
-                            android:inputType="textPersonName"
+                            android:inputType="textEmailAddress|textNoSuggestions"
                             android:padding="8dp"
                             android:textColorHint="#756C6C" />
 
@@ -179,7 +179,7 @@
                             android:drawablePadding="16dp"
                             android:ems="10"
                             android:hint="@string/enter_phone"
-                            android:inputType="phone"
+                            android:inputType="phone|textNoSuggestions"
                             android:padding="8dp"
                             android:textColorHint="#756C6C" />
 
