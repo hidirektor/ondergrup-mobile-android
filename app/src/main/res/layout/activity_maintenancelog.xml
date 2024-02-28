@@ -59,19 +59,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerSection"/>
 
-    <LinearLayout
-        android:id="@+id/startSection"
+    <ListView
+        android:id="@+id/machineMaintenances"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createMaintenanceLog">
-
-        <ListView
-            android:id="@+id/machineMaintenances"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/createMaintenanceLog"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

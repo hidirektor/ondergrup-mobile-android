@@ -84,6 +84,12 @@ public class MaintenanceLog extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        machineMaintenanceList = getMachineMaintenanceList();
+    }
+
     private ArrayList<Maintenance> getMachineMaintenanceList() {
         ArrayList<Maintenance> machineMaintenancesTemp = new ArrayList<>();
         String reqURL = util.BASE_URL + util.getMachineMaintenanceURL;

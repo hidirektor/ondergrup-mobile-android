@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -590,6 +592,7 @@ public class CreateMaintenance extends AppCompatActivity {
             @Override
             public void onSuccess(JSONObject response) {
                 util.showSuccessPopup(uyariDiyalog, "Bakım kaydı başarılı bir şekilde oluşturuldu.");
+                new Handler(Looper.getMainLooper()).postDelayed(() -> finish(), 1000);
             }
 
             @Override

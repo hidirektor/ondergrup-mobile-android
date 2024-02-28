@@ -38,7 +38,7 @@ import me.t3sl4.ondergrup.Util.Util;
 public class ErrorLog extends AppCompatActivity {
     public Util util;
 
-    private LinearLayout backToMachine;
+    private ImageView backToMachine;
 
     private ListView machineErrors;
     private MachineErrorAdapter machineErrorAdapter;
