@@ -77,9 +77,8 @@ public class ErrorLogAll extends AppCompatActivity {
     private ArrayList<MachineError> getMachineErrorList() {
         ArrayList<MachineError> machineErrorsTemp = new ArrayList<>();
         String reqURL = util.BASE_URL + util.getMachineErrorAllURL;
-        String jsonErrorBody = "{\"username\": \"" + receivedUser.getUserName() + "\"}";
 
-        HTTP.sendRequest(reqURL, jsonErrorBody, new HTTP.HttpRequestCallback() {
+        HTTP.sendRequestNormal(reqURL, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
                 try {

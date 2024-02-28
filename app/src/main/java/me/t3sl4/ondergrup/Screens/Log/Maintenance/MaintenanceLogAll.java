@@ -68,9 +68,8 @@ public class MaintenanceLogAll extends AppCompatActivity {
     private ArrayList<Maintenance> getMachineMaintenancesList() {
         ArrayList<Maintenance> machineErrorsTemp = new ArrayList<>();
         String reqURL = util.BASE_URL + util.getMachineMaintenanceAllURL;
-        String jsonErrorBody = "{\"username\": \"" + receivedUser.getUserName() + "\"}";
 
-        HTTP.sendRequest(reqURL, jsonErrorBody, new HTTP.HttpRequestCallback() {
+        HTTP.sendRequestNormal(reqURL, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
                 try {
