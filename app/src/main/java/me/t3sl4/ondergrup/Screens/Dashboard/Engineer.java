@@ -188,6 +188,13 @@ public class Engineer extends AppCompatActivity {
         setUserInfo();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        machineList = getMachineList();
+    }
+
     public void setUserInfo() {
         isimSoyisim.setText(this.getResources().getString(R.string.hello_prefix) + receivedUser.getNameSurname());
     }

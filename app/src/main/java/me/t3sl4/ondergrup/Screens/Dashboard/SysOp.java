@@ -106,8 +106,7 @@ public class SysOp extends AppCompatActivity {
                 if(item.getItemId() == R.id.deleteUser) {
                     //Kullanıcı silme işlemi
                     deleteUser(selectedUser.getUserName());
-                    userList.remove(selectedUser);
-                    updateUserListView(userList);
+
                 } else if(item.getItemId() == R.id.editUser) {
                     //Kullanıcı düzenleme işlemi
                     Intent userEditIntent = new Intent(SysOp.this, EditProfileScreen.class);
@@ -116,14 +115,11 @@ public class SysOp extends AppCompatActivity {
                     userEditIntent.putExtra("incomeScreen", "sysop");
 
                     startActivity(userEditIntent);
-                    userList = getUserList();
-                    updateUserListView(userList);
+
                 } else if(item.getItemId() == R.id.editRole) {
                     //Kullanıcı rol yükseltme işlemi
                     roleUpdate(selectedUser);
 
-                    userList = getUserList();
-                    updateUserListView(userList);
                 } else {
                     return false;
                 }
@@ -227,24 +223,32 @@ public class SysOp extends AppCompatActivity {
         normalRoleButton.setOnClickListener(v -> {
             String updateRoleBody = "{\"Username\": \"" + selectedUser.getUserName() + "\", \"Role\": \"" + "NORMAL" + "\"}";
             sendRoleRequest(updateRoleBody);
+            userList = getUserList();
+            updateUserListView(userList);
             roleDialog.dismiss();
         });
 
         technicianRoleButton.setOnClickListener(v -> {
             String updateRoleBody = "{\"Username\": \"" + selectedUser.getUserName() + "\", \"Role\": \"" + "TECHNICIAN" + "\"}";
             sendRoleRequest(updateRoleBody);
+            userList = getUserList();
+            updateUserListView(userList);
             roleDialog.dismiss();
         });
 
         engineerRoleButton.setOnClickListener(v -> {
             String updateRoleBody = "{\"Username\": \"" + selectedUser.getUserName() + "\", \"Role\": \"" + "ENGINEER" + "\"}";
             sendRoleRequest(updateRoleBody);
+            userList = getUserList();
+            updateUserListView(userList);
             roleDialog.dismiss();
         });
 
         sysopRoleButton.setOnClickListener(v -> {
             String updateRoleBody = "{\"Username\": \"" + selectedUser.getUserName() + "\", \"Role\": \"" + "SYSOP" + "\"}";
             sendRoleRequest(updateRoleBody);
+            userList = getUserList();
+            updateUserListView(userList);
             roleDialog.dismiss();
         });
 
