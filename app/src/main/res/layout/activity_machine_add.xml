@@ -1,164 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_dialog">
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_dialog"
+    android:fitsSystemWindows="true">
 
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ikon_line"
-        android:layout_gravity="center|top"
-        android:scaleType="centerCrop"/>
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center|center_vertical">
-
-        <TextView
-            android:id="@+id/createText"
-            android:layout_width="0dp"
-            android:layout_weight="0.8"
-            android:layout_height="wrap_content"
-            android:textAlignment="viewStart"
-            android:text="@string/machine_add"
-            android:padding="8dp"
-            android:textColor="@color/lacivert"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="5dp"
-            android:textSize="25sp" />
-
+        android:layout_height="match_parent">
         <ImageView
-            android:id="@+id/wifiButton"
-            android:layout_width="0dp"
-            android:layout_weight="0.1"
-            android:layout_height="32dp"
-            android:layout_marginBottom="10dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ikon_wifi_red" />
-
-        <ImageView
-            android:id="@+id/cancelButton"
-            android:layout_width="0dp"
-            android:layout_weight="0.1"
-            android:layout_height="32dp"
-            android:layout_marginBottom="10dp"
-            android:scaleType="fitEnd"
-            android:src="@drawable/ikon_dialog_cross" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutVideo"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/textViewMakineTuru"
-            android:layout_width="match_parent"
+            android:id="@+id/line"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/machine_type"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ikon_line"
+            android:layout_gravity="center|top"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <LinearLayout
+            android:id="@+id/mainText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="32dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_gravity="center|center_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line">
 
-            <Spinner
-                android:id="@+id/machineTypeSpinner"
+            <TextView
+                android:id="@+id/createText"
                 android:layout_width="0dp"
+                android:layout_weight="0.8"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ESP"
-                android:textColor="#182693"
-                android:textSize="18sp"
-                android:drawableStart="@drawable/ikon_machine_add_icon"
-                android:drawablePadding="10dp"/>
+                android:textAlignment="viewStart"
+                android:text="@string/machine_add"
+                android:padding="8dp"
+                android:textColor="@color/lacivert"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="5dp"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:id="@+id/wifiButton"
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="32dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ikon_wifi_red" />
+
+            <ImageView
+                android:id="@+id/cancelButton"
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="32dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="fitEnd"
+                android:src="@drawable/ikon_dialog_cross" />
+
         </LinearLayout>
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="6dp"
-            android:background="#D9D9D9" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutShorts"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/textViewMakineID"
+        <LinearLayout
+            android:id="@+id/layoutVideo"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/machine_id"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainText">
 
-        <EditText
-            android:id="@+id/editTextID"
+            <TextView
+                android:id="@+id/textViewMakineTuru"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/machine_type"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/machineTypeSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ESP"
+                    android:textColor="#182693"
+                    android:textSize="18sp"
+                    android:drawableStart="@drawable/ikon_machine_add_icon"
+                    android:drawablePadding="10dp"/>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="6dp"
+                android:background="#D9D9D9" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutShorts"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="32dp"
-            android:drawableEnd="@drawable/ikon_machine_add_camera"
-            android:hint="@string/machine_id"
-            android:inputType="text" />
-    </LinearLayout>
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutVideo">
 
-    <LinearLayout
-        android:id="@+id/layoutButton"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+            <TextView
+                android:id="@+id/textViewMakineID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/machine_id"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/makineEkleButton"
+            <EditText
+                android:id="@+id/editTextID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="32dp"
+                android:drawableEnd="@drawable/ikon_machine_add_camera"
+                android:hint="@string/machine_id"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutButton"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="32dp"
-            android:backgroundTint="@color/lacivert"
-            android:text="@string/machine_add"
-            android:textAllCaps="false"
-            android:textColor="@color/white"/>
-    </LinearLayout>
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutShorts"
+            app:layout_constraintBottom_toBottomOf="parent" >
 
-</LinearLayout>
+            <Button
+                android:id="@+id/makineEkleButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="32dp"
+                android:backgroundTint="@color/lacivert"
+                android:text="@string/machine_add"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

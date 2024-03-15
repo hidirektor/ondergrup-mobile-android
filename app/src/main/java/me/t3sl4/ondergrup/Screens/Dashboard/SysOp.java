@@ -347,6 +347,7 @@ public class SysOp extends AppCompatActivity {
                                 dilSecim, eepromData38, eepromData39, eepromData40, eepromData41,
                                 eepromData42, eepromData43, eepromData44, eepromData45, eepromData46, eepromData47,
                                 lcdBacklightSure);
+
                         machines.add(selectedMachine);
                     }
 
