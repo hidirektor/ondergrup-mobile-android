@@ -98,6 +98,8 @@ public class LoginScreen extends AppCompatActivity {
 
                 String enteredUsername = userNameField_login.getText().toString();
 
+                Log.d("testusername", enteredUsername);
+
                 SharedPreferencesManager.writeSharedPref("username", enteredUsername, this);
                 SharedPreferencesManager.writeSharedPref("password", cipheredPass, this);
                 SharedPreferencesManager.writeSharedPref("role", util.user.getRole(), this);
@@ -105,6 +107,7 @@ public class LoginScreen extends AppCompatActivity {
         });
 
         PasswordFieldTouchListener.setChangeablePasswordField(passwordField_login, getApplicationContext());
+        PasswordFieldTouchListener.setChangeablePasswordField(passwordField_register, getApplicationContext());
 
         sectionPager();
     }
@@ -298,7 +301,8 @@ public class LoginScreen extends AppCompatActivity {
                 intent.putExtra("user", util.user);
                 break;
             case "ENGINEER":
-                intent = new Intent(LoginScreen.this, Engineer.class);
+                intent = new Intent(LoginScreen.this, Engineer
+                        .class);
                 intent.putExtra("user", util.user);
                 break;
             case "SYSOP":
