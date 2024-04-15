@@ -272,11 +272,7 @@ public class LoginScreen extends AppCompatActivity {
                 util.user.setNameSurname(nameSurname);
                 util.user.setPhoneNumber(phoneNumber);
                 util.user.setCompanyName(company);
-                if(ownerName != null) {
-                    util.user.setOwnerName(ownerName);
-                } else {
-                    util.user.setOwnerName(null);
-                }
+                util.user.setOwnerName(ownerName);
                 util.user.setCreatedAt(createdAt);
                 redirectBasedRole(role);
             }

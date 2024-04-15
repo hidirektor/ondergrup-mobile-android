@@ -251,7 +251,7 @@ public class User extends AppCompatActivity {
 
         settingsButton.setOnClickListener(v -> {
             Intent settingsIntent = new Intent(User.this, EditProfileScreen.class);
-            settingsIntent.putExtra("user", receivedUser);
+            settingsIntent.putExtra("user", util.user);
             startActivity(settingsIntent);
         });
 
@@ -259,7 +259,7 @@ public class User extends AppCompatActivity {
             Intent belgelerIntent = new Intent(User.this, DocumentsScreen.class);
             startActivity(belgelerIntent);
         });
-
+ 
         subUserButton.setOnClickListener(v -> {
             if(receivedUser.getOwnerName() != null) {
                 util.showErrorPopup(uyariDiyalog, "Alt kullanıcıları yalnızca yöneticiniz görüntüleyebilir.");

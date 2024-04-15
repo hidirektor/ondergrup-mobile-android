@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -109,6 +110,8 @@ public class SubUserAddScreen extends AppCompatActivity {
             @Override
             public void onSuccess(JSONObject response) {
                 util.showSuccessPopup(uyariDiyalog, "Alt Kullanıcı Başarıyla Eklendi !");
+
+                new Handler().postDelayed(() -> finish(), 1500);
             }
 
             @Override
