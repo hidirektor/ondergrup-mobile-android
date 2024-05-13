@@ -306,7 +306,7 @@ public class User extends AppCompatActivity {
 
         String userName = receivedUser.getUserName();
         String companyName = receivedUser.getCompanyName();
-        String jsonAddMachineBody = "{\"Username\": \"" + userName + "\", \"CompanyName\": \"" + companyName + "\", \"MachineID\": \"" + machineID + "\"}";
+        String jsonAddMachineBody = "{\"Username\": \"" + userName + "\", \"CompanyName\": \"" + companyName + "\", \"MachineID\": \"" + machineID + "\", \"MachineType\": \"" + machineType + "\"}";
 
         HTTP.sendRequest(reqURL, jsonAddMachineBody, new HTTP.HttpRequestCallback() {
             @Override
@@ -552,7 +552,14 @@ public class User extends AppCompatActivity {
             });
 
 
-            addButton.setOnClickListener(view -> makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCode));
+            addButton.setOnClickListener(view -> {
+                Log.d("Selected Type", machineTypeSpinner.getSelectedItem().toString());
+                if(scannedQRCode != null) {
+                    makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCode);
+                } else {
+                    makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCodeEditText.getText().toString());
+                }
+            });
 
             String[] machineTypes = getResources().getStringArray(R.array.machineType);
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, machineTypes);
