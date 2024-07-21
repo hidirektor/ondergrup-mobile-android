@@ -1,19 +1,81 @@
+import java.text.SimpleDateFormat
+import java.util.Properties
+import java.io.FileInputStream
+import java.util.Date
+
 plugins {
     id("com.android.application")
 }
+
+val keystorePropertiesFile = file("signing.properties")
+val keystoreProperties = Properties()
+keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
     namespace = "me.t3sl4.ondergrup"
     compileSdk = 34
 
-    defaultConfig {
-        applicationId = "me.t3sl4.ondergrup"
-        minSdk = 29
-        targetSdk = 34
-        versionCode = 48
-        versionName = "T3SL4_24.01.2024"
+    applicationVariants.all {
+        outputs.all {
+            val output = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+            val variantName = name
+            val versionName = versionName
+            val formattedDate = SimpleDateFormat("dd-MM-yyyy").format(Date())
+            val fileExtension = output.outputFile.extension
+            output.outputFileName = "OnderGrup ${variantName}_${formattedDate}_v${versionName}.${fileExtension}"
+        }
+    }
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    val versionPropsFile = file("version.properties")
+    val versionProps = Properties()
+
+    if (versionPropsFile.canRead()) {
+        versionProps.load(FileInputStream(versionPropsFile))
+
+        val patch = versionProps["PATCH"].toString().toInt() + 1
+        var minor = versionProps["MINOR"].toString().toInt()
+        var major = versionProps["MAJOR"].toString().toInt()
+        val realVersionCode = versionProps["VERSION_CODE"].toString().toInt() + 1
+
+        if (patch == 100) {
+            minor += 1
+            versionProps["PATCH"] = "0"
+        } else {
+            versionProps["PATCH"] = patch.toString()
+        }
+
+        if (minor == 10) {
+            major += 1
+            minor = 0
+        }
+
+        versionProps["MINOR"] = minor.toString()
+        versionProps["MAJOR"] = major.toString()
+        versionProps["VERSION_CODE"] = realVersionCode.toString()
+        versionProps.store(versionPropsFile.writer(), null)
+
+        defaultConfig {
+            applicationId = "me.t3sl4.ondergrup"
+            minSdk = 29
+            targetSdk = 34
+            versionCode = realVersionCode
+            versionName = "$major.$minor.$patch($versionCode)"
+
+            buildConfigField("String", "BASE_URL", "\"http://85.95.231.92:4000/api/v1/\"")
+
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
+
+        signingConfigs {
+            create("key0") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+            }
+        }
+    } else {
+        throw GradleException("Could not read version.properties!")
     }
 
     buildFeatures {
@@ -21,9 +83,15 @@ android {
     }
 
     buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            buildFeatures.buildConfig = true
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -32,14 +100,19 @@ android {
     }
 }
 
+tasks.withType<JavaCompile> {
+    options.compilerArgs.add("-Xlint:deprecation")
+    options.isWarnings = true
+}
+
 dependencies {
 
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
     //Custom
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
