@@ -20,8 +20,8 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
-import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Model.User.User;
+import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 
 public class Util {

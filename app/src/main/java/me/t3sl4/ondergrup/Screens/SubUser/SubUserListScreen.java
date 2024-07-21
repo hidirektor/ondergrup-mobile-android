@@ -17,12 +17,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import me.t3sl4.ondergrup.Model.SubUser.Adapter.SubUserAdapter;
+import me.t3sl4.ondergrup.Model.SubUser.SubUser;
+import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Profile.EditSubScreen;
-import me.t3sl4.ondergrup.Model.SubUser.SubUser;
-import me.t3sl4.ondergrup.Model.SubUser.Adapter.SubUserAdapter;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
-import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SubUserListScreen extends AppCompatActivity {

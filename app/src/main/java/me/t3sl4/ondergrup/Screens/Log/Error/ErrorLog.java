@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -29,9 +28,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Model.MachineError.MachineError;
 import me.t3sl4.ondergrup.Model.MachineError.Adapter.MachineErrorAdapter;
+import me.t3sl4.ondergrup.Model.MachineError.MachineError;
+import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 

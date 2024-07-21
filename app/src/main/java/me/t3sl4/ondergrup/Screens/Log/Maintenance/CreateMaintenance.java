@@ -29,7 +29,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;

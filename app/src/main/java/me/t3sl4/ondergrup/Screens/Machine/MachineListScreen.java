@@ -16,11 +16,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Model.Machine.Machine;
 import me.t3sl4.ondergrup.Model.Machine.Adapter.MachineAdapter;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
+import me.t3sl4.ondergrup.Model.Machine.Machine;
 import me.t3sl4.ondergrup.Model.User.User;
+import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class MachineListScreen extends AppCompatActivity {

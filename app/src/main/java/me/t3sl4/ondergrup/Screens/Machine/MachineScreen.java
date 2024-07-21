@@ -7,17 +7,17 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import androidx.core.content.res.ResourcesCompat;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.Objects;
 
-import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Screens.Log.Error.ErrorLog;
 import me.t3sl4.ondergrup.Model.Machine.Machine;
 import me.t3sl4.ondergrup.Model.User.User;
+import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Log.Error.ErrorLog;
 import me.t3sl4.ondergrup.Screens.Log.Maintenance.MaintenanceLog;
 import me.t3sl4.ondergrup.Util.Util;
 

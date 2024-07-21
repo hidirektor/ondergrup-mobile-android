@@ -8,8 +8,8 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Model.User.User;
+import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SubUserScreen extends AppCompatActivity {
