@@ -14,12 +14,9 @@ import org.json.JSONObject;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class ForgetPasswordSelection extends AppCompatActivity {
-    public Util util;
-
     public String userName;
 
     private Dialog uyariDiyalog;
@@ -29,8 +26,6 @@ public class ForgetPasswordSelection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password_selection);
 
-        util = new Util(getApplicationContext());
-
         uyariDiyalog = new Dialog(this);
         Intent intent = getIntent();
         if (intent != null) {
@@ -39,12 +34,12 @@ public class ForgetPasswordSelection extends AppCompatActivity {
     }
 
     public void sendOTPWithSMS(View view) {
-        util.showErrorPopup(uyariDiyalog, "SMS sistemimiz henüz aktif değil.");
+        Util.showErrorPopup(uyariDiyalog, "SMS sistemimiz henüz aktif değil.");
     }
 
     public void sendOTPWithEmail(View view) {
         if(!userName.equals(null)) {
-            String userTypeUrl = util.BASE_URL + util.profileInfoURLPrefix + ":Email";
+            /*String userTypeUrl = util.BASE_URL + util.profileInfoURLPrefix + ":Email";
             String jsonProfileInfoBody = "{\"Username\": \"" + userName + "\"}";
 
             HTTP.sendRequest(userTypeUrl, jsonProfileInfoBody, new HTTP.HttpRequestCallback() {
@@ -67,14 +62,14 @@ public class ForgetPasswordSelection extends AppCompatActivity {
                 public void onFailure(String errorMessage) {
                     util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen bilgilerini kontrol edip tekrar dene.");
                 }
-            }, Volley.newRequestQueue(this));
+            }, Volley.newRequestQueue(this));*/
         } else {
-            util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen bilgilerini kontrol edip tekrar dene.");
+            Util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen bilgilerini kontrol edip tekrar dene.");
         }
     }
 
     public void sendOTP(String email) {
-        String otpUrl = util.BASE_URL + util.otpURLPrefix;
+        /*String otpUrl = util.BASE_URL + util.otpURLPrefix;
         String jsonOTPBody = "{\"Email\": \"" + email + "\"}";
 
         HTTP.sendRequest(otpUrl, jsonOTPBody, new HTTP.HttpRequestCallback() {
@@ -101,7 +96,7 @@ public class ForgetPasswordSelection extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen bilgilerini kontrol edip tekrar dene.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
     }
 
     public void callBackScreenFromMakeSelection(View view) {

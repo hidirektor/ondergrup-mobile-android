@@ -101,35 +101,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_gravity="start">
-
-                        <com.zpj.widget.checkbox.ZCheckBox
-                            android:id="@+id/beniHatirlaCheckBox"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.1"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="5dp"
-                            android:padding="5dp"
-                            app:z_checkbox_checked_color="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.7"
-                            android:layout_gravity="center"
-                            android:text="@string/rememberme"
-                            android:textColor="@color/atlaTextColor"
-                            android:fontFamily="@font/poppins"/>
-                    </LinearLayout>
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="end">
 
                     <TextView
                         android:id="@+id/resetPassButton"

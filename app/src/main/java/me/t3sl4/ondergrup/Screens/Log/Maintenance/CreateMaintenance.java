@@ -33,11 +33,9 @@ import java.util.ArrayList;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class CreateMaintenance extends AppCompatActivity {
-    public Util util;
     public User receivedUser;
 
     private ArrayList<EditText> editTextList = new ArrayList<>();
@@ -80,7 +78,6 @@ public class CreateMaintenance extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintenancelog_create);
 
-        util = new Util(getApplicationContext());
         uyariDiyalog = new Dialog(this);
 
         Intent intent = getIntent();
@@ -130,7 +127,7 @@ public class CreateMaintenance extends AppCompatActivity {
             if(checkIfAnyMaintenanceVariableIsNull()) {
                 createMaintenanceRequest(machineID, receivedUser.getUserName());
             } else {
-                util.showErrorPopup(uyariDiyalog, "Bakım kaydı oluşturulamadı. \nLütfen bilgileri kontrol edip tekrar deneyin.");
+                Util.showErrorPopup(uyariDiyalog, "Bakım kaydı oluşturulamadı. \nLütfen bilgileri kontrol edip tekrar deneyin.");
             }
         });
 
@@ -560,7 +557,7 @@ public class CreateMaintenance extends AppCompatActivity {
     }
 
     private void createMaintenanceRequest(String machineID, String userName) {
-        String requestURL = util.BASE_URL + util.createMaintenancePrefix;
+        /*String requestURL = util.BASE_URL + util.createMaintenancePrefix;
 
         String requestBody = String.format(
                 "{\"MachineID\": \"%s\", \"Technician\": \"%s\", " +
@@ -599,7 +596,7 @@ public class CreateMaintenance extends AppCompatActivity {
                 Log.d("createMaintenance", requestURL + " " + requestBody);
                 util.showErrorPopup(uyariDiyalog, "Bakım kaydı oluşturulamadı. \nLütfen bilgileri kontrol edip tekrar deneyin.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
     }
 
     public boolean checkIfAnyMaintenanceVariableIsNull() {

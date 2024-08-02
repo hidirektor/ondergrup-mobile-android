@@ -22,11 +22,9 @@ import java.util.Locale;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SubUserAddScreen extends AppCompatActivity {
-    public Util util;
     public User receivedUser;
 
     private Button signUp;
@@ -45,12 +43,10 @@ public class SubUserAddScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_subuser_add);
 
         uyariDiyalog = new Dialog(this);
 
-        util = new Util(getApplicationContext());
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
@@ -99,12 +95,12 @@ public class SubUserAddScreen extends AppCompatActivity {
 
             sendRegisterRequestFinal(registerJsonBody, userName);
         } else {
-            util.showErrorPopup(uyariDiyalog, "Alt kullanıcı eklemek için tüm alanları doldurmalısın.");
+            Util.showErrorPopup(uyariDiyalog, "Alt kullanıcı eklemek için tüm alanları doldurmalısın.");
         }
     }
 
     private void sendRegisterRequestFinal(String jsonBody, String userName) {
-        String registerUrl = util.BASE_URL + util.addSubURLPrefix;
+        /*String registerUrl = util.BASE_URL + util.addSubURLPrefix;
 
         HTTP.sendRequest(registerUrl, jsonBody, new HTTP.HttpRequestCallback() {
             @Override
@@ -118,7 +114,7 @@ public class SubUserAddScreen extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Alt kullanıcı eklerken hata meydana geldi. Lütfen tekrar dene.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
     }
 
     private boolean checkFields(String userName, String email, String password, String nameSurname, String phone, String companyName) {

@@ -22,7 +22,6 @@ import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SupportScreen extends AppCompatActivity {
-    public Util util;
     public User receivedUser;
 
     private Button mapButton;
@@ -36,10 +35,7 @@ public class SupportScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_support_selection);
-
-        util = new Util(getApplicationContext());
 
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");

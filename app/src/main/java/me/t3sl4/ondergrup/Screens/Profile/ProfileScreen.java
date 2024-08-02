@@ -19,7 +19,6 @@ import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class ProfileScreen extends AppCompatActivity {
-    public Util util;
     public User receivedUser;
 
     private ImageView backButton;
@@ -37,10 +36,7 @@ public class ProfileScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_profile);
-
-        util = new Util(getApplicationContext());
 
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
@@ -60,7 +56,7 @@ public class ProfileScreen extends AppCompatActivity {
 
         editProfileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(ProfileScreen.this, EditProfileScreen.class);
-            profileIntent.putExtra("user", util.user);
+            profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
             finish();
         });

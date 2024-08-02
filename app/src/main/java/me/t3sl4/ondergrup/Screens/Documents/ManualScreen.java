@@ -35,7 +35,7 @@ public class ManualScreen extends AppCompatActivity {
         dataWebView.getSettings().setBuiltInZoomControls(true);
         dataWebView.getSettings().setDisplayZoomControls(false);
 
-        dataWebView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + util.manualPDFUrlPrefix);
+        //dataWebView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + util.manualPDFUrlPrefix);
 
         closeButton.setOnClickListener(v -> finish());
     }

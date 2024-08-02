@@ -5,6 +5,10 @@ import android.os.Parcelable;
 
 public class User implements Parcelable {
 
+    private String userID;
+    private String accessToken;
+    private String refreshToken;
+
     private String role;
     private String userName;
     private String eMail;
@@ -86,6 +90,30 @@ public class User implements Parcelable {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     @Override

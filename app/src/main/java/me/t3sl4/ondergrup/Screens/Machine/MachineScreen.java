@@ -22,7 +22,6 @@ import me.t3sl4.ondergrup.Screens.Log.Maintenance.MaintenanceLog;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class MachineScreen extends AppCompatActivity {
-    public Util util;
     public User receivedUser;
     public Machine selectedMachine;
 
@@ -56,7 +55,6 @@ public class MachineScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine);
 
-        util = new Util(getApplicationContext());
         uyariDiyalog = new Dialog(this);
 
         Intent intent = getIntent();

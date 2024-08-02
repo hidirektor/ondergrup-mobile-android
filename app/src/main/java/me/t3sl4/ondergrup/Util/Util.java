@@ -27,53 +27,13 @@ import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 public class Util {
     public Context context;
 
-    public static User user = new User("1", "1", "1", "1", "1", "1", "1");
-
-    public String BASE_URL = "http://85.95.231.92:3000";
-
-    public String loginURLPrefix = "/api/login";
-    public String getPassURLPrefix = "/api/getCipheredPass";
-    public String directLoginURLPrefix = "/api/directLogin";
-    public String registerURLPrefix = "/api/register";
-    public String otpURLPrefix = "/api/sendOTP";
-    public String addSubURLPrefix = "/api/createSub";
-    public String getSubUsersPrefix = "/api/getSubUsers";
-    public String deleteSubUserPrefix = "/api/deleteSubUser";
-
-
-    public String profileInfoURLPrefix = "/api/users/profileInfo/";
-    public String updatePassURLPrefix = "/api/users/updatePass";
-    public String updateProfileURLPrefix = "/api/users/updateProfile";
-    public String wholeProfileURLPrefix = "/api/users/getWholeProfileInfo";
-    public String getPhotoURLPrefix = "/api/fileSystem/getPhoto/";
-    public String updateRolePrefix = "/api/users/updateRole";
-
-    public String addMachineURL = "/api/machine/add";
-    public String getMachineURL = "/api/machine/getMachines";
-    public String getAllMachinesURL = "/api/machine/getAllMachines";
-    public String getMachineErrorURL = "/api/machine/getMachineErrors";
-    public String getMachineMaintenanceURL = "/api/machine/getMachineMaintenances";
-    public String getMachineErrorAllURL = "/api/machine/getMachineErrorsAll";
-    public String getMachineMaintenanceAllURL = "/api/machine/getMachineMaintenancesAll";
-    public String updateMachineOwner = "/api/machine/updateOwner";
-
-    public String getAllUsersURL = "/api/users/getAllUsers";
-    public String deleteUser = "/api/users/deleteUser";
-
-    public String createMaintenancePrefix = "/api/machine/createMaintenance";
-
-
-    public String uploadURLPrefix = "/api/fileSystem/upload";
-    public String downloadPhotoURLPrefix = "/api/fileSystem/downloadPhoto";
-    public String manualPDFUrlPrefix = "https://hidirektor.com.tr/manual/manual.pdf";
-
     public static String profilePhotoPath;
     public Util(Context context) {
         this.context = context;
         this.profilePhotoPath = context.getFilesDir() + "/profilePhoto/";
     }
 
-    public boolean isEmpty(TextInputEditText etText) {
+    public static boolean isEmpty(TextInputEditText etText) {
         if (Objects.requireNonNull(etText.getText()).toString().trim().length() > 0)
             return false;
 
@@ -87,7 +47,7 @@ public class Util {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public void showErrorPopup(Dialog diyalog, String hataMesaji) {
+    public static void showErrorPopup(Dialog diyalog, String hataMesaji) {
         diyalog.setContentView(R.layout.activity_popup_warning);
         Button close = diyalog.findViewById(R.id.kapatButton);
         TextView hataMesajiTextView = diyalog.findViewById(R.id.uyariMesaji);
@@ -130,6 +90,13 @@ public class Util {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    public static String convertUnixTimestampToDateString(long unixTimestamp) {
+        Date date = new Date(unixTimestamp * 1000L); // Convert seconds to milliseconds
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+        sdf.setTimeZone(TimeZone.getDefault());
+        return sdf.format(date);
     }
 
     public static void setLocale(Context context, String newLanguage) {

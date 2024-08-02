@@ -13,7 +13,6 @@ import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SubUserScreen extends AppCompatActivity {
-    public Util util;
     public User receivedUser;
 
     private Button subUserListeleButton;
@@ -28,7 +27,6 @@ public class SubUserScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_subuser);
 
-        util = new Util(getApplicationContext());
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 

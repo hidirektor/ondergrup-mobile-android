@@ -59,14 +59,13 @@ import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.QR.QRScanner;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
+import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.Navigation.NavigationManager;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class User extends AppCompatActivity {
     private static final String TARGET_WIFI_SSID = "OnderGrup_IoT";
-    public Util util;
 
     private TextView isimSoyisim;
 
@@ -125,7 +124,7 @@ public class User extends AppCompatActivity {
                     } else if(originalIntent.hasExtra(Intents.Scan.MISSING_CAMERA_PERMISSION)) {
                         Log.d("MainActivity", "Kamera yetkisi eksik");
                         String cameraPerm = getResources().getString(R.string.camera_permission_error);
-                        util.showErrorPopup(uyariDiyalog, cameraPerm);
+                        Util.showErrorPopup(uyariDiyalog, cameraPerm);
                     }
                 } else {
                     Log.d("MainActivity", "Taramam tamamlandı");
@@ -141,7 +140,6 @@ public class User extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_user);
 
-        util = new Util(this);
         uyariDiyalog = new Dialog(this);
         qrDiyalog = new Dialog(this);
 
@@ -198,7 +196,7 @@ public class User extends AppCompatActivity {
 
         navProfileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(User.this, ProfileScreen.class);
-            profileIntent.putExtra("user", util.user);
+            profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
         });
         subLanguage.setOnClickListener(v -> {
@@ -223,7 +221,7 @@ public class User extends AppCompatActivity {
             switchLanguage();
         });
 
-        logoutButton.setOnClickListener(v -> logoutProcess());
+        logoutButton.setOnClickListener(v -> UserDataService.logout(this));
 
         feedbackButton.setOnClickListener(v -> {
             String url = "https://play.google.com/store/apps/details?id=me.t3sl4.ondergrup&hl=tr&gl=US";
@@ -244,13 +242,13 @@ public class User extends AppCompatActivity {
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(User.this, ProfileScreen.class);
-            profileIntent.putExtra("user", util.user);
+            profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
         });
 
         settingsButton.setOnClickListener(v -> {
             Intent settingsIntent = new Intent(User.this, EditProfileScreen.class);
-            settingsIntent.putExtra("user", util.user);
+            settingsIntent.putExtra("user", receivedUser);
             startActivity(settingsIntent);
         });
 
@@ -261,7 +259,7 @@ public class User extends AppCompatActivity {
  
         subUserButton.setOnClickListener(v -> {
             if(receivedUser.getOwnerName() != null) {
-                util.showErrorPopup(uyariDiyalog, "Alt kullanıcıları yalnızca yöneticiniz görüntüleyebilir.");
+                Util.showErrorPopup(uyariDiyalog, "Alt kullanıcıları yalnızca yöneticiniz görüntüleyebilir.");
             } else {
                 Intent settingsIntent = new Intent(User.this, SubUserScreen.class);
                 settingsIntent.putExtra("user", receivedUser);
@@ -301,7 +299,7 @@ public class User extends AppCompatActivity {
     }
 
     public void makineEkle(String machineType, String machineID) {
-        String reqURL = util.BASE_URL + util.addMachineURL;
+        /*String reqURL = util.BASE_URL + util.addMachineURL;
 
         String userName = receivedUser.getUserName();
         String companyName = receivedUser.getCompanyName();
@@ -318,7 +316,7 @@ public class User extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Kullanıcı adı veya şifreniz hatalı. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
     }
 
     private boolean isConnectedToTargetWifi() {
@@ -342,7 +340,7 @@ public class User extends AppCompatActivity {
     }
 
     private ArrayList<Machine> getMachineList() {
-        ArrayList<Machine> machines = new ArrayList<>();
+        /*ArrayList<Machine> machines = new ArrayList<>();
         String reqURL = util.BASE_URL + util.getMachineURL;
         String jsonSubUserBody = "{\"username\": \"" + receivedUser.getUserName() + "\"}";
 
@@ -428,7 +426,8 @@ public class User extends AppCompatActivity {
                 util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
             }
         }, Volley.newRequestQueue(this));
-        return machines;
+        return machines;*/
+        return null;
     }
 
     private void updateListView(ArrayList<Machine> machines) {
@@ -570,22 +569,8 @@ public class User extends AppCompatActivity {
             qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
             qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
         } else {
-            util.showErrorPopup(uyariDiyalog, "Sadece NORMAL kullanıcılar doğrudan makine ekleyebilir.");
+            Util.showErrorPopup(uyariDiyalog, "Sadece NORMAL kullanıcılar doğrudan makine ekleyebilir.");
         }
-    }
-
-    private void logoutProcess() {
-        String username = SharedPreferencesManager.getSharedPref("username", this, "");
-
-        if(!username.isEmpty()) {
-            SharedPreferencesManager.writeSharedPref("username", "", this);
-            SharedPreferencesManager.writeSharedPref("password", "", this);
-            SharedPreferencesManager.writeSharedPref("role", "", this);
-        }
-
-        Intent loginIntent = new Intent(User.this, LoginScreen.class);
-        startActivity(loginIntent);
-        finish();
     }
 
     private void minimizeMainLayout() {

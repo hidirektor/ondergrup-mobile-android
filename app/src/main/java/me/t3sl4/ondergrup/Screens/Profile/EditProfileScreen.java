@@ -22,11 +22,9 @@ import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class EditProfileScreen extends AppCompatActivity {
-    public Util util;
     public User receivedUser;
     public User mainUser;
 
@@ -51,8 +49,6 @@ public class EditProfileScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_profile_edit);
-
-        util = new Util(getApplicationContext());
 
         uyariDiyalog = new Dialog(this);
         Intent intent = getIntent();
@@ -133,7 +129,7 @@ public class EditProfileScreen extends AppCompatActivity {
     }
 
     private void sendUpdateRequest(String jsonBody, String username) {
-        String updateProfileUrl = util.BASE_URL + util.updateProfileURLPrefix;
+        /*String updateProfileUrl = util.BASE_URL + util.updateProfileURLPrefix;
 
         HTTP.sendRequest(updateProfileUrl, jsonBody, new HTTP.HttpRequestCallback() {
             @Override
@@ -148,7 +144,7 @@ public class EditProfileScreen extends AppCompatActivity {
                 Log.e("Hata", " " + errorMessage);
                 util.showErrorPopup(uyariDiyalog, "Profil güncellenirken hata meydana geldi. Lütfen tekrar dene.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
     }
 
     @Override

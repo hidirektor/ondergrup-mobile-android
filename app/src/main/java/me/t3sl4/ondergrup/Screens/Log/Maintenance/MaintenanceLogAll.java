@@ -20,12 +20,9 @@ import me.t3sl4.ondergrup.Model.MachineMaintenance.Adapter.MaintenanceAllAdapter
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class MaintenanceLogAll extends AppCompatActivity {
-    public Util util;
-
     private ImageView backToMain;
 
     private ListView machineMaintenances;
@@ -41,7 +38,6 @@ public class MaintenanceLogAll extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintenancelog_all);
 
-        util = new Util(this);
         uyariDiyalog = new Dialog(this);
 
         Intent intent = getIntent();
@@ -67,7 +63,7 @@ public class MaintenanceLogAll extends AppCompatActivity {
 
     private ArrayList<Maintenance> getMachineMaintenancesList() {
         ArrayList<Maintenance> machineErrorsTemp = new ArrayList<>();
-        String reqURL = util.BASE_URL + util.getMachineMaintenanceAllURL;
+        /*String reqURL = util.BASE_URL + util.getMachineMaintenanceAllURL;
 
         HTTP.sendRequestNormal(reqURL, new HTTP.HttpRequestCallback() {
             @Override
@@ -140,7 +136,7 @@ public class MaintenanceLogAll extends AppCompatActivity {
                 String hatasizMesaj = MaintenanceLogAll.this.getResources().getString(R.string.bakimyok);
                 util.showSuccessPopup(uyariDiyalog, hatasizMesaj);
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
         return machineErrorsTemp;
     }
 

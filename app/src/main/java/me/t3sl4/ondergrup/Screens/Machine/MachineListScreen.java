@@ -20,11 +20,9 @@ import me.t3sl4.ondergrup.Model.Machine.Adapter.MachineAdapter;
 import me.t3sl4.ondergrup.Model.Machine.Machine;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class MachineListScreen extends AppCompatActivity {
-    public Util util;
     public User receivedUser;
 
     private ImageView backButton;
@@ -40,7 +38,6 @@ public class MachineListScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine_list);
 
-        util = new Util(getApplicationContext());
         uyariDiyalog = new Dialog(this);
 
         Intent intent = getIntent();
@@ -65,7 +62,7 @@ public class MachineListScreen extends AppCompatActivity {
 
     private ArrayList<Machine> getMachineList() {
         ArrayList<Machine> machines = new ArrayList<>();
-        String reqURL = util.BASE_URL + util.getMachineURL;
+        /*String reqURL = util.BASE_URL + util.getMachineURL;
         String jsonSubUserBody = "{\"username\": \"" + receivedUser.getUserName() + "\"}";
 
         HTTP.sendRequest(reqURL, jsonSubUserBody, new HTTP.HttpRequestCallback() {
@@ -149,7 +146,7 @@ public class MachineListScreen extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
         return machines;
     }
 

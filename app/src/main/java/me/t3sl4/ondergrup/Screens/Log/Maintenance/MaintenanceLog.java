@@ -23,11 +23,9 @@ import java.util.Objects;
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Adapter.MaintenanceAdapter;
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class MaintenanceLog extends AppCompatActivity {
-    public Util util;
     public me.t3sl4.ondergrup.Model.User.User receivedUser;
 
     private ImageView backToMachine;
@@ -46,7 +44,6 @@ public class MaintenanceLog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintenancelog);
 
-        util = new Util(this);
         uyariDiyalog = new Dialog(this);
 
         Intent intent = getIntent();
@@ -92,7 +89,7 @@ public class MaintenanceLog extends AppCompatActivity {
 
     private ArrayList<Maintenance> getMachineMaintenanceList() {
         ArrayList<Maintenance> machineMaintenancesTemp = new ArrayList<>();
-        String reqURL = util.BASE_URL + util.getMachineMaintenanceURL;
+        /*String reqURL = util.BASE_URL + util.getMachineMaintenanceURL;
         String jsonErrorBody = "{\"machineID\": \"" + currentMachineID + "\"}";
 
         Log.d("ErrorLog-URL", reqURL);
@@ -169,7 +166,7 @@ public class MaintenanceLog extends AppCompatActivity {
                 String hatasizMesaj = MaintenanceLog.this.getResources().getString(R.string.bakimyok);
                 util.showSuccessPopup(uyariDiyalog, hatasizMesaj);
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
         return machineMaintenancesTemp;
     }
 

@@ -52,13 +52,12 @@ import me.t3sl4.ondergrup.Screens.Machine.RestrictedMachineScreen;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.QR.QRScanner;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
+import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class Technician extends AppCompatActivity {
     private static final String TARGET_WIFI_SSID = "OnderGrup_IoT";
-    public Util util;
 
     private TextView isimSoyisim;
 
@@ -97,7 +96,7 @@ public class Technician extends AppCompatActivity {
                     } else if(originalIntent.hasExtra(Intents.Scan.MISSING_CAMERA_PERMISSION)) {
                         Log.d("MainActivity", "Kamera yetkisi eksik");
                         String cameraPerm = getResources().getString(R.string.camera_permission_error);
-                        util.showErrorPopup(uyariDiyalog, cameraPerm);
+                        Util.showErrorPopup(uyariDiyalog, cameraPerm);
                     }
                 } else {
                     Log.d("MainActivity", "Taramam tamamlandı");
@@ -113,7 +112,6 @@ public class Technician extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_technician);
 
-        util = new Util(this);
         uyariDiyalog = new Dialog(this);
         qrDiyalog = new Dialog(this);
 
@@ -146,7 +144,7 @@ public class Technician extends AppCompatActivity {
         });
 
         //Top Buttons:
-        logoutButton.setOnClickListener(v -> logoutProcess());
+        logoutButton.setOnClickListener(v -> UserDataService.logout(this));
 
         allMaintenancesButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(Technician.this, MaintenanceLogAll.class);
@@ -169,7 +167,7 @@ public class Technician extends AppCompatActivity {
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(Technician.this, ProfileScreen.class);
-            profileIntent.putExtra("user", util.user);
+            profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
         });
 
@@ -193,7 +191,7 @@ public class Technician extends AppCompatActivity {
     }
 
     public void makineEkle(String machineType, String machineID) {
-        String reqURL = util.BASE_URL + util.addMachineURL;
+        /*String reqURL = util.BASE_URL + util.addMachineURL;
 
         String userName = receivedUser.getUserName();
         String companyName = receivedUser.getCompanyName();
@@ -210,7 +208,7 @@ public class Technician extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Kullanıcı adı veya şifreniz hatalı. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
     }
 
     private boolean isConnectedToTargetWifi() {
@@ -234,7 +232,7 @@ public class Technician extends AppCompatActivity {
     }
 
     private ArrayList<Machine> getMachineList() {
-        ArrayList<Machine> machines = new ArrayList<>();
+        /*ArrayList<Machine> machines = new ArrayList<>();
         String reqURL = util.BASE_URL + util.getAllMachinesURL;
 
         HTTP.sendRequestNormal(reqURL, new HTTP.HttpRequestCallback() {
@@ -319,7 +317,8 @@ public class Technician extends AppCompatActivity {
                 util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
             }
         }, Volley.newRequestQueue(this));
-        return machines;
+        return machines;*/
+        return null;
     }
 
     private void updateListView(ArrayList<Machine> machines) {
@@ -397,22 +396,8 @@ public class Technician extends AppCompatActivity {
             qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
             qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
         } else {
-            util.showErrorPopup(uyariDiyalog, "Sadece NORMAL kullanıcılar doğrudan makine ekleyebilir.");
+            Util.showErrorPopup(uyariDiyalog, "Sadece NORMAL kullanıcılar doğrudan makine ekleyebilir.");
         }
-    }
-
-    private void logoutProcess() {
-        String username = SharedPreferencesManager.getSharedPref("username", this, "");
-
-        if(!username.isEmpty()) {
-            SharedPreferencesManager.writeSharedPref("username", "", this);
-            SharedPreferencesManager.writeSharedPref("password", "", this);
-            SharedPreferencesManager.writeSharedPref("role", "", this);
-        }
-
-        Intent loginIntent = new Intent(Technician.this, LoginScreen.class);
-        startActivity(loginIntent);
-        finish();
     }
 
     private void switchLanguage() {

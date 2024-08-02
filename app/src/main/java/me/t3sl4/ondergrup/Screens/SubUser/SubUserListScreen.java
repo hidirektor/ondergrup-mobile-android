@@ -22,11 +22,9 @@ import me.t3sl4.ondergrup.Model.SubUser.SubUser;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Profile.EditSubScreen;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SubUserListScreen extends AppCompatActivity {
-    public Util util;
     public User receivedUser;
 
     private ListView subUserListView;
@@ -43,7 +41,6 @@ public class SubUserListScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_subuser_list);
 
-        util = new Util(getApplicationContext());
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
         uyariDiyalog = new Dialog(this);
@@ -87,7 +84,7 @@ public class SubUserListScreen extends AppCompatActivity {
 
     private ArrayList<SubUser> getSubUserList() {
         ArrayList<SubUser> subUsers = new ArrayList<>();
-        String reqURL = util.BASE_URL + util.getSubUsersPrefix;
+        /*String reqURL = util.BASE_URL + util.getSubUsersPrefix;
         String jsonSubUserBody = "{\"username\": \"" + receivedUser.getUserName() + "\"}";
 
         HTTP.sendRequest(reqURL, jsonSubUserBody, new HTTP.HttpRequestCallback() {
@@ -120,7 +117,7 @@ public class SubUserListScreen extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
         return subUsers;
     }
 
@@ -131,7 +128,7 @@ public class SubUserListScreen extends AppCompatActivity {
     }
 
     private void deleteAndUpdateSubUser(SubUser selectedSubUser, ArrayList<SubUser> subUsers) {
-        String reqURL = util.BASE_URL + util.deleteSubUserPrefix;
+        /*String reqURL = util.BASE_URL + util.deleteSubUserPrefix;
 
         String selectedSubUsername = selectedSubUser.getUserName();
         String ownerName = receivedUser.getUserName();
@@ -147,7 +144,7 @@ public class SubUserListScreen extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Kullanıcı silinmeedi. \nLütfen birazdan tekrar deneyin.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
 
         subUsers.remove(selectedSubUser);
         updateListView(subUsers);

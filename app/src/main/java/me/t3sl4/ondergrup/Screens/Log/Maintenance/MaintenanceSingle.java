@@ -20,7 +20,6 @@ import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 
 public class MaintenanceSingle extends AppCompatActivity {
-
     private ImageView backToMachine;
 
     private Button fonksiyonlarVeKontrol;

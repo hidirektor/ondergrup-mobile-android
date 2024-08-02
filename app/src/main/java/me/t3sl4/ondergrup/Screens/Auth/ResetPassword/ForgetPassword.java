@@ -17,12 +17,9 @@ import org.json.JSONObject;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class ForgetPassword extends AppCompatActivity {
-    public Util util;
-
     private TextInputLayout forgetPassUsername;
     private TextInputEditText forgetPassUsernameText;
     private Button forgetPassButton;
@@ -34,7 +31,6 @@ public class ForgetPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
 
-        util = new Util(getApplicationContext());
         uyariDiyalog = new Dialog(this);
 
         forgetPassUsername = findViewById(R.id.forgetPassUsername);
@@ -42,17 +38,17 @@ public class ForgetPassword extends AppCompatActivity {
         forgetPassButton = findViewById(R.id.forgetPassButton);
 
         forgetPassButton.setOnClickListener(v -> {
-            if(!util.isEmpty(forgetPassUsernameText)) {
+            if(!Util.isEmpty(forgetPassUsernameText)) {
                 String username = forgetPassUsernameText.getText().toString();
                 sendOTP(username);
             } else {
-                util.showErrorPopup(uyariDiyalog, "E-Posta alanı boş olamaz.");
+                Util.showErrorPopup(uyariDiyalog, "E-Posta alanı boş olamaz.");
             }
         });
     }
 
     private void sendOTP(String username) {
-        String userTypeUrl = util.BASE_URL + util.profileInfoURLPrefix + ":Role";
+        /*String userTypeUrl = util.BASE_URL + util.profileInfoURLPrefix + ":Role";
         String jsonProfileInfoBody = "{\"Username\": \"" + username + "\"}";
 
         HTTP.sendRequest(userTypeUrl, jsonProfileInfoBody, new HTTP.HttpRequestCallback() {
@@ -78,7 +74,7 @@ public class ForgetPassword extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. İstersen tekrar deneyebilirsin.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
     }
 
     public void callBackScreenFromForgetPassword(View view) {

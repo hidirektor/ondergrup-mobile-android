@@ -28,11 +28,9 @@ import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Log.Error.ErrorLog;
 import me.t3sl4.ondergrup.Screens.Log.Maintenance.MaintenanceLog;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class RestrictedMachineScreen extends AppCompatActivity {
-    public Util util;
     public User receivedUser;
     public Machine selectedMachine;
 
@@ -96,7 +94,6 @@ public class RestrictedMachineScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine_restricted);
 
-        util = new Util(getApplicationContext());
         uyariDiyalog = new Dialog(this);
 
         Intent intent = getIntent();
@@ -259,7 +256,7 @@ public class RestrictedMachineScreen extends AppCompatActivity {
         ownerButton.setOnClickListener(v -> {
             if(newOwner.getText() == null) {
                 String errorMessage = this.getResources().getString(R.string.cantbenull);
-                util.showErrorPopup(uyariDiyalog, errorMessage);
+                Util.showErrorPopup(uyariDiyalog, errorMessage);
                 roleDialog.dismiss();
             } else {
                 String updateOwnerBody = "{\"MachineID\": \"" + machineID + "\", \"Owner\": \"" + newOwner.getText().toString() + "\"}";
@@ -273,7 +270,7 @@ public class RestrictedMachineScreen extends AppCompatActivity {
     }
 
     private void sendOwnerRequest(String updateBody) {
-        String updateRoleURL = util.BASE_URL + util.updateMachineOwner;
+        /*String updateRoleURL = util.BASE_URL + util.updateMachineOwner;
         HTTP.sendRequest(updateRoleURL, updateBody, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
@@ -285,6 +282,6 @@ public class RestrictedMachineScreen extends AppCompatActivity {
                 Log.d("updateRole", updateRoleURL + " " + updateBody);
                 util.showErrorPopup(uyariDiyalog, "Makine sahibi güncellenemedi. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
     }
 }

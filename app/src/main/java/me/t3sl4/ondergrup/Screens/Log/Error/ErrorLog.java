@@ -31,12 +31,9 @@ import java.util.Objects;
 import me.t3sl4.ondergrup.Model.MachineError.Adapter.MachineErrorAdapter;
 import me.t3sl4.ondergrup.Model.MachineError.MachineError;
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class ErrorLog extends AppCompatActivity {
-    public Util util;
-
     private ImageView backToMachine;
 
     private ListView machineErrors;
@@ -52,7 +49,6 @@ public class ErrorLog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_errorlog);
 
-        util = new Util(this);
         uyariDiyalog = new Dialog(this);
 
         Intent intent = getIntent();
@@ -78,7 +74,7 @@ public class ErrorLog extends AppCompatActivity {
 
     private ArrayList<MachineError> getMachineErrorList() {
         ArrayList<MachineError> machineErrorsTemp = new ArrayList<>();
-        String reqURL = util.BASE_URL + util.getMachineErrorURL;
+        /*String reqURL = util.BASE_URL + util.getMachineErrorURL;
         String jsonErrorBody = "{\"machineID\": \"" + currentMachineID + "\"}";
 
         Log.d("ErrorLog-URL", reqURL);
@@ -111,7 +107,7 @@ public class ErrorLog extends AppCompatActivity {
                 String hatasizMesaj = ErrorLog.this.getResources().getString(R.string.hatayok);
                 util.showSuccessPopup(uyariDiyalog, hatasizMesaj);
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
         return machineErrorsTemp;
     }
 

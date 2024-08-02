@@ -18,12 +18,9 @@ import org.json.JSONObject;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class ForgetPasswordNewPass extends AppCompatActivity {
-    public Util util;
-
     public String eMail;
 
     private TextInputLayout editTextNewPass;
@@ -41,8 +38,6 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password_new_password);
-
-        util = new Util(getApplicationContext());
 
         uyariDiyalog = new Dialog(this);
         Intent intent = getIntent();
@@ -68,7 +63,7 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
             secondPass = editTextConfirmNewPassText.getText().toString();
 
             if(firstPass.equals(secondPass)) {
-                String otpUrl = util.BASE_URL + util.updatePassURLPrefix;
+                /*String otpUrl = util.BASE_URL + util.updatePassURLPrefix;
                 String jsonUpdatePassBody = "{\"Email\": \"" + eMail + "\", \"Password\": \"" + firstPass + "\"}";
 
                 HTTP.sendRequest(otpUrl, jsonUpdatePassBody, new HTTP.HttpRequestCallback() {
@@ -93,12 +88,12 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
                     public void onFailure(String errorMessage) {
                         util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen tekrar dene.");
                     }
-                }, Volley.newRequestQueue(this));
+                }, Volley.newRequestQueue(this));*/
             } else {
-                util.showErrorPopup(uyariDiyalog, "Girilen şifreler birbirleriyle uyuşmuyor. Lütfen tekrar dene.");
+                Util.showErrorPopup(uyariDiyalog, "Girilen şifreler birbirleriyle uyuşmuyor. Lütfen tekrar dene.");
             }
         } else {
-            util.showErrorPopup(uyariDiyalog, "İki şifre alanını da doldurman gerekiyor.");
+            Util.showErrorPopup(uyariDiyalog, "İki şifre alanını da doldurman gerekiyor.");
         }
     }
 

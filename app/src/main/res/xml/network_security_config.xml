@@ -3,4 +3,10 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">85.95.231.92</domain>
     </domain-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">hidirektor.com.tr</domain>
+    </domain-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">ondergrup.hidirektor.com.tr</domain>
+    </domain-config>
 </network-security-config>

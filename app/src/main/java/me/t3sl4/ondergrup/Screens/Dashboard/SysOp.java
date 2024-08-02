@@ -33,15 +33,14 @@ import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.Machine.RestrictedMachineScreen;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
+import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
-import me.t3sl4.ondergrup.Util.HTTP.HTTP;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SysOp extends AppCompatActivity {
 
     public me.t3sl4.ondergrup.Model.User.User receivedUser;
-    public Util util;
     private Dialog uyariDiyalog;
 
     private TextView isimSoyisim;
@@ -70,7 +69,6 @@ public class SysOp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_sysop);
 
-        util = new Util(this);
         uyariDiyalog = new Dialog(this);
 
         Intent intent = getIntent();
@@ -141,7 +139,7 @@ public class SysOp extends AppCompatActivity {
 
         profileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(SysOp.this, ProfileScreen.class);
-            profileIntent.putExtra("user", util.user);
+            profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
         });
 
@@ -151,7 +149,7 @@ public class SysOp extends AppCompatActivity {
             startActivity(settingsIntent);
         });
 
-        logoutButton.setOnClickListener(v -> logoutProcess());
+        logoutButton.setOnClickListener(v -> UserDataService.logout(this));
 
         subLanguage.setOnClickListener(v -> {
             switchLanguage();
@@ -194,7 +192,7 @@ public class SysOp extends AppCompatActivity {
     }
 
     private void deleteUser(String userName) {
-        String reqURL = util.BASE_URL + util.deleteUser;
+        /*String reqURL = util.BASE_URL + util.deleteUser;
         String jsonDeleteBody = "{\"Username\": \"" + userName + "\"}";
 
         HTTP.sendRequest(reqURL, jsonDeleteBody, new HTTP.HttpRequestCallback() {
@@ -211,7 +209,7 @@ public class SysOp extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Kullanıcı silinemedi.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
     }
 
     private void roleUpdate(User selectedUser) {
@@ -260,7 +258,7 @@ public class SysOp extends AppCompatActivity {
     }
 
     private void sendRoleRequest(String updateBody) {
-        String updateRoleURL = util.BASE_URL + util.updateRolePrefix;
+        /*String updateRoleURL = util.BASE_URL + util.updateRolePrefix;
         HTTP.sendRequest(updateRoleURL, updateBody, new HTTP.HttpRequestCallback() {
             @Override
             public void onSuccess(JSONObject response) {
@@ -272,11 +270,11 @@ public class SysOp extends AppCompatActivity {
                 Log.d("updateRole", updateRoleURL + " " + updateBody);
                 util.showErrorPopup(uyariDiyalog, "Rol güncellenemedi. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
             }
-        }, Volley.newRequestQueue(this));
+        }, Volley.newRequestQueue(this));*/
     }
 
     private ArrayList<Machine> getMachineList() {
-        ArrayList<Machine> machines = new ArrayList<>();
+        /*ArrayList<Machine> machines = new ArrayList<>();
         String reqURL = util.BASE_URL + util.getAllMachinesURL;
 
         HTTP.sendRequestNormal(reqURL, new HTTP.HttpRequestCallback() {
@@ -362,11 +360,12 @@ public class SysOp extends AppCompatActivity {
                 util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
             }
         }, Volley.newRequestQueue(this));
-        return machines;
+        return machines;*/
+        return null;
     }
 
     private ArrayList<me.t3sl4.ondergrup.Model.User.User> getUserList() {
-        ArrayList<me.t3sl4.ondergrup.Model.User.User> users = new ArrayList<>();
+        /*ArrayList<me.t3sl4.ondergrup.Model.User.User> users = new ArrayList<>();
         String reqURL = util.BASE_URL + util.getAllUsersURL;
 
         HTTP.sendRequestNormal(reqURL, new HTTP.HttpRequestCallback() {
@@ -402,7 +401,8 @@ public class SysOp extends AppCompatActivity {
                 util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
             }
         }, Volley.newRequestQueue(this));
-        return users;
+        return users;*/
+        return null;
     }
 
     private void updateListView(ArrayList<Machine> machines) {
@@ -415,20 +415,6 @@ public class SysOp extends AppCompatActivity {
         userList = users;
         userListAdapter = new UserAdapter(this, userList);
         userListView.setAdapter(userListAdapter);
-    }
-
-    private void logoutProcess() {
-        String username = SharedPreferencesManager.getSharedPref("username", this, "");
-
-        if(!username.isEmpty()) {
-            SharedPreferencesManager.writeSharedPref("username", "", this);
-            SharedPreferencesManager.writeSharedPref("password", "", this);
-            SharedPreferencesManager.writeSharedPref("role", "", this);
-        }
-
-        Intent loginIntent = new Intent(SysOp.this, LoginScreen.class);
-        startActivity(loginIntent);
-        finish();
     }
 
     private void switchLanguage() {
