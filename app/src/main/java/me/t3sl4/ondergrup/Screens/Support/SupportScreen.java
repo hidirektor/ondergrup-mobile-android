@@ -19,7 +19,6 @@ import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
 import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
 import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
-import me.t3sl4.ondergrup.Util.Util;
 
 public class SupportScreen extends AppCompatActivity {
     public User receivedUser;

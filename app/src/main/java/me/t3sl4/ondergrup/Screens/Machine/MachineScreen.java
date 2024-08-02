@@ -19,7 +19,6 @@ import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Log.Error.ErrorLog;
 import me.t3sl4.ondergrup.Screens.Log.Maintenance.MaintenanceLog;
-import me.t3sl4.ondergrup.Util.Util;
 
 public class MachineScreen extends AppCompatActivity {
     public User receivedUser;
