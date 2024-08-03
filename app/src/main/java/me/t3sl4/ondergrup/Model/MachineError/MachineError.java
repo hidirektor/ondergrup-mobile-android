@@ -7,17 +7,20 @@ public class MachineError implements Parcelable {
 
     private String machineID;
     private String errorCode;
+    private String errorMessage;
     private String errorDate;
 
-    public MachineError(String machineID, String errorCode, String errorDate) {
+    public MachineError(String machineID, String errorCode, String errorMessage, String errorDate) {
         this.machineID = machineID;
         this.errorCode = errorCode;
+        this.errorMessage = errorMessage;
         this.errorDate = errorDate;
     }
 
     protected MachineError(Parcel in) {
         machineID = in.readString();
         errorCode = in.readString();
+        errorMessage = in.readString();
         errorDate = in.readString();
     }
 
@@ -42,6 +45,7 @@ public class MachineError implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(machineID);
         dest.writeString(errorCode);
+        dest.writeString(errorMessage);
         dest.writeString(errorDate);
     }
 
@@ -59,6 +63,14 @@ public class MachineError implements Parcelable {
 
     public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public String getErrorDate() {

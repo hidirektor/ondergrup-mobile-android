@@ -24,6 +24,7 @@ import java.util.Objects;
 import me.t3sl4.ondergrup.Model.MachineError.Adapter.MachineErrorAdapter;
 import me.t3sl4.ondergrup.Model.MachineError.MachineError;
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
 
 public class ErrorLog extends AppCompatActivity {
     private ImageView backToMachine;
@@ -66,40 +67,11 @@ public class ErrorLog extends AppCompatActivity {
 
     private ArrayList<MachineError> getMachineErrorList() {
         ArrayList<MachineError> machineErrorsTemp = new ArrayList<>();
-        /*String reqURL = util.BASE_URL + util.getMachineErrorURL;
-        String jsonErrorBody = "{\"machineID\": \"" + currentMachineID + "\"}";
 
-        Log.d("ErrorLog-URL", reqURL);
-        Log.d("ErrorLog-Body", jsonErrorBody);
+        MachineService.getErrors(this, currentMachineID, machineErrorsTemp, () -> {
+            updateListView(machineErrorsTemp);
+        });
 
-        HTTP.sendRequest(reqURL, jsonErrorBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                try {
-                    JSONArray machineArray = response.getJSONArray("data");
-                    Log.d("ErrorLog-data", String.valueOf(machineArray));
-                    for (int i = 0; i < machineArray.length(); i++) {
-                        JSONObject machineInfoObj = machineArray.getJSONObject(i);
-                        String machineID = machineInfoObj.getString("MachineID");
-                        String errorCode = machineInfoObj.getString("ErrorCode");
-                        String errorDate = machineInfoObj.getString("ErrorDate");
-
-                        MachineError selectedMachine = new MachineError(machineID, errorCode, errorDate);
-                        machineErrorsTemp.add(selectedMachine);
-                    }
-
-                    updateListView(machineErrorsTemp);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                String hatasizMesaj = ErrorLog.this.getResources().getString(R.string.hatayok);
-                util.showSuccessPopup(uyariDiyalog, hatasizMesaj);
-            }
-        }, Volley.newRequestQueue(this));*/
         return machineErrorsTemp;
     }
 

@@ -294,24 +294,12 @@ public class User extends AppCompatActivity {
     }
 
     public void makineEkle(String machineType, String machineID) {
-        /*String reqURL = util.BASE_URL + util.addMachineURL;
+        String ownerID = UserDataService.getUserID(this);
 
-        String userName = receivedUser.getUserName();
-        String companyName = receivedUser.getCompanyName();
-        String jsonAddMachineBody = "{\"Username\": \"" + userName + "\", \"CompanyName\": \"" + companyName + "\", \"MachineID\": \"" + machineID + "\", \"MachineType\": \"" + machineType + "\"}";
-
-        HTTP.sendRequest(reqURL, jsonAddMachineBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                qrDiyalog.dismiss();
-                util.showSuccessPopup(uyariDiyalog, "Makine başarılı bir şekilde eklendi.");
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                util.showErrorPopup(uyariDiyalog, "Kullanıcı adı veya şifreniz hatalı. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
-            }
-        }, Volley.newRequestQueue(this));*/
+        MachineService.addMachine(this, machineID, ownerID, () -> {
+            Util.showSuccessPopup(uyariDiyalog, "Makine başarılı bir şekilde eklendi.");
+            qrDiyalog.dismiss();
+        });
     }
 
     private boolean isConnectedToTargetWifi() {

@@ -1,5 +1,6 @@
 package me.t3sl4.ondergrup.Util.HTTP.Requests.Machine;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -9,12 +10,13 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import me.t3sl4.ondergrup.Model.Machine.Machine;
+import me.t3sl4.ondergrup.Model.MachineError.MachineError;
+import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.HttpHelper;
+import me.t3sl4.ondergrup.Util.Util;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -96,6 +98,8 @@ public class MachineService {
                 } else {
                     try {
                         Log.e("AddMachine", "Failure: " + response.errorBody().string());
+                        // Burada hata mesajını kullanıcıya gösteriyoruz.
+                        Util.showErrorPopup(new Dialog(context), "Makine eklenirken bir hata oluştu. Lütfen tekrar deneyin.");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -105,31 +109,60 @@ public class MachineService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("AddMachine", "Error: " + t.getMessage());
+                // Burada hata mesajını kullanıcıya gösteriyoruz.
+                Util.showErrorPopup(new Dialog(context), "Bir hata oluştu. Lütfen internet bağlantınızı kontrol edin.");
             }
         });
     }
 
-    public static void getErrors(Context context, String machineID, Runnable onSuccess) {
-        Map<String, String> params = new HashMap<>();
-        params.put("machineID", machineID);
+    public static void getErrors(Context context, String machineID, ArrayList<MachineError> machineErrorsTemp, Runnable onSuccess) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("machineID", machineID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
 
         String authToken = UserDataService.getAccessToken(context);
-        Call<ResponseBody> call = HttpHelper.makeRequest("GET", GET_ERRORS_URL, params, null, authToken);
+        Call<ResponseBody> call = HttpHelper.makeRequest("POST", GET_ERRORS_URL, null, jsonObject.toString(), authToken);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     try {
-                        Log.d("GetErrors", "Success: " + response.body().string());
+                        String responseBody = response.body().string();
+                        Log.d("GetErrors", "Success: " + responseBody);
+
+                        // JSON response'i işleyin
+                        JSONObject responseJson = new JSONObject(responseBody);
+                        JSONArray machineErrorsArray = responseJson.getJSONObject("payload").getJSONArray("machineErrors");
+
+                        machineErrorsTemp.clear(); // Listeyi temizle
+                        for (int i = 0; i < machineErrorsArray.length(); i++) {
+                            JSONObject machineErrorObj = machineErrorsArray.getJSONObject(i);
+                            String machineID = machineErrorObj.getString("machineID");
+                            String errorCode = machineErrorObj.getString("errorCode");
+                            String errorMessage = machineErrorObj.getString("errorMessage");
+                            String errorTime = machineErrorObj.getString("errorTime");
+
+                            MachineError selectedMachine = new MachineError(machineID, errorCode, errorMessage, errorTime);
+                            machineErrorsTemp.add(selectedMachine);
+                        }
+
                         if (onSuccess != null) {
                             onSuccess.run();
                         }
-                    } catch (IOException e) {
+
+                    } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
                 } else {
                     try {
-                        Log.e("GetErrors", "Failure: " + response.errorBody().string());
+                        String errorBody = response.errorBody().string();
+                        Log.e("GetErrors", "Failure: " + errorBody);
+                        String hataMesaj = context.getResources().getString(R.string.hatayok);
+                        Util.showErrorPopup(new Dialog(context), hataMesaj);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -139,26 +172,51 @@ public class MachineService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("GetErrors", "Error: " + t.getMessage());
+                String hataMesaj = context.getResources().getString(R.string.hatayok);
+                Util.showErrorPopup(new Dialog(context), hataMesaj);
             }
         });
     }
 
-    public static void getErrorsAll(Context context, String userID, Runnable onSuccess) {
-        Map<String, String> params = new HashMap<>();
-        params.put("userID", userID);
+    public static void getErrorsAll(Context context, String userID, ArrayList<MachineError> machineErrorsTemp, Runnable onSuccess) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("userID", userID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
 
         String authToken = UserDataService.getAccessToken(context);
-        Call<ResponseBody> call = HttpHelper.makeRequest("GET", GET_ERRORS_ALL_URL, params, null, authToken);
+        Call<ResponseBody> call = HttpHelper.makeRequest("POST", GET_ERRORS_ALL_URL, null, jsonObject.toString(), authToken);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     try {
+                        String responseBody = response.body().string();
                         Log.d("GetErrorsAll", "Success: " + response.body().string());
+
+                        // JSON response'i işleyin
+                        JSONObject responseJson = new JSONObject(responseBody);
+                        JSONArray machineErrorsArray = responseJson.getJSONObject("payload").getJSONArray("errors");
+
+                        machineErrorsTemp.clear(); // Listeyi temizle
+                        for (int i = 0; i < machineErrorsArray.length(); i++) {
+                            JSONObject machineErrorObj = machineErrorsArray.getJSONObject(i);
+                            String machineID = machineErrorObj.getString("machineID");
+                            String errorCode = machineErrorObj.getString("errorCode");
+                            String errorMessage = machineErrorObj.getString("errorMessage");
+                            String errorTime = machineErrorObj.getString("errorTime");
+
+                            MachineError selectedMachine = new MachineError(machineID, errorCode, errorMessage, errorTime);
+                            machineErrorsTemp.add(selectedMachine);
+                        }
+
                         if (onSuccess != null) {
                             onSuccess.run();
                         }
-                    } catch (IOException e) {
+                    } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
                 } else {
@@ -186,8 +244,6 @@ public class MachineService {
             return;
         }
 
-        Log.d("OWNER ID", ownerID);
-
         String authToken = UserDataService.getAccessToken(context);
         Call<ResponseBody> call = HttpHelper.makeRequest("POST", GET_MACHINES_URL, null, jsonObject.toString(), authToken);
         call.enqueue(new Callback<ResponseBody>() {
@@ -205,52 +261,55 @@ public class MachineService {
                         for (int i = 0; i < machinesArray.length(); i++) {
                             JSONObject machineObject = machinesArray.getJSONObject(i);
                             JSONArray machineDataArray = machineObject.getJSONArray("machineData");
-                            JSONObject machineDataValues = machineDataArray.getJSONObject(0);
+
                             Machine machine = new Machine(machineObject.getString("machineID"), machineObject.getString("machineType"), machineObject.getString("ownerID"), machineObject.getString("ownerName"), machineObject.getString("createdAt"), machineObject.getString("lastUpdate"));
 
-                            machine.setWifiSSID(machineDataValues.getString("wifiSSID"));
-                            machine.setWifiPass(machineDataValues.getString("wifiPass"));
-                            machine.setDevirmeYuruyusSecim(machineDataValues.getString("devirmeYuruyusSecim"));
-                            machine.setCalismaSekli(machineDataValues.getString("calismaSekli"));
-                            machine.setEmniyetCercevesi(machineDataValues.getString("emniyetCercevesi"));
-                            machine.setYavaslamaLimit(machineDataValues.getString("yavaslamaLimit"));
-                            machine.setAltLimit(machineDataValues.getString("altLimit"));
-                            machine.setKapiTablaAcKonum(machineDataValues.getString("kapiTablaAcKonum"));
-                            machine.setBasincSalteri(machineDataValues.getString("basincSalteri"));
-                            machine.setKapiSecimleri(machineDataValues.getString("kapiSecimleri"));
-                            machine.setKapiAcTipi(machineDataValues.getString("kapiAcTipi"));
-                            machine.setKapi1Tip(machineDataValues.getString("kapi1Tip"));
-                            machine.setKapi1AcSure(machineDataValues.getString("kapi1AcSure"));
-                            machine.setKapi2Tip(machineDataValues.getString("kapi2Tip"));
-                            machine.setKapi2AcSure(machineDataValues.getString("kapi2AcSure"));
-                            machine.setKapitablaTip(machineDataValues.getString("kapitablaTip"));
-                            machine.setKapiTablaAcSure(machineDataValues.getString("kapiTablaAcSure"));
-                            machine.setYukariYavasLimit(machineDataValues.getString("yukariYavasLimit"));
-                            machine.setDevirmeYukariIleriLimit(machineDataValues.getString("devirmeYukariIleriLimit"));
-                            machine.setDevirmeAsagiGeriLimit(machineDataValues.getString("devirmeAsagiGeriLimit"));
-                            machine.setDevirmeSilindirTipi(machineDataValues.getString("devirmeSilindirTipi"));
-                            machine.setPlatformSilindirTipi(machineDataValues.getString("platformSilindirTipi"));
-                            machine.setYukariValfTmr(machineDataValues.getString("yukariValfTmr"));
-                            machine.setAsagiValfTmr(machineDataValues.getString("asagiValfTmr"));
-                            machine.setDevirmeYukariIleriTmr(machineDataValues.getString("devirmeYukariIleriTmr"));
-                            machine.setDevirmeAsagiGeriTmr(machineDataValues.getString("devirmeAsagiGeriTmr"));
-                            machine.setMakineCalismaTmr(machineDataValues.getString("makineCalismaTmr"));
-                            machine.setBuzzer(machineDataValues.getString("buzzer"));
-                            machine.setDemoMode(machineDataValues.getString("demoMode"));
-                            machine.setCalismaSayisi(machineDataValues.getString("calismaSayisi"));
-                            machine.setCalismaSayisiDemo(machineDataValues.getString("calismaSayisiDemo"));
-                            machine.setDilSecim(machineDataValues.getString("dilSecim"));
-                            machine.setEepromData38(machineDataValues.getString("eepromData38"));
-                            machine.setEepromData39(machineDataValues.getString("eepromData39"));
-                            machine.setEepromData40(machineDataValues.getString("eepromData40"));
-                            machine.setEepromData41(machineDataValues.getString("eepromData41"));
-                            machine.setEepromData42(machineDataValues.getString("eepromData42"));
-                            machine.setEepromData43(machineDataValues.getString("eepromData43"));
-                            machine.setEepromData44(machineDataValues.getString("eepromData44"));
-                            machine.setEepromData45(machineDataValues.getString("eepromData45"));
-                            machine.setEepromData46(machineDataValues.getString("eepromData46"));
-                            machine.setEepromData47(machineDataValues.getString("eepromData47"));
-                            machine.setLcdBacklightSure(machineDataValues.getString("lcdBacklightSure"));
+                            if (machineDataArray.length() > 0) {
+                                JSONObject machineDataValues = machineDataArray.getJSONObject(0);
+                                machine.setWifiSSID(machineDataValues.getString("wifiSSID"));
+                                machine.setWifiPass(machineDataValues.getString("wifiPass"));
+                                machine.setDevirmeYuruyusSecim(machineDataValues.getString("devirmeYuruyusSecim"));
+                                machine.setCalismaSekli(machineDataValues.getString("calismaSekli"));
+                                machine.setEmniyetCercevesi(machineDataValues.getString("emniyetCercevesi"));
+                                machine.setYavaslamaLimit(machineDataValues.getString("yavaslamaLimit"));
+                                machine.setAltLimit(machineDataValues.getString("altLimit"));
+                                machine.setKapiTablaAcKonum(machineDataValues.getString("kapiTablaAcKonum"));
+                                machine.setBasincSalteri(machineDataValues.getString("basincSalteri"));
+                                machine.setKapiSecimleri(machineDataValues.getString("kapiSecimleri"));
+                                machine.setKapiAcTipi(machineDataValues.getString("kapiAcTipi"));
+                                machine.setKapi1Tip(machineDataValues.getString("kapi1Tip"));
+                                machine.setKapi1AcSure(machineDataValues.getString("kapi1AcSure"));
+                                machine.setKapi2Tip(machineDataValues.getString("kapi2Tip"));
+                                machine.setKapi2AcSure(machineDataValues.getString("kapi2AcSure"));
+                                machine.setKapitablaTip(machineDataValues.getString("kapitablaTip"));
+                                machine.setKapiTablaAcSure(machineDataValues.getString("kapiTablaAcSure"));
+                                machine.setYukariYavasLimit(machineDataValues.getString("yukariYavasLimit"));
+                                machine.setDevirmeYukariIleriLimit(machineDataValues.getString("devirmeYukariIleriLimit"));
+                                machine.setDevirmeAsagiGeriLimit(machineDataValues.getString("devirmeAsagiGeriLimit"));
+                                machine.setDevirmeSilindirTipi(machineDataValues.getString("devirmeSilindirTipi"));
+                                machine.setPlatformSilindirTipi(machineDataValues.getString("platformSilindirTipi"));
+                                machine.setYukariValfTmr(machineDataValues.getString("yukariValfTmr"));
+                                machine.setAsagiValfTmr(machineDataValues.getString("asagiValfTmr"));
+                                machine.setDevirmeYukariIleriTmr(machineDataValues.getString("devirmeYukariIleriTmr"));
+                                machine.setDevirmeAsagiGeriTmr(machineDataValues.getString("devirmeAsagiGeriTmr"));
+                                machine.setMakineCalismaTmr(machineDataValues.getString("makineCalismaTmr"));
+                                machine.setBuzzer(machineDataValues.getString("buzzer"));
+                                machine.setDemoMode(machineDataValues.getString("demoMode"));
+                                machine.setCalismaSayisi(machineDataValues.getString("calismaSayisi"));
+                                machine.setCalismaSayisiDemo(machineDataValues.getString("calismaSayisiDemo"));
+                                machine.setDilSecim(machineDataValues.getString("dilSecim"));
+                                machine.setEepromData38(machineDataValues.getString("eepromData38"));
+                                machine.setEepromData39(machineDataValues.getString("eepromData39"));
+                                machine.setEepromData40(machineDataValues.getString("eepromData40"));
+                                machine.setEepromData41(machineDataValues.getString("eepromData41"));
+                                machine.setEepromData42(machineDataValues.getString("eepromData42"));
+                                machine.setEepromData43(machineDataValues.getString("eepromData43"));
+                                machine.setEepromData44(machineDataValues.getString("eepromData44"));
+                                machine.setEepromData45(machineDataValues.getString("eepromData45"));
+                                machine.setEepromData46(machineDataValues.getString("eepromData46"));
+                                machine.setEepromData47(machineDataValues.getString("eepromData47"));
+                                machine.setLcdBacklightSure(machineDataValues.getString("lcdBacklightSure"));
+                            }
 
                             machines.add(machine);
                         }
@@ -278,11 +337,16 @@ public class MachineService {
     }
 
     public static void getMaintenances(Context context, String machineID, Runnable onSuccess) {
-        Map<String, String> params = new HashMap<>();
-        params.put("machineID", machineID);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("machineID", machineID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
 
         String authToken = UserDataService.getAccessToken(context);
-        Call<ResponseBody> call = HttpHelper.makeRequest("GET", GET_MAINTENANCES_URL, params, null, authToken);
+        Call<ResponseBody> call = HttpHelper.makeRequest("POST", GET_MAINTENANCES_URL, null, jsonObject.toString(), authToken);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -312,11 +376,16 @@ public class MachineService {
     }
 
     public static void getMaintenancesAll(Context context, String userID, Runnable onSuccess) {
-        Map<String, String> params = new HashMap<>();
-        params.put("userID", userID);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("userID", userID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
 
         String authToken = UserDataService.getAccessToken(context);
-        Call<ResponseBody> call = HttpHelper.makeRequest("GET", GET_MAINTENANCES_ALL_URL, params, null, authToken);
+        Call<ResponseBody> call = HttpHelper.makeRequest("POST", GET_MAINTENANCES_ALL_URL, null, jsonObject.toString(), authToken);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

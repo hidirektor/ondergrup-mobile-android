@@ -68,7 +68,7 @@ public class Util {
         diyalog.show();
     }
 
-    public void showSuccessPopup(Dialog diyalog, String hataMesaji) {
+    public static void showSuccessPopup(Dialog diyalog, String hataMesaji) {
         diyalog.setContentView(R.layout.activity_popup_success);
         Button close = diyalog.findViewById(R.id.kapatButton);
         TextView hataMesajiTextView = diyalog.findViewById(R.id.uyariMesaji);
