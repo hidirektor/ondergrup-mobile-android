@@ -30,7 +30,7 @@ public class UserService {
     private static final String UPDATE_PROFILE_URL = "/api/v2/user/updateProfile";
     private static final String UPLOAD_PROFILE_PHOTO_URL = "/api/v2/user/uploadProfilePhoto";
 
-    public static void getProfile(Context context, String userID) {
+    public static void getProfile(Context context, String userID, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("userID", userID);
@@ -61,14 +61,19 @@ public class UserService {
                         UserDataService.setCompanyName(context, user.getString("companyName"));
                         UserDataService.setCreatedAt(context, Util.convertUnixTimestampToDateString(Long.parseLong(String.valueOf(user.getInt("createdAt")))));
 
-                        Log.d("ROILLL232", UserDataService.getUserRole(context));
-
+                        if (onSuccess != null) {
+                            onSuccess.run();
+                        }
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
                 } else {
                     try {
                         Log.e("GetProfile", "Failure: " + response.errorBody().string());
+
+                        if (onFailure != null) {
+                            onFailure.run();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

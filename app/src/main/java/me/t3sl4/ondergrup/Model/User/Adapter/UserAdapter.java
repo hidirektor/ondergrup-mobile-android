@@ -7,10 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
@@ -70,18 +67,7 @@ public class UserAdapter extends BaseAdapter {
         holder.company.setText(user.getCompanyName());
         holder.owner.setText(user.getOwnerName());
 
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        Date date = null;
-        try {
-            date = isoFormat.parse(user.getCreatedAt());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String formattedDate = targetFormat.format(date);
-
-        holder.createdAt.setText(formattedDate);
+        holder.createdAt.setText(Util.convertUnixTimestampToDateString(Long.valueOf(user.getCreatedAt())));
 
         return convertView;
     }

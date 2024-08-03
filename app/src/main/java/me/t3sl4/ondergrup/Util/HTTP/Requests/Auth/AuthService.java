@@ -97,7 +97,7 @@ public class AuthService {
                         UserDataService.setAccessToken(context, accessToken);
                         UserDataService.setRefreshToken(context, refreshToken);
 
-                        UserService.getProfile(context, userID);
+                        UserService.getProfile(context, userID, null, null);
 
                         // Check if onSuccess callback is not null and run it
                         if (onSuccess != null) {

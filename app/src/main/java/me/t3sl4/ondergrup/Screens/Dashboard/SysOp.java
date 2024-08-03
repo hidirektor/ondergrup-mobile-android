@@ -29,6 +29,7 @@ import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPMachineService;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPUserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SysOp extends AppCompatActivity {
@@ -216,32 +217,28 @@ public class SysOp extends AppCompatActivity {
         Button sysopRoleButton = roleDialog.findViewById(R.id.sysopRole);
 
         normalRoleButton.setOnClickListener(v -> {
-            String updateRoleBody = "{\"Username\": \"" + selectedUser.getUserName() + "\", \"Role\": \"" + "NORMAL" + "\"}";
-            sendRoleRequest(updateRoleBody);
+            sendRoleRequest(selectedUser, "NORMAL");
             userList = getUserList();
             updateUserListView(userList);
             roleDialog.dismiss();
         });
 
         technicianRoleButton.setOnClickListener(v -> {
-            String updateRoleBody = "{\"Username\": \"" + selectedUser.getUserName() + "\", \"Role\": \"" + "TECHNICIAN" + "\"}";
-            sendRoleRequest(updateRoleBody);
+            sendRoleRequest(selectedUser, "TECHNICIAN");
             userList = getUserList();
             updateUserListView(userList);
             roleDialog.dismiss();
         });
 
         engineerRoleButton.setOnClickListener(v -> {
-            String updateRoleBody = "{\"Username\": \"" + selectedUser.getUserName() + "\", \"Role\": \"" + "ENGINEER" + "\"}";
-            sendRoleRequest(updateRoleBody);
+            sendRoleRequest(selectedUser, "ENGINEER");
             userList = getUserList();
             updateUserListView(userList);
             roleDialog.dismiss();
         });
 
         sysopRoleButton.setOnClickListener(v -> {
-            String updateRoleBody = "{\"Username\": \"" + selectedUser.getUserName() + "\", \"Role\": \"" + "SYSOP" + "\"}";
-            sendRoleRequest(updateRoleBody);
+            sendRoleRequest(selectedUser, "SYSOP");
             userList = getUserList();
             updateUserListView(userList);
             roleDialog.dismiss();
@@ -250,20 +247,13 @@ public class SysOp extends AppCompatActivity {
         roleDialog.show();
     }
 
-    private void sendRoleRequest(String updateBody) {
-        /*String updateRoleURL = util.BASE_URL + util.updateRolePrefix;
-        HTTP.sendRequest(updateRoleURL, updateBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                util.showSuccessPopup(uyariDiyalog, "Rol başarılı bir şekilde güncellendi.");
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                Log.d("updateRole", updateRoleURL + " " + updateBody);
-                util.showErrorPopup(uyariDiyalog, "Rol güncellenemedi. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
-            }
-        }, Volley.newRequestQueue(this));*/
+    private void sendRoleRequest(User selectedUser, String newRole) {
+        OPUserService.updateRole(this, selectedUser.getUserName(), newRole, () -> {
+            // onSuccess callback
+            getUserList();
+        }, () -> {
+            //onFailure callback
+        });
     }
 
     private ArrayList<Machine> getMachineList() {
@@ -280,44 +270,16 @@ public class SysOp extends AppCompatActivity {
     }
 
     private ArrayList<me.t3sl4.ondergrup.Model.User.User> getUserList() {
-        /*ArrayList<me.t3sl4.ondergrup.Model.User.User> users = new ArrayList<>();
-        String reqURL = util.BASE_URL + util.getAllUsersURL;
+        ArrayList<me.t3sl4.ondergrup.Model.User.User> users = new ArrayList<>();
 
-        HTTP.sendRequestNormal(reqURL, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                try {
-                    JSONArray userArray = response.getJSONArray("users");
-                    for (int i = 0; i < userArray.length(); i++) {
-                        JSONObject userInfoObj = userArray.getJSONObject(i).getJSONObject("UserInfo");
+        OPUserService.getAllUsers(this, users, () -> {
+            // onSuccess callback
+            updateUserListView(users);
+        }, () -> {
+            //onFailure callback
+        });
 
-                        String userRole = userInfoObj.getString("Role");
-                        String userName = userInfoObj.getString("UserName");
-                        String userEmail = userInfoObj.getString("Email");
-                        String userNameSurname = userInfoObj.getString("NameSurname");
-                        String userPhone = userInfoObj.getString("Phone");
-                        String userCompany = userInfoObj.getString("CompanyName");
-                        String userOwner = userInfoObj.getString("Owner");
-                        String userCreatedAt = userInfoObj.getString("Created_At");
-
-                        User selectedUser = new User(userRole, userName, userEmail, userNameSurname, userPhone, userCompany, userCreatedAt);
-                        selectedUser.setOwnerName(userOwner);
-                        users.add(selectedUser);
-                    }
-
-                    updateUserListView(users);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
-            }
-        }, Volley.newRequestQueue(this));
-        return users;*/
-        return null;
+        return users;
     }
 
     private void updateListView(ArrayList<Machine> machines) {

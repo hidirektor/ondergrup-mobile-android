@@ -7,7 +7,9 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import me.t3sl4.ondergrup.Screens.OnBoard.OnBoarding1;
+import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SplashActivity extends AppCompatActivity {
@@ -37,7 +39,11 @@ public class SplashActivity extends AppCompatActivity {
 
     private void redirectToMainActivity() {
         new Handler().postDelayed(() -> {
-            Util.redirectBasedRole(this, true);
+            UserService.getProfile(this, UserDataService.getUserID(this), () -> {
+                Util.redirectBasedRole(this, true);
+            }, () -> {
+
+            });
         }, WAITING_TIME);
     }
 }
