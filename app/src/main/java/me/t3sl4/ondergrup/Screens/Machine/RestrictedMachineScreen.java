@@ -177,10 +177,14 @@ public class RestrictedMachineScreen extends AppCompatActivity {
     private void initMachineData() {
         String machineType = selectedMachine.getMachineType();
         String cycleCount;
-        if(selectedMachine.getDemoMode().equals("1")) {
-            cycleCount = selectedMachine.getCalismaSayisiDemo();
+        if(selectedMachine.getDemoMode() != null) {
+            if(selectedMachine.getDemoMode().equals("1")) {
+                cycleCount = selectedMachine.getCalismaSayisiDemo();
+            } else {
+                cycleCount = selectedMachine.getCalismaSayisi();
+            }
         } else {
-            cycleCount = selectedMachine.getCalismaSayisi();
+            cycleCount = "";
         }
         String secilenDil = selectedMachine.getDilSecim();
         Drawable drawable = null;

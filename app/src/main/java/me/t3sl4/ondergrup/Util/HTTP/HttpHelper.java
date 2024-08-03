@@ -1,6 +1,7 @@
 package me.t3sl4.ondergrup.Util.HTTP;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -90,6 +91,10 @@ public class HttpHelper {
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonBody != null ? jsonBody : "");
         Call<ResponseBody> call = null;
 
+        if (params == null) {
+            params = new HashMap<>();
+        }
+
         switch (method.toUpperCase()) {
             case "GET":
                 call = service.getRequest(url, params);
@@ -162,6 +167,10 @@ public class HttpHelper {
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonBody != null ? jsonBody : "");
         Call<ResponseBody> call = null;
+
+        if (params == null) {
+            params = new HashMap<>();
+        }
 
         switch (method.toUpperCase()) {
             case "GET":
