@@ -14,7 +14,6 @@ import java.util.Map;
 
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.HttpHelper;
-import me.t3sl4.ondergrup.Util.SharedPrefUtil;
 import me.t3sl4.ondergrup.Util.Util;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -40,7 +39,7 @@ public class UserService {
             return;
         }
 
-        Call<ResponseBody> call = HttpHelper.makeRequest("POST", GET_PROFILE_URL, null, jsonObject.toString(), SharedPrefUtil.getAccessToken(context));
+        Call<ResponseBody> call = HttpHelper.makeRequest("POST", GET_PROFILE_URL, null, jsonObject.toString(), UserDataService.getAccessToken(context));
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -61,6 +60,8 @@ public class UserService {
                         UserDataService.setPhoneNumber(context, user.getString("phoneNumber"));
                         UserDataService.setCompanyName(context, user.getString("companyName"));
                         UserDataService.setCreatedAt(context, Util.convertUnixTimestampToDateString(Long.parseLong(String.valueOf(user.getInt("createdAt")))));
+
+                        Log.d("ROILLL232", UserDataService.getUserRole(context));
 
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
@@ -90,7 +91,7 @@ public class UserService {
             return;
         }
 
-        Call<ResponseBody> call = HttpHelper.makeRequest("POST", GET_PREFERENCES_URL, null, jsonObject.toString(), SharedPrefUtil.getAccessToken(context));
+        Call<ResponseBody> call = HttpHelper.makeRequest("POST", GET_PREFERENCES_URL, null, jsonObject.toString(), UserDataService.getAccessToken(context));
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -137,7 +138,7 @@ public class UserService {
             return;
         }
 
-        Call<ResponseBody> call = HttpHelper.makeRequest("POST", UPDATE_PREFERENCES_URL, null, jsonObject.toString(), SharedPrefUtil.getAccessToken(context));
+        Call<ResponseBody> call = HttpHelper.makeRequest("POST", UPDATE_PREFERENCES_URL, null, jsonObject.toString(), UserDataService.getAccessToken(context));
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -179,7 +180,7 @@ public class UserService {
             return;
         }
 
-        Call<ResponseBody> call = HttpHelper.makeRequest("POST", UPDATE_PROFILE_URL, null, jsonObject.toString(), SharedPrefUtil.getAccessToken(context));
+        Call<ResponseBody> call = HttpHelper.makeRequest("POST", UPDATE_PROFILE_URL, null, jsonObject.toString(), UserDataService.getAccessToken(context));
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -212,7 +213,7 @@ public class UserService {
 
         MultipartBody.Part filePart = HttpHelper.prepareFilePart("file", photoFile);
 
-        Call<ResponseBody> call = HttpHelper.uploadFilesWithAuth(UPLOAD_PROFILE_PHOTO_URL, partMap, List.of(filePart), SharedPrefUtil.getAccessToken(context));
+        Call<ResponseBody> call = HttpHelper.uploadFilesWithAuth(UPLOAD_PROFILE_PHOTO_URL, partMap, List.of(filePart), UserDataService.getAccessToken(context));
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

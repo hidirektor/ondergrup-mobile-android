@@ -5,10 +5,16 @@ import android.os.Parcelable;
 
 public class Machine implements Parcelable {
 
-    private String ownerUser;
-    private String lastUpdate;
-    private String machineType;
     private String machineID;
+    private String machineType;
+    private String ownerID;
+    private String ownerUserName;
+    private String createdAt;
+    private String lastUpdate;
+
+    private String wifiSSID;
+    private String wifiPass;
+
     private String devirmeYuruyusSecim;
     private String calismaSekli;
     private String emniyetCercevesi;
@@ -36,11 +42,8 @@ public class Machine implements Parcelable {
     private String makineCalismaTmr;
     private String buzzer;
     private String demoMode;
-    private String calismaSayisi1;
-    private String calismaSayisi10;
-    private String calismaSayisi100;
-    private String calismaSayisi1000;
-    private String calismaSayisi10000;
+    private String calismaSayisi;
+    private String calismaSayisiDemo;
     private String dilSecim;
     private String eepromData38;
     private String eepromData39;
@@ -54,17 +57,26 @@ public class Machine implements Parcelable {
     private String eepromData47;
     private String lcdBacklightSure;
 
-    public Machine(String ownerUser, String lastUpdate, String machineType, String machineID, String devirmeYuruyusSecim, String calismaSekli, String emniyetCercevesi,
+    public Machine(String machineID, String machineType, String ownerID, String ownerUserName, String createdAt, String lastUpdate) {
+        this.machineID = machineID;
+        this.machineType = machineType;
+        this.ownerID = ownerID;
+        this.ownerUserName = ownerUserName;
+        this.createdAt = createdAt;
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Machine(String ownerUserName, String lastUpdate, String machineType, String machineID, String devirmeYuruyusSecim, String calismaSekli, String emniyetCercevesi,
                    String yavaslamaLimit, String altLimit, String kapiTablaAcKonum, String basincSalteri, String kapiSecimleri,
                    String kapiAcTipi, String kapi1Tip, String kapi1AcSure, String kapi2Tip, String kapi2AcSure, String kapitablaTip,
                    String kapiTablaAcSure, String yukariYavasLimit, String devirmeYukariIleriLimit, String devirmeAsagiGeriLimit,
                    String devirmeSilindirTipi, String platformSilindirTipi, String yukariValfTmr, String asagiValfTmr,
                    String devirmeYukariIleriTmr, String devirmeAsagiGeriTmr, String makineCalismaTmr, String buzzer, String demoMode,
-                   String calismaSayisi1, String calismaSayisi10, String calismaSayisi100, String calismaSayisi1000, String calismaSayisi10000,
+                   String calismaSayisi, String calismaSayisiDemo,
                    String dilSecim, String eepromData38, String eepromData39, String eepromData40, String eepromData41,
                    String eepromData42, String eepromData43, String eepromData44, String eepromData45, String eepromData46, String eepromData47,
                    String lcdBacklightSure) {
-        this.ownerUser = ownerUser;
+        this.ownerUserName = ownerUserName;
         this.lastUpdate = lastUpdate;
         this.machineType = machineType;
         this.machineID = machineID;
@@ -95,11 +107,8 @@ public class Machine implements Parcelable {
         this.makineCalismaTmr = makineCalismaTmr;
         this.buzzer = buzzer;
         this.demoMode = demoMode;
-        this.calismaSayisi1 = calismaSayisi1;
-        this.calismaSayisi10 = calismaSayisi10;
-        this.calismaSayisi100 = calismaSayisi100;
-        this.calismaSayisi1000 = calismaSayisi1000;
-        this.calismaSayisi10000 = calismaSayisi10000;
+        this.calismaSayisi = calismaSayisi;
+        this.calismaSayisiDemo = calismaSayisiDemo;
         this.dilSecim = dilSecim;
         this.eepromData38 = eepromData38;
         this.eepromData39 = eepromData39;
@@ -115,10 +124,16 @@ public class Machine implements Parcelable {
     }
 
     protected Machine(Parcel in) {
-        ownerUser = in.readString();
-        lastUpdate = in.readString();
-        machineType = in.readString();
         machineID = in.readString();
+        machineType = in.readString();
+        ownerID = in.readString();
+        ownerUserName = in.readString();
+        createdAt = in.readString();
+        lastUpdate = in.readString();
+
+        wifiSSID = in.readString();
+        wifiPass = in.readString();
+
         devirmeYuruyusSecim = in.readString();
         calismaSekli = in.readString();
         emniyetCercevesi = in.readString();
@@ -146,11 +161,8 @@ public class Machine implements Parcelable {
         makineCalismaTmr = in.readString();
         buzzer = in.readString();
         demoMode = in.readString();
-        calismaSayisi1 = in.readString();
-        calismaSayisi10 = in.readString();
-        calismaSayisi100 = in.readString();
-        calismaSayisi1000 = in.readString();
-        calismaSayisi10000 = in.readString();
+        calismaSayisi = in.readString();
+        calismaSayisiDemo = in.readString();
         dilSecim = in.readString();
         eepromData38 = in.readString();
         eepromData39 = in.readString();
@@ -184,10 +196,16 @@ public class Machine implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(ownerUser);
-        dest.writeString(lastUpdate);
-        dest.writeString(machineType);
         dest.writeString(machineID);
+        dest.writeString(machineType);
+        dest.writeString(ownerID);
+        dest.writeString(ownerUserName);
+        dest.writeString(createdAt);
+        dest.writeString(lastUpdate);
+
+        dest.writeString(wifiSSID);
+        dest.writeString(wifiPass);
+
         dest.writeString(devirmeYuruyusSecim);
         dest.writeString(calismaSekli);
         dest.writeString(emniyetCercevesi);
@@ -215,11 +233,8 @@ public class Machine implements Parcelable {
         dest.writeString(makineCalismaTmr);
         dest.writeString(buzzer);
         dest.writeString(demoMode);
-        dest.writeString(calismaSayisi1);
-        dest.writeString(calismaSayisi10);
-        dest.writeString(calismaSayisi100);
-        dest.writeString(calismaSayisi1000);
-        dest.writeString(calismaSayisi10000);
+        dest.writeString(calismaSayisi);
+        dest.writeString(calismaSayisiDemo);
         dest.writeString(dilSecim);
         dest.writeString(eepromData38);
         dest.writeString(eepromData39);
@@ -234,12 +249,28 @@ public class Machine implements Parcelable {
         dest.writeString(lcdBacklightSure);
     }
 
-    public String getOwnerUser() {
-        return ownerUser;
+    public String getOwnerID() {
+        return ownerID;
     }
 
-    public void setOwnerUser(String ownerUser) {
-        this.ownerUser = ownerUser;
+    public void setOwnerID(String ownerID) {
+        this.ownerID = ownerID;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getOwnerUserName() {
+        return ownerUserName;
+    }
+
+    public void setOwnerUserName(String ownerUserName) {
+        this.ownerUserName = ownerUserName;
     }
 
     public String getLastUpdate() {
@@ -264,6 +295,22 @@ public class Machine implements Parcelable {
 
     public void setMachineID(String machineID) {
         this.machineID = machineID;
+    }
+
+    public String getWifiSSID() {
+        return wifiSSID;
+    }
+
+    public void setWifiSSID(String wifiSSID) {
+        this.wifiSSID = wifiSSID;
+    }
+
+    public String getWifiPass() {
+        return wifiPass;
+    }
+
+    public void setWifiPass(String wifiPass) {
+        this.wifiPass = wifiPass;
     }
 
     public String getDevirmeYuruyusSecim() {
@@ -482,44 +529,20 @@ public class Machine implements Parcelable {
         this.demoMode = demoMode;
     }
 
-    public String getCalismaSayisi1() {
-        return calismaSayisi1;
+    public String getCalismaSayisi() {
+        return calismaSayisi;
     }
 
-    public void setCalismaSayisi1(String calismaSayisi1) {
-        this.calismaSayisi1 = calismaSayisi1;
+    public void setCalismaSayisi(String calismaSayisi) {
+        this.calismaSayisi = calismaSayisi;
     }
 
-    public String getCalismaSayisi10() {
-        return calismaSayisi10;
+    public String getCalismaSayisiDemo() {
+        return calismaSayisiDemo;
     }
 
-    public void setCalismaSayisi10(String calismaSayisi10) {
-        this.calismaSayisi10 = calismaSayisi10;
-    }
-
-    public String getCalismaSayisi100() {
-        return calismaSayisi100;
-    }
-
-    public void setCalismaSayisi100(String calismaSayisi100) {
-        this.calismaSayisi100 = calismaSayisi100;
-    }
-
-    public String getCalismaSayisi1000() {
-        return calismaSayisi1000;
-    }
-
-    public void setCalismaSayisi1000(String calismaSayisi1000) {
-        this.calismaSayisi1000 = calismaSayisi1000;
-    }
-
-    public String getCalismaSayisi10000() {
-        return calismaSayisi10000;
-    }
-
-    public void setCalismaSayisi10000(String calismaSayisi10000) {
-        this.calismaSayisi10000 = calismaSayisi10000;
+    public void setCalismaSayisiDemo(String calismaSayisiDemo) {
+        this.calismaSayisiDemo = calismaSayisiDemo;
     }
 
     public String getDilSecim() {

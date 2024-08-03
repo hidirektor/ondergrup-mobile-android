@@ -1,13 +1,18 @@
 package me.t3sl4.ondergrup.Util;
 
+import static me.t3sl4.ondergrup.Service.UserDataService.getUserFromPreferences;
+
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -21,6 +26,11 @@ import java.util.Objects;
 import java.util.TimeZone;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
+import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
+import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
+import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
+import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 
 public class Util {
@@ -116,5 +126,47 @@ public class Util {
         String currentLanguage = SharedPreferencesManager.getSharedPref("language", context, "en");
 
         Util.setLocale(context, currentLanguage);
+    }
+
+    public static void redirectBasedRole(Activity activity, boolean splashStatus) {
+        Intent intent = null;
+
+        String userRole = UserDataService.getUserRole(activity.getApplicationContext());
+
+        Log.d("ROLL", userRole);
+
+        switch (userRole) {
+            case "NORMAL":
+                intent = new Intent(activity, me.t3sl4.ondergrup.Screens.Dashboard.User.class);
+                intent.putExtra("user", getUserFromPreferences(activity.getApplicationContext()));
+                break;
+            case "TECHNICIAN":
+                intent = new Intent(activity, Technician.class);
+                intent.putExtra("user", getUserFromPreferences(activity.getApplicationContext()));
+                break;
+            case "ENGINEER":
+                intent = new Intent(activity, Engineer
+                        .class);
+                intent.putExtra("user", getUserFromPreferences(activity.getApplicationContext()));
+                break;
+            case "SYSOP":
+                intent = new Intent(activity, SysOp.class);
+                intent.putExtra("user", getUserFromPreferences(activity.getApplicationContext()));
+                break;
+            default:
+                if(splashStatus) {
+                    intent = new Intent(activity, LoginScreen.class);
+                    activity.startActivity(intent);
+                    activity.finish();
+                } else {
+                    Util.showErrorPopup(new Dialog(activity.getApplicationContext()), "Desteklenmeyen bir kullanıcı rolüne sahipsin. Lütfen iletişime geç.");
+                }
+                break;
+        }
+
+        if (intent != null) {
+            activity.startActivity(intent);
+            activity.finish();
+        }
     }
 }

@@ -3,7 +3,6 @@ package me.t3sl4.ondergrup.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
@@ -23,71 +22,75 @@ public class UserDataService {
     private static final String KEY_USER_COMPANY = "userCompany";
     private static final String KEY_USER_CREATED_AT = "userCreatedAt";
 
+    private static SharedPreferences getPreferences(Context context) {
+        return context.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
+    }
+
     public static void setUserID(Context context, String userID) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_USER_ID, userID);
         editor.apply();
     }
 
     public static void setAccessToken(Context context, String accessToken) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_ACCESS_TOKEN, accessToken);
         editor.apply();
     }
 
     public static void setRefreshToken(Context context, String refreshToken) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_REFRESH_TOKEN, refreshToken);
         editor.apply();
     }
 
     public static void setUserRole(Context context, String role) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_USER_ROLE, role);
         editor.apply();
     }
 
     public static void setUserName(Context context, String userName) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_USER_NAME, userName);
         editor.apply();
     }
 
     public static void seteMail(Context context, String eMail) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_USER_EMAIL, eMail);
         editor.apply();
     }
 
     public static void setNameSurname(Context context, String nameSurname) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_USER_NAME_SURNAME, nameSurname);
         editor.apply();
     }
 
     public static void setPhoneNumber(Context context, String phoneNumber) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_USER_PHONE, phoneNumber);
         editor.apply();
     }
 
     public static void setCompanyName(Context context, String companyName) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_USER_COMPANY, companyName);
         editor.apply();
     }
 
     public static void setCreatedAt(Context context, String createdAt) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_USER_CREATED_AT, createdAt);
         editor.apply();
@@ -95,58 +98,58 @@ public class UserDataService {
 
     // Get individual user properties from SharedPreferences
     public static String getUserID(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         return prefs.getString(KEY_USER_ID, "");
     }
 
     public static String getAccessToken(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         return prefs.getString(KEY_ACCESS_TOKEN, "");
     }
 
     public static String getRefreshToken(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         return prefs.getString(KEY_REFRESH_TOKEN, "");
     }
 
     public static String getUserRole(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getString(KEY_USER_ROLE, "1"); // Default role if not found
+        SharedPreferences prefs = getPreferences(context);
+        return prefs.getString(KEY_USER_ROLE, "");
     }
 
     public static String getUserName(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         return prefs.getString(KEY_USER_NAME, "");
     }
 
     public static String geteMail(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         return prefs.getString(KEY_USER_EMAIL, "");
     }
 
     public static String getNameSurname(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         return prefs.getString(KEY_USER_NAME_SURNAME, "");
     }
 
     public static String getPhoneNumber(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         return prefs.getString(KEY_USER_PHONE, "");
     }
 
     public static String getCompanyName(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         return prefs.getString(KEY_USER_COMPANY, "");
     }
 
     public static String getCreatedAt(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         return prefs.getString(KEY_USER_CREATED_AT, "");
     }
 
     // Clear user data from SharedPreferences
     public static void clearUser(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
 
         editor.remove(KEY_USER_ID);

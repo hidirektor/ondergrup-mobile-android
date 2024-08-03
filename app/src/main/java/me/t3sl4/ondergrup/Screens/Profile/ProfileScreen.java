@@ -16,7 +16,6 @@ import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
 import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
 import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
-import me.t3sl4.ondergrup.Util.Util;
 
 public class ProfileScreen extends AppCompatActivity {
     public User receivedUser;
@@ -109,7 +108,7 @@ public class ProfileScreen extends AppCompatActivity {
         kullaniciAdi.setText(receivedUser.getUserName());
         phone.setText(receivedUser.getPhoneNumber());
         companyName.setText(receivedUser.getCompanyName());
-        createdDate.setText(Util.dateTimeConvert(createdAtString));
+        createdDate.setText(createdAtString);
     }
 
 }

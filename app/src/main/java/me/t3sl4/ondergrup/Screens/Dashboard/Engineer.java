@@ -232,8 +232,8 @@ public class Engineer extends AppCompatActivity {
     }
 
     private ArrayList<Machine> getMachineList() {
-        /*ArrayList<Machine> machines = new ArrayList<>();
-        String reqURL = util.BASE_URL + util.getAllMachinesURL;
+        ArrayList<Machine> machines = new ArrayList<>();
+        /*String reqURL = util.BASE_URL + util.getAllMachinesURL;
 
         HTTP.sendRequestNormal(reqURL, new HTTP.HttpRequestCallback() {
             @Override
@@ -316,9 +316,8 @@ public class Engineer extends AppCompatActivity {
             public void onFailure(String errorMessage) {
                 util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
             }
-        }, Volley.newRequestQueue(this));
-        return machines;*/
-        return null;
+        }, Volley.newRequestQueue(this));*/
+        return machines;
     }
 
     private void updateListView(ArrayList<Machine> machines) {

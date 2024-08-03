@@ -11,7 +11,6 @@ import java.io.IOException;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.HttpHelper;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
-import me.t3sl4.ondergrup.Util.SharedPrefUtil;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,7 +65,7 @@ public class AuthService {
         });
     }
 
-    public static void login(Context context, String userName, String password) {
+    public static void login(Context context, String userName, String password, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("userName", userName);
@@ -89,14 +88,21 @@ public class AuthService {
                         JSONObject payload = responseJson.getJSONObject("payload");
 
                         String userID = payload.getString("userID");
+                        String userType = payload.getString("userType");
                         String accessToken = payload.getString("accessToken");
                         String refreshToken = payload.getString("refreshToken");
 
-                        SharedPrefUtil.saveCredentials(context, userID, accessToken, refreshToken);
                         UserDataService.setUserID(context, userID);
+                        UserDataService.setUserRole(context, userType);
                         UserDataService.setAccessToken(context, accessToken);
                         UserDataService.setRefreshToken(context, refreshToken);
+
                         UserService.getProfile(context, userID);
+
+                        // Check if onSuccess callback is not null and run it
+                        if (onSuccess != null) {
+                            onSuccess.run();
+                        }
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
@@ -117,7 +123,7 @@ public class AuthService {
     }
 
     public static void logout(Context context) {
-        String accessToken = SharedPrefUtil.getAccessToken(context);
+        String accessToken = UserDataService.getAccessToken(context);
 
         if (accessToken == null) {
             Log.e("Logout", "Error: No access token found.");

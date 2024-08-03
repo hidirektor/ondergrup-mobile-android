@@ -103,7 +103,12 @@ public class MachineScreen extends AppCompatActivity {
 
     private void initMachineData() {
         String machineType = selectedMachine.getMachineType();
-        String cycleCount = selectedMachine.getCalismaSayisi10000() + selectedMachine.getCalismaSayisi1000() + selectedMachine.getCalismaSayisi100() + selectedMachine.getCalismaSayisi10() + selectedMachine.getCalismaSayisi1();
+        String cycleCount;
+        if(selectedMachine.getDemoMode().equals("1")) {
+            cycleCount = selectedMachine.getCalismaSayisiDemo();
+        } else {
+            cycleCount = selectedMachine.getCalismaSayisi();
+        }
         String secilenDil = selectedMachine.getDilSecim();
         Drawable drawable = null;
         Drawable selectedLang = null;
@@ -113,7 +118,7 @@ public class MachineScreen extends AppCompatActivity {
             drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.tanitimekrani_csp1, null);
         }
         machineImage.setImageDrawable(drawable);
-        ownerName.setText(selectedMachine.getOwnerUser());
+        ownerName.setText(selectedMachine.getOwnerUserName());
         machineID.setText(selectedMachine.getMachineID());
         cycle.setText(cycleCount);
 

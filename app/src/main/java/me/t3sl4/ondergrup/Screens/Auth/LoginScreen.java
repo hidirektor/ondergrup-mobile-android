@@ -1,7 +1,5 @@
 package me.t3sl4.ondergrup.Screens.Auth;
 
-import static me.t3sl4.ondergrup.Service.UserDataService.getUserFromPreferences;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -17,9 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
-import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
-import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
-import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
@@ -137,43 +132,7 @@ public class LoginScreen extends AppCompatActivity {
         String username = userNameField_login.getText().toString();
         String password = passwordField_login.getText().toString();
 
-        AuthService.login(this, username, password);
-
-        if(getUserFromPreferences(this).getRole() != null) {
-            redirectBasedRole(getUserFromPreferences(this).getRole());
-        }
-    }
-
-    public void redirectBasedRole(String role) {
-        Intent intent = null;
-
-        switch (role) {
-            case "NORMAL":
-                intent = new Intent(LoginScreen.this, me.t3sl4.ondergrup.Screens.Dashboard.User.class);
-                intent.putExtra("user", getUserFromPreferences(this));
-                break;
-            case "TECHNICIAN":
-                intent = new Intent(LoginScreen.this, Technician.class);
-                intent.putExtra("user", getUserFromPreferences(this));
-                break;
-            case "ENGINEER":
-                intent = new Intent(LoginScreen.this, Engineer
-                        .class);
-                intent.putExtra("user", getUserFromPreferences(this));
-                break;
-            case "SYSOP":
-                intent = new Intent(LoginScreen.this, SysOp.class);
-                intent.putExtra("user", getUserFromPreferences(this));
-                break;
-            default:
-                Util.showErrorPopup(uyariDiyalog, "Desteklenmeyen bir kullanıcı rolüne sahipsin. Lütfen iletişime geç.");
-                break;
-        }
-
-        if (intent != null) {
-            startActivity(intent);
-            finish();
-        }
+        AuthService.login(this, username, password, () -> Util.redirectBasedRole(LoginScreen.this, false));
     }
 
     private void sendRegisterRequest() {
