@@ -125,7 +125,7 @@ public class OPMachineService {
         });
     }
 
-    public static void updateOwner(Context context, String authToken, int machineID, String userName, Runnable onSuccess, Runnable onFailure) {
+    public static void updateOwner(Context context, String machineID, String userName, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("machineID", machineID);
@@ -135,6 +135,7 @@ public class OPMachineService {
             return;
         }
 
+        String authToken = UserDataService.getAccessToken(context);
         Call<ResponseBody> call = HttpHelper.makeRequestWithAuth("PUT", UPDATE_OWNER_URL, null, jsonObject.toString(), authToken);
         call.enqueue(new Callback<ResponseBody>() {
             @Override

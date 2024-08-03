@@ -324,6 +324,7 @@ public class User extends AppCompatActivity {
 
     private ArrayList<Machine> getMachineList() {
         ArrayList<Machine> machines = new ArrayList<>();
+
         MachineService.getMachines(this, UserDataService.getUserID(this), machines, () -> {
             // onSuccess callback
             updateListView(machines);

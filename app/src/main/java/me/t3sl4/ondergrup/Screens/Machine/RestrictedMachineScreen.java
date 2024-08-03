@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,6 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Objects;
 
 import me.t3sl4.ondergrup.Model.Machine.Machine;
@@ -23,6 +27,8 @@ import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Log.Error.ErrorLog;
 import me.t3sl4.ondergrup.Screens.Log.Maintenance.MaintenanceLog;
+import me.t3sl4.ondergrup.Service.UserDataService;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPMachineService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class RestrictedMachineScreen extends AppCompatActivity {
@@ -263,7 +269,7 @@ public class RestrictedMachineScreen extends AppCompatActivity {
                 Util.showErrorPopup(uyariDiyalog, errorMessage);
                 roleDialog.dismiss();
             } else {
-                String updateOwnerBody = "{\"MachineID\": \"" + machineID + "\", \"Owner\": \"" + newOwner.getText().toString() + "\"}";
+                String updateOwnerBody = "{\"machineID\": \"" + machineID + "\", \"userName\": \"" + newOwner.getText().toString() + "\"}";
                 sendOwnerRequest(updateOwnerBody);
                 ownerName.setText(newOwner.getText().toString());
                 roleDialog.dismiss();
@@ -274,18 +280,24 @@ public class RestrictedMachineScreen extends AppCompatActivity {
     }
 
     private void sendOwnerRequest(String updateBody) {
-        /*String updateRoleURL = util.BASE_URL + util.updateMachineOwner;
-        HTTP.sendRequest(updateRoleURL, updateBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                util.showSuccessPopup(uyariDiyalog, "Makine sahibi başarılı bir şekilde güncellendi.");
-            }
+        try {
+            JSONObject jsonObject = new JSONObject(updateBody);
+            String machineID = jsonObject.getString("machineID");
+            String userName = jsonObject.getString("userName");
 
-            @Override
-            public void onFailure(String errorMessage) {
-                Log.d("updateRole", updateRoleURL + " " + updateBody);
-                util.showErrorPopup(uyariDiyalog, "Makine sahibi güncellenemedi. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
-            }
-        }, Volley.newRequestQueue(this));*/
+            OPMachineService.updateOwner(
+                    this,
+                    machineID,
+                    userName,
+                    () -> Util.showSuccessPopup(uyariDiyalog, "Makine sahibi başarılı bir şekilde güncellendi."),
+                    () -> {
+                        Log.d("updateOwner", "Auth Token: " + UserDataService.getAccessToken(this) + " MachineID: " + machineID + " UserName: " + userName);
+                        Util.showErrorPopup(uyariDiyalog, "Makine sahibi güncellenemedi. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
+                    }
+            );
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Util.showErrorPopup(uyariDiyalog, "Güncelleme verisi işlenirken bir hata oluştu.");
+        }
     }
 }
