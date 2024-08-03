@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import me.t3sl4.ondergrup.Model.Machine.Machine;
 import me.t3sl4.ondergrup.Model.MachineError.MachineError;
+import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.HttpHelper;
@@ -336,7 +337,7 @@ public class MachineService {
         });
     }
 
-    public static void getMaintenances(Context context, String machineID, Runnable onSuccess) {
+    public static void getMaintenances(Context context, String machineID, ArrayList<Maintenance> machineMaintenancesTemp, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("machineID", machineID);
@@ -352,12 +353,79 @@ public class MachineService {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     try {
+                        String responseBody = response.body().string();
                         Log.d("GetMaintenances", "Success: " + response.body().string());
+
+                        // JSON response'i işleyin
+                        JSONObject responseJson = new JSONObject(responseBody);
+                        JSONArray machineMaintenancesArray = responseJson.getJSONObject("payload").getJSONArray("machineMaintenancesWithTechnicianNames");
+
+                        machineMaintenancesTemp.clear(); // Listeyi temizle
+                        for (int i = 0; i < machineMaintenancesArray.length(); i++) {
+                            JSONObject machineMaintenanceObj = machineMaintenancesArray.getJSONObject(i);
+
+                            String maintenanceID = machineMaintenanceObj.getString("id");
+                            String machineID = machineMaintenanceObj.getString("machineID");
+                            String technicianID = machineMaintenanceObj.getString("technicianID");
+                            String technicianName = machineMaintenanceObj.getString("technicianName");
+                            String maintenanceDate = machineMaintenanceObj.getString("maintenanceDate");
+
+                            Maintenance selectedMaintenance = new Maintenance(maintenanceID, machineID, technicianID, technicianName, maintenanceDate);
+                            selectedMaintenance.setKontrol11(machineMaintenanceObj.getString("kontrol11"));
+                            selectedMaintenance.setKontrol12(machineMaintenanceObj.getString("kontrol12"));
+                            selectedMaintenance.setKontrol13(machineMaintenanceObj.getString("kontrol13"));
+                            selectedMaintenance.setKontrol14(machineMaintenanceObj.getString("kontrol14"));
+                            selectedMaintenance.setKontrol21(machineMaintenanceObj.getString("kontrol21"));
+                            selectedMaintenance.setKontrol22(machineMaintenanceObj.getString("kontrol22"));
+                            selectedMaintenance.setKontrol23(machineMaintenanceObj.getString("kontrol23"));
+                            selectedMaintenance.setKontrol24(machineMaintenanceObj.getString("kontrol24"));
+                            selectedMaintenance.setKontrol31(machineMaintenanceObj.getString("kontrol31"));
+                            selectedMaintenance.setKontrol32(machineMaintenanceObj.getString("kontrol32"));
+                            selectedMaintenance.setKontrol33(machineMaintenanceObj.getString("kontrol33"));
+                            selectedMaintenance.setKontrol34(machineMaintenanceObj.getString("kontrol34"));
+                            selectedMaintenance.setKontrol35(machineMaintenanceObj.getString("kontrol35"));
+                            selectedMaintenance.setKontrol36(machineMaintenanceObj.getString("kontrol36"));
+                            selectedMaintenance.setKontrol41(machineMaintenanceObj.getString("kontrol41"));
+                            selectedMaintenance.setKontrol42(machineMaintenanceObj.getString("kontrol42"));
+                            selectedMaintenance.setKontrol43(machineMaintenanceObj.getString("kontrol43"));
+                            selectedMaintenance.setKontrol44(machineMaintenanceObj.getString("kontrol44"));
+                            selectedMaintenance.setKontrol45(machineMaintenanceObj.getString("kontrol45"));
+                            selectedMaintenance.setKontrol46(machineMaintenanceObj.getString("kontrol46"));
+                            selectedMaintenance.setKontrol51(machineMaintenanceObj.getString("kontrol51"));
+                            selectedMaintenance.setKontrol52(machineMaintenanceObj.getString("kontrol52"));
+                            selectedMaintenance.setKontrol53(machineMaintenanceObj.getString("kontrol53"));
+                            selectedMaintenance.setKontrol54(machineMaintenanceObj.getString("kontrol54"));
+                            selectedMaintenance.setKontrol55(machineMaintenanceObj.getString("kontrol55"));
+                            selectedMaintenance.setKontrol56(machineMaintenanceObj.getString("kontrol56"));
+                            selectedMaintenance.setKontrol61(machineMaintenanceObj.getString("kontrol61"));
+                            selectedMaintenance.setKontrol62(machineMaintenanceObj.getString("kontrol62"));
+                            selectedMaintenance.setKontrol63(machineMaintenanceObj.getString("kontrol63"));
+                            selectedMaintenance.setKontrol71(machineMaintenanceObj.getString("kontrol71"));
+                            selectedMaintenance.setKontrol72(machineMaintenanceObj.getString("kontrol72"));
+                            selectedMaintenance.setKontrol81(machineMaintenanceObj.getString("kontrol81"));
+                            selectedMaintenance.setKontrol82(machineMaintenanceObj.getString("kontrol82"));
+                            selectedMaintenance.setKontrol83(machineMaintenanceObj.getString("kontrol83"));
+                            selectedMaintenance.setKontrol91(machineMaintenanceObj.getString("kontrol91"));
+                            selectedMaintenance.setKontrol92(machineMaintenanceObj.getString("kontrol92"));
+                            selectedMaintenance.setKontrol93(machineMaintenanceObj.getString("kontrol93"));
+                            selectedMaintenance.setKontrol94(machineMaintenanceObj.getString("kontrol94"));
+                            selectedMaintenance.setKontrol95(machineMaintenanceObj.getString("kontrol95"));
+                            selectedMaintenance.setKontrol96(machineMaintenanceObj.getString("kontrol96"));
+                            selectedMaintenance.setKontrol97(machineMaintenanceObj.getString("kontrol97"));
+                            selectedMaintenance.setKontrol98(machineMaintenanceObj.getString("kontrol98"));
+                            selectedMaintenance.setKontrol99(machineMaintenanceObj.getString("kontrol99"));
+                            selectedMaintenance.setKontrol910(machineMaintenanceObj.getString("kontrol910"));
+
+                            machineMaintenancesTemp.add(selectedMaintenance);
+                        }
+
                         if (onSuccess != null) {
                             onSuccess.run();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
                 } else {
                     try {
@@ -375,7 +443,7 @@ public class MachineService {
         });
     }
 
-    public static void getMaintenancesAll(Context context, String userID, Runnable onSuccess) {
+    public static void getMaintenancesAll(Context context, String userID, ArrayList<Maintenance> machineMaintenancesTemp, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("userID", userID);
@@ -391,12 +459,79 @@ public class MachineService {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     try {
+                        String responseBody = response.body().string();
                         Log.d("GetMaintenancesAll", "Success: " + response.body().string());
+
+                        // JSON response'i işleyin
+                        JSONObject responseJson = new JSONObject(responseBody);
+                        JSONArray machineMaintenancesArray = responseJson.getJSONObject("payload").getJSONArray("maintenancesWithTechnicianNames");
+
+                        machineMaintenancesTemp.clear(); // Listeyi temizle
+                        for (int i = 0; i < machineMaintenancesArray.length(); i++) {
+                            JSONObject machineMaintenanceObj = machineMaintenancesArray.getJSONObject(i);
+
+                            String maintenanceID = machineMaintenanceObj.getString("id");
+                            String machineID = machineMaintenanceObj.getString("machineID");
+                            String technicianID = machineMaintenanceObj.getString("technicianID");
+                            String technicianName = machineMaintenanceObj.getString("technicianName");
+                            String maintenanceDate = machineMaintenanceObj.getString("maintenanceDate");
+
+                            Maintenance selectedMaintenance = new Maintenance(maintenanceID, machineID, technicianID, technicianName, maintenanceDate);
+                            selectedMaintenance.setKontrol11(machineMaintenanceObj.getString("kontrol11"));
+                            selectedMaintenance.setKontrol12(machineMaintenanceObj.getString("kontrol12"));
+                            selectedMaintenance.setKontrol13(machineMaintenanceObj.getString("kontrol13"));
+                            selectedMaintenance.setKontrol14(machineMaintenanceObj.getString("kontrol14"));
+                            selectedMaintenance.setKontrol21(machineMaintenanceObj.getString("kontrol21"));
+                            selectedMaintenance.setKontrol22(machineMaintenanceObj.getString("kontrol22"));
+                            selectedMaintenance.setKontrol23(machineMaintenanceObj.getString("kontrol23"));
+                            selectedMaintenance.setKontrol24(machineMaintenanceObj.getString("kontrol24"));
+                            selectedMaintenance.setKontrol31(machineMaintenanceObj.getString("kontrol31"));
+                            selectedMaintenance.setKontrol32(machineMaintenanceObj.getString("kontrol32"));
+                            selectedMaintenance.setKontrol33(machineMaintenanceObj.getString("kontrol33"));
+                            selectedMaintenance.setKontrol34(machineMaintenanceObj.getString("kontrol34"));
+                            selectedMaintenance.setKontrol35(machineMaintenanceObj.getString("kontrol35"));
+                            selectedMaintenance.setKontrol36(machineMaintenanceObj.getString("kontrol36"));
+                            selectedMaintenance.setKontrol41(machineMaintenanceObj.getString("kontrol41"));
+                            selectedMaintenance.setKontrol42(machineMaintenanceObj.getString("kontrol42"));
+                            selectedMaintenance.setKontrol43(machineMaintenanceObj.getString("kontrol43"));
+                            selectedMaintenance.setKontrol44(machineMaintenanceObj.getString("kontrol44"));
+                            selectedMaintenance.setKontrol45(machineMaintenanceObj.getString("kontrol45"));
+                            selectedMaintenance.setKontrol46(machineMaintenanceObj.getString("kontrol46"));
+                            selectedMaintenance.setKontrol51(machineMaintenanceObj.getString("kontrol51"));
+                            selectedMaintenance.setKontrol52(machineMaintenanceObj.getString("kontrol52"));
+                            selectedMaintenance.setKontrol53(machineMaintenanceObj.getString("kontrol53"));
+                            selectedMaintenance.setKontrol54(machineMaintenanceObj.getString("kontrol54"));
+                            selectedMaintenance.setKontrol55(machineMaintenanceObj.getString("kontrol55"));
+                            selectedMaintenance.setKontrol56(machineMaintenanceObj.getString("kontrol56"));
+                            selectedMaintenance.setKontrol61(machineMaintenanceObj.getString("kontrol61"));
+                            selectedMaintenance.setKontrol62(machineMaintenanceObj.getString("kontrol62"));
+                            selectedMaintenance.setKontrol63(machineMaintenanceObj.getString("kontrol63"));
+                            selectedMaintenance.setKontrol71(machineMaintenanceObj.getString("kontrol71"));
+                            selectedMaintenance.setKontrol72(machineMaintenanceObj.getString("kontrol72"));
+                            selectedMaintenance.setKontrol81(machineMaintenanceObj.getString("kontrol81"));
+                            selectedMaintenance.setKontrol82(machineMaintenanceObj.getString("kontrol82"));
+                            selectedMaintenance.setKontrol83(machineMaintenanceObj.getString("kontrol83"));
+                            selectedMaintenance.setKontrol91(machineMaintenanceObj.getString("kontrol91"));
+                            selectedMaintenance.setKontrol92(machineMaintenanceObj.getString("kontrol92"));
+                            selectedMaintenance.setKontrol93(machineMaintenanceObj.getString("kontrol93"));
+                            selectedMaintenance.setKontrol94(machineMaintenanceObj.getString("kontrol94"));
+                            selectedMaintenance.setKontrol95(machineMaintenanceObj.getString("kontrol95"));
+                            selectedMaintenance.setKontrol96(machineMaintenanceObj.getString("kontrol96"));
+                            selectedMaintenance.setKontrol97(machineMaintenanceObj.getString("kontrol97"));
+                            selectedMaintenance.setKontrol98(machineMaintenanceObj.getString("kontrol98"));
+                            selectedMaintenance.setKontrol99(machineMaintenanceObj.getString("kontrol99"));
+                            selectedMaintenance.setKontrol910(machineMaintenanceObj.getString("kontrol910"));
+
+                            machineMaintenancesTemp.add(selectedMaintenance);
+                        }
+
                         if (onSuccess != null) {
                             onSuccess.run();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
                 } else {
                     try {

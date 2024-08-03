@@ -7,8 +7,10 @@ public class Maintenance implements Parcelable {
 
     private String maintenanceID;
     private String machineID;
-    private String technician;
+    private String technicianID;
+    private String technicianName;
     private String maintenanceDate;
+
     private String kontrol11;
     private String kontrol12;
     private String kontrol13;
@@ -54,17 +56,19 @@ public class Maintenance implements Parcelable {
     private String kontrol99;
     private String kontrol910;
 
-    public Maintenance(String maintenanceID, String machineID, String technician, String maintenanceDate) {
+    public Maintenance(String maintenanceID, String machineID, String technicianID, String technicianName, String maintenanceDate) {
         this.maintenanceID = maintenanceID;
         this.machineID = machineID;
-        this.technician = technician;
+        this.technicianID = technicianID;
+        this.technicianName = technicianName;
         this.maintenanceDate = maintenanceDate;
     }
 
     protected Maintenance(Parcel in) {
         maintenanceID = in.readString();
         machineID = in.readString();
-        technician = in.readString();
+        technicianID = in.readString();
+        technicianName = in.readString();
         maintenanceDate = in.readString();
         kontrol11 = in.readString();
         kontrol12 = in.readString();
@@ -133,7 +137,8 @@ public class Maintenance implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(maintenanceID);
         dest.writeString(machineID);
-        dest.writeString(technician);
+        dest.writeString(technicianID);
+        dest.writeString(technicianName);
         dest.writeString(maintenanceDate);
         dest.writeString(kontrol11);
         dest.writeString(kontrol12);
@@ -197,12 +202,20 @@ public class Maintenance implements Parcelable {
         this.machineID = machineID;
     }
 
-    public String getTechnician() {
-        return technician;
+    public String getTechnicianID() {
+        return technicianID;
     }
 
-    public void setTechnician(String technician) {
-        this.technician = technician;
+    public void setTechnicianID(String technicianID) {
+        this.technicianID = technicianID;
+    }
+
+    public String getTechnicianName() {
+        return technicianName;
+    }
+
+    public void setTechnicianName(String technicianName) {
+        this.technicianName = technicianName;
     }
 
     public String getMaintenanceDate() {

@@ -16,6 +16,7 @@ import java.util.Objects;
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Adapter.MaintenanceAdapter;
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
 
 public class MaintenanceLog extends AppCompatActivity {
     public me.t3sl4.ondergrup.Model.User.User receivedUser;
@@ -81,84 +82,9 @@ public class MaintenanceLog extends AppCompatActivity {
 
     private ArrayList<Maintenance> getMachineMaintenanceList() {
         ArrayList<Maintenance> machineMaintenancesTemp = new ArrayList<>();
-        /*String reqURL = util.BASE_URL + util.getMachineMaintenanceURL;
-        String jsonErrorBody = "{\"machineID\": \"" + currentMachineID + "\"}";
-
-        Log.d("ErrorLog-URL", reqURL);
-        Log.d("ErrorLog-Body", jsonErrorBody);
-
-        HTTP.sendRequest(reqURL, jsonErrorBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                try {
-                    JSONArray machineArray = response.getJSONArray("data");
-                    for (int i = 0; i < machineArray.length(); i++) {
-                        JSONObject maintenanceInfoObj = machineArray.getJSONObject(i);
-                        String maintenanceID = maintenanceInfoObj.getString("maintenanceID");
-                        String machineID = maintenanceInfoObj.getString("machineID");
-                        String incharge = maintenanceInfoObj.getString("technician");
-                        String maintenanceDate = maintenanceInfoObj.getString("maintenanceDate");
-
-                        Maintenance selectedMaintenance = new Maintenance(maintenanceID, machineID, incharge, maintenanceDate);
-                        selectedMaintenance.setKontrol11(maintenanceInfoObj.getString("kontrol1-1"));
-                        selectedMaintenance.setKontrol12(maintenanceInfoObj.getString("kontrol1-2"));
-                        selectedMaintenance.setKontrol13(maintenanceInfoObj.getString("kontrol1-3"));
-                        selectedMaintenance.setKontrol14(maintenanceInfoObj.getString("kontrol1-4"));
-                        selectedMaintenance.setKontrol21(maintenanceInfoObj.getString("kontrol2-1"));
-                        selectedMaintenance.setKontrol22(maintenanceInfoObj.getString("kontrol2-2"));
-                        selectedMaintenance.setKontrol23(maintenanceInfoObj.getString("kontrol2-3"));
-                        selectedMaintenance.setKontrol24(maintenanceInfoObj.getString("kontrol2-4"));
-                        selectedMaintenance.setKontrol31(maintenanceInfoObj.getString("kontrol3-1"));
-                        selectedMaintenance.setKontrol32(maintenanceInfoObj.getString("kontrol3-2"));
-                        selectedMaintenance.setKontrol33(maintenanceInfoObj.getString("kontrol3-3"));
-                        selectedMaintenance.setKontrol34(maintenanceInfoObj.getString("kontrol3-4"));
-                        selectedMaintenance.setKontrol35(maintenanceInfoObj.getString("kontrol3-5"));
-                        selectedMaintenance.setKontrol36(maintenanceInfoObj.getString("kontrol3-6"));
-                        selectedMaintenance.setKontrol41(maintenanceInfoObj.getString("kontrol4-1"));
-                        selectedMaintenance.setKontrol42(maintenanceInfoObj.getString("kontrol4-2"));
-                        selectedMaintenance.setKontrol43(maintenanceInfoObj.getString("kontrol4-3"));
-                        selectedMaintenance.setKontrol44(maintenanceInfoObj.getString("kontrol4-4"));
-                        selectedMaintenance.setKontrol45(maintenanceInfoObj.getString("kontrol4-5"));
-                        selectedMaintenance.setKontrol46(maintenanceInfoObj.getString("kontrol4-6"));
-                        selectedMaintenance.setKontrol51(maintenanceInfoObj.getString("kontrol5-1"));
-                        selectedMaintenance.setKontrol52(maintenanceInfoObj.getString("kontrol5-2"));
-                        selectedMaintenance.setKontrol53(maintenanceInfoObj.getString("kontrol5-3"));
-                        selectedMaintenance.setKontrol54(maintenanceInfoObj.getString("kontrol5-4"));
-                        selectedMaintenance.setKontrol55(maintenanceInfoObj.getString("kontrol5-5"));
-                        selectedMaintenance.setKontrol56(maintenanceInfoObj.getString("kontrol5-6"));
-                        selectedMaintenance.setKontrol61(maintenanceInfoObj.getString("kontrol6-1"));
-                        selectedMaintenance.setKontrol62(maintenanceInfoObj.getString("kontrol6-2"));
-                        selectedMaintenance.setKontrol63(maintenanceInfoObj.getString("kontrol6-3"));
-                        selectedMaintenance.setKontrol71(maintenanceInfoObj.getString("kontrol7-1"));
-                        selectedMaintenance.setKontrol72(maintenanceInfoObj.getString("kontrol7-2"));
-                        selectedMaintenance.setKontrol81(maintenanceInfoObj.getString("kontrol8-1"));
-                        selectedMaintenance.setKontrol82(maintenanceInfoObj.getString("kontrol8-2"));
-                        selectedMaintenance.setKontrol83(maintenanceInfoObj.getString("kontrol8-3"));
-                        selectedMaintenance.setKontrol91(maintenanceInfoObj.getString("kontrol9-1"));
-                        selectedMaintenance.setKontrol92(maintenanceInfoObj.getString("kontrol9-2"));
-                        selectedMaintenance.setKontrol93(maintenanceInfoObj.getString("kontrol9-3"));
-                        selectedMaintenance.setKontrol94(maintenanceInfoObj.getString("kontrol9-4"));
-                        selectedMaintenance.setKontrol95(maintenanceInfoObj.getString("kontrol9-5"));
-                        selectedMaintenance.setKontrol96(maintenanceInfoObj.getString("kontrol9-6"));
-                        selectedMaintenance.setKontrol97(maintenanceInfoObj.getString("kontrol9-7"));
-                        selectedMaintenance.setKontrol98(maintenanceInfoObj.getString("kontrol9-8"));
-                        selectedMaintenance.setKontrol99(maintenanceInfoObj.getString("kontrol9-9"));
-                        selectedMaintenance.setKontrol910(maintenanceInfoObj.getString("kontrol9-10"));
-                        machineMaintenancesTemp.add(selectedMaintenance);
-                    }
-
-                    updateListView(machineMaintenancesTemp);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                String hatasizMesaj = MaintenanceLog.this.getResources().getString(R.string.bakimyok);
-                util.showSuccessPopup(uyariDiyalog, hatasizMesaj);
-            }
-        }, Volley.newRequestQueue(this));*/
+        MachineService.getMaintenances(this, currentMachineID, machineMaintenancesTemp, () -> {
+            updateListView(machineMaintenancesTemp);
+        });
         return machineMaintenancesTemp;
     }
 

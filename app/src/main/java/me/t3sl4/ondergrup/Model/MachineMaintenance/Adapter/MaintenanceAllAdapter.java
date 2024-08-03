@@ -68,7 +68,7 @@ public class MaintenanceAllAdapter extends BaseAdapter {
         String preID = context.getResources().getString(R.string.maintenance_id);
 
         holder.maintenanceIcon.setImageDrawable(drawable);
-        holder.incharge_technician.setText(preIncharge + " " + machineMaintenance.getTechnician());
+        holder.incharge_technician.setText(preIncharge + " " + machineMaintenance.getTechnicianName());
         holder.maintenance_date.setText(preDate + " " + Util.dateTimeConvert(machineMaintenance.getMaintenanceDate()));
         holder.maintenance_id.setText(preID + " " + machineMaintenance.getMaintenanceID());
         String idText = context.getResources().getString(R.string.machine_id) + " " + machineMaintenance.getMachineID();
