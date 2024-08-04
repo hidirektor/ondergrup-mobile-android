@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,7 +17,9 @@ import me.t3sl4.ondergrup.Model.SubUser.SubUser;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserListScreen;
+import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.SubUser.SubUserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class EditSubScreen extends AppCompatActivity {
@@ -30,6 +35,7 @@ public class EditSubScreen extends AppCompatActivity {
     private LinearLayout showSubUsers;
 
     private ImageView backButton;
+    private Button editSubUserButton;
 
     private Dialog uyariDiyalog;
 
@@ -64,6 +70,11 @@ public class EditSubScreen extends AppCompatActivity {
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
+        editSubUserButton = findViewById(R.id.editSubButton);
+        editSubUserButton.setOnClickListener(v -> {
+            updateWholeProfile();
+        });
+
         PasswordFieldTouchListener.setChangeablePasswordField(passwordEditText, getApplicationContext());
 
         setUserInfo();
@@ -78,43 +89,19 @@ public class EditSubScreen extends AppCompatActivity {
     }
 
     public void updateWholeProfile() {
-        String created_at = Util.getCurrentDateTime();
         String password = String.valueOf(passwordEditText.getText());
 
         if (password.isEmpty()) {
-            password = "null";
+            password = null;
         }
 
-        String registerJsonBody =
-                "{" +
-                        "\"UserName\":\"" + kullaniciAdi.getText() + "\"," +
-                        "\"Email\":\"" + eMail.getText() + "\"," +
-                        "\"Password\":\"" + password + "\"," +
-                        "\"NameSurname\":\"" + nameSurname.getText() + "\"," +
-                        "\"Phone\":\"" + phone.getText() + "\"," +
-                        "\"CompanyName\":\"" + companyName.getText() + "\"" +
-                        "}";
-
-        sendUpdateRequest(registerJsonBody, String.valueOf(kullaniciAdi.getText()));
-    }
-
-    private void sendUpdateRequest(String jsonBody, String username) {
-        /*String updateProfileUrl = util.BASE_URL + util.updateProfileURLPrefix;
-
-        HTTP.sendRequest(updateProfileUrl, jsonBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
+        SubUserService.editSubUser(this, UserDataService.getUserID(this), receivedSubUser.getSubUserID(), kullaniciAdi.getText().toString(), "NORMAL", nameSurname.getText().toString(), eMail.getText().toString(), phone.getText().toString(), companyName.getText().toString(), password, () -> {
+            updateUserObject(receivedUser);
+            Util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde güncellendi.");
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 finish();
-                updateUserObject(receivedUser);
-                startActivity(getIntent().putExtra("user", receivedUser));
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                Log.e("Hata", " " + errorMessage);
-                util.showErrorPopup(uyariDiyalog, "Profil güncellenirken hata meydana geldi. Lütfen tekrar dene.");
-            }
-        }, Volley.newRequestQueue(this));*/
+            }, 1000);
+        });
     }
 
     @Override

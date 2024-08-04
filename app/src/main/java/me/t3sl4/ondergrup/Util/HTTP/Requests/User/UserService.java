@@ -171,13 +171,14 @@ public class UserService {
         });
     }
 
-    public static void updateProfile(Context context, String userID, String nameSurname, String eMail, String companyName, String password) {
+    public static void updateProfile(Context context, String userID, String nameSurname, String eMail, String companyName, String password, String phoneNumber, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("userID", userID);
             JSONObject userData = new JSONObject();
             userData.put("nameSurname", nameSurname);
             userData.put("eMail", eMail);
+            userData.put("phoneNumber", phoneNumber);
             userData.put("companyName", companyName);
             userData.put("password", password);
             jsonObject.put("userData", userData);
@@ -194,6 +195,10 @@ public class UserService {
                     try {
                         String responseBody = response.body().string();
                         Log.d("UpdateProfile", "Success: " + responseBody);
+
+                        if (onSuccess != null) {
+                            onSuccess.run();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

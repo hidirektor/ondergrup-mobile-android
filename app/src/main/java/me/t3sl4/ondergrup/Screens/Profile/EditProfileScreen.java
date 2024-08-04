@@ -16,8 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
+import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
-import me.t3sl4.ondergrup.Util.Util;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 
 public class EditProfileScreen extends AppCompatActivity {
     public User receivedUser;
@@ -103,43 +104,17 @@ public class EditProfileScreen extends AppCompatActivity {
     }
 
     public void updateWholeProfile() {
-        String created_at = Util.getCurrentDateTime();
         String password = String.valueOf(passwordEditText.getText());
 
         if (password.isEmpty()) {
-            password = "null";
+            password = null;
         }
 
-        String registerJsonBody =
-                "{" +
-                        "\"UserName\":\"" + kullaniciAdi.getText() + "\"," +
-                        "\"Email\":\"" + eMail.getText() + "\"," +
-                        "\"Password\":\"" + password + "\"," +
-                        "\"NameSurname\":\"" + nameSurname.getText() + "\"," +
-                        "\"Phone\":\"" + phone.getText() + "\"," +
-                        "\"CompanyName\":\"" + companyName.getText() + "\"" +
-                        "}";
-
-        sendUpdateRequest(registerJsonBody, String.valueOf(kullaniciAdi.getText()));
-    }
-
-    private void sendUpdateRequest(String jsonBody, String username) {
-        /*String updateProfileUrl = util.BASE_URL + util.updateProfileURLPrefix;
-
-        HTTP.sendRequest(updateProfileUrl, jsonBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                finish();
-                updateUserObject(receivedUser);
-                startActivity(getIntent().putExtra("user", receivedUser));
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                Log.e("Hata", " " + errorMessage);
-                util.showErrorPopup(uyariDiyalog, "Profil güncellenirken hata meydana geldi. Lütfen tekrar dene.");
-            }
-        }, Volley.newRequestQueue(this));*/
+        UserService.updateProfile(this, UserDataService.getUserID(this), nameSurname.getText().toString(), eMail.getText().toString(), companyName.getText().toString(), password, phone.getText().toString(), () -> {
+            finish();
+            updateUserObject(receivedUser);
+            startActivity(getIntent().putExtra("user", receivedUser));
+        });
     }
 
     @Override

@@ -4,19 +4,19 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.SubUser.SubUserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SubUserAddScreen extends AppCompatActivity {
@@ -69,47 +69,15 @@ public class SubUserAddScreen extends AppCompatActivity {
         String phone = editTextPhone.getText().toString();
         String companyName = editTextCompany.getText().toString();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        String createdAt = sdf.format(new Date());
-
         if(checkFields(userName, email, password, nameSurname, phone, companyName)) {
-            String profilePhotoPath = userName + ".jpg";
-            String registerJsonBody =
-                    "{" +
-                            "\"Role\":\"" + "NORMAL" + "\"," +
-                            "\"UserName\":\"" + userName + "\"," +
-                            "\"Email\":\"" + email + "\"," +
-                            "\"Password\":\"" + password + "\"," +
-                            "\"NameSurname\":\"" + nameSurname + "\"," +
-                            "\"Phone\":\"" + phone + "\"," +
-                            "\"Profile_Photo\":\"" + profilePhotoPath + "\"," +
-                            "\"CompanyName\":\"" + companyName + "\"," +
-                            "\"OwnerName\":\"" + receivedUser.getUserName() + "\"," +
-                            "\"Created_At\":\"" + createdAt + "\"" +
-                            "}";
 
-            sendRegisterRequestFinal(registerJsonBody, userName);
+            SubUserService.createSubUser(this, UserDataService.getUserID(this), userName, "NORMAL", nameSurname, email, phone, companyName, password, () -> {
+                Util.showSuccessPopup(uyariDiyalog, "Alt Kullanıcı Başarıyla Eklendi !");
+                new Handler(Looper.getMainLooper()).postDelayed(() -> finish(), 1000);
+            });
         } else {
             Util.showErrorPopup(uyariDiyalog, "Alt kullanıcı eklemek için tüm alanları doldurmalısın.");
         }
-    }
-
-    private void sendRegisterRequestFinal(String jsonBody, String userName) {
-        /*String registerUrl = util.BASE_URL + util.addSubURLPrefix;
-
-        HTTP.sendRequest(registerUrl, jsonBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                util.showSuccessPopup(uyariDiyalog, "Alt Kullanıcı Başarıyla Eklendi !");
-
-                new Handler().postDelayed(() -> finish(), 1500);
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                util.showErrorPopup(uyariDiyalog, "Alt kullanıcı eklerken hata meydana geldi. Lütfen tekrar dene.");
-            }
-        }, Volley.newRequestQueue(this));*/
     }
 
     private boolean checkFields(String userName, String email, String password, String nameSurname, String phone, String companyName) {

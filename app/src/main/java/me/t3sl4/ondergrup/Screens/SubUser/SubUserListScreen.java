@@ -16,6 +16,9 @@ import me.t3sl4.ondergrup.Model.SubUser.SubUser;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Profile.EditSubScreen;
+import me.t3sl4.ondergrup.Service.UserDataService;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.SubUser.SubUserService;
+import me.t3sl4.ondergrup.Util.Util;
 
 public class SubUserListScreen extends AppCompatActivity {
     public User receivedUser;
@@ -55,7 +58,7 @@ public class SubUserListScreen extends AppCompatActivity {
 
             popupMenu.setOnMenuItemClickListener(item -> {
                 if(item.getItemId() == R.id.deleteSub) {
-                    deleteAndUpdateSubUser(selectedSubUser, subUserList);
+                    deleteAndUpdateSubUser(selectedSubUser);
                     return true;
                 } else if(item.getItemId() == R.id.editSub) {
                     Intent editSubIntent = new Intent(SubUserListScreen.this, EditSubScreen.class);
@@ -77,40 +80,11 @@ public class SubUserListScreen extends AppCompatActivity {
 
     private ArrayList<SubUser> getSubUserList() {
         ArrayList<SubUser> subUsers = new ArrayList<>();
-        /*String reqURL = util.BASE_URL + util.getSubUsersPrefix;
-        String jsonSubUserBody = "{\"username\": \"" + receivedUser.getUserName() + "\"}";
 
-        HTTP.sendRequest(reqURL, jsonSubUserBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                try {
-                    JSONArray subUserArray = response.getJSONArray("subUsers");
-                    for (int i = 0; i < subUserArray.length(); i++) {
-                        JSONObject subUserObj = subUserArray.getJSONObject(i);
-                        String role = subUserObj.getString("Role");
-                        String userName = subUserObj.getString("UserName");
-                        String email = subUserObj.getString("Email");
-                        String nameSurname = subUserObj.getString("NameSurname");
-                        String phone = subUserObj.getString("Phone");
-                        String profilePhoto = subUserObj.getString("Profile_Photo");
-                        String companyName = subUserObj.getString("CompanyName");
-                        String owner = subUserObj.getString("Owner");
+        SubUserService.getSubUsers(this, UserDataService.getUserID(this), subUsers, () -> {
+            updateListView(subUsers);
+        });
 
-                        SubUser subUser = new SubUser(role, userName, email, nameSurname, phone, companyName, owner);
-                        subUsers.add(subUser);
-                    }
-
-                    updateListView(subUsers);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                util.showErrorPopup(uyariDiyalog, "Herhangi bir alt kullanıcı bulunamadı.");
-            }
-        }, Volley.newRequestQueue(this));*/
         return subUsers;
     }
 
@@ -120,26 +94,10 @@ public class SubUserListScreen extends AppCompatActivity {
         subUserListView.setAdapter(subUserListAdapter);
     }
 
-    private void deleteAndUpdateSubUser(SubUser selectedSubUser, ArrayList<SubUser> subUsers) {
-        /*String reqURL = util.BASE_URL + util.deleteSubUserPrefix;
-
-        String selectedSubUsername = selectedSubUser.getUserName();
-        String ownerName = receivedUser.getUserName();
-        String jsonSubUserBody = "{\"username\": \"" + selectedSubUsername + "\", \"OwnerName\": \"" + ownerName + "\"}";
-
-        HTTP.sendRequest(reqURL, jsonSubUserBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde silindi !");
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                util.showErrorPopup(uyariDiyalog, "Kullanıcı silinmeedi. \nLütfen birazdan tekrar deneyin.");
-            }
-        }, Volley.newRequestQueue(this));*/
-
-        subUsers.remove(selectedSubUser);
-        updateListView(subUsers);
+    private void deleteAndUpdateSubUser(SubUser selectedSubUser) {
+        SubUserService.deleteSubUser(this, selectedSubUser.getSubUserID(), () -> {
+            getSubUserList();
+            Util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde silindi !");
+        });
     }
 }

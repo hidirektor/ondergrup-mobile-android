@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 public class SubUser implements Parcelable {
 
+    private String subUserID;
     private String role;
     private String userName;
     private String eMail;
@@ -13,7 +14,8 @@ public class SubUser implements Parcelable {
     private String companyName;
     private String owner;
 
-    public SubUser(String role, String userName, String eMail, String nameSurname, String phone, String companyName, String owner) {
+    public SubUser(String subUserID, String role, String userName, String eMail, String nameSurname, String phone, String companyName, String owner) {
+        this.subUserID = subUserID;
         this.role = role;
         this.userName = userName;
         this.eMail = eMail;
@@ -24,6 +26,7 @@ public class SubUser implements Parcelable {
     }
 
     protected SubUser(Parcel in) {
+        subUserID = in.readString();
         role = in.readString();
         userName = in.readString();
         eMail = in.readString();
@@ -31,6 +34,14 @@ public class SubUser implements Parcelable {
         phone = in.readString();
         companyName = in.readString();
         owner = in.readString();
+    }
+
+    public String getSubUserID() {
+        return subUserID;
+    }
+
+    public void setSubUserID(String subUserID) {
+        this.subUserID = subUserID;
     }
 
     public String getRole() {
@@ -108,6 +119,7 @@ public class SubUser implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(subUserID);
         dest.writeString(role);
         dest.writeString(userName);
         dest.writeString(eMail);
