@@ -68,7 +68,7 @@ public class MaintenanceAdapter extends BaseAdapter {
 
         holder.maintenanceIcon.setImageDrawable(drawable);
         holder.incharge_technician.setText(preIncharge + " " + machineMaintenance.getTechnicianName());
-        holder.maintenance_date.setText(preDate + " " + Util.dateTimeConvert(machineMaintenance.getMaintenanceDate()));
+        holder.maintenance_date.setText(preDate + " " + Util.convertUnixTimestampToDateString(Long.valueOf(machineMaintenance.getMaintenanceDate())));
         holder.maintenance_id.setText(preID + " " + machineMaintenance.getMaintenanceID());
 
         return convertView;

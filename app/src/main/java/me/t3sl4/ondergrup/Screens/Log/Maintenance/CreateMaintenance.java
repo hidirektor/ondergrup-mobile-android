@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,11 +24,16 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPMaintenanceService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class CreateMaintenance extends AppCompatActivity {
@@ -119,7 +126,11 @@ public class CreateMaintenance extends AppCompatActivity {
 
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             if(checkIfAnyMaintenanceVariableIsNull()) {
-                createMaintenanceRequest(machineID, receivedUser.getUserName());
+                try {
+                    createMaintenanceRequest();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             } else {
                 Util.showErrorPopup(uyariDiyalog, "Bakım kaydı oluşturulamadı. \nLütfen bilgileri kontrol edip tekrar deneyin.");
             }
@@ -550,47 +561,64 @@ public class CreateMaintenance extends AppCompatActivity {
         return maintenanceStatus;
     }
 
-    private void createMaintenanceRequest(String machineID, String userName) {
-        /*String requestURL = util.BASE_URL + util.createMaintenancePrefix;
+    private void createMaintenanceRequest() throws JSONException {
+        OPMaintenanceService.createMaintenance(this, getMaintenanceData(), () -> {
+            Util.showSuccessPopup(uyariDiyalog, "Bakım kaydı oluşturuldu.");
+            new Handler(Looper.getMainLooper()).postDelayed(() -> finish(), 1000);
+        });
+    }
 
-        String requestBody = String.format(
-                "{\"MachineID\": \"%s\", \"Technician\": \"%s\", " +
-                        "\"maintenance1\": [\"%s\", \"%s\", \"%s\", \"%s\"], " +
-                        "\"maintenance2\": [\"%s\", \"%s\", \"%s\", \"%s\"], " +
-                        "\"maintenance3\": [\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"], " +
-                        "\"maintenance4\": [\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"], " +
-                        "\"maintenance5\": [\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"], " +
-                        "\"maintenance6\": [\"%s\", \"%s\", \"%s\"], " +
-                        "\"maintenance7\": [\"%s\", \"%s\"], " +
-                        "\"maintenance8\": [\"%s\", \"%s\", \"%s\"], " +
-                        "\"notes\": [\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"]}",
-                machineID, userName,
-                maintenance1_1, maintenance1_2, maintenance1_3, maintenance1_4,
-                maintenance2_1, maintenance2_2, maintenance2_3, maintenance2_4,
-                maintenance3_1, maintenance3_2, maintenance3_3, maintenance3_4, maintenance3_5, maintenance3_6,
-                maintenance4_1, maintenance4_2, maintenance4_3, maintenance4_4, maintenance4_5, maintenance4_6,
-                maintenance5_1, maintenance5_2, maintenance5_3, maintenance5_4, maintenance5_5, maintenance5_6,
-                maintenance6_1, maintenance6_2, maintenance6_3,
-                maintenance7_1, maintenance7_2,
-                maintenance8_1, maintenance8_2, maintenance8_3,
-                note1, note2, note3, note4, note5, note6, note7, note8, note9, note10
-        );
+    private String getMaintenanceData() throws JSONException {
+        JSONObject requestBody = new JSONObject();
 
-        Log.d("maintenancelog", requestBody);
+        requestBody.put("machineID", machineID);
+        requestBody.put("technicianID", UserDataService.getUserID(this));
+        requestBody.put("kontrol11", maintenance1_1);
+        requestBody.put("kontrol12", maintenance1_2);
+        requestBody.put("kontrol13", maintenance1_3);
+        requestBody.put("kontrol14", maintenance1_4);
+        requestBody.put("kontrol21", maintenance2_1);
+        requestBody.put("kontrol22", maintenance2_2);
+        requestBody.put("kontrol23", maintenance2_3);
+        requestBody.put("kontrol24", maintenance2_4);
+        requestBody.put("kontrol31", maintenance3_1);
+        requestBody.put("kontrol32", maintenance3_2);
+        requestBody.put("kontrol33", maintenance3_3);
+        requestBody.put("kontrol34", maintenance3_4);
+        requestBody.put("kontrol35", maintenance3_5);
+        requestBody.put("kontrol36", maintenance3_6);
+        requestBody.put("kontrol41", maintenance4_1);
+        requestBody.put("kontrol42", maintenance4_2);
+        requestBody.put("kontrol43", maintenance4_3);
+        requestBody.put("kontrol44", maintenance4_4);
+        requestBody.put("kontrol45", maintenance4_5);
+        requestBody.put("kontrol46", maintenance4_6);
+        requestBody.put("kontrol51", maintenance5_1);
+        requestBody.put("kontrol52", maintenance5_2);
+        requestBody.put("kontrol53", maintenance5_3);
+        requestBody.put("kontrol54", maintenance5_4);
+        requestBody.put("kontrol55", maintenance5_5);
+        requestBody.put("kontrol56", maintenance5_6);
+        requestBody.put("kontrol61", maintenance6_1);
+        requestBody.put("kontrol62", maintenance6_2);
+        requestBody.put("kontrol63", maintenance6_3);
+        requestBody.put("kontrol71", maintenance7_1);
+        requestBody.put("kontrol72", maintenance7_2);
+        requestBody.put("kontrol81", maintenance8_1);
+        requestBody.put("kontrol82", maintenance8_2);
+        requestBody.put("kontrol83", maintenance8_3);
+        requestBody.put("kontrol91", note1);
+        requestBody.put("kontrol92", note2);
+        requestBody.put("kontrol93", note3);
+        requestBody.put("kontrol94", note4);
+        requestBody.put("kontrol95", note5);
+        requestBody.put("kontrol96", note6);
+        requestBody.put("kontrol97", note7);
+        requestBody.put("kontrol98", note8);
+        requestBody.put("kontrol99", note9);
+        requestBody.put("kontrol910", note10);
 
-        HTTP.sendRequest(requestURL, requestBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                util.showSuccessPopup(uyariDiyalog, "Bakım kaydı başarılı bir şekilde oluşturuldu.");
-                new Handler(Looper.getMainLooper()).postDelayed(() -> finish(), 1000);
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                Log.d("createMaintenance", requestURL + " " + requestBody);
-                util.showErrorPopup(uyariDiyalog, "Bakım kaydı oluşturulamadı. \nLütfen bilgileri kontrol edip tekrar deneyin.");
-            }
-        }, Volley.newRequestQueue(this));*/
+        return requestBody.toString();
     }
 
     public boolean checkIfAnyMaintenanceVariableIsNull() {
