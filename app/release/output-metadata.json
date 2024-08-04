@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 395,
-      "versionName": "1.2.95(395)",
-      "outputFile": "OnderGrup release_03-08-2024_v1.2.95(395).apk"
+      "versionCode": 492,
+      "versionName": "1.3.92(492)",
+      "outputFile": "OnderGrup release_04-08-2024_v1.3.92(492).apk"
     }
   ],
   "elementType": "File",
@@ -22,14 +22,14 @@
       "minApi": 28,
       "maxApi": 30,
       "baselineProfiles": [
-        "baselineProfiles/1/OnderGrup release_03-08-2024_v1.2.95(395).dm"
+        "baselineProfiles/1/OnderGrup release_04-08-2024_v1.3.92(492).dm"
       ]
     },
     {
       "minApi": 31,
       "maxApi": 2147483647,
       "baselineProfiles": [
-        "baselineProfiles/0/OnderGrup release_03-08-2024_v1.2.95(395).dm"
+        "baselineProfiles/0/OnderGrup release_04-08-2024_v1.3.92(492).dm"
       ]
     }
   ],
