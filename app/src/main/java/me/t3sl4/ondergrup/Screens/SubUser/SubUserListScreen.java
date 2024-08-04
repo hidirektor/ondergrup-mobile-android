@@ -41,14 +41,23 @@ public class SubUserListScreen extends AppCompatActivity {
         receivedUser = intent.getParcelableExtra("user");
         uyariDiyalog = new Dialog(this);
 
+        initializeComponents();
+
+        buttonClickListeners();
+    }
+
+    private void initializeComponents() {
         backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(v -> finish());
 
         subUserListView = findViewById(R.id.subUserListView);
         subUserList = getSubUserList();
 
         subUserListAdapter = new SubUserAdapter(getApplicationContext(), subUserList);
         subUserListView.setAdapter(subUserListAdapter);
+    }
+
+    private void buttonClickListeners() {
+        backButton.setOnClickListener(v -> finish());
 
         subUserListView.setOnItemLongClickListener((adapterView, view, position, id) -> {
             SubUser selectedSubUser = subUserList.get(position);

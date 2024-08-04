@@ -38,6 +38,10 @@ public class ForgetPasswordVerification extends AppCompatActivity {
             otpSentTime = intent.getStringExtra("otpSentTime");
         }
 
+        initializeComponents();
+    }
+
+    private void initializeComponents() {
         enteredOTP = findViewById(R.id.enteredOTP);
     }
 

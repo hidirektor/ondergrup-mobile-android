@@ -143,6 +143,25 @@ public class User extends AppCompatActivity {
 
         currentLang = SharedPreferencesManager.getSharedPref("language", User.this, "en");
 
+        initializeComponents();
+
+        String activeText = "";
+        if(Objects.equals(currentLang, "tr")) {
+            activeText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_turkish);
+        } else {
+            activeText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_english);
+        }
+
+        navCurrentLang.setText(activeText);
+
+        buttonClickListeners();
+
+        setUserInfo();
+
+        hamburgerEffect();
+    }
+
+    private void initializeComponents() {
         isimSoyisim = findViewById(R.id.loggedUserName);
 
         hamburgerButton = findViewById(R.id.hamburgerMenuBttn);
@@ -164,11 +183,6 @@ public class User extends AppCompatActivity {
         machineInnerLayout = findViewById(R.id.machineInnerLayout);
         subLayout = findViewById(R.id.subLayout);
 
-        hamburgerButton.setOnClickListener(v -> {
-            NavigationManager.showNavigationViewWithAnimation(hamburgerMenu, this);
-            //minimizeMainLayout();
-        });
-
         //hamburgerButtons
         View hamburgerView = hamburgerMenu.getHeaderView(0);
         navAddMachineButton = hamburgerView.findViewById(R.id.navAddMachineButton);
@@ -180,15 +194,12 @@ public class User extends AppCompatActivity {
         feedbackButton = hamburgerView.findViewById(R.id.feedbackButton);
         logoutButton = hamburgerView.findViewById(R.id.logoutButton);
 
-        String activeText = "";
-        if(Objects.equals(currentLang, "tr")) {
-            activeText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_turkish);
-        } else {
-            activeText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_english);
-        }
+        //Machine List
+        machineListView = findViewById(R.id.machineListView);
+        machineList = getMachineList();
+    }
 
-        navCurrentLang.setText(activeText);
-
+    private void buttonClickListeners() {
         navProfileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(User.this, ProfileScreen.class);
             profileIntent.putExtra("user", receivedUser);
@@ -224,8 +235,7 @@ public class User extends AppCompatActivity {
             startActivity(playStoreIntent);
         });
 
-        machineListView = findViewById(R.id.machineListView);
-        machineList = getMachineList();
+
         machineListView.setOnItemClickListener((parent, view, position, id) -> {
             Machine selectedMachine = machineList.get(position);
 
@@ -251,7 +261,7 @@ public class User extends AppCompatActivity {
             Intent belgelerIntent = new Intent(User.this, DocumentsScreen.class);
             startActivity(belgelerIntent);
         });
- 
+
         subUserButton.setOnClickListener(v -> {
             if(receivedUser.getOwnerName() != null) {
                 Util.showErrorPopup(uyariDiyalog, "Alt kullanıcıları yalnızca yöneticiniz görüntüleyebilir.");
@@ -284,9 +294,10 @@ public class User extends AppCompatActivity {
             addMachine();
         });
 
-        setUserInfo();
-
-        hamburgerEffect();
+        hamburgerButton.setOnClickListener(v -> {
+            NavigationManager.showNavigationViewWithAnimation(hamburgerMenu, this);
+            //minimizeMainLayout();
+        });
     }
 
     public void setUserInfo() {

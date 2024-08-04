@@ -63,15 +63,7 @@ public class LoginScreen extends AppCompatActivity {
 
         checkWifiStatus();
 
-        registerButton.setOnClickListener(v -> sendRegisterRequest());
-
-        loginButton.setOnClickListener(v -> sendLoginRequest());
-
-        resetPassButton.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginScreen.this, ForgetPassword.class);
-            startActivity(intent);
-            finish();
-        });
+        buttonClickListeners();
 
         PasswordFieldTouchListener.setChangeablePasswordField(passwordField_login, getApplicationContext());
         PasswordFieldTouchListener.setChangeablePasswordField(passwordField_register, getApplicationContext());
@@ -126,6 +118,18 @@ public class LoginScreen extends AppCompatActivity {
         phoneField_register = findViewById(R.id.phoneField_register);
         companyField_register = findViewById(R.id.companyField_register);
         registerButton = findViewById(R.id.registerButton);
+    }
+
+    private void buttonClickListeners() {
+        registerButton.setOnClickListener(v -> sendRegisterRequest());
+
+        loginButton.setOnClickListener(v -> sendLoginRequest());
+
+        resetPassButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginScreen.this, ForgetPassword.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void sendLoginRequest() {

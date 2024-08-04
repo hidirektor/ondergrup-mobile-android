@@ -16,14 +16,26 @@ import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 
 public class OnBoarding3 extends AppCompatActivity {
 
-    @SuppressLint("ClickableViewAccessibility")
+    ImageView nextButton3;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_boarding3);
 
-        ImageView nextButton3 = findViewById(R.id.nextButton);
+        initializeComponents();
 
+        buttonClickListeners();
+
+        setOnBoardingState();
+    }
+
+    private void initializeComponents() {
+        nextButton3 = findViewById(R.id.nextButton);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void buttonClickListeners() {
         nextButton3.setOnClickListener(v -> {
             Intent intent = new Intent(OnBoarding3.this, LoginScreen.class);
             startActivity(intent);
@@ -50,8 +62,6 @@ public class OnBoarding3 extends AppCompatActivity {
 
             return false;
         });
-
-        setOnBoardingState();
     }
 
     private void setOnBoardingState() {

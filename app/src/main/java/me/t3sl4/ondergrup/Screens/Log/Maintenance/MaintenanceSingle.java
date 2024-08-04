@@ -46,6 +46,14 @@ public class MaintenanceSingle extends AppCompatActivity {
         Intent intent = getIntent();
         currentMaintenance = intent.getParcelableExtra("currentMaintenance");
 
+        initializeComponents();
+
+        buttonClickListeners();
+
+        fonksiyonlarVeKontrolProcess();
+    }
+
+    private void initializeComponents() {
         backToMachine = findViewById(R.id.backButton);
 
         fonksiyonlarVeKontrol = findViewById(R.id.fonksiyonlarVeKontrol);
@@ -61,7 +69,9 @@ public class MaintenanceSingle extends AppCompatActivity {
         aciklamaNot = findViewById(R.id.aciklamaNot);
 
         tableLayout = findViewById(R.id.tableLayout);
+    }
 
+    private void buttonClickListeners() {
         backToMachine.setOnClickListener(v -> {
             finish();
         });
@@ -77,8 +87,6 @@ public class MaintenanceSingle extends AppCompatActivity {
         kilavuzVeEtiket.setOnClickListener(v -> kilavuzVeEtiketProcess());
         sase.setOnClickListener(v -> saseProcess());
         aciklamaNot.setOnClickListener(v -> aciklamaNotProcess());
-
-        fonksiyonlarVeKontrolProcess();
     }
 
     private void fonksiyonlarVeKontrolProcess() {

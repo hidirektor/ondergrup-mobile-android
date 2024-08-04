@@ -45,16 +45,24 @@ public class MaintenanceLog extends AppCompatActivity {
             receivedUser = intent.getParcelableExtra("user");
         }
 
-        backToMachine = findViewById(R.id.backToMachine);
-        createMaintenance = findViewById(R.id.createMaintenanceLog);
+        initializeComponents();
 
         if(Objects.equals(receivedUser.getRole(), "NORMAL")) {
             createMaintenance.setVisibility(View.GONE);
         }
 
+        buttonClickListeners();
+    }
+
+    private void initializeComponents() {
+        backToMachine = findViewById(R.id.backToMachine);
+        createMaintenance = findViewById(R.id.createMaintenanceLog);
+
         machineMaintenances = findViewById(R.id.machineMaintenances);
         machineMaintenanceList = getMachineMaintenanceList();
+    }
 
+    private void buttonClickListeners() {
         machineMaintenances.setOnItemClickListener((parent, view, position, id) -> {
             Maintenance selectedMaintenance = machineMaintenanceList.get(position);
 

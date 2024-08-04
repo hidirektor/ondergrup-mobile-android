@@ -37,11 +37,19 @@ public class MachineListScreen extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
+        initializeComponents();
+
+        buttonClickListeners();
+    }
+
+    private void initializeComponents() {
         backButton = findViewById(R.id.backButton);
 
         machineListView = findViewById(R.id.machineListView);
         machineList = getMachineList();
+    }
 
+    private void buttonClickListeners() {
         machineListView.setOnItemClickListener((parent, view, position, id) -> {
             Machine selectedMachine = machineList.get(position);
 

@@ -60,6 +60,14 @@ public class MachineScreen extends AppCompatActivity {
         receivedUser = intent.getParcelableExtra("user");
         selectedMachine = intent.getParcelableExtra("machine");
 
+        initializeComponents();
+
+        initMachineData();
+
+        buttonClickListeners();
+    }
+
+    private void initializeComponents() {
         backButton = findViewById(R.id.backIconImageView);
         errorLogButton = findViewById(R.id.machineErrorLogLayout);
         maintenanceLogButton = findViewById(R.id.machineMaintenanceLogLayout);
@@ -80,9 +88,9 @@ public class MachineScreen extends AppCompatActivity {
         eepromData45 = findViewById(R.id.eepromData45);
         eepromData46 = findViewById(R.id.eepromData46);
         eepromData47 = findViewById(R.id.eepromData47);
+    }
 
-        initMachineData();
-
+    private void buttonClickListeners() {
         backButton.setOnClickListener(v -> {
             finish();
         });

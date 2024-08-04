@@ -85,6 +85,14 @@ public class CreateMaintenance extends AppCompatActivity {
         receivedUser = intent.getParcelableExtra("user");
         machineID = intent.getStringExtra("currentMahine");
 
+        initializeComponents();
+
+        buttonClickListeners();
+
+        fonksiyonlarVeKontrolProcess();
+    }
+
+    private void initializeComponents() {
         backToMachine = findViewById(R.id.backButton);
         createMaintenanceLog = findViewById(R.id.createMaintenanceLog);
 
@@ -101,7 +109,9 @@ public class CreateMaintenance extends AppCompatActivity {
         aciklamaNot = findViewById(R.id.aciklamaNot);
 
         tableLayout = findViewById(R.id.tableLayout);
+    }
 
+    private void buttonClickListeners() {
         backToMachine.setOnClickListener(v -> finish());
 
         fonksiyonlarVeKontrol.setOnClickListener(v -> fonksiyonlarVeKontrolProcess());
@@ -135,8 +145,6 @@ public class CreateMaintenance extends AppCompatActivity {
                 Util.showErrorPopup(uyariDiyalog, "Bakım kaydı oluşturulamadı. \nLütfen bilgileri kontrol edip tekrar deneyin.");
             }
         });
-
-        fonksiyonlarVeKontrolProcess();
     }
 
     private void fonksiyonlarVeKontrolProcess() {

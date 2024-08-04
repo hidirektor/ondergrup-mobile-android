@@ -42,10 +42,18 @@ public class SupportScreen extends AppCompatActivity {
         uyariDiyalog = new Dialog(this);
         qrDiyalog = new Dialog(this);
 
+        initializeComponents();
+
+        buttonClickListeners();
+    }
+
+    private void initializeComponents() {
         mapButton = findViewById(R.id.mapButton);
         mailButton = findViewById(R.id.mailButton);
         callButton = findViewById(R.id.callButton);
+    }
 
+    private void buttonClickListeners() {
         mapButton.setOnClickListener(v -> {
             showMap();
         });

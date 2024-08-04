@@ -68,6 +68,15 @@ public class SysOp extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
+        initializeComponents();
+
+        buttonClickListeners();
+
+        sectionPager();
+        setUserInfo();
+    }
+
+    private void initializeComponents() {
         isimSoyisim = findViewById(R.id.loggedUserName);
         allText = findViewById(R.id.allText);
 
@@ -87,7 +96,9 @@ public class SysOp extends AppCompatActivity {
 
         machineList = getMachineList();
         userList = getUserList();
+    }
 
+    private void buttonClickListeners() {
         userListView.setOnItemClickListener((parent, view, position, id) -> {
             User selectedUser = (User) parent.getItemAtPosition(position);
 
@@ -148,9 +159,6 @@ public class SysOp extends AppCompatActivity {
         subLanguage.setOnClickListener(v -> {
             switchLanguage();
         });
-
-        sectionPager();
-        setUserInfo();
     }
 
     @Override

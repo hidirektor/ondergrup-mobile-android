@@ -28,10 +28,9 @@ public class QRScanner extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_scanner);
 
-        barcodeScannerView = findViewById(R.id.zxing_barcode_scanner);
-        barcodeScannerView.setTorchListener(this);
+        initializeComponents();
 
-        viewfinderView = findViewById(R.id.zxing_viewfinder_view);
+        barcodeScannerView.setTorchListener(this);
 
         capture = new CaptureManager(this, barcodeScannerView);
         capture.initializeFromIntent(getIntent(), savedInstanceState);
@@ -40,6 +39,12 @@ public class QRScanner extends Activity implements
 
         changeMaskColor(null);
         changeLaserVisibility(true);
+    }
+
+    private void initializeComponents() {
+        barcodeScannerView = findViewById(R.id.zxing_barcode_scanner);
+
+        viewfinderView = findViewById(R.id.zxing_viewfinder_view);
     }
 
     @Override

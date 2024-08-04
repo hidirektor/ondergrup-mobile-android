@@ -52,6 +52,24 @@ public class EditProfileScreen extends AppCompatActivity {
         mainUser = intent.getParcelableExtra("mainUser");
         incomeScreen = intent.getStringExtra("incomeScreen");
 
+        initializeComponents();
+
+        if(mainUser != null) {
+            showProfile.setVisibility(View.GONE);
+        }
+
+        if(receivedUser.getOwnerName() != null) {
+            companyName.setInputType(InputType.TYPE_NULL);
+        }
+
+        buttonClickListeners();
+
+        PasswordFieldTouchListener.setChangeablePasswordField(passwordEditText, getApplicationContext());
+
+        setUserInfo();
+    }
+
+    private void initializeComponents() {
         backButton = findViewById(R.id.backButton);
 
         nameSurname = findViewById(R.id.editTextNameSurname);
@@ -63,15 +81,9 @@ public class EditProfileScreen extends AppCompatActivity {
 
         showProfile = findViewById(R.id.showProfileLayout);
         updateProfileButton = findViewById(R.id.button3);
+    }
 
-        if(mainUser != null) {
-            showProfile.setVisibility(View.GONE);
-        }
-
-        if(receivedUser.getOwnerName() != null) {
-            companyName.setInputType(InputType.TYPE_NULL);
-        }
-
+    private void buttonClickListeners() {
         showProfile.setOnClickListener(v -> {
             Intent profileIntent = new Intent(EditProfileScreen.this, ProfileScreen.class);
             if(mainUser != null) {
@@ -89,10 +101,6 @@ public class EditProfileScreen extends AppCompatActivity {
         });
 
         backButton.setOnClickListener(v -> finish());
-
-        PasswordFieldTouchListener.setChangeablePasswordField(passwordEditText, getApplicationContext());
-
-        setUserInfo();
     }
 
     public void setUserInfo() {

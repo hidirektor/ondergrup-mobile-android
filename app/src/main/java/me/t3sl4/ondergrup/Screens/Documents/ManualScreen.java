@@ -23,8 +23,7 @@ public class ManualScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_documents_manual);
 
-        dataWebView = findViewById(R.id.webview);
-        closeButton = findViewById(R.id.closeImageView);
+        initializeComponents();
 
         dataWebView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = dataWebView.getSettings();
@@ -35,5 +34,10 @@ public class ManualScreen extends AppCompatActivity {
         dataWebView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + Util.userManualURL);
 
         closeButton.setOnClickListener(v -> finish());
+    }
+
+    private void initializeComponents() {
+        dataWebView = findViewById(R.id.webview);
+        closeButton = findViewById(R.id.closeImageView);
     }
 }

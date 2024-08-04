@@ -25,12 +25,20 @@ public class DocumentsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_documents);
 
+        initializeComponents();
+
+        buttonClickListeners();
+    }
+
+    private void initializeComponents() {
         dataButton = findViewById(R.id.dataButton);
         privacyButton = findViewById(R.id.privacyButton);
         imhaButton = findViewById(R.id.imhaButton);
         manualButton = findViewById(R.id.manualButton);
         backButton = findViewById(R.id.backButton);
+    }
 
+    private void buttonClickListeners() {
         manualButton.setOnClickListener(v -> {
             Intent manualIntent = new Intent(DocumentsScreen.this, ManualScreen.class);
             startActivity(manualIntent);

@@ -22,8 +22,7 @@ public class KVKKScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_documents_kvkk);
 
-        dataWebView = findViewById(R.id.webview);
-        closeButton = findViewById(R.id.closeImageView);
+        initializeComponents();
 
         dataWebView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = dataWebView.getSettings();
@@ -34,6 +33,11 @@ public class KVKKScreen extends AppCompatActivity {
         closeButton.setOnClickListener(v -> {
             finish();
         });
+    }
+
+    private void initializeComponents() {
+        dataWebView = findViewById(R.id.webview);
+        closeButton = findViewById(R.id.closeImageView);
     }
 
     @Override

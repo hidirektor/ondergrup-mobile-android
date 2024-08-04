@@ -42,13 +42,17 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
             userName = intent.getStringExtra("userName");
         }
 
+        initializeComponents();
+
+        PasswordFieldTouchListener.setChangeablePasswordFieldLayout(editTextNewPass, getApplicationContext());
+        PasswordFieldTouchListener.setChangeablePasswordFieldLayout(editTextConfirmNewPass, getApplicationContext());
+    }
+
+    private void initializeComponents() {
         editTextNewPass = findViewById(R.id.editTextNewPass);
         editTextNewPassText = editTextNewPass.findViewById(R.id.editTextNewPassText);
         editTextConfirmNewPass = findViewById(R.id.editTextConfirmNewPass);
         editTextConfirmNewPassText = editTextConfirmNewPass.findViewById(R.id.editTextConfirmNewPassText);
-
-        PasswordFieldTouchListener.setChangeablePasswordFieldLayout(editTextNewPass, getApplicationContext());
-        PasswordFieldTouchListener.setChangeablePasswordFieldLayout(editTextConfirmNewPass, getApplicationContext());
     }
 
     public void setNewPassword(View view) {

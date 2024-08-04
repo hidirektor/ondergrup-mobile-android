@@ -29,10 +29,18 @@ public class SubUserScreen extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
+        initializeComponents();
+
+        buttonClickListeners();
+    }
+
+    private void initializeComponents() {
         subUserListeleButton = findViewById(R.id.showButton);
         subUsterEkleButton = findViewById(R.id.addSubUserButton);
         backButton = findViewById(R.id.backButton);
+    }
 
+    private void buttonClickListeners() {
         subUserListeleButton.setOnClickListener(v -> {
             Intent addIntent = new Intent(SubUserScreen.this, SubUserListScreen.class);
             addIntent.putExtra("user", receivedUser);

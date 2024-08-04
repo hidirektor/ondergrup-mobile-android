@@ -30,10 +30,18 @@ public class ForgetPassword extends AppCompatActivity {
 
         uyariDiyalog = new Dialog(this);
 
+        initializeComponents();
+
+        buttonClickListeners();
+    }
+
+    private void initializeComponents() {
         forgetPassUsername = findViewById(R.id.forgetPassUsername);
         forgetPassUsernameText = forgetPassUsername.findViewById(R.id.forgetPassUsernameText);
         forgetPassButton = findViewById(R.id.forgetPassButton);
+    }
 
+    private void buttonClickListeners() {
         forgetPassButton.setOnClickListener(v -> {
             if(!Util.isEmpty(forgetPassUsernameText)) {
                 String username = forgetPassUsernameText.getText().toString();

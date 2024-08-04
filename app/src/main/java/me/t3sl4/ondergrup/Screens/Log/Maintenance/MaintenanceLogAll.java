@@ -38,11 +38,19 @@ public class MaintenanceLogAll extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
+        initializeComponents();
+
+        buttonClickListeners();
+    }
+
+    private void initializeComponents() {
         backToMain = findViewById(R.id.backToMain);
 
         machineMaintenances = findViewById(R.id.machineMaintenancesAll);
         machineMaintenanceList = getMachineMaintenancesList();
+    }
 
+    private void buttonClickListeners() {
         machineMaintenances.setOnItemClickListener((parent, view, position, id) -> {
             Maintenance selectedMaintenance = machineMaintenanceList.get(position);
 

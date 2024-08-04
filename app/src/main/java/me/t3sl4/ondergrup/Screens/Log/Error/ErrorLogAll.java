@@ -49,11 +49,19 @@ public class ErrorLogAll extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
+        initializeComponents();
+
+        buttonClickListeners();
+    }
+
+    private void initializeComponents() {
         backToMain = findViewById(R.id.backToMain);
 
         machineErrors = findViewById(R.id.machineErrorsAll);
         machineErrorList = getMachineErrorList();
+    }
 
+    private void buttonClickListeners() {
         machineErrors.setOnItemClickListener((parent, view, position, id) -> {
             MachineError selectedError = machineErrorList.get(position);
 

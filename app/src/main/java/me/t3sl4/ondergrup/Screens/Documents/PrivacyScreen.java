@@ -22,8 +22,7 @@ public class PrivacyScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_documents_privacy);
 
-        privacyWebView = findViewById(R.id.webview);
-        closeButton = findViewById(R.id.closeImageView);
+        initializeComponents();
 
         privacyWebView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = privacyWebView.getSettings();
@@ -34,6 +33,11 @@ public class PrivacyScreen extends AppCompatActivity {
         closeButton.setOnClickListener(v -> {
             finish();
         });
+    }
+
+    private void initializeComponents() {
+        privacyWebView = findViewById(R.id.webview);
+        closeButton = findViewById(R.id.closeImageView);
     }
 
     @Override

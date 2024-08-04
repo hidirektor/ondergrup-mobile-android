@@ -51,6 +51,16 @@ public class EditSubScreen extends AppCompatActivity {
         receivedUser = intent.getParcelableExtra("user");
         receivedSubUser = intent.getParcelableExtra("subuser");
 
+        initializeComponents();
+
+        buttonClickListeners();
+
+        PasswordFieldTouchListener.setChangeablePasswordField(passwordEditText, getApplicationContext());
+
+        setUserInfo();
+    }
+
+    private void initializeComponents() {
         nameSurname = findViewById(R.id.editTextNameSurname);
         eMail = findViewById(R.id.editTextMail);
         kullaniciAdi = findViewById(R.id.editTextNickname);
@@ -60,6 +70,11 @@ public class EditSubScreen extends AppCompatActivity {
 
         showSubUsers = findViewById(R.id.showSubUsersLayout);
 
+        backButton = findViewById(R.id.backButton);
+        editSubUserButton = findViewById(R.id.editSubButton);
+    }
+
+    private void buttonClickListeners() {
         showSubUsers.setOnClickListener(v -> {
             Intent subUserIntent = new Intent(EditSubScreen.this, SubUserListScreen.class);
             subUserIntent.putExtra("user", receivedUser);
@@ -67,17 +82,11 @@ public class EditSubScreen extends AppCompatActivity {
             finish();
         });
 
-        backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
-        editSubUserButton = findViewById(R.id.editSubButton);
         editSubUserButton.setOnClickListener(v -> {
             updateWholeProfile();
         });
-
-        PasswordFieldTouchListener.setChangeablePasswordField(passwordEditText, getApplicationContext());
-
-        setUserInfo();
     }
 
     public void setUserInfo() {

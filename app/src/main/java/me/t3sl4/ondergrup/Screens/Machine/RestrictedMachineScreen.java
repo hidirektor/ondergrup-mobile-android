@@ -101,14 +101,22 @@ public class RestrictedMachineScreen extends AppCompatActivity {
         receivedUser = intent.getParcelableExtra("user");
         selectedMachine = intent.getParcelableExtra("machine");
 
-        backButton = findViewById(R.id.backIconImageView);
-        errorLogButton = findViewById(R.id.machineErrorLogLayout);
-        maintenanceLogButton = findViewById(R.id.machineMaintenanceLogLayout);
-        changeOwner = findViewById(R.id.changeMachineOwnerLayout);
+        initializeComponents();
 
         if(Objects.equals(receivedUser.getRole(), "TECHNICIAN")) {
             changeOwner.setVisibility(View.GONE);
         }
+
+        initMachineData();
+
+        buttonClickListeners();
+    }
+
+    private void initializeComponents() {
+        backButton = findViewById(R.id.backIconImageView);
+        errorLogButton = findViewById(R.id.machineErrorLogLayout);
+        maintenanceLogButton = findViewById(R.id.machineMaintenanceLogLayout);
+        changeOwner = findViewById(R.id.changeMachineOwnerLayout);
 
         machineImage = findViewById(R.id.makineGorsel);
         ownerName = findViewById(R.id.ownerNameText);
@@ -155,9 +163,9 @@ public class RestrictedMachineScreen extends AppCompatActivity {
         eepromData46 = findViewById(R.id.eepromData46);
         eepromData47 = findViewById(R.id.eepromData47);
         lcdBacklightSure = findViewById(R.id.lcdBacklightSure);
+    }
 
-        initMachineData();
-
+    private void buttonClickListeners() {
         backButton.setOnClickListener(v -> {
             finish();
         });

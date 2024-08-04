@@ -45,6 +45,14 @@ public class SubUserAddScreen extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
+        initializeComponents();
+
+        buttonClickListeners();
+
+        PasswordFieldTouchListener.setChangeablePasswordField(editTextPassword, getApplicationContext());
+    }
+
+    private void initializeComponents() {
         editTextNickname = findViewById(R.id.editTextNickname);
         editTextMail = findViewById(R.id.editTextMail);
         editTextPassword = findViewById(R.id.editTextPassword);
@@ -53,12 +61,13 @@ public class SubUserAddScreen extends AppCompatActivity {
         editTextCompany = findViewById(R.id.editTextCompany);
 
         signUp = findViewById(R.id.signUp);
+        backButton = findViewById(R.id.backButton);
+    }
+
+    private void buttonClickListeners() {
         signUp.setOnClickListener(v -> sendRegisterRequest());
 
-        backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
-
-        PasswordFieldTouchListener.setChangeablePasswordField(editTextPassword, getApplicationContext());
     }
 
     private void sendRegisterRequest() {

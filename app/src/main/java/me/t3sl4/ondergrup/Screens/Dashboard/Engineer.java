@@ -113,6 +113,14 @@ public class Engineer extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
+        initializeComponents();
+
+        buttonClickListeners();
+
+        setUserInfo();
+    }
+
+    private void initializeComponents() {
         isimSoyisim = findViewById(R.id.loggedUserName);
 
         subLanguage = findViewById(R.id.languageConstraint);
@@ -129,6 +137,9 @@ public class Engineer extends AppCompatActivity {
         //ListView Definitians:
         machineListView = findViewById(R.id.machineListView);
         machineList = getMachineList();
+    }
+
+    private void buttonClickListeners() {
         machineListView.setOnItemClickListener((parent, view, position, id) -> {
             Machine selectedMachine = machineList.get(position);
 
@@ -177,8 +188,6 @@ public class Engineer extends AppCompatActivity {
             settingsIntent.putExtra("user", receivedUser);
             startActivity(settingsIntent);
         });
-
-        setUserInfo();
     }
 
     @Override

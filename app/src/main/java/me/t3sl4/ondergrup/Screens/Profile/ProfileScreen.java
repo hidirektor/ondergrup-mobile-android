@@ -40,6 +40,14 @@ public class ProfileScreen extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
+        initializeComponents();
+
+        buttonClickListeners();
+
+        setUserInfo();
+    }
+
+    private void initializeComponents() {
         backButton = findViewById(R.id.backButton);
 
         nameSurname = findViewById(R.id.textView);
@@ -52,7 +60,9 @@ public class ProfileScreen extends AppCompatActivity {
 
         editProfileButton = findViewById(R.id.button3);
         subUserButton = findViewById(R.id.subUserConstraint);
+    }
 
+    private void buttonClickListeners() {
         editProfileButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(ProfileScreen.this, EditProfileScreen.class);
             profileIntent.putExtra("user", receivedUser);
@@ -67,8 +77,6 @@ public class ProfileScreen extends AppCompatActivity {
         });
 
         backButton.setOnClickListener(v -> finish());
-
-        setUserInfo();
     }
 
     @Override

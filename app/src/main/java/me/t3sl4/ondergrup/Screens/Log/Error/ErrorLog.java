@@ -49,11 +49,19 @@ public class ErrorLog extends AppCompatActivity {
             currentMachineID = intent.getStringExtra("currentmachine");
         }
 
+        initializeComponents();
+
+        buttonClickListeners();
+    }
+
+    private void initializeComponents() {
         backToMachine = findViewById(R.id.backToMachine);
 
         machineErrors = findViewById(R.id.machineErrors);
         machineErrorList = getMachineErrorList();
+    }
 
+    private void buttonClickListeners() {
         machineErrors.setOnItemClickListener((parent, view, position, id) -> {
             MachineError selectedError = machineErrorList.get(position);
 
