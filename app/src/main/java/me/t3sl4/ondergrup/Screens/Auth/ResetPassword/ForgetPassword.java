@@ -13,6 +13,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class ForgetPassword extends AppCompatActivity {
@@ -36,41 +37,18 @@ public class ForgetPassword extends AppCompatActivity {
         forgetPassButton.setOnClickListener(v -> {
             if(!Util.isEmpty(forgetPassUsernameText)) {
                 String username = forgetPassUsernameText.getText().toString();
-                sendOTP(username);
+                UserService.checkUser(this, username, () -> {
+                    Intent intent = new Intent(ForgetPassword.this, ForgetPasswordSelection.class);
+                    intent.putExtra("username", username);
+                    startActivity(intent);
+                    finish();
+                }, () -> {
+                    Util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. İstersen tekrar deneyebilirsin.");
+                });
             } else {
                 Util.showErrorPopup(uyariDiyalog, "E-Posta alanı boş olamaz.");
             }
         });
-    }
-
-    private void sendOTP(String username) {
-        /*String userTypeUrl = util.BASE_URL + util.profileInfoURLPrefix + ":Role";
-        String jsonProfileInfoBody = "{\"Username\": \"" + username + "\"}";
-
-        HTTP.sendRequest(userTypeUrl, jsonProfileInfoBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                try {
-                    String role = response.getString("Role");
-
-                    if(!role.equals(null)) {
-                        Intent intent = new Intent(ForgetPassword.this, ForgetPasswordSelection.class);
-                        intent.putExtra("username", username);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. İstersen tekrar deneyebilirsin.");
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. İstersen tekrar deneyebilirsin.");
-            }
-        }, Volley.newRequestQueue(this));*/
     }
 
     public void callBackScreenFromForgetPassword(View view) {

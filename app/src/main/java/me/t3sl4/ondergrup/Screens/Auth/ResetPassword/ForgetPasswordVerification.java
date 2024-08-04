@@ -3,7 +3,6 @@ package me.t3sl4.ondergrup.Screens.Auth.ResetPassword;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,13 +11,14 @@ import com.chaos.view.PinView;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.OTP.OTPService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class ForgetPasswordVerification extends AppCompatActivity {
     public Util util;
 
-    public String otpCode;
-    public String eMail;
+    public String userName;
+    public String otpSentTime;
 
     private PinView enteredOTP;
 
@@ -34,8 +34,8 @@ public class ForgetPasswordVerification extends AppCompatActivity {
         uyariDiyalog = new Dialog(this);
         Intent intent = getIntent();
         if (intent != null) {
-            otpCode = intent.getStringExtra("otpcode");
-            eMail = intent.getStringExtra("eMail");
+            userName = intent.getStringExtra("userName");
+            otpSentTime = intent.getStringExtra("otpSentTime");
         }
 
         enteredOTP = findViewById(R.id.enteredOTP);
@@ -45,20 +45,12 @@ public class ForgetPasswordVerification extends AppCompatActivity {
         String girilenKod = enteredOTP.getText().toString();
 
         if(!girilenKod.equals(null)) {
-            if(!otpCode.equals(null)) {
-                Log.d("OTP", otpCode);
-                Log.d("Entered OTP", String.valueOf(girilenKod));
-                if(girilenKod.equals(otpCode)) {
-                    Intent intent = new Intent(ForgetPasswordVerification.this, ForgetPasswordNewPass.class);
-                    intent.putExtra("eMail", eMail);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    util.showErrorPopup(uyariDiyalog, "Hatalı OTP kodu girdiniz. Lütfen gelen kodu kontrol edip tekrar dene.");
-                }
-            } else {
-                util.showErrorPopup(uyariDiyalog, "OTP kodu alınamadı. Lütfen tekrar dene.");
-            }
+            OTPService.verifyOTP(userName, girilenKod, otpSentTime, () -> {
+                Intent intent = new Intent(ForgetPasswordVerification.this, ForgetPasswordNewPass.class);
+                intent.putExtra("userName", userName);
+                startActivity(intent);
+                finish();
+            });
         } else {
             util.showErrorPopup(uyariDiyalog, "OTP kodunu girmeden işleme devam edemezsin.");
         }

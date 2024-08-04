@@ -13,7 +13,6 @@ import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class ManualScreen extends AppCompatActivity {
-    public Util util;
 
     private WebView dataWebView;
     private ImageView closeButton;
@@ -24,8 +23,6 @@ public class ManualScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_documents_manual);
 
-        util = new Util(getApplicationContext());
-
         dataWebView = findViewById(R.id.webview);
         closeButton = findViewById(R.id.closeImageView);
 
@@ -35,7 +32,7 @@ public class ManualScreen extends AppCompatActivity {
         dataWebView.getSettings().setBuiltInZoomControls(true);
         dataWebView.getSettings().setDisplayZoomControls(false);
 
-        //dataWebView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + util.manualPDFUrlPrefix);
+        dataWebView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + Util.userManualURL);
 
         closeButton.setOnClickListener(v -> finish());
     }

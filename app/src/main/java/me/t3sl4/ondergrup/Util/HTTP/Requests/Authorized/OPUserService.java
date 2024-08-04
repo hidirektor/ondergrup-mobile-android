@@ -22,6 +22,7 @@ public class OPUserService {
 
     private static final String GET_ALL_USERS_URL = "/api/v2/authorized/getAllUsers";
     private static final String UPDATE_ROLE_URL = "/api/v2/authorized/updateRole";
+    private static final String DELETE_USER_URL = "/api/v2/authorized/deActivateUser";
 
     // getAllUsers method
     public static void getAllUsers(Context context, ArrayList<User> users, Runnable onSuccess, Runnable onFailure) {
@@ -141,6 +142,61 @@ public class OPUserService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("UpdateRole", "Error: " + t.getMessage());
+                if (onFailure != null) {
+                    onFailure.run();
+                }
+            }
+        });
+    }
+
+    public static void deActivateUser(Context context, String userName, Runnable onSuccess, Runnable onFailure) {
+        String authToken = UserDataService.getAccessToken(context); // Auth token'ı al
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("userName", userName);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            if (onFailure != null) {
+                onFailure.run();
+            }
+            return;
+        }
+
+        Call<ResponseBody> call = HttpHelper.makeRequestWithAuth("POST", DELETE_USER_URL, null, jsonObject.toString(), authToken);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        Log.d("DeleteUser", "Success: " + response.body().string());
+                        if (onSuccess != null) {
+                            onSuccess.run();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        if (onFailure != null) {
+                            onFailure.run();
+                        }
+                    }
+                } else {
+                    try {
+                        Log.e("DeleteUser", "Failure: " + response.errorBody().string());
+                        if (onFailure != null) {
+                            onFailure.run();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        if (onFailure != null) {
+                            onFailure.run();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("DeleteUser", "Error: " + t.getMessage());
                 if (onFailure != null) {
                     onFailure.run();
                 }

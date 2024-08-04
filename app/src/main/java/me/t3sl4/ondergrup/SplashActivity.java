@@ -6,6 +6,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.OnBoard.OnBoarding1;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
@@ -42,7 +43,9 @@ public class SplashActivity extends AppCompatActivity {
             UserService.getProfile(this, UserDataService.getUserID(this), () -> {
                 Util.redirectBasedRole(this, true);
             }, () -> {
-
+                Intent loginIntent = new Intent(SplashActivity.this, LoginScreen.class);
+                startActivity(loginIntent);
+                finish();
             });
         }, WAITING_TIME);
     }

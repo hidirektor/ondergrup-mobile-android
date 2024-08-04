@@ -184,27 +184,6 @@ public class Technician extends AppCompatActivity {
         isimSoyisim.setText(this.getResources().getString(R.string.hello_prefix) + receivedUser.getNameSurname());
     }
 
-    public void makineEkle(String machineType, String machineID) {
-        /*String reqURL = util.BASE_URL + util.addMachineURL;
-
-        String userName = receivedUser.getUserName();
-        String companyName = receivedUser.getCompanyName();
-        String jsonAddMachineBody = "{\"Username\": \"" + userName + "\", \"CompanyName\": \"" + companyName + "\", \"MachineID\": \"" + machineID + "\"}";
-
-        HTTP.sendRequest(reqURL, jsonAddMachineBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                qrDiyalog.dismiss();
-                util.showSuccessPopup(uyariDiyalog, "Makine başarılı bir şekilde eklendi.");
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                util.showErrorPopup(uyariDiyalog, "Kullanıcı adı veya şifreniz hatalı. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
-            }
-        }, Volley.newRequestQueue(this));*/
-    }
-
     private boolean isConnectedToTargetWifi() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
@@ -299,9 +278,6 @@ public class Technician extends AppCompatActivity {
                     wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
                 }
             });
-
-
-            addButton.setOnClickListener(view -> makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCode));
 
             String[] machineTypes = getResources().getStringArray(R.array.machineType);
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, machineTypes);

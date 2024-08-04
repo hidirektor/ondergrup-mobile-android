@@ -48,6 +48,7 @@ import me.t3sl4.ondergrup.Screens.QR.QRScanner;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPMachineService;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class Engineer extends AppCompatActivity {
@@ -192,24 +193,12 @@ public class Engineer extends AppCompatActivity {
     }
 
     public void makineEkle(String machineType, String machineID) {
-        /*String reqURL = util.BASE_URL + util.addMachineURL;
-
-        String userName = receivedUser.getUserName();
-        String companyName = receivedUser.getCompanyName();
-        String jsonAddMachineBody = "{\"Username\": \"" + userName + "\", \"CompanyName\": \"" + companyName + "\", \"MachineID\": \"" + machineID + "\"}";
-
-        HTTP.sendRequest(reqURL, jsonAddMachineBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                qrDiyalog.dismiss();
-                util.showSuccessPopup(uyariDiyalog, "Makine başarılı bir şekilde eklendi.");
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                util.showErrorPopup(uyariDiyalog, "Kullanıcı adı veya şifreniz hatalı. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
-            }
-        }, Volley.newRequestQueue(this));*/
+        MachineService.createMachine(this, machineID, machineType, () -> {
+            //onSuccess operations
+            qrDiyalog.dismiss();
+            getMachineList();
+            Util.showSuccessPopup(uyariDiyalog, "Makine başarılı bir şekilde oluşturuldu.");
+        });
     }
 
     private boolean isConnectedToTargetWifi() {
@@ -258,70 +247,66 @@ public class Engineer extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void addMachine() {
-        if(receivedUser.getRole().equals("NORMAL")) {
-            qrDiyalog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            qrDiyalog.setContentView(R.layout.activity_machine_add);
+        qrDiyalog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        qrDiyalog.setContentView(R.layout.activity_machine_add);
 
-            ImageView cancelButton = qrDiyalog.findViewById(R.id.cancelButton);
-            ImageView wifiButton = qrDiyalog.findViewById(R.id.wifiButton);
-            Button addButton = qrDiyalog.findViewById(R.id.makineEkleButton);
-            Spinner machineTypeSpinner = qrDiyalog.findViewById(R.id.machineTypeSpinner);
+        ImageView cancelButton = qrDiyalog.findViewById(R.id.cancelButton);
+        ImageView wifiButton = qrDiyalog.findViewById(R.id.wifiButton);
+        Button addButton = qrDiyalog.findViewById(R.id.makineEkleButton);
+        Spinner machineTypeSpinner = qrDiyalog.findViewById(R.id.machineTypeSpinner);
 
-            scannedQRCodeEditText = qrDiyalog.findViewById(R.id.editTextID);
-            if (scannedQRCode != null) {
-                scannedQRCodeEditText.setText(scannedQRCode);
-            }
-
-            scannedQRCodeEditText.setOnTouchListener((vi, event) -> {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_UP:
-                        if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
-                            scanBarcodeCustomLayout();
-                            return true;
-                        }
-                }
-                return false;
-            });
-
-            cancelButton.setOnClickListener(view -> qrDiyalog.dismiss());
-
-            wifiButton.setOnClickListener(view -> {
-                if (!isConnectedToTargetWifi()) {
-                    openWifiSettings();
-
-                    new Thread(() -> {
-                        while (!isConnectedToTargetWifi()) {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        runOnUiThread(() -> {
-                            wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
-                        });
-                    }).start();
-                } else {
-                    wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
-                }
-            });
-
-
-            addButton.setOnClickListener(view -> makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCode));
-
-            String[] machineTypes = getResources().getStringArray(R.array.machineType);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, machineTypes);
-            machineTypeSpinner.setAdapter(adapter);
-
-            qrDiyalog.show();
-            qrDiyalog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            qrDiyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-            qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
-        } else {
-            Util.showErrorPopup(uyariDiyalog, "Sadece NORMAL kullanıcılar doğrudan makine ekleyebilir.");
+        scannedQRCodeEditText = qrDiyalog.findViewById(R.id.editTextID);
+        if (scannedQRCode != null) {
+            scannedQRCodeEditText.setText(scannedQRCode);
         }
+
+        scannedQRCodeEditText.setOnTouchListener((vi, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_UP:
+                    if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
+                        scanBarcodeCustomLayout();
+                        return true;
+                    }
+            }
+            return false;
+        });
+
+        cancelButton.setOnClickListener(view -> qrDiyalog.dismiss());
+
+        wifiButton.setOnClickListener(view -> {
+            if (!isConnectedToTargetWifi()) {
+                openWifiSettings();
+
+                new Thread(() -> {
+                    while (!isConnectedToTargetWifi()) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    runOnUiThread(() -> {
+                        wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
+                    });
+                }).start();
+            } else {
+                wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
+            }
+        });
+
+
+        addButton.setOnClickListener(view -> makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCodeEditText.getText().toString()));
+
+        String[] machineTypes = getResources().getStringArray(R.array.machineType);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, machineTypes);
+        machineTypeSpinner.setAdapter(adapter);
+
+        qrDiyalog.show();
+        qrDiyalog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        qrDiyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
     private void switchLanguage() {

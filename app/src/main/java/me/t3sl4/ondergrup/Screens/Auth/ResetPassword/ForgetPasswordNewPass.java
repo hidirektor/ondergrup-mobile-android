@@ -14,10 +14,11 @@ import com.google.android.material.textfield.TextInputLayout;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.Auth.AuthService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class ForgetPasswordNewPass extends AppCompatActivity {
-    public String eMail;
+    public String userName;
 
     private TextInputLayout editTextNewPass;
     private TextInputEditText editTextNewPassText;
@@ -38,7 +39,7 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
         uyariDiyalog = new Dialog(this);
         Intent intent = getIntent();
         if (intent != null) {
-            eMail = intent.getStringExtra("eMail");
+            userName = intent.getStringExtra("userName");
         }
 
         editTextNewPass = findViewById(R.id.editTextNewPass);
@@ -59,32 +60,11 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
             secondPass = editTextConfirmNewPassText.getText().toString();
 
             if(firstPass.equals(secondPass)) {
-                /*String otpUrl = util.BASE_URL + util.updatePassURLPrefix;
-                String jsonUpdatePassBody = "{\"Email\": \"" + eMail + "\", \"Password\": \"" + firstPass + "\"}";
-
-                HTTP.sendRequest(otpUrl, jsonUpdatePassBody, new HTTP.HttpRequestCallback() {
-                    @Override
-                    public void onSuccess(JSONObject response) {
-                        try {
-                            String message = response.getString("message");
-
-                            if(message.contains("Şifre güncellendi")) {
-                                Intent intent = new Intent(ForgetPasswordNewPass.this, ForgetPasswordSuccess.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                util.showErrorPopup(uyariDiyalog, "Şifre güncellenirken hata meydana geldi. Lütfen tekrar dene.");
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String errorMessage) {
-                        util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. Lütfen tekrar dene.");
-                    }
-                }, Volley.newRequestQueue(this));*/
+                AuthService.resetPass(userName, firstPass.toString(), () -> {
+                    Intent intent = new Intent(ForgetPasswordNewPass.this, ForgetPasswordSuccess.class);
+                    startActivity(intent);
+                    finish();
+                });
             } else {
                 Util.showErrorPopup(uyariDiyalog, "Girilen şifreler birbirleriyle uyuşmuyor. Lütfen tekrar dene.");
             }

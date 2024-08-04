@@ -20,6 +20,8 @@ public class AuthService {
     private static final String REGISTER_URL = "/api/v2/auth/register";
     private static final String LOGIN_URL = "/api/v2/auth/login";
     private static final String LOGOUT_URL = "/api/v2/auth/logout";
+    private static final String RESET_PASS_URL = "/api/v2/auth/resetPass";
+    private static final String CHANGE_PASS_URL = "/api/v2/auth/changePass";
 
     public static void register(Context context, String userName, String userType, String nameSurname, String eMail, String phoneNumber, String companyName, String password, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
@@ -161,6 +163,86 @@ public class AuthService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("Logout", "Error: " + t.getMessage());
+            }
+        });
+    }
+
+    public static void resetPass(String userName, String newPassword, Runnable onSuccess) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("userName", userName);
+            jsonObject.put("newPassword", newPassword);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        Call<ResponseBody> call = HttpHelper.makeRequest("POST", RESET_PASS_URL, null, jsonObject.toString(), null);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        Log.d("ResetPass", "Success: " + response.body().string());
+                        if (onSuccess != null) {
+                            onSuccess.run();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        Log.e("ResetPass", "Failure: " + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("ResetPass", "Error: " + t.getMessage());
+            }
+        });
+    }
+
+    public static void changePass(Context context, String userName, String oldPassword, String newPassword, Runnable onSuccess) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("userName", userName);
+            jsonObject.put("oldPassword", oldPassword);
+            jsonObject.put("newPassword", newPassword);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        String accessToken = UserDataService.getAccessToken(context);
+        Call<ResponseBody> call = HttpHelper.makeRequest("POST", CHANGE_PASS_URL, null, jsonObject.toString(), accessToken);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        Log.d("ChangePass", "Success: " + response.body().string());
+                        if (onSuccess != null) {
+                            onSuccess.run();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        Log.e("ChangePass", "Failure: " + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("ChangePass", "Error: " + t.getMessage());
             }
         });
     }

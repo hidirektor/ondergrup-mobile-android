@@ -95,7 +95,7 @@ public class SysOp extends AppCompatActivity {
             popup.getMenuInflater().inflate(R.menu.user_operations_menu, popup.getMenu());
 
             popup.setOnMenuItemClickListener(item -> {
-                if(item.getItemId() == R.id.deleteUser) {
+                if(item.getItemId() == R.id.deActivate) {
                     //Kullanıcı silme işlemi
                     deleteUser(selectedUser.getUserName());
 
@@ -186,24 +186,11 @@ public class SysOp extends AppCompatActivity {
     }
 
     private void deleteUser(String userName) {
-        /*String reqURL = util.BASE_URL + util.deleteUser;
-        String jsonDeleteBody = "{\"Username\": \"" + userName + "\"}";
-
-        HTTP.sendRequest(reqURL, jsonDeleteBody, new HTTP.HttpRequestCallback() {
-            @Override
-            public void onSuccess(JSONObject response) throws JSONException {
-                if(response.getString("error").contains("silinemez")) {
-                    util.showErrorPopup(uyariDiyalog, "Bu kullanıcının makinesi olduğu için kullanıcı silinemez.");
-                } else {
-                    util.showSuccessPopup(uyariDiyalog, "Kullanıcı silindi !");
-                }
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                util.showErrorPopup(uyariDiyalog, "Kullanıcı silinemedi.");
-            }
-        }, Volley.newRequestQueue(this));*/
+        OPUserService.deActivateUser(this, userName, () -> {
+            Util.showSuccessPopup(uyariDiyalog, "Kullanıcı başarılı bir şekilde deaktif edildi.");
+        }, () -> {
+            Util.showErrorPopup(uyariDiyalog, "Kullanıcı deaktif edilemedi.");
+        });
     }
 
     private void roleUpdate(User selectedUser) {

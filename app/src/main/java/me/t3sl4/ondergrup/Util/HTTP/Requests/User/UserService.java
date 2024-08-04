@@ -29,6 +29,7 @@ public class UserService {
     private static final String UPDATE_PREFERENCES_URL = "/api/v2/user/updatePreferences";
     private static final String UPDATE_PROFILE_URL = "/api/v2/user/updateProfile";
     private static final String UPLOAD_PROFILE_PHOTO_URL = "/api/v2/user/uploadProfilePhoto";
+    private static final String CHECK_USER_URL = "/api/v2/user/checkUser";
 
     public static void getProfile(Context context, String userID, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
@@ -241,6 +242,53 @@ public class UserService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("UploadProfilePhoto", "Error: " + t.getMessage());
+            }
+        });
+    }
+
+    public static void checkUser(Context context, String userName, Runnable onSuccess, Runnable onFailure) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("userName", userName);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        Call<ResponseBody> call = HttpHelper.makeRequest("POST", "/api/v2/user/checkUser", null, jsonObject.toString(), UserDataService.getAccessToken(context));
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        String responseBody = response.body().string();
+                        Log.d("CheckUser", "Success: " + responseBody);
+
+                        if (onSuccess != null) {
+                            onSuccess.run();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        Log.e("CheckUser", "Failure: " + response.errorBody().string());
+
+                        if (onFailure != null) {
+                            onFailure.run();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("CheckUser", "Error: " + t.getMessage());
+                if (onFailure != null) {
+                    onFailure.run();
+                }
             }
         });
     }

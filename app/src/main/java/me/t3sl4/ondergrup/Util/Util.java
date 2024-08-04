@@ -36,6 +36,8 @@ import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 public class Util {
     public Context context;
 
+    public static String userManualURL = "https://hidirektor.com.tr/manual/manual.pdf";
+
     public static String profilePhotoPath;
     public Util(Context context) {
         this.context = context;
