@@ -76,6 +76,9 @@ public class MachineAdapter extends BaseAdapter {
         } else if(Objects.equals(machine.getDilSecim(), "1")) {
             String language = context.getResources().getString(R.string.lang_english);
             secilenDil = language;
+        } else {
+            String language = context.getResources().getString(R.string.machine_data_null);
+            secilenDil = language;
         }
 
         if(Objects.nonNull(machine.getLastUpdate())) {

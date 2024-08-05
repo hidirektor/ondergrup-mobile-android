@@ -304,4 +304,6 @@
 
     <string name="createmaintenance">Bakım Kaydı Oluştur</string>
     <string name="note">Not</string>
+
+    <string name="machine_data_null">Data Yok</string>
 </resources>

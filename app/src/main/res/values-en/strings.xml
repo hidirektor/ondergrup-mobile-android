@@ -255,4 +255,5 @@
     <string name="cantbenull">The new machine owner cannot be null.</string>
     <string name="createmaintenance">Create Maintenance Log</string>
     <string name="note">Note</string>
+    <string name="machine_data_null">Null Data</string>
 </resources>

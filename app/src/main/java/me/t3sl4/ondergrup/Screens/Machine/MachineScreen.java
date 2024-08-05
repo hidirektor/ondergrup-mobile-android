@@ -114,10 +114,18 @@ public class MachineScreen extends AppCompatActivity {
         String cycleCount;
         if(selectedMachine.getDemoMode().equals("1")) {
             cycleCount = selectedMachine.getCalismaSayisiDemo();
-        } else {
+        } else if(selectedMachine.getDemoMode().equals("0")) {
             cycleCount = selectedMachine.getCalismaSayisi();
+        } else {
+            cycleCount = this.getResources().getString(R.string.machine_data_null);
         }
-        String secilenDil = selectedMachine.getDilSecim();
+
+        String secilenDil;
+        if(selectedMachine.getDilSecim() != null) {
+            secilenDil = selectedMachine.getDilSecim();
+        } else {
+            secilenDil = this.getResources().getString(R.string.machine_data_null);
+        }
         Drawable drawable = null;
         Drawable selectedLang = null;
         if(Objects.equals(machineType, "ESP")) {
