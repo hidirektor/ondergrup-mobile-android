@@ -11,6 +11,7 @@ import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.OnBoard.OnBoarding1;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.Token.TokenService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -47,9 +48,21 @@ public class SplashActivity extends AppCompatActivity {
                 Util.redirectBasedRole(SplashActivity.this, true);
             }
         }, () -> {
-            Intent loginIntent = new Intent(SplashActivity.this, LoginScreen.class);
-            startActivity(loginIntent);
-            finish();
+            refreshTokenAndRetry();
         }), WAITING_TIME);
+    }
+
+    private void refreshTokenAndRetry() {
+        TokenService.refreshToken(this, UserDataService.getRefreshToken(this), () -> UserService.getProfile(SplashActivity.this, UserDataService.getUserID(SplashActivity.this), () -> Util.redirectBasedRole(SplashActivity.this, true), () -> {
+            redirectToLogin();
+        }), () -> {
+            redirectToLogin();
+        });
+    }
+
+    private void redirectToLogin() {
+        Intent loginIntent = new Intent(SplashActivity.this, LoginScreen.class);
+        startActivity(loginIntent);
+        finish();
     }
 }
