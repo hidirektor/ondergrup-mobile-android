@@ -1,8 +1,11 @@
 package me.t3sl4.ondergrup.Screens.SubUser;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
@@ -10,6 +13,7 @@ import android.widget.PopupMenu;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import me.t3sl4.ondergrup.Model.SubUser.Adapter.SubUserAdapter;
 import me.t3sl4.ondergrup.Model.SubUser.SubUser;
@@ -92,6 +96,14 @@ public class SubUserListScreen extends AppCompatActivity {
 
         SubUserService.getSubUsers(this, UserDataService.getUserID(this), subUsers, () -> {
             updateListView(subUsers);
+        }, () -> {
+            String hataMesaj = this.getResources().getString(R.string.subuseryok);
+            Util.showErrorPopup(uyariDiyalog, hataMesaj);
+
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                uyariDiyalog.dismiss();
+                finish();
+            }, 1000);
         });
 
         return subUsers;
@@ -104,9 +116,27 @@ public class SubUserListScreen extends AppCompatActivity {
     }
 
     private void deleteAndUpdateSubUser(SubUser selectedSubUser) {
-        SubUserService.deleteSubUser(this, selectedSubUser.getSubUserID(), () -> {
-            getSubUserList();
-            Util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde silindi !");
-        });
+        AtomicBoolean isConfirmed = new AtomicBoolean(false);
+        new AlertDialog.Builder(this)
+                .setTitle("Silme Onayı")
+                .setMessage("Alt kullanıcıyı silmek istediğinize emin misiniz?")
+                .setPositiveButton("Evet", (dialog, which) -> {
+                    isConfirmed.set(true);
+                })
+                .setNegativeButton("Hayır", (dialog, which) -> {
+                    isConfirmed.set(false);
+                })
+                .setOnDismissListener(dialog -> {
+                    new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                        if (isConfirmed.get()) {
+                            SubUserService.deleteSubUser(this, selectedSubUser.getSubUserID(), () -> {
+                                getSubUserList();
+
+                                Util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde silindi!");
+                            });
+                        }
+                    }, 500);
+                })
+                .show();
     }
 }

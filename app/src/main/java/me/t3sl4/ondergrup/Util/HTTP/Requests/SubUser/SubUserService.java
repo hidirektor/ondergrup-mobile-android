@@ -71,7 +71,7 @@ public class SubUserService {
         });
     }
 
-    public static void getSubUsers(Context context, String ownerID, ArrayList<SubUser> subUsers, Runnable onSuccess) {
+    public static void getSubUsers(Context context, String ownerID, ArrayList<SubUser> subUsers, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("ownerID", ownerID);
@@ -120,6 +120,10 @@ public class SubUserService {
                 } else {
                     try {
                         Log.e("GetSubUsers", "Failure: " + response.errorBody().string());
+
+                        if(onFailure != null) {
+                            onFailure.run();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -129,6 +133,7 @@ public class SubUserService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("GetSubUsers", "Error: " + t.getMessage());
+                //Boş kısım revize edilecek
             }
         });
     }

@@ -19,6 +19,7 @@ import me.t3sl4.ondergrup.Model.MachineMaintenance.Adapter.MaintenanceAdapter;
 import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
+import me.t3sl4.ondergrup.Util.Util;
 
 public class MaintenanceLog extends AppCompatActivity {
     public me.t3sl4.ondergrup.Model.User.User receivedUser;
@@ -95,7 +96,13 @@ public class MaintenanceLog extends AppCompatActivity {
         MachineService.getMaintenances(this, currentMachineID, machineMaintenancesTemp, () -> {
             updateListView(machineMaintenancesTemp);
         }, () -> {
-            new Handler(Looper.getMainLooper()).postDelayed(() -> finish(), 1000);
+            String hataMesaj = this.getResources().getString(R.string.bakimyok);
+            Util.showErrorPopup(uyariDiyalog, hataMesaj);
+
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                uyariDiyalog.dismiss();
+                finish();
+            }, 1000);
         });
         return machineMaintenancesTemp;
     }

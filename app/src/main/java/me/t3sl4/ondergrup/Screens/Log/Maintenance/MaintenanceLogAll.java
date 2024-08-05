@@ -18,6 +18,7 @@ import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
+import me.t3sl4.ondergrup.Util.Util;
 
 public class MaintenanceLogAll extends AppCompatActivity {
     private ImageView backToMain;
@@ -72,7 +73,13 @@ public class MaintenanceLogAll extends AppCompatActivity {
         MachineService.getMaintenancesAll(this, UserDataService.getUserID(this), machineMaintenancesTemp, () -> {
             updateListView(machineMaintenancesTemp);
         }, () -> {
-            new Handler(Looper.getMainLooper()).postDelayed(() -> finish(), 1000);
+            String hataMesaj = this.getResources().getString(R.string.bakimyok_all);
+            Util.showErrorPopup(uyariDiyalog, hataMesaj);
+
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                uyariDiyalog.dismiss();
+                finish();
+            }, 1000);
         });
 
         return machineMaintenancesTemp;

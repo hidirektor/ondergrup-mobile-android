@@ -29,6 +29,7 @@ import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
+import me.t3sl4.ondergrup.Util.Util;
 
 public class ErrorLogAll extends AppCompatActivity {
     private ImageView backToMain;
@@ -81,7 +82,13 @@ public class ErrorLogAll extends AppCompatActivity {
         MachineService.getErrorsAll(this, UserDataService.getUserID(this), machineErrorsTemp, () -> {
             updateListView(machineErrorsTemp);
         }, () -> {
-            new Handler(Looper.getMainLooper()).postDelayed(() -> finish(), 1000);
+            String hataMesaj = this.getResources().getString(R.string.hatayok_all);
+            Util.showErrorPopup(uyariDiyalog, hataMesaj);
+
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                uyariDiyalog.dismiss();
+                finish();
+            }, 1000);
         });
 
         return machineErrorsTemp;

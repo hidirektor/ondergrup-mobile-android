@@ -27,6 +27,7 @@ import me.t3sl4.ondergrup.Model.MachineError.Adapter.MachineErrorAdapter;
 import me.t3sl4.ondergrup.Model.MachineError.MachineError;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
+import me.t3sl4.ondergrup.Util.Util;
 
 public class ErrorLog extends AppCompatActivity {
     private ImageView backToMachine;
@@ -81,7 +82,13 @@ public class ErrorLog extends AppCompatActivity {
         MachineService.getErrors(this, currentMachineID, machineErrorsTemp, () -> {
             updateListView(machineErrorsTemp);
         }, () -> {
-            new Handler(Looper.getMainLooper()).postDelayed(() -> finish(), 1000);
+            String hataMesaj = this.getResources().getString(R.string.hatayok);
+            Util.showErrorPopup(uyariDiyalog, hataMesaj);
+
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                uyariDiyalog.dismiss();
+                finish();
+            }, 1000);
         });
 
         return machineErrorsTemp;

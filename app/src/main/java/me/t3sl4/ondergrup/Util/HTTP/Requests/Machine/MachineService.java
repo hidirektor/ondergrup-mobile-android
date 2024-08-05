@@ -162,8 +162,6 @@ public class MachineService {
                     try {
                         String errorBody = response.errorBody().string();
                         Log.e("GetErrors", "Failure: " + errorBody);
-                        String hataMesaj = context.getResources().getString(R.string.hatayok);
-                        Util.showErrorPopup(new Dialog(context), hataMesaj);
 
                         if(onFailure != null) {
                             onFailure.run();
@@ -226,8 +224,6 @@ public class MachineService {
                 } else {
                     try {
                         Log.e("GetErrorsAll1", "Failure: " + response.errorBody().string());
-                        String hataMesaj = context.getResources().getString(R.string.hatayok_all);
-                        Util.showErrorPopup(new Dialog(context), hataMesaj);
 
                         if(onFailure != null) {
                             onFailure.run();
@@ -440,8 +436,6 @@ public class MachineService {
                 } else {
                     try {
                         Log.e("GetMaintenances", "Failure: " + response.errorBody().string());
-                        String hataMesaj = context.getResources().getString(R.string.bakimyok);
-                        Util.showErrorPopup(new Dialog(context), hataMesaj);
 
                         if(onFailure != null) {
                             onFailure.run();
@@ -553,8 +547,6 @@ public class MachineService {
                 } else {
                     try {
                         Log.e("GetMaintenancesAll", "Failure: " + response.errorBody().string());
-                        String hataMesaj = context.getResources().getString(R.string.bakimyok_all);
-                        Util.showErrorPopup(new Dialog(context), hataMesaj);
 
                         if(onFailure != null) {
                             onFailure.run();
