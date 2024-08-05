@@ -304,6 +304,7 @@ public class User extends AppCompatActivity {
 
         MachineService.addMachine(this, machineID, ownerID, () -> {
             Util.showSuccessPopup(uyariDiyalog, "Makine başarılı bir şekilde eklendi.");
+            getMachineList();
             qrDiyalog.dismiss();
         });
     }
@@ -397,12 +398,16 @@ public class User extends AppCompatActivity {
         qrDiyalog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         qrDiyalog.setContentView(R.layout.activity_machine_add);
 
+        TextView makineTuru = qrDiyalog.findViewById(R.id.textViewMakineTuru);
         ImageView cancelButton = qrDiyalog.findViewById(R.id.cancelButton);
         ImageView wifiButton = qrDiyalog.findViewById(R.id.wifiButton);
         Button addButton = qrDiyalog.findViewById(R.id.makineEkleButton);
         Spinner machineTypeSpinner = qrDiyalog.findViewById(R.id.machineTypeSpinner);
+        View splitter = qrDiyalog.findViewById(R.id.view);
 
-        machineTypeSpinner.setVisibility(View.INVISIBLE);
+        makineTuru.setVisibility(View.GONE);
+        machineTypeSpinner.setVisibility(View.GONE);
+        splitter.setVisibility(View.GONE);
 
         scannedQRCodeEditText = qrDiyalog.findViewById(R.id.editTextID);
         if (scannedQRCode != null) {

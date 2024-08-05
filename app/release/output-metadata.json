@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 554,
-      "versionName": "1.4.54(554)",
-      "outputFile": "OnderGrup release_05-08-2024_v1.4.54(554).apk"
+      "versionCode": 561,
+      "versionName": "1.4.61(561)",
+      "outputFile": "OnderGrup release_05-08-2024_v1.4.61(561).apk"
     }
   ],
   "elementType": "File",
@@ -22,14 +22,14 @@
       "minApi": 28,
       "maxApi": 30,
       "baselineProfiles": [
-        "baselineProfiles/1/OnderGrup release_05-08-2024_v1.4.54(554).dm"
+        "baselineProfiles/1/OnderGrup release_05-08-2024_v1.4.61(561).dm"
       ]
     },
     {
       "minApi": 31,
       "maxApi": 2147483647,
       "baselineProfiles": [
-        "baselineProfiles/0/OnderGrup release_05-08-2024_v1.4.54(554).dm"
+        "baselineProfiles/0/OnderGrup release_05-08-2024_v1.4.61(561).dm"
       ]
     }
   ],

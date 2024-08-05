@@ -40,7 +40,6 @@
         tools:targetApi="31">
         <activity
             android:name=".SplashActivity"
-            android:screenOrientation="unspecified"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,46 +48,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Screens.OnBoard.OnBoarding1"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.OnBoard.OnBoarding1" />
         <activity
-            android:name=".Screens.OnBoard.OnBoarding2"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.OnBoard.OnBoarding2" />
         <activity
-            android:name=".Screens.OnBoard.OnBoarding3"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.OnBoard.OnBoarding3" />
         <activity
             android:name=".Screens.Auth.LoginScreen"
-            android:screenOrientation="unspecified"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".Screens.Auth.ResetPassword.ForgetPassword"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Auth.ResetPassword.ForgetPassword" />
         <activity
-            android:name=".Screens.Auth.ResetPassword.ForgetPasswordSelection"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Auth.ResetPassword.ForgetPasswordSelection" />
         <activity
-            android:name=".Screens.Auth.ResetPassword.ForgetPasswordVerification"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Auth.ResetPassword.ForgetPasswordVerification" />
         <activity
             android:name=".Screens.Auth.ResetPassword.ForgetPasswordNewPass"
-            android:screenOrientation="unspecified"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".Screens.Auth.ResetPassword.ForgetPasswordSuccess"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Auth.ResetPassword.ForgetPasswordSuccess" />
         <activity
-            android:name=".Screens.Machine.MachineScreen"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Machine.MachineScreen" />
         <activity
-            android:name=".Screens.Machine.MachineListScreen"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Machine.MachineListScreen" />
         <activity
             android:name=".Screens.Dashboard.User"
-            android:screenOrientation="unspecified" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".Screens.Documents.DocumentsScreen"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Documents.DocumentsScreen" />
         <activity
             android:name=".Screens.Documents.ManualScreen"
             android:screenOrientation="unspecified" />
@@ -99,61 +86,44 @@
             android:name=".Screens.Documents.KVKKScreen"
             android:screenOrientation="unspecified" />
         <activity
-            android:name=".Screens.Documents.DestructionScreen"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Documents.DestructionScreen" />
         <activity
-            android:name=".Screens.SubUser.SubUserScreen"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.SubUser.SubUserScreen" />
         <activity
-            android:name=".Screens.SubUser.SubUserAddScreen"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.SubUser.SubUserAddScreen" />
         <activity
-            android:name=".Screens.SubUser.SubUserListScreen"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.SubUser.SubUserListScreen" />
         <activity
             android:name=".Screens.QR.QRScanner"
-            android:screenOrientation="unspecified"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".Screens.Profile.ProfileScreen"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Profile.ProfileScreen" />
         <activity
-            android:name=".Screens.Profile.EditProfileScreen"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Profile.EditProfileScreen" />
         <activity
-            android:name=".Screens.Profile.EditSubScreen"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Profile.EditSubScreen" />
         <activity
-            android:name=".Screens.Log.Error.ErrorLog"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Log.Error.ErrorLog" />
         <activity
-            android:name=".Screens.Log.Maintenance.MaintenanceLog"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Log.Maintenance.MaintenanceLog" />
         <activity
-            android:name=".Screens.Log.Maintenance.MaintenanceSingle"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Log.Maintenance.MaintenanceSingle" />
         <activity
-            android:name=".Screens.Log.Error.ErrorLogAll"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Log.Error.ErrorLogAll" />
         <activity
-            android:name=".Screens.Log.Maintenance.MaintenanceLogAll"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Log.Maintenance.MaintenanceLogAll" />
         <activity
-            android:name=".Screens.Dashboard.Technician"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Dashboard.Technician" />
         <activity
-            android:name=".Screens.Dashboard.SysOp"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Dashboard.SysOp"/>
         <activity
-            android:name=".Screens.Machine.RestrictedMachineScreen"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Machine.RestrictedMachineScreen" />
         <activity
-            android:name=".Screens.Log.Maintenance.CreateMaintenance"
-            android:screenOrientation="unspecified" />
+            android:name=".Screens.Log.Maintenance.CreateMaintenance" />
         <activity
             android:name=".Screens.Dashboard.Engineer"
-            android:screenOrientation="unspecified" />
+            android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>
