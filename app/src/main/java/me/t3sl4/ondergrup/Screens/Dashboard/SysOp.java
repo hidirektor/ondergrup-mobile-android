@@ -114,6 +114,9 @@ public class SysOp extends AppCompatActivity {
                     //Kullanıcı deaktive işlemi
                     deActivateUser(selectedUser.getUserName());
 
+                } else if(item.getItemId() == R.id.activate) {
+                    //Kullanıcı aktive işlemi
+                    activateUser(selectedUser.getUserName());
                 } else if(item.getItemId() == R.id.delete) {
                     //Kullanıcı silme işlemi
                     deleteUser(selectedUser.getUserName());
@@ -236,9 +239,23 @@ public class SysOp extends AppCompatActivity {
             Util.showErrorPopup(uyariDiyalog, "Kendi kendinizi deaktif edemezsiniz.");
         } else {
             OPUserService.deActivateUser(this, userName, () -> {
+                getUserList();
                 Util.showSuccessPopup(uyariDiyalog, "Kullanıcı başarılı bir şekilde deaktif edildi.");
             }, () -> {
                 Util.showErrorPopup(uyariDiyalog, "Kullanıcı deaktif edilemedi.");
+            });
+        }
+    }
+
+    private void activateUser(String userName) {
+        if(userName.equals(UserDataService.getUserName(this))) {
+            Util.showErrorPopup(uyariDiyalog, "Kendi kendinizi aktif edemezsiniz.");
+        } else {
+            OPUserService.activateUser(this, userName, () -> {
+                getUserList();
+                Util.showSuccessPopup(uyariDiyalog, "Kullanıcı başarılı bir şekilde aktif edildi.");
+            }, () -> {
+                Util.showErrorPopup(uyariDiyalog, "Kullanıcı aktif edilemedi.");
             });
         }
     }

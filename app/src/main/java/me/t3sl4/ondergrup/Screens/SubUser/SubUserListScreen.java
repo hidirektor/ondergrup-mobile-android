@@ -73,6 +73,9 @@ public class SubUserListScreen extends AppCompatActivity {
                 if(item.getItemId() == R.id.deActivateSub) {
                     deActivateSubUser(selectedSubUser);
                     return true;
+                } else if(item.getItemId() == R.id.deActivateSub) {
+                    activateSubUser(selectedSubUser);
+                    return true;
                 } else if(item.getItemId() == R.id.deleteSub) {
                     deleteAndUpdateSubUser(selectedSubUser);
                     return true;
@@ -145,7 +148,15 @@ public class SubUserListScreen extends AppCompatActivity {
 
     private void deActivateSubUser(SubUser selectedSubUser) {
         SubUserService.deActivateSubUser(this, selectedSubUser.getSubUserID(), () -> {
+            getSubUserList();
             Util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde deaktif edildi!");
+        });
+    }
+
+    private void activateSubUser(SubUser selectedSubUser) {
+        SubUserService.activateSubUser(this, selectedSubUser.getSubUserID(), () -> {
+            getSubUserList();
+            Util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde aktif edildi!");
         });
     }
 }

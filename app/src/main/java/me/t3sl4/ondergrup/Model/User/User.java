@@ -17,8 +17,9 @@ public class User implements Parcelable {
     private String companyName;
     private String ownerName;
     private String createdAt;
+    private String isActive;
 
-    public User(String role, String userName, String eMail, String nameSurname, String phoneNumber, String companyName, String createdAt) {
+    public User(String role, String userName, String eMail, String nameSurname, String phoneNumber, String companyName, String createdAt, String isActive) {
         this.role = role;
         this.userName = userName;
         this.eMail = eMail;
@@ -26,6 +27,7 @@ public class User implements Parcelable {
         this.phoneNumber = phoneNumber;
         this.companyName = companyName;
         this.createdAt = createdAt;
+        this.isActive = isActive;
     }
 
     public String getRole() {
@@ -116,6 +118,14 @@ public class User implements Parcelable {
         this.refreshToken = refreshToken;
     }
 
+    public String getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -130,6 +140,7 @@ public class User implements Parcelable {
         dest.writeString(phoneNumber);
         dest.writeString(companyName);
         dest.writeString(createdAt);
+        dest.writeString(isActive);
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -152,5 +163,6 @@ public class User implements Parcelable {
         phoneNumber = in.readString();
         companyName = in.readString();
         createdAt = in.readString();
+        isActive = in.readString();
     }
 }

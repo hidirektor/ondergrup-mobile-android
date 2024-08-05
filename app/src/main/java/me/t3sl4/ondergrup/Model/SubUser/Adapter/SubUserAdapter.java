@@ -59,6 +59,9 @@ public class SubUserAdapter extends BaseAdapter {
         }
 
         SubUser subUser = subUserList.get(position);
+        if(!Boolean.valueOf(subUser.getIsActive())) {
+            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.tanitimekrani2));
+        }
         holder.profilePhoto.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ikon_profilephoto));
         holder.nameSurname.setText(subUser.getNameSurname());
         holder.userName.setText(subUser.getUserName());

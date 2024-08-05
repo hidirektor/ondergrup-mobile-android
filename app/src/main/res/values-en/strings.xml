@@ -117,6 +117,7 @@
     <string name="subuser_update">Update Sub User</string>
     <string name="delete">Delete</string>
     <string name="deActivate">Disable</string>
+    <string name="activate">Enable</string>
     <string name="edit">Edit</string>
     <string name="changerole">Promote / Demote</string>
     <string name="role">Role</string>

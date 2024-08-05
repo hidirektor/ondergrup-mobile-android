@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 
 import me.t3sl4.ondergrup.Model.User.User;
@@ -59,6 +61,9 @@ public class UserAdapter extends BaseAdapter {
         }
 
         User user = userList.get(position);
+        if(!Boolean.valueOf(user.getIsActive())) {
+            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.tanitimekrani2));
+        }
 
         holder.roleUserName.setText(user.getRole() + " -- " + user.getUserName());
         holder.nameSurname.setText(user.getNameSurname());

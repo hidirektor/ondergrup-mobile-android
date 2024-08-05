@@ -4,6 +4,9 @@
         android:id="@+id/deActivate"
         android:title="@string/deActivate" />
     <item
+        android:id="@+id/activate"
+        android:title="@string/activate" />
+    <item
         android:id="@+id/delete"
         android:title="@string/delete" />
     <item

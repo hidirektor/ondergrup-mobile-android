@@ -21,6 +21,7 @@ public class UserDataService {
     private static final String KEY_USER_PHONE = "userPhone";
     private static final String KEY_USER_COMPANY = "userCompany";
     private static final String KEY_USER_CREATED_AT = "userCreatedAt";
+    private static final String KEY_USER_IS_ACTIVE = "isActive";
 
     private static SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
@@ -96,6 +97,13 @@ public class UserDataService {
         editor.apply();
     }
 
+    public static void setIsActive(Context context, String isActive) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_USER_IS_ACTIVE, isActive);
+        editor.apply();
+    }
+
     // Get individual user properties from SharedPreferences
     public static String getUserID(Context context) {
         SharedPreferences prefs = getPreferences(context);
@@ -147,6 +155,11 @@ public class UserDataService {
         return prefs.getString(KEY_USER_CREATED_AT, "");
     }
 
+    public static String getIsActive(Context context) {
+        SharedPreferences prefs = getPreferences(context);
+        return prefs.getString(KEY_USER_IS_ACTIVE, "");
+    }
+
     // Clear user data from SharedPreferences
     public static void clearUser(Context context) {
         SharedPreferences prefs = getPreferences(context);
@@ -177,8 +190,9 @@ public class UserDataService {
         String phoneNumber = getPhoneNumber(context);
         String companyName = getCompanyName(context);
         String createdAt = getCreatedAt(context);
+        String isActive = getIsActive(context);
 
-        User sharedUser = new User(role, userName, eMail, nameSurname, phoneNumber, companyName, createdAt);
+        User sharedUser = new User(role, userName, eMail, nameSurname, phoneNumber, companyName, createdAt, isActive);
         sharedUser.setUserID(userID);
         sharedUser.setAccessToken(accessToken);
         sharedUser.setRefreshToken(refreshToken);

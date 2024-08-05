@@ -13,6 +13,7 @@
     <string name="skip">Atla</string>
     <string name="delete">Sil</string>
     <string name="deActivate">Pasifleştir</string>
+    <string name="activate">Aktifleştir</string>
     <string name="edit">Düzenle</string>
     <string name="changerole">Rol Değiştir</string>
     <string name="okay">Tamam</string>

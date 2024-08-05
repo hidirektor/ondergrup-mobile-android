@@ -24,6 +24,7 @@ public class SubUserService {
     private static final String GET_SUB_USERS_URL = "/api/v2/subuser/getSubUsers";
     private static final String DELETE_SUB_USER_URL = "/api/v2/subuser/deleteSubUser";
     private static final String DEACTIVATE_SUB_USER_URL = "/api/v2/subuser/deActivateSubUser";
+    private static final String ACTIVATE_SUB_USER_URL = "/api/v2/subuser/activateSubUser";
     private static final String EDIT_SUB_USER_URL = "/api/v2/subuser/editSubUser";
 
     public static void createSubUser(Context context, String ownerID, String userName, String userType, String nameSurname, String eMail, String phoneNumber, String companyName, String password, Runnable onSuccess) {
@@ -105,7 +106,8 @@ public class SubUserService {
                                     subUserObject.getString("nameSurname"),
                                     subUserObject.getString("phoneNumber"),
                                     subUserObject.getString("companyName"),
-                                    ownerID);
+                                    ownerID,
+                                    subUserObject.getString("isActive"));
 
                             subUsers.add(subUser);
                         }
@@ -218,7 +220,49 @@ public class SubUserService {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("DeleteSubUser", "Error: " + t.getMessage());
+                Log.e("DeActivateSubUser", "Error: " + t.getMessage());
+            }
+        });
+    }
+
+    public static void activateSubUser(Context context, String subUserID, Runnable onSuccess) {
+
+        Log.d("Sub ID", subUserID);
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("subUserID", subUserID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        String accessToken = UserDataService.getAccessToken(context);
+        Call<ResponseBody> call = HttpHelper.makeRequestWithAuth("POST", ACTIVATE_SUB_USER_URL, null, jsonObject.toString(), accessToken);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        Log.d("ActivateSubUser", "Success: " + response.body().string());
+                        if (onSuccess != null) {
+                            onSuccess.run();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        Log.e("ActivateSubUser", "Failure: " + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("ActivateSubUser", "Error: " + t.getMessage());
             }
         });
     }

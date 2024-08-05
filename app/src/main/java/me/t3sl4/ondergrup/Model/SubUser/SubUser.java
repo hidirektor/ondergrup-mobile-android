@@ -13,8 +13,9 @@ public class SubUser implements Parcelable {
     private String phone;
     private String companyName;
     private String owner;
+    private String isActive;
 
-    public SubUser(String subUserID, String role, String userName, String eMail, String nameSurname, String phone, String companyName, String owner) {
+    public SubUser(String subUserID, String role, String userName, String eMail, String nameSurname, String phone, String companyName, String owner, String isActive) {
         this.subUserID = subUserID;
         this.role = role;
         this.userName = userName;
@@ -23,6 +24,7 @@ public class SubUser implements Parcelable {
         this.phone = phone;
         this.companyName = companyName;
         this.owner = owner;
+        this.isActive = isActive;
     }
 
     protected SubUser(Parcel in) {
@@ -34,6 +36,7 @@ public class SubUser implements Parcelable {
         phone = in.readString();
         companyName = in.readString();
         owner = in.readString();
+        isActive = in.readString();
     }
 
     public String getSubUserID() {
@@ -100,6 +103,14 @@ public class SubUser implements Parcelable {
         this.owner = owner;
     }
 
+    public String getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
+    }
+
     public static final Creator<SubUser> CREATOR = new Creator<SubUser>() {
         @Override
         public SubUser createFromParcel(Parcel in) {
@@ -127,5 +138,6 @@ public class SubUser implements Parcelable {
         dest.writeString(phone);
         dest.writeString(companyName);
         dest.writeString(owner);
+        dest.writeString(isActive);
     }
 }
