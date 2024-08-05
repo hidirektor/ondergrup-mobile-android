@@ -3,6 +3,7 @@ package me.t3sl4.ondergrup.Screens.Profile;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +17,7 @@ import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
 import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
 import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
+import me.t3sl4.ondergrup.Service.UserDataService;
 
 public class ProfileScreen extends AppCompatActivity {
     public User receivedUser;
@@ -60,6 +62,10 @@ public class ProfileScreen extends AppCompatActivity {
 
         editProfileButton = findViewById(R.id.button3);
         subUserButton = findViewById(R.id.subUserConstraint);
+
+        if(UserDataService.getUserRole(this) != "NORMAL") {
+            subUserButton.setVisibility(View.GONE);
+        }
     }
 
     private void buttonClickListeners() {
