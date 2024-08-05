@@ -3,6 +3,7 @@ package me.t3sl4.ondergrup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,14 +40,16 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void redirectToMainActivity() {
-        new Handler().postDelayed(() -> {
-            UserService.getProfile(this, UserDataService.getUserID(this), () -> {
-                Util.redirectBasedRole(this, true);
-            }, () -> {
-                Intent loginIntent = new Intent(SplashActivity.this, LoginScreen.class);
-                startActivity(loginIntent);
-                finish();
-            });
-        }, WAITING_TIME);
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> UserService.getProfile(SplashActivity.this, UserDataService.getUserID(SplashActivity.this), new Runnable() {
+            @Override
+            public void run() {
+                Util.redirectBasedRole(SplashActivity.this, true);
+            }
+        }, () -> {
+            Intent loginIntent = new Intent(SplashActivity.this, LoginScreen.class);
+            startActivity(loginIntent);
+            finish();
+        }), WAITING_TIME);
     }
 }

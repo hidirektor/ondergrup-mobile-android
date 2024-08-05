@@ -11,7 +11,10 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,6 +41,8 @@ public class Util {
 
     public static String userManualURL = "https://hidirektor.com.tr/manual/manual.pdf";
 
+    private static final String TARGET_WIFI_SSID = "OnderGrup_IoT";
+
     public static String profilePhotoPath;
     public Util(Context context) {
         this.context = context;
@@ -45,17 +50,44 @@ public class Util {
     }
 
     public static boolean isEmpty(TextInputEditText etText) {
-        if (Objects.requireNonNull(etText.getText()).toString().trim().length() > 0)
-            return false;
-
-        return true;
+        return Objects.requireNonNull(etText.getText()).toString().trim().isEmpty();
     }
 
     public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager != null ? connectivityManager.getActiveNetworkInfo() : null;
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager != null) {
+            Network network = connectivityManager.getActiveNetwork();
+            if (network != null) {
+                NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(network);
+                return networkCapabilities != null &&
+                        (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET));
+            }
+        }
+        return false;
+    }
+
+    public static boolean isConnectedToTargetWifi(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            Network network = connectivityManager.getActiveNetwork();
+            if (network != null) {
+                NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(network);
+                if (networkCapabilities != null && networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                    if (wifiManager != null) {
+                        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+                        if (wifiInfo != null) {
+                            String ssid = wifiInfo.getSSID().replace("\"", ""); // Remove quotes from SSID
+                            return ssid.equals(TARGET_WIFI_SSID);
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public static void showErrorPopup(Dialog diyalog, String hataMesaji) {
@@ -115,13 +147,13 @@ public class Util {
         Configuration activityConf = activityRes.getConfiguration();
         Locale newLocale = new Locale(newLanguage);
         activityConf.setLocale(newLocale);
-        activityRes.updateConfiguration(activityConf, activityRes.getDisplayMetrics());
 
-        Resources applicationRes = context.getResources();
+        Resources applicationRes = context.getApplicationContext().getResources();
         Configuration applicationConf = applicationRes.getConfiguration();
         applicationConf.setLocale(newLocale);
-        applicationRes.updateConfiguration(applicationConf,
-                applicationRes.getDisplayMetrics());
+
+        context.createConfigurationContext(activityConf);
+        context.getApplicationContext().createConfigurationContext(applicationConf);
     }
 
     public static void loadNewTranslations(Context context) {

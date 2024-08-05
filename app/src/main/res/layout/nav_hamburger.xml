@@ -236,17 +236,6 @@
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
-
-        <ImageView
-            android:id="@+id/womaLogo"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_gravity="center|center_horizontal"
-            android:src="@drawable/woma_logo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

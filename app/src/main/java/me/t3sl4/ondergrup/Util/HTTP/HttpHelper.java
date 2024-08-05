@@ -88,7 +88,8 @@ public class HttpHelper {
             service = getApiService();
         }
 
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonBody != null ? jsonBody : "");
+        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create(jsonBody != null ? jsonBody : "", mediaType);
         Call<ResponseBody> call = null;
 
         if (params == null) {
@@ -165,7 +166,8 @@ public class HttpHelper {
     public static Call<ResponseBody> makeRequestWithAuth(String method, String url, Map<String, String> params, String jsonBody, String authToken) {
         ApiService service = getApiServiceWithAuth(authToken);
 
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonBody != null ? jsonBody : "");
+        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create(jsonBody != null ? jsonBody : "", mediaType);
         Call<ResponseBody> call = null;
 
         if (params == null) {

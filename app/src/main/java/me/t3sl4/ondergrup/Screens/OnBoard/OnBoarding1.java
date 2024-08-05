@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,7 +19,6 @@ public class OnBoarding1 extends AppCompatActivity {
     TextView atlaButton1;
     ImageView nextButton1;
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +36,7 @@ public class OnBoarding1 extends AppCompatActivity {
         nextButton1 = findViewById(R.id.nextButton);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void buttonClickListeners() {
         atlaButton1.setOnClickListener(v -> {
             Intent intent = new Intent(OnBoarding1.this, LoginScreen.class);
@@ -74,7 +73,7 @@ public class OnBoarding1 extends AppCompatActivity {
     }
 
     private void setOnBoardingState() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences = getSharedPreferences("isFirstTime", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("isFirstTime", false);
         editor.apply();

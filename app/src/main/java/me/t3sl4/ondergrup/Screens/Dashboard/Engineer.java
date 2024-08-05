@@ -2,12 +2,9 @@ package me.t3sl4.ondergrup.Screens.Dashboard;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -210,21 +207,6 @@ public class Engineer extends AppCompatActivity {
         });
     }
 
-    private boolean isConnectedToTargetWifi() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager != null) {
-            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-            if (networkInfo != null && networkInfo.isConnected()) {
-                WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
-                if (wifiManager != null) {
-                    String ssid = wifiManager.getConnectionInfo().getSSID().replace("\"", ""); // Remove quotes from SSID
-                    return ssid.equals(TARGET_WIFI_SSID);
-                }
-            }
-        }
-        return false;
-    }
-
     private void openWifiSettings() {
         Intent intent = new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK);
         startActivity(intent);
@@ -283,11 +265,11 @@ public class Engineer extends AppCompatActivity {
         cancelButton.setOnClickListener(view -> qrDiyalog.dismiss());
 
         wifiButton.setOnClickListener(view -> {
-            if (!isConnectedToTargetWifi()) {
+            if (!Util.isConnectedToTargetWifi(this)) {
                 openWifiSettings();
 
                 new Thread(() -> {
-                    while (!isConnectedToTargetWifi()) {
+                    while (!Util.isConnectedToTargetWifi(this)) {
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
