@@ -1,9 +1,12 @@
 package me.t3sl4.ondergrup.Screens.Dashboard;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,6 +19,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import me.t3sl4.ondergrup.Model.Machine.Adapter.MachineAdapter;
 import me.t3sl4.ondergrup.Model.Machine.Machine;
@@ -107,6 +111,10 @@ public class SysOp extends AppCompatActivity {
 
             popup.setOnMenuItemClickListener(item -> {
                 if(item.getItemId() == R.id.deActivate) {
+                    //Kullanıcı deaktive işlemi
+                    deActivateUser(selectedUser.getUserName());
+
+                } else if(item.getItemId() == R.id.delete) {
                     //Kullanıcı silme işlemi
                     deleteUser(selectedUser.getUserName());
 
@@ -194,11 +202,45 @@ public class SysOp extends AppCompatActivity {
     }
 
     private void deleteUser(String userName) {
-        OPUserService.deActivateUser(this, userName, () -> {
-            Util.showSuccessPopup(uyariDiyalog, "Kullanıcı başarılı bir şekilde deaktif edildi.");
-        }, () -> {
-            Util.showErrorPopup(uyariDiyalog, "Kullanıcı deaktif edilemedi.");
-        });
+        AtomicBoolean isConfirmed = new AtomicBoolean(false);
+        if(userName.equals(UserDataService.getUserName(this))) {
+            Util.showErrorPopup(uyariDiyalog, "Kendi kendinizi silemezsiniz.");
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle("Silme Onayı")
+                    .setMessage("Kullanıcıyı silmek istediğinize emin misiniz?")
+                    .setPositiveButton("Evet", (dialog, which) -> {
+                        isConfirmed.set(true);
+                    })
+                    .setNegativeButton("Hayır", (dialog, which) -> {
+                        isConfirmed.set(false);
+                    })
+                    .setOnDismissListener(dialog -> {
+                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                            if (isConfirmed.get()) {
+                                OPUserService.deleteUser(this, userName, () -> {
+                                    Util.showSuccessPopup(uyariDiyalog, "Kullanıcı başarılı bir şekilde silindi.");
+                                    getUserList();
+                                }, () -> {
+                                    Util.showErrorPopup(uyariDiyalog, "Kullanıcı silinemedi.");
+                                });
+                            }
+                        }, 500);
+                    })
+                    .show();
+        }
+    }
+
+    private void deActivateUser(String userName) {
+        if(userName.equals(UserDataService.getUserName(this))) {
+            Util.showErrorPopup(uyariDiyalog, "Kendi kendinizi deaktif edemezsiniz.");
+        } else {
+            OPUserService.deActivateUser(this, userName, () -> {
+                Util.showSuccessPopup(uyariDiyalog, "Kullanıcı başarılı bir şekilde deaktif edildi.");
+            }, () -> {
+                Util.showErrorPopup(uyariDiyalog, "Kullanıcı deaktif edilemedi.");
+            });
+        }
     }
 
     private void roleUpdate(User selectedUser) {

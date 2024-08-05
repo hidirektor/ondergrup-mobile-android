@@ -70,7 +70,10 @@ public class SubUserListScreen extends AppCompatActivity {
             popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
 
             popupMenu.setOnMenuItemClickListener(item -> {
-                if(item.getItemId() == R.id.deleteSub) {
+                if(item.getItemId() == R.id.deActivateSub) {
+                    deActivateSubUser(selectedSubUser);
+                    return true;
+                } else if(item.getItemId() == R.id.deleteSub) {
                     deleteAndUpdateSubUser(selectedSubUser);
                     return true;
                 } else if(item.getItemId() == R.id.editSub) {
@@ -138,5 +141,11 @@ public class SubUserListScreen extends AppCompatActivity {
                     }, 500);
                 })
                 .show();
+    }
+
+    private void deActivateSubUser(SubUser selectedSubUser) {
+        SubUserService.deActivateSubUser(this, selectedSubUser.getSubUserID(), () -> {
+            Util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde deaktif edildi!");
+        });
     }
 }
