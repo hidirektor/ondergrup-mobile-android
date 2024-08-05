@@ -111,21 +111,22 @@ public class MachineScreen extends AppCompatActivity {
 
     private void initMachineData() {
         String machineType = selectedMachine.getMachineType();
-        String cycleCount;
-        if(selectedMachine.getDemoMode().equals("1")) {
-            cycleCount = selectedMachine.getCalismaSayisiDemo();
-        } else if(selectedMachine.getDemoMode().equals("0")) {
-            cycleCount = selectedMachine.getCalismaSayisi();
-        } else {
-            cycleCount = this.getResources().getString(R.string.machine_data_null);
+        String cycleCount = this.getResources().getString(R.string.machine_data_null);
+        if(selectedMachine.getDemoMode() != null) {
+            if(selectedMachine.getDemoMode().equals("1")) {
+                cycleCount = selectedMachine.getCalismaSayisiDemo();
+            } else if(selectedMachine.getDemoMode().equals("0")) {
+                cycleCount = selectedMachine.getCalismaSayisi();
+            }
         }
 
-        String secilenDil;
+        String secilenDil = this.getResources().getString(R.string.machine_data_null);
         if(selectedMachine.getDilSecim() != null) {
-            secilenDil = selectedMachine.getDilSecim();
-        } else {
-            secilenDil = this.getResources().getString(R.string.machine_data_null);
+            if(selectedMachine.getDilSecim().equals("1") || selectedMachine.getDilSecim().equals("0")) {
+                secilenDil = selectedMachine.getDilSecim();
+            }
         }
+
         Drawable drawable = null;
         Drawable selectedLang = null;
         if(Objects.equals(machineType, "ESP")) {
@@ -133,6 +134,7 @@ public class MachineScreen extends AppCompatActivity {
         } else if(Objects.equals(machineType, "CSP-D")) {
             drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.tanitimekrani_csp1, null);
         }
+
         machineImage.setImageDrawable(drawable);
         ownerName.setText(selectedMachine.getOwnerUserName());
         machineID.setText(selectedMachine.getMachineID());

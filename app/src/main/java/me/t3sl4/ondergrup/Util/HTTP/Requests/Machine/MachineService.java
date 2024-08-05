@@ -116,7 +116,7 @@ public class MachineService {
         });
     }
 
-    public static void getErrors(Context context, String machineID, ArrayList<MachineError> machineErrorsTemp, Runnable onSuccess) {
+    public static void getErrors(Context context, String machineID, ArrayList<MachineError> machineErrorsTemp, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("machineID", machineID);
@@ -164,6 +164,10 @@ public class MachineService {
                         Log.e("GetErrors", "Failure: " + errorBody);
                         String hataMesaj = context.getResources().getString(R.string.hatayok);
                         Util.showErrorPopup(new Dialog(context), hataMesaj);
+
+                        if(onFailure != null) {
+                            onFailure.run();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -173,13 +177,12 @@ public class MachineService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("GetErrors", "Error: " + t.getMessage());
-                String hataMesaj = context.getResources().getString(R.string.hatayok);
-                Util.showErrorPopup(new Dialog(context), hataMesaj);
+                //Boş kısım revize edilecek
             }
         });
     }
 
-    public static void getErrorsAll(Context context, String userID, ArrayList<MachineError> machineErrorsTemp, Runnable onSuccess) {
+    public static void getErrorsAll(Context context, String userID, ArrayList<MachineError> machineErrorsTemp, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("userID", userID);
@@ -222,7 +225,13 @@ public class MachineService {
                     }
                 } else {
                     try {
-                        Log.e("GetErrorsAll", "Failure: " + response.errorBody().string());
+                        Log.e("GetErrorsAll1", "Failure: " + response.errorBody().string());
+                        String hataMesaj = context.getResources().getString(R.string.hatayok_all);
+                        Util.showErrorPopup(new Dialog(context), hataMesaj);
+
+                        if(onFailure != null) {
+                            onFailure.run();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -231,7 +240,8 @@ public class MachineService {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("GetErrorsAll", "Error: " + t.getMessage());
+                Log.e("GetErrorsAll2", "Error: " + t.getMessage());
+                //Boş kısım revize edilecek
             }
         });
     }
@@ -337,7 +347,7 @@ public class MachineService {
         });
     }
 
-    public static void getMaintenances(Context context, String machineID, ArrayList<Maintenance> machineMaintenancesTemp, Runnable onSuccess) {
+    public static void getMaintenances(Context context, String machineID, ArrayList<Maintenance> machineMaintenancesTemp, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("machineID", machineID);
@@ -430,6 +440,12 @@ public class MachineService {
                 } else {
                     try {
                         Log.e("GetMaintenances", "Failure: " + response.errorBody().string());
+                        String hataMesaj = context.getResources().getString(R.string.bakimyok);
+                        Util.showErrorPopup(new Dialog(context), hataMesaj);
+
+                        if(onFailure != null) {
+                            onFailure.run();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -439,11 +455,12 @@ public class MachineService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("GetMaintenances", "Error: " + t.getMessage());
+                //Boş kısım revize edilecek
             }
         });
     }
 
-    public static void getMaintenancesAll(Context context, String userID, ArrayList<Maintenance> machineMaintenancesTemp, Runnable onSuccess) {
+    public static void getMaintenancesAll(Context context, String userID, ArrayList<Maintenance> machineMaintenancesTemp, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("userID", userID);
@@ -536,6 +553,12 @@ public class MachineService {
                 } else {
                     try {
                         Log.e("GetMaintenancesAll", "Failure: " + response.errorBody().string());
+                        String hataMesaj = context.getResources().getString(R.string.bakimyok_all);
+                        Util.showErrorPopup(new Dialog(context), hataMesaj);
+
+                        if(onFailure != null) {
+                            onFailure.run();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -545,6 +568,8 @@ public class MachineService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("GetMaintenancesAll", "Error: " + t.getMessage());
+
+                //Boş kısım revize edilecek
             }
         });
     }

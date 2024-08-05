@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -78,6 +80,8 @@ public class ErrorLogAll extends AppCompatActivity {
 
         MachineService.getErrorsAll(this, UserDataService.getUserID(this), machineErrorsTemp, () -> {
             updateListView(machineErrorsTemp);
+        }, () -> {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> finish(), 1000);
         });
 
         return machineErrorsTemp;

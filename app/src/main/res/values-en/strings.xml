@@ -147,7 +147,9 @@
     <string name="tablakapiswitch">Tray Door Switch Error</string>
     <string name="maximumcalisma">Maximum Running Error</string>
     <string name="hatayok">The machine has not gone into any error state so far.</string>
+    <string name="hatayok_all">None of your machines have given any errors so far.</string>
     <string name="bakimyok">No maintenance records have been entered for the machine yet.</string>
+    <string name="bakimyok_all">No maintenance records have been created for any of your machines so far.</string>
     <string name="show_profile">Show Profile</string>
     <string name="hataSebep">Error Causes</string>
     <string name="hataCozum">Error Solution</string>

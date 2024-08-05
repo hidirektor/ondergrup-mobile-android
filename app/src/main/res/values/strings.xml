@@ -177,7 +177,9 @@
     <string name="tablakapiswitch">Tabla Kapı Switch Hatası</string>
     <string name="maximumcalisma">Maximum Çalışma Hatası</string>
     <string name="hatayok">Makine şuana kadar hiç hata durumuna geçmemiş.</string>
+    <string name="hatayok_all">Şuana kadar hiçbir makineniz hata vermemiş.</string>
     <string name="bakimyok">Makine için şuana kadar hiç bakım kaydı girilmemiş.</string>
+    <string name="bakimyok_all">Şuana kadar hiçbir makineniz için bakım kaydı oluşturulmamış.</string>
 
     <string name="show_profile">Profili Görüntüle</string>
 

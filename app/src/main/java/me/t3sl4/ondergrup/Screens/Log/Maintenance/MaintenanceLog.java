@@ -3,6 +3,8 @@ package me.t3sl4.ondergrup.Screens.Log.Maintenance;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -92,6 +94,8 @@ public class MaintenanceLog extends AppCompatActivity {
         ArrayList<Maintenance> machineMaintenancesTemp = new ArrayList<>();
         MachineService.getMaintenances(this, currentMachineID, machineMaintenancesTemp, () -> {
             updateListView(machineMaintenancesTemp);
+        }, () -> {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> finish(), 1000);
         });
         return machineMaintenancesTemp;
     }
