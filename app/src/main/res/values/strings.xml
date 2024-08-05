@@ -1,34 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Önder Grup</string>
-    <string name="developer">Halil İbrahim Direktör</string>
-    <string name="developer_mail">hidirektor@gmail.com</string>
-    <string name="welcome">Merhabalar</string>
-    <string name="developedby">Designed &amp; Developed by\nHalil İbrahim Direktör</string>
+    <string name="app_name" translatable="false">Önder Grup</string>
+    <string name="developer" translatable="false">Halil İbrahim Direktör</string>
+    <string name="developer_mail" translatable="false">hidirektor@gmail.com</string>
+    <string name="developedby" translatable="false">Designed &amp; Developed by\nHalil İbrahim Direktör</string>
 
+    <!-- General Texts -->
+    <string name="welcome">Merhabalar</string>
+
+    <!-- Button Texts -->
     <string name="login">Giriş Yap</string>
     <string name="register">Kayıt Ol</string>
     <string name="next_btn">İlerle</string>
     <string name="forget_password">Şifremi Unuttum</string>
     <string name="rememberme">Beni Hatırla</string>
     <string name="skip">Atla</string>
+    <string name="okay">Tamam</string>
     <string name="delete">Sil</string>
     <string name="deActivate">Pasifleştir</string>
     <string name="activate">Aktifleştir</string>
     <string name="edit">Düzenle</string>
     <string name="changerole">Rol Değiştir</string>
-    <string name="okay">Tamam</string>
-    <string name="warning">HATA !</string>
-
     <string name="button_profile">Profil</string>
     <string name="button_settings">Ayarlar</string>
     <string name="button_feedback">Bize Bildirin !</string>
     <string name="button_logout">Çıkış Yap</string>
 
-    <string name="lang_turkish">Türkçe</string>
-    <string name="lang_english">İngilizce</string>
-    <string name="machine_active">Aktif</string>
-    <string name="machine_deactive">Aktif Değil</string>
+    <!-- General Headers -->
+    <string name="warning">HATA !</string>
 
+    <!-- Input Fields -->
     <string name="enter_username">Kullanıcı Adı</string>
     <string name="enter_password">Şifre</string>
     <string name="enter_namesurname">İsim Soyisim</string>
@@ -36,14 +37,22 @@
     <string name="enter_phone">Telefon</string>
     <string name="enter_sirket">Şirket</string>
 
-    <string name="resetPass">Şİfrenİ\nSıfırla</string>
-    <string name="forget_password_detail">Şifrenizi sıfırlamak istediğiniz hesabın e-postasını girin</string>
+    <!-- OnBoard Texts -->
+    <string name="onboard_1_title_1">Bütüncül</string>
+    <string name="onboard_1_title_2">Kontrol</string>
+    <string name="onboard_1_desc">ÖnderGrup çatısı altındaki ürünlerinizi ve ürünlerle yetkili tüm alt kullanıcıları uygulama üzerinden kontrol edebilirsiniz.</string>
 
-    <string name="new_credentials">Yenİ Şİfren</string>
-    <string name="new_credentials_detail">Eski şifrenden farklı bir şifre belirleyerek aşağıdaki alana yazabilirsin</string>
-    <string name="new_credentials_2">Yeni Şifren</string>
-    <string name="new_credentials_2_repeat">Şifreni Doğrula</string>
-    <string name="new_credentials_reset">Sıfırla</string>
+    <string name="onboard_2_title_1">ESP</string>
+    <string name="onboard_2_title_2">Yönetimi</string>
+    <string name="onboard_2_desc">Satın almış olduğunuz tüm ESP cihazlarınızı tek bir platformdan kontrol edebilirsiniz.</string>
+
+    <string name="onboard_3_title_1">CSP-D</string>
+    <string name="onboard_3_title_2">Yönetimi</string>
+    <string name="onboard_3_desc">Satın almış olduğunuz tüm CSP-D cihazlarınızı tek bir platformdan kontrol edebilirsiniz.</string>
+
+    <!-- Forget Password Screen Texts -->
+    <string name="resetPass">Şİfrenİ\nSıfırla</string>
+    <string name="forget_password_detail">Şifrenizi sıfırlamak istediğiniz hesabın kullanıcı adını girin</string>
 
     <string name="make_selection">Seçİmİnİ Yap</string>
     <string name="make_selection_detail">Lütfen şifreni sıfırlamak istediğin yönetmi seç</string>
@@ -52,18 +61,53 @@
     <string name="via_mail">E-Posta ile Sıfırla</string>
     <string name="via_mail_detail">E-Postana gelecek kod ile şifreni sıfırlayabilirsin.</string>
 
-    <string name="password_updated">BAŞARILI</string>
-    <string name="password_updated_success_message">Tebrikler şifren değiştirildi. Artık yeni şifren ile giriş yapabilirsin</string>
-
     <string name="otp_code_text">On\nay</string>
     <string name="otp_verification_text">Doğrulama Aşaması</string>
     <string name="otp_description_text">Seçtiğiniz doğrulama yöntemine gelen onay kodunu girin</string>
 
+    <string name="new_credentials">Yenİ Şİfren</string>
+    <string name="new_credentials_detail">Eski şifrenden farklı bir şifre belirleyerek aşağıdaki alana yazabilirsin</string>
+    <string name="new_credentials_2">Yeni Şifren</string>
+    <string name="new_credentials_2_repeat">Şifreni Doğrula</string>
+    <string name="new_credentials_reset">Sıfırla</string>
+
+    <string name="password_updated">BAŞARILI</string>
+    <string name="password_updated_success_message">Tebrikler şifren değiştirildi. Artık yeni şifren ile giriş yapabilirsin.</string>
+
+    <!-- General Machine Texts -->
+    <string name="machine_data_null">Data Yok</string>
+
+    <string name="lang_turkish">Türkçe</string>
+    <string name="lang_english">İngilizce</string>
+    <string name="machine_active">Aktif</string>
+    <string name="machine_deactive">Aktif Değil</string>
 
     <string name="machine_owner">Sahibi: </string>
     <string name="machine_id">Makine ID: </string>
     <string name="machine_cycle">Cycle: </string>
     <string name="machine_language">Dil: </string>
+
+    <string name="active_language">Dil: </string>
+    <string name="time">sn.</string>
+
+
+    <string name="error_code_1">1. Hata Kodu</string>
+    <string name="error_code_2">2. Hata Kodu</string>
+    <string name="error_code_3">3. Hata Kodu</string>
+    <string name="error_code_4">4. Hata Kodu</string>
+    <string name="error_code_5">5. Hata Kodu</string>
+    <string name="error_code_6">6. Hata Kodu</string>
+    <string name="error_code_7">7. Hata Kodu</string>
+    <string name="error_code_8">8. Hata Kodu</string>
+    <string name="error_code_9">9. Hata Kodu</string>
+    <string name="error_code_10">10. Hata Kodu</string>
+
+    <string-array name="machineType" translatable="false">
+        <item>ESP</item>
+        <item>CSP</item>
+    </string-array>
+
+    <!-- Machine Data Texts -->
     <string name="machine_devirmeYuruyusSecim">devirmeYuruyusSecim</string>
     <string name="machine_calismaSekli">calismaSekli</string>
     <string name="machine_emniyetCercevesi">emniyetCercevesi</string>
@@ -105,6 +149,7 @@
     <string name="machine_eepromData47">eepromData47</string>
     <string name="machine_lcdBacklightSure">lcdBacklightSure</string>
 
+    <!-- Dashboard Screen Texts -->
     <string name="hello_template">Merhaba\nHalil İbrahim Direktör</string>
     <string name="hello_prefix">Merhaba\n</string>
     <string name="subusers">Alt Kullanıcılar</string>
@@ -112,18 +157,16 @@
     <string name="maintenance">Bakım Geçmişi</string>
     <string name="docs">Belgeler</string>
 
-    <string name="onboard_1_title_1">Bütüncül</string>
-    <string name="onboard_1_title_2">Kontrol</string>
-    <string name="onboard_1_desc">ÖnderGrup çatısı altındaki ürünlerinizi ve ürünlerle yetkili tüm alt kullanıcıları uygulama üzerinden kontrol edebilirsiniz.</string>
+    <string name="mymachines">Makinelerim</string>
+    <string name="allmachines">Tüm Makineler</string>
+    <string name="allusers">Tüm Kullanıcılar</string>
 
-    <string name="onboard_2_title_1">ESP</string>
-    <string name="onboard_2_title_2">Yönetimi</string>
-    <string name="onboard_2_desc">Satın almış olduğunuz tüm ESP cihazlarınızı tek bir platformdan kontrol edebilirsiniz.</string>
+    <string name="createmaintenance">Bakım Kaydı Oluştur</string>
+    <string name="select_role">Lütfen Rol Seçin</string>
+    <string name="role_update">Rolü Güncelle</string>
+    <string name="changeowner">Sahibini Güncelle</string>
 
-    <string name="onboard_3_title_1">CSP-D</string>
-    <string name="onboard_3_title_2">Yönetimi</string>
-    <string name="onboard_3_desc">Satın almış olduğunuz tüm CSP-D cihazlarınızı tek bir platformdan kontrol edebilirsiniz.</string>
-
+    <!-- Documents Screen Texts -->
     <string name="documents_desc">İncelemek istediğin dokümanı aşağıdan seçebilirsin.</string>
     <string name="user_manual">Kullanma Kılavuzu</string>
     <string name="user_manual_desc">ESP ve CSP-D makineleriniz için kullanma kılavuzuna ulaşın.</string>
@@ -134,6 +177,7 @@
     <string name="data_storage">Veri Saklama ve İmha</string>
     <string name="data_storage_desc">Veri saklama ve imha politikamızı bu butonu kullanarak inceleyebilirsiniz.</string>
 
+    <!-- SubUser Screen Texts -->
     <string name="subuser_desc">Alt kullanıcıların için yapmak istediğin işlemi aşağıdan seçebilirsin.</string>
     <string name="subuser_list">Alt Kullanıcıları Listele</string>
     <string name="subuser_list_desc">Eklediğin alt kullanıcıları buradan görüntüleyebilirsiniz.</string>
@@ -145,17 +189,15 @@
 
     <string name="subuser_update">Alt Kullanıcıyı Güncelle</string>
 
+    <string name="show_profile">Profili Görüntüle</string>
+
+    <!-- User Profile Texts -->
     <string name="role">Kullanıcı Rolü</string>
     <string name="create_date">Oluşturma Tarihi</string>
     <string name="create_date_template">28.05.2001 17:50</string>
-
     <string name="profile_update">Profili Güncelle</string>
 
-    <string-array name="machineType">
-        <item>ESP</item>
-        <item>CSP</item>
-    </string-array>
-
+    <!-- Support Screen Texts -->
     <string name="support_desc">Lütfen bizimle kurmak istediğin irtibat yöntemini seç.</string>
     <string name="support_location">Konum</string>
     <string name="support_location_desc">Fabrika ve Showroom adreslerine bakabilirsin.</string>
@@ -164,11 +206,13 @@
     <string name="support_call">Bizi Ara</string>
     <string name="support_call_desc">Bizi arayarak destek alabilirsiniz.</string>
 
+    <!-- Machine Add Popup Texts -->
     <string name="machine_add">Makine Ekle</string>
     <string name="machine_type">Makine Türü</string>
 
     <string name="camera_permission_error">Lütfen ÖnderGrup uygulaması için kamera izinlerini aktif edin.</string>
 
+    <!-- Machine Error Screen Texts -->
     <string name="machine_screen">Makine Ekranına Dön</string>
 
     <string name="acilstop">Acil Stop Hatası</string>
@@ -177,14 +221,15 @@
     <string name="kapiswitch">Kapı Switch Hatası</string>
     <string name="tablakapiswitch">Tabla Kapı Switch Hatası</string>
     <string name="maximumcalisma">Maximum Çalışma Hatası</string>
+
+    <!-- Custom ListView Error Texts -->
     <string name="hatayok">Makine şuana kadar hiç hata durumuna geçmemiş.</string>
     <string name="hatayok_all">Şuana kadar hiçbir makineniz hata vermemiş.</string>
     <string name="bakimyok">Makine için şuana kadar hiç bakım kaydı girilmemiş.</string>
     <string name="bakimyok_all">Şuana kadar hiçbir makineniz için bakım kaydı oluşturulmamış.</string>
     <string name="subuseryok">Hesabınıza bağlı hiçbir alt kullanıcı yok.</string>
 
-    <string name="show_profile">Profili Görüntüle</string>
-
+    <!-- Machine Error Solutions Screen Texts -->
     <string name="hataSebep">Hata Sebepleri</string>
     <string name="hataCozum">Hata Çözümü</string>
 
@@ -224,8 +269,7 @@
     <string name="error_maxcalisma_sebep4">Makine Aşağı İnerken Işık Yandığı Halde Makinenin Aşağı Hareket Etmemesi</string>
     <string name="error_maxcalisma_cozum4">İndirme popetini kontrol ediniz ve temizleyiniz.</string>
 
-    <string name="mymachines">Makinelerim</string>
-
+    <!-- Maintenances Screen Texts -->
     <string name="functionsandcontrol">Fonksiyonlar\n&amp;\nKontrol</string>
     <string name="platformmontaj">Platform Montajı</string>
     <string name="makaslar">Makaslar</string>
@@ -274,6 +318,7 @@
     <string name="maintenance8_1">Hidrolik ünite kabinleri hasarsız ve şaseye bağlı.</string>
     <string name="maintenance8_2">Elektrik ünite kabinleri hasarsız ve şaseye bağlı.</string>
     <string name="maintenance8_3">Şase hasarsız ve çalışır durumda.</string>
+    <string name="note">Not</string>
 
     <string name="maintenance_milestone">Bakım</string>
     <string name="maintenance_status">Bakım Durumu</string>
@@ -282,32 +327,9 @@
     <string name="maintenance_duzeltme">Düzeltilecek</string>
     <string name="maintenance_yok">Yok</string>
 
-    <string name="active_language">Dil: </string>
-    <string name="time">sn.</string>
-
-    <string name="allmachines">Tüm Makineler</string>
-    <string name="allusers">Tüm Kullanıcılar</string>
-
+    <!-- Failure Texts -->
     <string name="wifiFailure">Lütfen internet bağlantınızı kontrol edin!</string>
-    <string name="error_code_1">1. Hata Kodu</string>
-    <string name="error_code_2">2. Hata Kodu</string>
-    <string name="error_code_3">3. Hata Kodu</string>
-    <string name="error_code_4">4. Hata Kodu</string>
-    <string name="error_code_5">5. Hata Kodu</string>
-    <string name="error_code_6">6. Hata Kodu</string>
-    <string name="error_code_7">7. Hata Kodu</string>
-    <string name="error_code_8">8. Hata Kodu</string>
-    <string name="error_code_9">9. Hata Kodu</string>
-    <string name="error_code_10">10. Hata Kodu</string>
-
-    <string name="select_role">Lütfen Rol Seçin</string>
-    <string name="role_update">Rolü Güncelle</string>
-
-    <string name="changeowner">Sahibini Güncelle</string>
     <string name="cantbenull">Yeni makine sahibi null olamaz.</string>
 
-    <string name="createmaintenance">Bakım Kaydı Oluştur</string>
-    <string name="note">Not</string>
-
-    <string name="machine_data_null">Data Yok</string>
+    <!-- Success Texts -->
 </resources>

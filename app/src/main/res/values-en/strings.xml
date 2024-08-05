@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Önder Grup</string>
-    <string name="developer">Halil İbrahim Direktör</string>
-    <string name="developedby">Designed &amp; Developed by\nHalil İbrahim Direktör</string>
+    <!-- General Texts -->
+    <string name="welcome">Hello</string>
+
+    <!-- Button Texts -->
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="next_btn">Next</string>
@@ -10,35 +11,92 @@
     <string name="rememberme">Remember Me</string>
     <string name="skip">Skip</string>
     <string name="okay">Okay</string>
+    <string name="delete">Delete</string>
+    <string name="deActivate">Disable</string>
+    <string name="activate">Enable</string>
+    <string name="edit">Edit</string>
+    <string name="changerole">Promote / Demote</string>
+    <string name="button_profile">Profile</string>
+    <string name="button_settings">Settings</string>
+    <string name="button_feedback">Feedback</string>
+    <string name="button_logout">Logout</string>
+
+    <!-- General Headers -->
     <string name="warning">WARNING !</string>
+
+    <!-- Input Fields -->
     <string name="enter_username">Username</string>
     <string name="enter_password">Password</string>
     <string name="enter_namesurname">Name Surname</string>
     <string name="enter_mail">E-Mail</string>
     <string name="enter_phone">Phone</string>
     <string name="enter_sirket">Company</string>
+
+    <!-- OnBoard Texts -->
+    <string name="onboard_1_title_1">Holistic</string>
+    <string name="onboard_1_title_2">Control</string>
+    <string name="onboard_1_desc">You can control your products under the ÖnderGrup umbrella and all sub-users authorized with the products through the application.</string>
+
+    <string name="onboard_2_title_1">ESP</string>
+    <string name="onboard_2_title_2">Management</string>
+    <string name="onboard_2_desc">You can control all your purchased ESP devices from a single platform.</string>
+
+    <string name="onboard_3_title_1">CSP-D</string>
+    <string name="onboard_3_title_2">Management</string>
+    <string name="onboard_3_desc">You can control all your purchased CSP-D devices from a single platform.</string>
+
+    <!-- Forget Password Screen Texts -->
     <string name="resetPass">Reset\nPassword</string>
-    <string name="forget_password_detail">Enter the email of the account you want to reset your password for</string>
-    <string name="new_credentials">New Password</string>
-    <string name="new_credentials_detail">You can choose a password different from your old password and write it in the field below.</string>
-    <string name="new_credentials_2">New Password</string>
-    <string name="new_credentials_2_repeat">Confirm Password</string>
-    <string name="new_credentials_reset">Reset</string>
+    <string name="forget_password_detail">Enter the username of the account you want to reset your password for</string>
+
     <string name="make_selection">Make Your Choice</string>
     <string name="make_selection_detail">Please select the method you want to reset your password from.</string>
     <string name="via_sms">Reset via SMS</string>
     <string name="via_sms_detail">You can reset your password with the code sent to your phone.</string>
     <string name="via_mail">Reset via Email</string>
     <string name="via_mail_detail">You can reset your password with the code sent to your e-mail.</string>
-    <string name="password_updated">SUCCESS</string>
-    <string name="password_updated_success_message">Congratulations, your password has been changed. You can now log in with your new password.</string>
+
     <string name="otp_code_text">CON\nFIRM</string>
     <string name="otp_verification_text">Verification Phase</string>
     <string name="otp_description_text">Enter the confirmation code received in the verification method you selected</string>
+
+    <string name="new_credentials">New Password</string>
+    <string name="new_credentials_detail">You can choose a password different from your old password and write it in the field below.</string>
+    <string name="new_credentials_2">New Password</string>
+    <string name="new_credentials_2_repeat">Confirm Password</string>
+    <string name="new_credentials_reset">Reset</string>
+
+    <string name="password_updated">SUCCESS</string>
+    <string name="password_updated_success_message">Congratulations, your password has been changed. You can now log in with your new password.</string>
+
+    <!-- General Machine Texts -->
+    <string name="machine_data_null">Null Data</string>
+
+    <string name="lang_turkish">Turkish</string>
+    <string name="lang_english">English</string>
+    <string name="machine_active">Active</string>
+    <string name="machine_deactive">Not Active</string>
+
     <string name="machine_owner">"Owner: "</string>
     <string name="machine_id">"Machine ID: "</string>
     <string name="machine_cycle">"Cycle: "</string>
     <string name="machine_language">"Language: "</string>
+
+    <string name="active_language">Language:</string>
+    <string name="time">scnd.</string>
+
+    <string name="error_code_1">1st Error</string>
+    <string name="error_code_2">2nd Error</string>
+    <string name="error_code_3">3rd Error</string>
+    <string name="error_code_4">4th Error</string>
+    <string name="error_code_5">5th Error</string>
+    <string name="error_code_6">6th Error</string>
+    <string name="error_code_7">7th Error</string>
+    <string name="error_code_8">8th Error</string>
+    <string name="error_code_9">9th Error</string>
+    <string name="error_code_10">10th Error</string>
+
+    <!-- Machine Data Texts -->
     <string name="machine_devirmeYuruyusSecim">devirmeYuruyusSecim</string>
     <string name="machine_calismaSekli">calismaSekli</string>
     <string name="machine_emniyetCercevesi">emniyetCercevesi</string>
@@ -79,25 +137,25 @@
     <string name="machine_eepromData46">eepromData46</string>
     <string name="machine_eepromData47">eepromData47</string>
     <string name="machine_lcdBacklightSure">lcdBacklightTime</string>
+
+    <!-- Dashboard Screen Texts -->
     <string name="hello_template">Hello \n Halil İbrahim Direktör</string>
     <string name="hello_prefix">Hello \n</string>
     <string name="subusers">Sub Users</string>
     <string name="hatalog">Error Log</string>
     <string name="maintenance">Maintenance Log</string>
     <string name="docs">Documents</string>
-    <string name="onboard_1_title_1">Holistic</string>
-    <string name="onboard_1_title_2">Control</string>
-    <string name="onboard_1_desc">You can control your products under the ÖnderGrup umbrella and all sub-users authorized with the products through the application.</string>
-    <string name="onboard_2_title_1">ESP</string>
-    <string name="onboard_2_title_2">Management</string>
-    <string name="onboard_2_desc">You can control all your purchased ESP devices from a single platform.</string>
-    <string name="onboard_3_title_1">CSP-D</string>
-    <string name="onboard_3_title_2">Management</string>
-    <string name="onboard_3_desc">You can control all your purchased CSP-D devices from a single platform.</string>
-    <string name="lang_turkish">Turkish</string>
-    <string name="lang_english">English</string>
-    <string name="machine_active">Active</string>
-    <string name="machine_deactive">Not Active</string>
+
+    <string name="mymachines">Paired Machines</string>
+    <string name="allmachines">All Machines</string>
+    <string name="allusers">All Users</string>
+
+    <string name="select_role">Select Role</string>
+    <string name="role_update">Update Role</string>
+    <string name="changeowner">Update Owner</string>
+    <string name="createmaintenance">Create Maintenance Log</string>
+
+    <!-- Documents Screen Texts -->
     <string name="documents_desc">You can select the document you want to review below.</string>
     <string name="user_manual">User Manual</string>
     <string name="user_manual_desc">Get the user manual for your ESP and CSP-D machines.</string>
@@ -107,23 +165,28 @@
     <string name="privacy_desc">You can review our privacy policy using this button.</string>
     <string name="data_storage">Data Storage and Destruction</string>
     <string name="data_storage_desc">You can review our data retention and destruction policy using this button.</string>
+
+    <!-- SubUser Screen Texts -->
     <string name="subuser_desc">You can select the action you want to perform for your sub-users below.</string>
     <string name="subuser_list">List Sub Users</string>
     <string name="subuser_list_desc">You can view the subusers you added here.</string>
     <string name="subuser_add">Add Sub User</string>
     <string name="subuser_add_desc">You can add subusers here.</string>
+
     <string name="subuser_create">Create \nSub User</string>
     <string name="subuser_create_button">Create</string>
+
     <string name="subuser_update">Update Sub User</string>
-    <string name="delete">Delete</string>
-    <string name="deActivate">Disable</string>
-    <string name="activate">Enable</string>
-    <string name="edit">Edit</string>
-    <string name="changerole">Promote / Demote</string>
+
+    <string name="show_profile">Show Profile</string>
+
+    <!-- User Profile Texts -->
     <string name="role">Role</string>
     <string name="create_date">Creation Date</string>
     <string name="create_date_template">28.05.2001 17:50</string>
     <string name="profile_update">Update Profile</string>
+
+    <!-- Support Screen Texts -->
     <string name="support_desc">Please select the contact method you would like to contact us.</string>
     <string name="support_location">Location</string>
     <string name="support_location_desc">You can look at the factory and showroom addresses.</string>
@@ -131,52 +194,61 @@
     <string name="support_mail_desc">You can get support via e-mail.</string>
     <string name="support_call">Call Us</string>
     <string name="support_call_desc">You can get support by calling us.</string>
+
+    <!-- Machine Add Popup Texts -->
     <string name="machine_add">Add Machine</string>
     <string name="machine_type">Machine Type</string>
-    <string name="welcome">Hello</string>
-    <string name="button_profile">Profile</string>
-    <string name="button_settings">Settings</string>
-    <string name="button_feedback">Feedback</string>
-    <string name="button_logout">Logout</string>
+
     <string name="camera_permission_error">Please allow camera acces for ÖnderGrup application.</string>
-    <string name="developer_mail">hidirektor@gmail.com</string>
+
+    <!-- Machine Error Screen Texts -->
     <string name="machine_screen">Return Machine Screen</string>
+
     <string name="acilstop">Emergency Stop Error</string>
     <string name="emniyetcercevesi">Safety Frame Error</string>
     <string name="basincasiriyuk">Pressure Overload Error</string>
     <string name="kapiswitch">Door Switch Error</string>
     <string name="tablakapiswitch">Tray Door Switch Error</string>
     <string name="maximumcalisma">Maximum Running Error</string>
+
+    <!-- Custom ListView Error Texts -->
     <string name="hatayok">The machine has not gone into any error state so far.</string>
     <string name="hatayok_all">None of your machines have given any errors so far.</string>
     <string name="bakimyok">No maintenance records have been entered for the machine yet.</string>
     <string name="bakimyok_all">No maintenance records have been created for any of your machines so far.</string>
     <string name="subuseryok">There are no sub-users connected to your account.</string>
-    <string name="show_profile">Show Profile</string>
+
+    <!-- Machine Error Solutions Screen Texts -->
     <string name="hataSebep">Error Causes</string>
     <string name="hataCozum">Error Solution</string>
+
     <string name="error_acilstop_sebep1">Contact Proof</string>
     <string name="error_acilstop_cozum1">Checking the permeability of the cables connected to the contact located at the back of the emergency stop button.</string>
     <string name="error_acilstop_sebep2">Stuck on Press State</string>
     <string name="error_acilstop_cozum2">It should be checked whether the button remains pressed or not. If it is pressed, the button should be turned clockwise and released.</string>
+
     <string name="error_emniyetcerceve_sebep1">Cable Disconnection Condition</string>
     <string name="error_emniyetcerceve_cozum1">The return of the safety frame signal must be checked. If there is no return, the cable should be checked.</string>
     <string name="error_emniyetcerceve_sebep2">Frame Stuck Situation</string>
     <string name="error_emniyetcerceve_cozum2">If it gets stuck when you press the frame, the stuck place should be fixed.</string>
     <string name="error_emniyetcerceve_sebep3">Switch Failure</string>
     <string name="error_emniyetcerceve_cozum3">The switch should be checked.</string>
+
     <string name="error_basinc_sebep1">Overload Fault</string>
     <string name="error_basinc_cozum1">The load above its capacity must be taken.</string>
     <string name="error_basinc_sebep2">Pressure Switch Malfunction</string>
     <string name="error_basinc_cozum2">The pressure switch should be checked and replaced if necessary.</string>
+
     <string name="error_kapiswitch_sebep1">Switch Breakage</string>
     <string name="error_kapiswitch_cozum1">Provide switch control. Replace the switch if necessary.</string>
     <string name="error_kapiswitch_sebep2">Trying to Move the Machine with the Door Open</string>
     <string name="error_kapiswitch_cozum2">Check the doors. If the door is open, the door must be closed.</string>
+
     <string name="error_tablakapiswitch_sebep1">Switch Breakage</string>
     <string name="error_tablakapiswitch_cozum1">Provide switch control. Replace the switch if necessary.</string>
     <string name="error_tablakapiswitch_sebep2">Trying to Move the Machine with the Door Open</string>
     <string name="error_tablakapiswitch_cozum2">Check the doors. If the door is open, the door must be closed.</string>
+
     <string name="error_maxcalisma_sebep1">Machine Not Stopping Up During Maximum Up Reach Time</string>
     <string name="error_maxcalisma_cozum1">Check the upper limit switch.</string>
     <string name="error_maxcalisma_sebep2">The machine does not stop at the bottom during the maximum arrival time</string>
@@ -185,7 +257,8 @@
     <string name="error_maxcalisma_cozum3">Check the contactors and motor protection switch.</string>
     <string name="error_maxcalisma_sebep4">Although the light is on while the machine is going down, the machine does not move down</string>
     <string name="error_maxcalisma_cozum4">Check and clean the download poppet.</string>
-    <string name="mymachines">Paired Machines</string>
+
+    <!-- Maintenances Screen Texts -->
     <string name="functionsandcontrol">Functions\n&amp;\nControl</string>
     <string name="platformmontaj">Platform Assembly</string>
     <string name="makaslar">Scissors</string>
@@ -195,9 +268,11 @@
     <string name="kilavuzveetiket">Guides\n&amp;\nLabels</string>
     <string name="sase">Chassis</string>
     <string name="aciklamanot">Description\n&amp;\nNote</string>
+
     <string name="incharge">Responsible Technician: </string>
     <string name="maintenance_id">Maintenance ID: </string>
     <string name="maintenance_date">Maintenance Date: </string>
+
     <string name="maintenance1_1">Control buttons are working</string>
     <string name="maintenance1_2">Emergency stop button control</string>
     <string name="maintenance1_3">Raise, download buttons</string>
@@ -232,32 +307,18 @@
     <string name="maintenance8_1">Hydraulic unit cabins are undamaged and connected to the chassis.</string>
     <string name="maintenance8_2">Electrical unit cabinets are undamaged and connected to the chassis.</string>
     <string name="maintenance8_3">The chassis is undamaged and in working order.</string>
+    <string name="note">Note</string>
+
     <string name="maintenance_milestone">Maintenance</string>
     <string name="maintenance_status">Status</string>
     <string name="maintenance_tamam">Okay</string>
     <string name="maintenance_hayir">No</string>
     <string name="maintenance_duzeltme">Will be Fixed</string>
     <string name="maintenance_yok">None</string>
-    <string name="active_language">Language:</string>
-    <string name="time">scnd.</string>
-    <string name="allmachines">All Machines</string>
-    <string name="allusers">All Users</string>
+
+    <!-- Failure Texts -->
     <string name="wifiFailure">Please check your WiFi connection!</string>
-    <string name="error_code_1">1st Error</string>
-    <string name="error_code_2">2nd Error</string>
-    <string name="error_code_3">3rd Error</string>
-    <string name="error_code_4">4th Error</string>
-    <string name="error_code_5">5th Error</string>
-    <string name="error_code_6">6th Error</string>
-    <string name="error_code_7">7th Error</string>
-    <string name="error_code_8">8th Error</string>
-    <string name="error_code_9">9th Error</string>
-    <string name="error_code_10">10th Error</string>
-    <string name="select_role">Select Role</string>
-    <string name="role_update">Update Role</string>
-    <string name="changeowner">Update Owner</string>
     <string name="cantbenull">The new machine owner cannot be null.</string>
-    <string name="createmaintenance">Create Maintenance Log</string>
-    <string name="note">Note</string>
-    <string name="machine_data_null">Null Data</string>
+
+    <!-- Success Texts -->
 </resources>
