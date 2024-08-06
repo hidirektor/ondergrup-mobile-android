@@ -52,7 +52,6 @@ import me.t3sl4.ondergrup.Screens.QR.QRScanner;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.Navigation.NavigationManager;
-import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
@@ -137,12 +136,12 @@ public class User extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
-        currentLang = SharedPreferencesManager.getSharedPref("language", User.this, "en");
+        currentLang = UserDataService.getSelectedLanguage(this);
 
         initializeComponents();
 
         String activeText = "";
-        if(Objects.equals(currentLang, "tr")) {
+        if(Objects.equals(currentLang, "true")) {
             activeText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_turkish);
         } else {
             activeText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_english);

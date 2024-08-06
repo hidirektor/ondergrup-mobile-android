@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +17,6 @@ import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
-import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Auth.AuthService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
@@ -172,15 +170,6 @@ public class LoginScreen extends AppCompatActivity {
 
         if(!networkStatus) {
             Util.showErrorPopup(uyariDiyalog, wifiFailureMessage);
-            //Service başlat ve wifi ağına bağlı olup olmadığını kontrol etsin.
-        } else {
-            String username = SharedPreferencesManager.getSharedPref("username", this, "");
-
-            if (!TextUtils.isEmpty(username)) {
-                String password = SharedPreferencesManager.getSharedPref("username", this, "");
-                String role = SharedPreferencesManager.getSharedPref("role", this, "");
-                //initUser(username, role);
-            }
         }
     }
 }
