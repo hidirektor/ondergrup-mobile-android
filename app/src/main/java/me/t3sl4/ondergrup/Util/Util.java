@@ -6,8 +6,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
@@ -15,12 +13,11 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Build;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.yariksoffice.lingver.Lingver;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -142,30 +139,8 @@ public class Util {
         return sdf.format(date);
     }
 
-    public static void setSystemLanguage(Context context) {
-        String userLanguage = UserDataService.getSelectedLanguage(context);
-        Log.d("userLANG", userLanguage);
-        String nextLang;
-
-        if (userLanguage != null) {
-            if (userLanguage.equals("true")) {
-                nextLang = "tr";
-            } else {
-                nextLang = "en";
-            }
-        } else {
-            UserDataService.setSelectedLanguage(context, "true");
-            nextLang = "tr";
-        }
-
-        Log.d("Next LANGG", nextLang);
-
-        updateLocale(context, nextLang);
-    }
-
     public static void changeSystemLanguage(Context context) {
         String userLanguage = UserDataService.getSelectedLanguage(context);
-        Log.d("change -- userLANG", userLanguage);
         String nextLang;
 
         if (userLanguage.equals("true")) {
@@ -176,25 +151,11 @@ public class Util {
             UserDataService.setSelectedLanguage(context, "true");
         }
 
-        Log.d("Change -- Next LANGG", nextLang);
-
         updateLocale(context, nextLang);
     }
 
     public static void updateLocale(Context context, String nextLang) {
-        Locale newLocale = new Locale(nextLang);
-        Locale.setDefault(newLocale);
-
-        Resources resources = context.getResources();
-        Configuration config = resources.getConfiguration();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            config.setLocale(newLocale);
-        } else {
-            config.locale = newLocale;
-        }
-
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
+        Lingver.getInstance().setLocale(context, nextLang);
     }
 
     public static void redirectBasedRole(Activity activity, boolean splashStatus) {
