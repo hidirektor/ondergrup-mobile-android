@@ -53,7 +53,6 @@ import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.Navigation.NavigationManager;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
-import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class User extends AppCompatActivity {
@@ -201,7 +200,8 @@ public class User extends AppCompatActivity {
             startActivity(profileIntent);
         });
         subLanguage.setOnClickListener(v -> {
-            switchLanguage();
+            Util.changeSystemLanguage(this);
+            recreate();
         });
         navSettingsButton.setOnClickListener(v -> {
             Intent settingsIntent = new Intent(User.this, EditProfileScreen.class);
@@ -219,7 +219,8 @@ public class User extends AppCompatActivity {
         });
 
         navLanguageButton.setOnClickListener(v -> {
-            switchLanguage();
+            Util.changeSystemLanguage(this);
+            recreate();
         });
 
         logoutButton.setOnClickListener(v -> UserDataService.logout(this));
@@ -482,25 +483,5 @@ public class User extends AppCompatActivity {
         subLayout.setPadding(0, 0, 0, 0);
         machineLayout.setPadding(0, 0, 0, 0);
         headerLayout.setPadding(0, 0, 0, 0);
-    }
-
-    private void switchLanguage() {
-        String currentLanguage = UserDataService.getSelectedLanguage(this);
-        String nextLang = "";
-
-        if (currentLanguage.equals("true")) {
-            UserDataService.setSelectedLanguage(this, "false");
-            nextLang = "false";
-        } else {
-            UserDataService.setSelectedLanguage(this, "true");
-            String trText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_turkish);
-            navCurrentLang.setText(trText);
-            nextLang = "true";
-        }
-
-        UserService.updatePreferences(this, UserDataService.getUserID(this), UserDataService.getSelectedLanguage(this), UserDataService.getSelectedNightMode(this));
-
-        Util.setLocale(User.this, nextLang);
-        recreate();
     }
 }

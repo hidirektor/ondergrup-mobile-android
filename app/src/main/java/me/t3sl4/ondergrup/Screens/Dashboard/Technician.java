@@ -25,7 +25,6 @@ import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPMachineService;
-import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class Technician extends AppCompatActivity {
@@ -127,7 +126,8 @@ public class Technician extends AppCompatActivity {
         });
 
         subLanguage.setOnClickListener(v -> {
-            switchLanguage();
+            Util.changeSystemLanguage(this);
+            recreate();
         });
 
         settingsButton.setOnClickListener(v -> {
@@ -163,23 +163,5 @@ public class Technician extends AppCompatActivity {
         machineList = machines;
         machineListAdapter = new MachineAdapter(this, machineList);
         machineListView.setAdapter(machineListAdapter);
-    }
-
-    private void switchLanguage() {
-        String currentLanguage = UserDataService.getSelectedLanguage(this);
-        String nextLang = "";
-
-        if (currentLanguage.equals("true")) {
-            UserDataService.setSelectedLanguage(this, "false");
-            nextLang = "false";
-        } else {
-            UserDataService.setSelectedLanguage(this, "true");
-            nextLang = "true";
-        }
-
-        UserService.updatePreferences(this, UserDataService.getUserID(this), UserDataService.getSelectedLanguage(this), UserDataService.getSelectedNightMode(this));
-
-        Util.setLocale(Technician.this, nextLang);
-        recreate();
     }
 }

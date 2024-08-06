@@ -1,7 +1,7 @@
-import java.text.SimpleDateFormat
-import java.util.Properties
 import java.io.FileInputStream
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -60,6 +60,7 @@ android {
             targetSdk = 34
             versionCode = realVersionCode
             versionName = "$major.$minor.$patch($versionCode)"
+            resourceConfigurations += listOf("en", "tr")
 
             buildConfigField("String", "BASE_URL", "\"http://85.95.231.92:4000/api/v1/\"")
 

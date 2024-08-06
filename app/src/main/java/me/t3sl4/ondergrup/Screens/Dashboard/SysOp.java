@@ -33,7 +33,6 @@ import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPMachineService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPUserService;
-import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SysOp extends AppCompatActivity {
@@ -168,7 +167,8 @@ public class SysOp extends AppCompatActivity {
         logoutButton.setOnClickListener(v -> UserDataService.logout(this));
 
         subLanguage.setOnClickListener(v -> {
-            switchLanguage();
+            Util.changeSystemLanguage(this);
+            recreate();
         });
     }
 
@@ -346,23 +346,5 @@ public class SysOp extends AppCompatActivity {
         userList = users;
         userListAdapter = new UserAdapter(this, userList);
         userListView.setAdapter(userListAdapter);
-    }
-
-    private void switchLanguage() {
-        String currentLanguage = UserDataService.getSelectedLanguage(this);
-        String nextLang = "";
-
-        if (currentLanguage.equals("true")) {
-            UserDataService.setSelectedLanguage(this, "false");
-            nextLang = "false";
-        } else {
-            UserDataService.setSelectedLanguage(this, "true");
-            nextLang = "true";
-        }
-
-        UserService.updatePreferences(this, UserDataService.getUserID(this), UserDataService.getSelectedLanguage(this), UserDataService.getSelectedNightMode(this));
-
-        Util.setLocale(SysOp.this, nextLang);
-        recreate();
     }
 }

@@ -15,6 +15,7 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -141,44 +142,65 @@ public class Util {
         return sdf.format(date);
     }
 
-    public static void setLocale(Context context, String newLanguage) {
-        Resources activityRes = context.getResources();
-        Configuration activityConf = activityRes.getConfiguration();
-        Locale newLocale = new Locale(newLanguage);
-        activityConf.setLocale(newLocale);
+    public static void setSystemLanguage(Context context) {
+        String userLanguage = UserDataService.getSelectedLanguage(context);
+        Log.d("userLANG", userLanguage);
+        String nextLang;
 
-        Resources applicationRes = context.getApplicationContext().getResources();
-        Configuration applicationConf = applicationRes.getConfiguration();
-        applicationConf.setLocale(newLocale);
-
-        context.createConfigurationContext(activityConf);
-        context.getApplicationContext().createConfigurationContext(applicationConf);
-    }
-
-    public static void loadNewTranslations(Context context) {
-        String currentLanguage;
-
-        if(UserDataService.getSelectedLanguage(context) != null) {
-            boolean selectedLang = Boolean.parseBoolean(UserDataService.getSelectedLanguage(context));
-
-            if(selectedLang) {
-                currentLanguage = "tr";
+        if (userLanguage != null) {
+            if (userLanguage.equals("true")) {
+                nextLang = "tr";
             } else {
-                currentLanguage = "en";
+                nextLang = "en";
             }
         } else {
-            currentLanguage = "tr";
+            UserDataService.setSelectedLanguage(context, "true");
+            nextLang = "tr";
         }
 
-        Util.setLocale(context, currentLanguage);
+        Log.d("Next LANGG", nextLang);
+
+        updateLocale(context, nextLang);
+    }
+
+    public static void changeSystemLanguage(Context context) {
+        String userLanguage = UserDataService.getSelectedLanguage(context);
+        Log.d("change -- userLANG", userLanguage);
+        String nextLang;
+
+        if (userLanguage.equals("true")) {
+            nextLang = "en";
+            UserDataService.setSelectedLanguage(context, "false");
+        } else {
+            nextLang = "tr";
+            UserDataService.setSelectedLanguage(context, "true");
+        }
+
+        Log.d("Change -- Next LANGG", nextLang);
+
+        updateLocale(context, nextLang);
+    }
+
+    public static void updateLocale(Context context, String nextLang) {
+        Locale newLocale = new Locale(nextLang);
+        Locale.setDefault(newLocale);
+
+        Resources resources = context.getResources();
+        Configuration config = resources.getConfiguration();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            config.setLocale(newLocale);
+        } else {
+            config.locale = newLocale;
+        }
+
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     public static void redirectBasedRole(Activity activity, boolean splashStatus) {
         Intent intent = null;
 
         String userRole = UserDataService.getUserRole(activity.getApplicationContext());
-
-        Log.d("ROLL", userRole);
 
         switch (userRole) {
             case "NORMAL":

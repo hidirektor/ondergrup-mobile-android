@@ -45,7 +45,6 @@ import me.t3sl4.ondergrup.Screens.QR.QRScanner;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPMachineService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
-import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class Engineer extends AppCompatActivity {
@@ -177,7 +176,8 @@ public class Engineer extends AppCompatActivity {
         qrButton.setOnClickListener(v -> addMachine());
 
         subLanguage.setOnClickListener(v -> {
-            switchLanguage();
+            Util.changeSystemLanguage(this);
+            recreate();
         });
 
         settingsButton.setOnClickListener(v -> {
@@ -298,23 +298,5 @@ public class Engineer extends AppCompatActivity {
         qrDiyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
-    }
-
-    private void switchLanguage() {
-        String currentLanguage = UserDataService.getSelectedLanguage(this);
-        String nextLang = "";
-
-        if (currentLanguage.equals("true")) {
-            UserDataService.setSelectedLanguage(this, "false");
-            nextLang = "false";
-        } else {
-            UserDataService.setSelectedLanguage(this, "true");
-            nextLang = "true";
-        }
-
-        UserService.updatePreferences(this, UserDataService.getUserID(this), UserDataService.getSelectedLanguage(this), UserDataService.getSelectedNightMode(this));
-
-        Util.setLocale(Engineer.this, nextLang);
-        recreate();
     }
 }
