@@ -19,6 +19,7 @@ import me.t3sl4.ondergrup.Util.Util;
 
 public class ForgetPasswordNewPass extends AppCompatActivity {
     public String userName;
+    public String otpSentTime;
 
     private TextInputLayout editTextNewPass;
     private TextInputEditText editTextNewPassText;
@@ -40,6 +41,7 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             userName = intent.getStringExtra("userName");
+            otpSentTime = intent.getStringExtra("otpSentTime");
         }
 
         initializeComponents();
@@ -64,7 +66,7 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
             secondPass = editTextConfirmNewPassText.getText().toString();
 
             if(firstPass.equals(secondPass)) {
-                AuthService.resetPass(userName, firstPass.toString(), () -> {
+                AuthService.resetPass(userName, firstPass.toString(), otpSentTime, () -> {
                     Intent intent = new Intent(ForgetPasswordNewPass.this, ForgetPasswordSuccess.class);
                     startActivity(intent);
                     finish();

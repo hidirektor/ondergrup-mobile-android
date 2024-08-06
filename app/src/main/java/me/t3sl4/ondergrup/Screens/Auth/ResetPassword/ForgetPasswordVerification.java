@@ -52,6 +52,7 @@ public class ForgetPasswordVerification extends AppCompatActivity {
             OTPService.verifyOTP(userName, girilenKod, otpSentTime, () -> {
                 Intent intent = new Intent(ForgetPasswordVerification.this, ForgetPasswordNewPass.class);
                 intent.putExtra("userName", userName);
+                intent.putExtra("otpSentTime", otpSentTime);
                 startActivity(intent);
                 finish();
             });

@@ -167,11 +167,12 @@ public class AuthService {
         });
     }
 
-    public static void resetPass(String userName, String newPassword, Runnable onSuccess) {
+    public static void resetPass(String userName, String newPassword, String otpSentTime, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("userName", userName);
             jsonObject.put("newPassword", newPassword);
+            jsonObject.put("otpSentTime", otpSentTime);
         } catch (JSONException e) {
             e.printStackTrace();
             return;
