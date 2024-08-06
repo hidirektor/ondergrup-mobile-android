@@ -106,7 +106,7 @@ public class EditSubScreen extends AppCompatActivity {
 
         SubUserService.editSubUser(this, UserDataService.getUserID(this), receivedSubUser.getSubUserID(), kullaniciAdi.getText().toString(), "NORMAL", nameSurname.getText().toString(), eMail.getText().toString(), phone.getText().toString(), companyName.getText().toString(), password, () -> {
             updateUserObject(receivedUser);
-            Util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde güncellendi.");
+            Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.subuser_updated));
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 finish();
             }, 1000);

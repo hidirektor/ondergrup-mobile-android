@@ -1,6 +1,5 @@
 package me.t3sl4.ondergrup.Util.HTTP.Requests.Machine;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -17,7 +16,6 @@ import me.t3sl4.ondergrup.Model.MachineMaintenance.Maintenance;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.HttpHelper;
-import me.t3sl4.ondergrup.Util.Util;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,7 +70,7 @@ public class MachineService {
         });
     }
 
-    public static void addMachine(Context context, String machineID, String ownerID, Runnable onSuccess) {
+    public static void addMachine(Context context, String machineID, String ownerID, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("machineID", machineID);
@@ -99,8 +97,10 @@ public class MachineService {
                 } else {
                     try {
                         Log.e("AddMachine", "Failure: " + response.errorBody().string());
-                        // Burada hata mesajını kullanıcıya gösteriyoruz.
-                        Util.showErrorPopup(new Dialog(context), "Makine eklenirken bir hata oluştu. Lütfen tekrar deneyin.");
+
+                        if(onFailure != null) {
+                            onFailure.run();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -110,8 +110,7 @@ public class MachineService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("AddMachine", "Error: " + t.getMessage());
-                // Burada hata mesajını kullanıcıya gösteriyoruz.
-                Util.showErrorPopup(new Dialog(context), "Bir hata oluştu. Lütfen internet bağlantınızı kontrol edin.");
+                // Boş kısım revize edilecek.
             }
         });
     }

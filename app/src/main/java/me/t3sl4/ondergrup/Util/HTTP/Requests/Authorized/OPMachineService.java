@@ -118,9 +118,7 @@ public class OPMachineService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("GetAllMachines", "Error: " + t.getMessage());
-                if (onFailure != null) {
-                    onFailure.run();
-                }
+                //boş kısım revize edilecek
             }
         });
     }

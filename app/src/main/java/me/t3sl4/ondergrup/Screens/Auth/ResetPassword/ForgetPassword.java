@@ -51,10 +51,10 @@ public class ForgetPassword extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }, () -> {
-                    Util.showErrorPopup(uyariDiyalog, "Kullanıcı bulunamadı. İstersen tekrar deneyebilirsin.");
+                    Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.user_not_found));
                 });
             } else {
-                Util.showErrorPopup(uyariDiyalog, "E-Posta alanı boş olamaz.");
+                Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.empty_username));
             }
         });
     }

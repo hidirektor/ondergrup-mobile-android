@@ -20,6 +20,8 @@
     <string name="button_settings">Settings</string>
     <string name="button_feedback">Feedback</string>
     <string name="button_logout">Logout</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_no">No</string>
 
     <!-- General Headers -->
     <string name="warning">WARNING !</string>
@@ -319,6 +321,46 @@
     <!-- Failure Texts -->
     <string name="wifiFailure">Please check your WiFi connection!</string>
     <string name="cantbenull">The new machine owner cannot be null.</string>
+    <string name="unsupported_role">You have a personal role that is not supported. Please contact us.</string>
+    <string name="machine_add_error">An error occurred while adding the machine. Please try again.</string>
+    <string name="subuser_error">Only your administrator can view sub-users.</string>
+    <string name="user_not_found">User not found. You can try again if you want.</string>
+    <string name="empty_username">The Username field cannot be blank.</string>
+    <string name="repeated_pass_not_same">The entered passwords do not match. Please try again.</string>
+    <string name="empty_password">You must fill in both password fields.</string>
+    <string name="sms_not_active">Our SMS system is not yet active.</string>
+    <string name="empty_otp">You cannot continue the transaction without entering the OTP code.</string>
+    <string name="empty_fields">You must fill in all fields to register.</string>
+    <string name="self_delete_error">You cannot erase yourself.</string>
+    <string name="user_cant_deleted">The user could not be deleted.</string>
+    <string name="self_deactivate_error">You cannot deactivate yourself.</string>
+    <string name="deactivation_error">The user could not be deactivated.</string>
+    <string name="self_activate_error">You cannot activate yourself.</string>
+    <string name="activation_error">The user could not be activated.</string>
+    <string name="create_maintenance_error">Failed to create maintenance record. Please check the information and try again.</string>
+    <string name="machine_owner_update_error">An error occurred while processing update data.</string>
+    <string name="machine_owner_cant_updated">Failed to update the machine owner. Please check your information and try again.</string>
+    <string name="subuser_empty_fields">You must fill in all fields to add a sub-user.</string>
 
     <!-- Success Texts -->
+    <string name="machine_add_successful">The machine was added successfully.</string>
+    <string name="machine_created">The machine was created successfully.</string>
+    <string name="user_deleted">The user was deleted successfully.</string>
+    <string name="deactivation_successful">The user has been deactivated successfully.</string>
+    <string name="activation_successful">The user has been activated successfully.</string>
+    <string name="maintenance_created">A maintenance record has been created.</string>
+    <string name="machine_owner_updated">The machine owner was updated successfully.</string>
+    <string name="subuser_updated">Subuser updated successfully.</string>
+    <string name="subuser_added">Sub-User Added Successfully!</string>
+    <string name="subuser_deleted">Subuser deleted successfully!</string>
+    <string name="subuser_deactivated">Subuser successfully deactivated!</string>
+    <string name="subuser_activated">Subuser successfully activated!</string>
+
+    <!-- Deletion Popup Texts -->
+    <string name="confirm_delete_header">Confirm Delete User</string>
+    <string name="confirm_delete_desc">Are you sure you want to delete the user?</string>
+
+    <!-- SubUser Deletion Popup Texts -->
+    <string name="confirm_subuser_delete_header">Confirm Delete Sub User</string>
+    <string name="confirm_subuser_delete_desc">Are you sure you want to delete the subuser?</string>
 </resources>

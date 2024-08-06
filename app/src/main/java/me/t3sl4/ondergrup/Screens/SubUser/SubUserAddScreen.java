@@ -81,11 +81,11 @@ public class SubUserAddScreen extends AppCompatActivity {
         if(checkFields(userName, email, password, nameSurname, phone, companyName)) {
 
             SubUserService.createSubUser(this, UserDataService.getUserID(this), userName, "NORMAL", nameSurname, email, phone, companyName, password, () -> {
-                Util.showSuccessPopup(uyariDiyalog, "Alt Kullanıcı Başarıyla Eklendi !");
+                Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.subuser_added));
                 new Handler(Looper.getMainLooper()).postDelayed(() -> finish(), 1000);
             });
         } else {
-            Util.showErrorPopup(uyariDiyalog, "Alt kullanıcı eklemek için tüm alanları doldurmalısın.");
+            Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.subuser_empty_fields));
         }
     }
 

@@ -150,7 +150,7 @@ public class LoginScreen extends AppCompatActivity {
         if(checkFields(userName, email, password, nameSurname, phone, companyName)) {
             AuthService.register(this, userName, "NORMAL", nameSurname, email, phone, companyName, password, () -> swipeSections(1));
         } else {
-            Util.showErrorPopup(uyariDiyalog, "Kayıt olmak için tüm alanları doldurmalısın.");
+            Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.empty_fields));
         }
     }
 

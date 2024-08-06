@@ -57,7 +57,7 @@ public class ForgetPasswordVerification extends AppCompatActivity {
                 finish();
             });
         } else {
-            util.showErrorPopup(uyariDiyalog, "OTP kodunu girmeden işleme devam edemezsin.");
+            util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.empty_otp));
         }
     }
 

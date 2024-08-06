@@ -124,12 +124,12 @@ public class SubUserListScreen extends AppCompatActivity {
     private void deleteAndUpdateSubUser(SubUser selectedSubUser) {
         AtomicBoolean isConfirmed = new AtomicBoolean(false);
         new AlertDialog.Builder(this)
-                .setTitle("Silme Onayı")
-                .setMessage("Alt kullanıcıyı silmek istediğinize emin misiniz?")
-                .setPositiveButton("Evet", (dialog, which) -> {
+                .setTitle(this.getResources().getString(R.string.confirm_subuser_delete_header))
+                .setMessage(this.getResources().getString(R.string.confirm_subuser_delete_desc))
+                .setPositiveButton(this.getResources().getString(R.string.button_yes), (dialog, which) -> {
                     isConfirmed.set(true);
                 })
-                .setNegativeButton("Hayır", (dialog, which) -> {
+                .setNegativeButton(this.getResources().getString(R.string.button_no), (dialog, which) -> {
                     isConfirmed.set(false);
                 })
                 .setOnDismissListener(dialog -> {
@@ -138,7 +138,7 @@ public class SubUserListScreen extends AppCompatActivity {
                             SubUserService.deleteSubUser(this, selectedSubUser.getSubUserID(), () -> {
                                 getSubUserList();
 
-                                Util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde silindi!");
+                                Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.subuser_deleted));
                             });
                         }
                     }, 500);
@@ -149,14 +149,14 @@ public class SubUserListScreen extends AppCompatActivity {
     private void deActivateSubUser(SubUser selectedSubUser) {
         SubUserService.deActivateSubUser(this, selectedSubUser.getSubUserID(), () -> {
             getSubUserList();
-            Util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde deaktif edildi!");
+            Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.subuser_deactivated));
         });
     }
 
     private void activateSubUser(SubUser selectedSubUser) {
         SubUserService.activateSubUser(this, selectedSubUser.getSubUserID(), () -> {
             getSubUserList();
-            Util.showSuccessPopup(uyariDiyalog, "Alt kullanıcı başarılı bir şekilde aktif edildi!");
+            Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.subuser_activated));
         });
     }
 }

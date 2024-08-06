@@ -91,7 +91,7 @@ public class Engineer extends AppCompatActivity {
                         Util.showErrorPopup(uyariDiyalog, cameraPerm);
                     }
                 } else {
-                    Log.d("MainActivity", "Taramam tamamlandı");
+                    Log.d("MainActivity", "Tarama tamamlandı");
                     scannedQRCode = result.getContents();
                     scannedQRCodeEditText.setText(scannedQRCode);
                     Toast.makeText(Engineer.this, "ID: " + result.getContents(), Toast.LENGTH_LONG).show();
@@ -203,7 +203,7 @@ public class Engineer extends AppCompatActivity {
             //onSuccess operations
             qrDiyalog.dismiss();
             getMachineList();
-            Util.showSuccessPopup(uyariDiyalog, "Makine başarılı bir şekilde oluşturuldu.");
+            Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.machine_created));
         });
     }
 

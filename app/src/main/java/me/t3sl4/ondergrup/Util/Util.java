@@ -193,7 +193,7 @@ public class Util {
                     activity.startActivity(intent);
                     activity.finish();
                 } else {
-                    Util.showErrorPopup(new Dialog(activity.getApplicationContext()), "Desteklenmeyen bir kullanıcı rolüne sahipsin. Lütfen iletişime geç.");
+                    Util.showErrorPopup(new Dialog(activity.getApplicationContext()), activity.getResources().getString(R.string.unsupported_role));
                 }
                 break;
         }

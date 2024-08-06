@@ -72,10 +72,10 @@ public class ForgetPasswordNewPass extends AppCompatActivity {
                     finish();
                 });
             } else {
-                Util.showErrorPopup(uyariDiyalog, "Girilen şifreler birbirleriyle uyuşmuyor. Lütfen tekrar dene.");
+                Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.repeated_pass_not_same));
             }
         } else {
-            Util.showErrorPopup(uyariDiyalog, "İki şifre alanını da doldurman gerekiyor.");
+            Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.empty_password));
         }
     }
 

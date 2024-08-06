@@ -25,6 +25,8 @@
     <string name="button_settings">Ayarlar</string>
     <string name="button_feedback">Bize Bildirin !</string>
     <string name="button_logout">Çıkış Yap</string>
+    <string name="button_yes">Evet</string>
+    <string name="button_no">Hayır</string>
 
     <!-- General Headers -->
     <string name="warning">HATA !</string>
@@ -330,6 +332,46 @@
     <!-- Failure Texts -->
     <string name="wifiFailure">Lütfen internet bağlantınızı kontrol edin!</string>
     <string name="cantbenull">Yeni makine sahibi null olamaz.</string>
+    <string name="unsupported_role">Desteklenmeyen bir kullanıcı rolüne sahipsin. Lütfen iletişime geç.</string>
+    <string name="machine_add_error">Makine eklenirken bir hata oluştu. Lütfen tekrar deneyin.</string>
+    <string name="subuser_error">Alt kullanıcıları yalnızca yöneticiniz görüntüleyebilir.</string>
+    <string name="user_not_found">Kullanıcı bulunamadı. İstersen tekrar deneyebilirsin.</string>
+    <string name="empty_username">Kullanıcı Adı alanı boş olamaz.</string>
+    <string name="repeated_pass_not_same">Girilen şifreler birbirleriyle uyuşmuyor. Lütfen tekrar dene.</string>
+    <string name="empty_password">İki şifre alanını da doldurman gerekiyor.</string>
+    <string name="sms_not_active">SMS sistemimiz henüz aktif değil.</string>
+    <string name="empty_otp">OTP kodunu girmeden işleme devam edemezsin.</string>
+    <string name="empty_fields">Kayıt olmak için tüm alanları doldurmalısın.</string>
+    <string name="self_delete_error">Kendi kendinizi silemezsiniz.</string>
+    <string name="user_cant_deleted">Kullanıcı silinemedi.</string>
+    <string name="self_deactivate_error">Kendi kendinizi deaktif edemezsiniz.</string>
+    <string name="deactivation_error">Kullanıcı deaktif edilemedi.</string>
+    <string name="self_activate_error">Kendi kendinizi aktif edemezsiniz.</string>
+    <string name="activation_error">Kullanıcı aktif edilemedi.</string>
+    <string name="create_maintenance_error">Bakım kaydı oluşturulamadı. Lütfen bilgileri kontrol edip tekrar deneyin.</string>
+    <string name="machine_owner_update_error">Güncelleme verisi işlenirken bir hata oluştu.</string>
+    <string name="machine_owner_cant_updated">Makine sahibi güncellenemedi. Lütfen bilgilerinizi kontrol edip tekrar deneyin.</string>
+    <string name="subuser_empty_fields">Alt kullanıcı eklemek için tüm alanları doldurmalısın.</string>
 
     <!-- Success Texts -->
+    <string name="machine_add_successful">Makine başarılı bir şekilde eklendi.</string>
+    <string name="machine_created">Makine başarılı bir şekilde oluşturuldu.</string>
+    <string name="user_deleted">Kullanıcı başarılı bir şekilde silindi.</string>
+    <string name="deactivation_successful">Kullanıcı başarılı bir şekilde deaktif edildi.</string>
+    <string name="activation_successful">Kullanıcı başarılı bir şekilde aktif edildi.</string>
+    <string name="maintenance_created">Bakım kaydı oluşturuldu.</string>
+    <string name="machine_owner_updated">Makine sahibi başarılı bir şekilde güncellendi.</string>
+    <string name="subuser_updated">Alt kullanıcı başarılı bir şekilde güncellendi.</string>
+    <string name="subuser_added">Alt Kullanıcı Başarıyla Eklendi !</string>
+    <string name="subuser_deleted">Alt kullanıcı başarılı bir şekilde silindi!</string>
+    <string name="subuser_deactivated">Alt kullanıcı başarılı bir şekilde deaktif edildi!</string>
+    <string name="subuser_activated">Alt kullanıcı başarılı bir şekilde aktif edildi!</string>
+
+    <!-- User Deletion Popup Texts -->
+    <string name="confirm_delete_header">Silme Onayı</string>
+    <string name="confirm_delete_desc">Kullanıcıyı silmek istediğinize emin misiniz?</string>
+
+    <!-- SubUser Deletion Popup Texts -->
+    <string name="confirm_subuser_delete_header">Silme Onayı</string>
+    <string name="confirm_subuser_delete_desc">Alt kullanıcıyı silmek istediğinize emin misiniz?</string>
 </resources>

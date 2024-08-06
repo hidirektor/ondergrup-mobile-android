@@ -142,7 +142,7 @@ public class CreateMaintenance extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
             } else {
-                Util.showErrorPopup(uyariDiyalog, "Bakım kaydı oluşturulamadı. \nLütfen bilgileri kontrol edip tekrar deneyin.");
+                Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.create_maintenance_error));
             }
         });
     }
@@ -571,7 +571,7 @@ public class CreateMaintenance extends AppCompatActivity {
 
     private void createMaintenanceRequest() throws JSONException {
         OPMaintenanceService.createMaintenance(this, getMaintenanceData(), () -> {
-            Util.showSuccessPopup(uyariDiyalog, "Bakım kaydı oluşturuldu.");
+            Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.maintenance_created));
             new Handler(Looper.getMainLooper()).postDelayed(() -> finish(), 1000);
         });
     }

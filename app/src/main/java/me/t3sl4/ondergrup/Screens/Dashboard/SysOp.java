@@ -207,25 +207,25 @@ public class SysOp extends AppCompatActivity {
     private void deleteUser(String userName) {
         AtomicBoolean isConfirmed = new AtomicBoolean(false);
         if(userName.equals(UserDataService.getUserName(this))) {
-            Util.showErrorPopup(uyariDiyalog, "Kendi kendinizi silemezsiniz.");
+            Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.self_delete_error));
         } else {
             new AlertDialog.Builder(this)
-                    .setTitle("Silme Onayı")
-                    .setMessage("Kullanıcıyı silmek istediğinize emin misiniz?")
-                    .setPositiveButton("Evet", (dialog, which) -> {
+                    .setTitle(this.getResources().getString(R.string.confirm_delete_header))
+                    .setMessage(this.getResources().getString(R.string.confirm_delete_desc))
+                    .setPositiveButton(this.getResources().getString(R.string.button_yes), (dialog, which) -> {
                         isConfirmed.set(true);
                     })
-                    .setNegativeButton("Hayır", (dialog, which) -> {
+                    .setNegativeButton(this.getResources().getString(R.string.button_no), (dialog, which) -> {
                         isConfirmed.set(false);
                     })
                     .setOnDismissListener(dialog -> {
                         new Handler(Looper.getMainLooper()).postDelayed(() -> {
                             if (isConfirmed.get()) {
                                 OPUserService.deleteUser(this, userName, () -> {
-                                    Util.showSuccessPopup(uyariDiyalog, "Kullanıcı başarılı bir şekilde silindi.");
+                                    Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.user_deleted));
                                     getUserList();
                                 }, () -> {
-                                    Util.showErrorPopup(uyariDiyalog, "Kullanıcı silinemedi.");
+                                    Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.user_cant_deleted));
                                 });
                             }
                         }, 500);
@@ -236,26 +236,26 @@ public class SysOp extends AppCompatActivity {
 
     private void deActivateUser(String userName) {
         if(userName.equals(UserDataService.getUserName(this))) {
-            Util.showErrorPopup(uyariDiyalog, "Kendi kendinizi deaktif edemezsiniz.");
+            Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.self_deactivate_error));
         } else {
             OPUserService.deActivateUser(this, userName, () -> {
                 getUserList();
-                Util.showSuccessPopup(uyariDiyalog, "Kullanıcı başarılı bir şekilde deaktif edildi.");
+                Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.deactivation_successful));
             }, () -> {
-                Util.showErrorPopup(uyariDiyalog, "Kullanıcı deaktif edilemedi.");
+                Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.deactivation_error));
             });
         }
     }
 
     private void activateUser(String userName) {
         if(userName.equals(UserDataService.getUserName(this))) {
-            Util.showErrorPopup(uyariDiyalog, "Kendi kendinizi aktif edemezsiniz.");
+            Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.self_activate_error));
         } else {
             OPUserService.activateUser(this, userName, () -> {
                 getUserList();
-                Util.showSuccessPopup(uyariDiyalog, "Kullanıcı başarılı bir şekilde aktif edildi.");
+                Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.activation_successful));
             }, () -> {
-                Util.showErrorPopup(uyariDiyalog, "Kullanıcı aktif edilemedi.");
+                Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.activation_error));
             });
         }
     }

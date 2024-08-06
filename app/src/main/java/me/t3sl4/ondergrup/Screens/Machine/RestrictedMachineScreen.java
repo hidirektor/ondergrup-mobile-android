@@ -297,15 +297,15 @@ public class RestrictedMachineScreen extends AppCompatActivity {
                     this,
                     machineID,
                     userName,
-                    () -> Util.showSuccessPopup(uyariDiyalog, "Makine sahibi başarılı bir şekilde güncellendi."),
+                    () -> Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.machine_owner_updated)),
                     () -> {
                         Log.d("updateOwner", "Auth Token: " + UserDataService.getAccessToken(this) + " MachineID: " + machineID + " UserName: " + userName);
-                        Util.showErrorPopup(uyariDiyalog, "Makine sahibi güncellenemedi. \nLütfen bilgilerinizi kontrol edip tekrar deneyin.");
+                        Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.machine_owner_cant_updated));
                     }
             );
         } catch (JSONException e) {
             e.printStackTrace();
-            Util.showErrorPopup(uyariDiyalog, "Güncelleme verisi işlenirken bir hata oluştu.");
+            Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.machine_owner_update_error));
         }
     }
 }

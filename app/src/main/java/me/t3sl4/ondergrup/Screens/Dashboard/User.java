@@ -117,7 +117,7 @@ public class User extends AppCompatActivity {
                         Util.showErrorPopup(uyariDiyalog, cameraPerm);
                     }
                 } else {
-                    Log.d("MainActivity", "Taramam tamamlandı");
+                    Log.d("MainActivity", "Tarama tamamlandı");
                     scannedQRCode = result.getContents();
                     scannedQRCodeEditText.setText(scannedQRCode);
                     Toast.makeText(User.this, "ID: " + result.getContents(), Toast.LENGTH_LONG).show();
@@ -259,7 +259,7 @@ public class User extends AppCompatActivity {
 
         subUserButton.setOnClickListener(v -> {
             if(receivedUser.getOwnerName() != null) {
-                Util.showErrorPopup(uyariDiyalog, "Alt kullanıcıları yalnızca yöneticiniz görüntüleyebilir.");
+                Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.subuser_error));
             } else {
                 Intent settingsIntent = new Intent(User.this, SubUserScreen.class);
                 settingsIntent.putExtra("user", receivedUser);
@@ -303,9 +303,11 @@ public class User extends AppCompatActivity {
         String ownerID = UserDataService.getUserID(this);
 
         MachineService.addMachine(this, machineID, ownerID, () -> {
-            Util.showSuccessPopup(uyariDiyalog, "Makine başarılı bir şekilde eklendi.");
+            Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.machine_add_successful));
             getMachineList();
             qrDiyalog.dismiss();
+        }, () -> {
+            Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.machine_add_error));
         });
     }
 

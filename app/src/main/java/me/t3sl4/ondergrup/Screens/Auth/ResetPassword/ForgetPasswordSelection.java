@@ -30,7 +30,7 @@ public class ForgetPasswordSelection extends AppCompatActivity {
     }
 
     public void sendOTPWithSMS(View view) {
-        Util.showErrorPopup(uyariDiyalog, "SMS sistemimiz henüz aktif değil.");
+        Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.sms_not_active));
     }
 
     public void sendOTPWithEmail(View view) {
