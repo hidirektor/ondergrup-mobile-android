@@ -53,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void refreshTokenAndRetry() {
-        TokenService.refreshToken(this, UserDataService.getRefreshToken(this), () -> UserService.getProfile(SplashActivity.this, UserDataService.getUserID(SplashActivity.this), () -> Util.redirectBasedRole(SplashActivity.this, true), () -> {
+        TokenService.refreshToken(this, () -> UserService.getProfile(SplashActivity.this, UserDataService.getUserID(SplashActivity.this), () -> Util.redirectBasedRole(SplashActivity.this, true), () -> {
             redirectToLogin();
         }), () -> {
             redirectToLogin();

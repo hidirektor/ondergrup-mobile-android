@@ -19,10 +19,12 @@ public class TokenService {
 
     private static final String REFRESH_TOKEN_URL = "/api/v2/token/refreshToken";
 
-    public static void refreshToken(Context context, String refreshToken, Runnable onSuccess, Runnable onFailure) {
+    public static void refreshToken(Context context, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("refreshToken", refreshToken);
+            jsonObject.put("userID", UserDataService.getUserID(context));
+            jsonObject.put("accessToken", UserDataService.getAccessToken(context));
+            jsonObject.put("refreshToken", UserDataService.getRefreshToken(context));
         } catch (JSONException e) {
             e.printStackTrace();
             return;
