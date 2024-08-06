@@ -15,10 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.ResetPassword.ForgetPassword;
+import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Auth.AuthService;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class LoginScreen extends AppCompatActivity {
@@ -136,7 +138,13 @@ public class LoginScreen extends AppCompatActivity {
         String username = userNameField_login.getText().toString();
         String password = passwordField_login.getText().toString();
 
-        AuthService.login(this, username, password, () -> Util.redirectBasedRole(LoginScreen.this, false));
+        AuthService.login(this, username, password, () -> {
+            UserService.getProfile(this, UserDataService.getUserID(this), () -> {
+                Util.redirectBasedRole(LoginScreen.this, false);
+            }, null);
+        }, () -> {
+            Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.login_error));
+        });
     }
 
     private void sendRegisterRequest() {

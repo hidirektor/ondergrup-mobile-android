@@ -34,7 +34,6 @@ import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
 import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
 import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Service.UserDataService;
-import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 
 public class Util {
     public Context context;
@@ -157,7 +156,19 @@ public class Util {
     }
 
     public static void loadNewTranslations(Context context) {
-        String currentLanguage = SharedPreferencesManager.getSharedPref("language", context, "en");
+        String currentLanguage;
+
+        if(UserDataService.getSelectedLanguage(context) != null) {
+            boolean selectedLang = Boolean.parseBoolean(UserDataService.getSelectedLanguage(context));
+
+            if(selectedLang) {
+                currentLanguage = "tr";
+            } else {
+                currentLanguage = "en";
+            }
+        } else {
+            currentLanguage = "tr";
+        }
 
         Util.setLocale(context, currentLanguage);
     }

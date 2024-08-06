@@ -22,6 +22,8 @@ public class UserDataService {
     private static final String KEY_USER_COMPANY = "userCompany";
     private static final String KEY_USER_CREATED_AT = "userCreatedAt";
     private static final String KEY_USER_IS_ACTIVE = "isActive";
+    private static final String KEY_USER_PREFERENCES_LANGUAGE = "selectedLanguage";
+    private static final String KEY_USER_PREFERENCES_NIGHT_MODE = "selectedNightMode";
 
     private static SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
@@ -104,6 +106,20 @@ public class UserDataService {
         editor.apply();
     }
 
+    public static void setSelectedLanguage(Context context, String selectedLanguage) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_USER_PREFERENCES_LANGUAGE, selectedLanguage);
+        editor.apply();
+    }
+
+    public static void setSelectedNightMode(Context context, String selectedNightMode) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_USER_PREFERENCES_NIGHT_MODE, selectedNightMode);
+        editor.apply();
+    }
+
     // Get individual user properties from SharedPreferences
     public static String getUserID(Context context) {
         SharedPreferences prefs = getPreferences(context);
@@ -160,6 +176,16 @@ public class UserDataService {
         return prefs.getString(KEY_USER_IS_ACTIVE, "");
     }
 
+    public static String getSelectedLanguage(Context context) {
+        SharedPreferences prefs = getPreferences(context);
+        return prefs.getString(KEY_USER_PREFERENCES_LANGUAGE, "");
+    }
+
+    public static String getSelectedNightMode(Context context) {
+        SharedPreferences prefs = getPreferences(context);
+        return prefs.getString(KEY_USER_PREFERENCES_NIGHT_MODE, "");
+    }
+
     // Clear user data from SharedPreferences
     public static void clearUser(Context context) {
         SharedPreferences prefs = getPreferences(context);
@@ -175,6 +201,9 @@ public class UserDataService {
         editor.remove(KEY_USER_PHONE);
         editor.remove(KEY_USER_COMPANY);
         editor.remove(KEY_USER_CREATED_AT);
+        editor.remove(KEY_USER_IS_ACTIVE);
+        editor.remove(KEY_USER_PREFERENCES_LANGUAGE);
+        editor.remove(KEY_USER_PREFERENCES_NIGHT_MODE);
 
         editor.apply();
     }
@@ -191,8 +220,10 @@ public class UserDataService {
         String companyName = getCompanyName(context);
         String createdAt = getCreatedAt(context);
         String isActive = getIsActive(context);
+        String selectedLanguage = getSelectedLanguage(context);
+        String selectedNightMode = getSelectedNightMode(context);
 
-        User sharedUser = new User(role, userName, eMail, nameSurname, phoneNumber, companyName, createdAt, isActive);
+        User sharedUser = new User(role, userName, eMail, nameSurname, phoneNumber, companyName, createdAt, isActive, selectedLanguage, selectedNightMode);
         sharedUser.setUserID(userID);
         sharedUser.setAccessToken(accessToken);
         sharedUser.setRefreshToken(refreshToken);

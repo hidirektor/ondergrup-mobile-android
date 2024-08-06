@@ -352,6 +352,7 @@
     <string name="machine_owner_update_error">Güncelleme verisi işlenirken bir hata oluştu.</string>
     <string name="machine_owner_cant_updated">Makine sahibi güncellenemedi. Lütfen bilgilerinizi kontrol edip tekrar deneyin.</string>
     <string name="subuser_empty_fields">Alt kullanıcı eklemek için tüm alanları doldurmalısın.</string>
+    <string name="login_error">Kullanıcı adı veya şifre hatalı. Lütfen tekrar deneyin.</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">Makine başarılı bir şekilde eklendi.</string>

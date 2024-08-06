@@ -55,7 +55,11 @@ public class OPUserService {
                             String createdAt = userObject.getString("createdAt");
                             String isActive = userObject.getString("isActive");
 
-                            User user = new User(userRole, userName, eMail, userNameSurname, userPhoneNumber, companyName, createdAt, isActive);
+                            JSONObject userPreferencesObject = userObject.getJSONObject("preferences");
+                            String selectedLanguage = userPreferencesObject.getString("language");
+                            String selectedNightMode = userPreferencesObject.getString("nightMode");
+
+                            User user = new User(userRole, userName, eMail, userNameSurname, userPhoneNumber, companyName, createdAt, isActive, selectedLanguage, selectedNightMode);
                             users.add(user);
                         }
 

@@ -19,7 +19,10 @@ public class User implements Parcelable {
     private String createdAt;
     private String isActive;
 
-    public User(String role, String userName, String eMail, String nameSurname, String phoneNumber, String companyName, String createdAt, String isActive) {
+    private String selectedLanguage;
+    private String selectedNightMode;
+
+    public User(String role, String userName, String eMail, String nameSurname, String phoneNumber, String companyName, String createdAt, String isActive, String selectedLanguage, String selectedNightMode) {
         this.role = role;
         this.userName = userName;
         this.eMail = eMail;
@@ -28,6 +31,8 @@ public class User implements Parcelable {
         this.companyName = companyName;
         this.createdAt = createdAt;
         this.isActive = isActive;
+        this.selectedLanguage = selectedLanguage;
+        this.selectedNightMode = selectedNightMode;
     }
 
     public String getRole() {
@@ -126,6 +131,22 @@ public class User implements Parcelable {
         this.isActive = isActive;
     }
 
+    public String getSelectedLanguage() {
+        return selectedLanguage;
+    }
+
+    public void setSelectedLanguage(String selectedLanguage) {
+        this.selectedLanguage = selectedLanguage;
+    }
+
+    public String getSelectedNightMode() {
+        return selectedNightMode;
+    }
+
+    public void setSelectedNightMode(String selectedNightMode) {
+        this.selectedNightMode = selectedNightMode;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -141,6 +162,8 @@ public class User implements Parcelable {
         dest.writeString(companyName);
         dest.writeString(createdAt);
         dest.writeString(isActive);
+        dest.writeString(selectedLanguage);
+        dest.writeString(selectedNightMode);
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -164,5 +187,7 @@ public class User implements Parcelable {
         companyName = in.readString();
         createdAt = in.readString();
         isActive = in.readString();
+        selectedLanguage = in.readString();
+        selectedNightMode = in.readString();
     }
 }

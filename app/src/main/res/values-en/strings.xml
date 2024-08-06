@@ -341,6 +341,7 @@
     <string name="machine_owner_update_error">An error occurred while processing update data.</string>
     <string name="machine_owner_cant_updated">Failed to update the machine owner. Please check your information and try again.</string>
     <string name="subuser_empty_fields">You must fill in all fields to add a sub-user.</string>
+    <string name="login_error">User name or password is incorrect, please try again.</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">The machine was added successfully.</string>

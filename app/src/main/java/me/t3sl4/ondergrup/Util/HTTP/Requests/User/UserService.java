@@ -52,6 +52,7 @@ public class UserService {
                         JSONObject responseJson = new JSONObject(responseBody);
                         JSONObject payload = responseJson.getJSONObject("payload");
                         JSONObject user = payload.getJSONObject("user");
+                        JSONObject userPreferences = payload.getJSONObject("userPreferences");
 
 
                         UserDataService.setUserRole(context, user.getString("userType"));
@@ -61,6 +62,8 @@ public class UserService {
                         UserDataService.setPhoneNumber(context, user.getString("phoneNumber"));
                         UserDataService.setCompanyName(context, user.getString("companyName"));
                         UserDataService.setCreatedAt(context, Util.convertUnixTimestampToDateString(Long.parseLong(String.valueOf(user.getInt("createdAt")))));
+                        UserDataService.setSelectedLanguage(context, userPreferences.getString("language"));
+                        UserDataService.setSelectedNightMode(context, userPreferences.getString("nightMode"));
 
                         if (onSuccess != null) {
                             onSuccess.run();

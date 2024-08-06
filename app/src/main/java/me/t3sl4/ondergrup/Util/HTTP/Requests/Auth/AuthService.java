@@ -10,7 +10,6 @@ import java.io.IOException;
 
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.HttpHelper;
-import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,7 +66,7 @@ public class AuthService {
         });
     }
 
-    public static void login(Context context, String userName, String password, Runnable onSuccess) {
+    public static void login(Context context, String userName, String password, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("userName", userName);
@@ -99,8 +98,6 @@ public class AuthService {
                         UserDataService.setAccessToken(context, accessToken);
                         UserDataService.setRefreshToken(context, refreshToken);
 
-                        UserService.getProfile(context, userID, null, null);
-
                         // Check if onSuccess callback is not null and run it
                         if (onSuccess != null) {
                             onSuccess.run();
@@ -111,6 +108,10 @@ public class AuthService {
                 } else {
                     try {
                         Log.e("Login", "Failure: " + response.errorBody().string());
+
+                        if(onFailure != null) {
+                            onFailure.run();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
