@@ -134,7 +134,7 @@ public class UserService {
         });
     }
 
-    public static void updatePreferences(Context context, String userID, boolean language, boolean nightMode) {
+    public static void updatePreferences(Context context, String userID, String language, String nightMode) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("userID", userID);

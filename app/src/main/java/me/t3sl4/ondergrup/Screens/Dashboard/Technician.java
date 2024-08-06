@@ -24,8 +24,8 @@ import me.t3sl4.ondergrup.Screens.Machine.RestrictedMachineScreen;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Service.UserDataService;
-import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPMachineService;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class Technician extends AppCompatActivity {
@@ -166,16 +166,18 @@ public class Technician extends AppCompatActivity {
     }
 
     private void switchLanguage() {
-        String currentLanguage = SharedPreferencesManager.getSharedPref("language", Technician.this, "en");
+        String currentLanguage = UserDataService.getSelectedLanguage(this);
         String nextLang = "";
 
-        if (currentLanguage.equals("tr")) {
-            SharedPreferencesManager.writeSharedPref("language", "en", Technician.this);
-            nextLang = "en";
+        if (currentLanguage.equals("true")) {
+            UserDataService.setSelectedLanguage(this, "false");
+            nextLang = "false";
         } else {
-            SharedPreferencesManager.writeSharedPref("language", "tr", Technician.this);
-            nextLang = "tr";
+            UserDataService.setSelectedLanguage(this, "true");
+            nextLang = "true";
         }
+
+        UserService.updatePreferences(this, UserDataService.getUserID(this), UserDataService.getSelectedLanguage(this), UserDataService.getSelectedNightMode(this));
 
         Util.setLocale(Technician.this, nextLang);
         recreate();

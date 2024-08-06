@@ -54,6 +54,7 @@ import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.Navigation.NavigationManager;
 import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class User extends AppCompatActivity {
@@ -485,18 +486,20 @@ public class User extends AppCompatActivity {
     }
 
     private void switchLanguage() {
-        String currentLanguage = SharedPreferencesManager.getSharedPref("language", User.this, "en");
+        String currentLanguage = UserDataService.getSelectedLanguage(this);
         String nextLang = "";
 
-        if (currentLanguage.equals("tr")) {
-            SharedPreferencesManager.writeSharedPref("language", "en", User.this);
-            nextLang = "en";
+        if (currentLanguage.equals("true")) {
+            UserDataService.setSelectedLanguage(this, "false");
+            nextLang = "false";
         } else {
-            SharedPreferencesManager.writeSharedPref("language", "tr", User.this);
+            UserDataService.setSelectedLanguage(this, "true");
             String trText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_turkish);
             navCurrentLang.setText(trText);
-            nextLang = "tr";
+            nextLang = "true";
         }
+
+        UserService.updatePreferences(this, UserDataService.getUserID(this), UserDataService.getSelectedLanguage(this), UserDataService.getSelectedNightMode(this));
 
         Util.setLocale(User.this, nextLang);
         recreate();

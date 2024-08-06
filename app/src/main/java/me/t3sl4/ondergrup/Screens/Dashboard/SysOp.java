@@ -31,9 +31,9 @@ import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
-import me.t3sl4.ondergrup.Util.Component.SharedPreferencesManager;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPMachineService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPUserService;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class SysOp extends AppCompatActivity {
@@ -349,16 +349,18 @@ public class SysOp extends AppCompatActivity {
     }
 
     private void switchLanguage() {
-        String currentLanguage = SharedPreferencesManager.getSharedPref("language", SysOp.this, "en");
+        String currentLanguage = UserDataService.getSelectedLanguage(this);
         String nextLang = "";
 
-        if (currentLanguage.equals("tr")) {
-            SharedPreferencesManager.writeSharedPref("language", "en", SysOp.this);
-            nextLang = "en";
+        if (currentLanguage.equals("true")) {
+            UserDataService.setSelectedLanguage(this, "false");
+            nextLang = "false";
         } else {
-            SharedPreferencesManager.writeSharedPref("language", "tr", SysOp.this);
-            nextLang = "tr";
+            UserDataService.setSelectedLanguage(this, "true");
+            nextLang = "true";
         }
+
+        UserService.updatePreferences(this, UserDataService.getUserID(this), UserDataService.getSelectedLanguage(this), UserDataService.getSelectedNightMode(this));
 
         Util.setLocale(SysOp.this, nextLang);
         recreate();
