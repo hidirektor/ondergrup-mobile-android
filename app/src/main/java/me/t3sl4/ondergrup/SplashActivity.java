@@ -25,6 +25,8 @@ public class SplashActivity extends AppCompatActivity {
 
         boolean isFirstTime = SharedPreferencesManager.getSharedPref("isFirstTime", this, false);
 
+        Util.setSystemLanguage(this);
+
         if (isFirstTime) {
             setupOnboarding();
         } else {

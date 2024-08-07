@@ -32,6 +32,7 @@ import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
 import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
 import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Service.UserDataService;
+import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 
 public class Util {
     public Context context;
@@ -139,6 +140,19 @@ public class Util {
         return sdf.format(date);
     }
 
+    public static void setSystemLanguage(Context context) {
+        String userLanguage = UserDataService.getSelectedLanguage(context);
+        String nextLang;
+
+        if (userLanguage.equals("true")) {
+            nextLang = "tr";
+        } else {
+            nextLang = "en";
+        }
+
+        updateLocale(context, nextLang);
+    }
+
     public static void changeSystemLanguage(Context context) {
         String userLanguage = UserDataService.getSelectedLanguage(context);
         String nextLang;
@@ -150,6 +164,8 @@ public class Util {
             nextLang = "tr";
             UserDataService.setSelectedLanguage(context, "true");
         }
+
+        UserService.updatePreferences(context, UserDataService.getUserID(context), UserDataService.getSelectedLanguage(context), UserDataService.getSelectedNightMode(context));
 
         updateLocale(context, nextLang);
     }
