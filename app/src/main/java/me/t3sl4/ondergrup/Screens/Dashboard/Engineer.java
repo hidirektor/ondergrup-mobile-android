@@ -62,6 +62,7 @@ public class Engineer extends AppCompatActivity {
     private ImageView logoutButton;
     private ConstraintLayout allMaintenancesButton;
     private ConstraintLayout allErrorsButton;
+    private ConstraintLayout versionHistoryButton;
 
 
     //Machine List View Section:
@@ -129,6 +130,7 @@ public class Engineer extends AppCompatActivity {
         logoutButton = findViewById(R.id.logoutButton);
         allErrorsButton = findViewById(R.id.allErrorsConstraint);
         allMaintenancesButton = findViewById(R.id.allMaintenancesConstraint);
+        versionHistoryButton = findViewById(R.id.versionHistoryConstraint);
 
         //ListView Definitians:
         machineListView = findViewById(R.id.machineListView);

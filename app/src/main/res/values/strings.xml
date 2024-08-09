@@ -27,6 +27,7 @@
     <string name="button_logout">Çıkış Yap</string>
     <string name="button_yes">Evet</string>
     <string name="button_no">Hayır</string>
+    <string name="version_history">Versiyon Geçmişi</string>
 
     <!-- General Headers -->
     <string name="warning">HATA !</string>
