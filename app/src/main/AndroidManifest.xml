@@ -122,6 +122,9 @@
         <activity
             android:name=".Screens.Dashboard.Engineer"
             android:windowSoftInputMode="adjustResize"/>
+
+        <activity
+            android:name=".Screens.VersionHistory.VersionHistory" />
     </application>
 
 </manifest>

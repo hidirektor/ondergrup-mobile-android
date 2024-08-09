@@ -42,6 +42,7 @@ import me.t3sl4.ondergrup.Screens.Machine.RestrictedMachineScreen;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
 import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.QR.QRScanner;
+import me.t3sl4.ondergrup.Screens.VersionHistory.VersionHistory;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized.OPMachineService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
@@ -160,6 +161,12 @@ public class Engineer extends AppCompatActivity {
             Intent profileIntent = new Intent(Engineer.this, ErrorLogAll.class);
             profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
+        });
+
+        versionHistoryButton.setOnClickListener(v -> {
+            Intent versionIntent = new Intent(Engineer.this, VersionHistory.class);
+            versionIntent.putExtra("user", receivedUser);
+            startActivity(versionIntent);
         });
 
         //Bottom buttons:

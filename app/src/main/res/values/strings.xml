@@ -354,6 +354,7 @@
     <string name="machine_owner_cant_updated">Makine sahibi güncellenemedi. Lütfen bilgilerinizi kontrol edip tekrar deneyin.</string>
     <string name="subuser_empty_fields">Alt kullanıcı eklemek için tüm alanları doldurmalısın.</string>
     <string name="login_error">Kullanıcı adı veya şifre hatalı. Lütfen tekrar deneyin.</string>
+    <string name="version_not_found">Şuana kadar herhangi bir makine yazılımı sisteme eklenmemiş.</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">Makine başarılı bir şekilde eklendi.</string>
@@ -376,4 +377,11 @@
     <!-- SubUser Deletion Popup Texts -->
     <string name="confirm_subuser_delete_header">Silme Onayı</string>
     <string name="confirm_subuser_delete_desc">Alt kullanıcıyı silmek istediğinize emin misiniz?</string>
+
+    <!-- Version History Item Texts -->
+    <string name="version_title_prefix">Başlık:</string>
+    <string name="version_description_prefix">Açıklama:</string>
+    <string name="version_code_prefix">Versiyon Numarası:</string>
+    <string name="version_release_prefix">Yayınlanma Tarihi:</string>
+    <string name="version_id_prefix">MinIO ID:</string>
 </resources>

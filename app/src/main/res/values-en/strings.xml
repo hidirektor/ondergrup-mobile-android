@@ -343,6 +343,7 @@
     <string name="machine_owner_cant_updated">Failed to update the machine owner. Please check your information and try again.</string>
     <string name="subuser_empty_fields">You must fill in all fields to add a sub-user.</string>
     <string name="login_error">User name or password is incorrect, please try again.</string>
+    <string name="version_not_found">So far, no machine software has been added to the system.</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">The machine was added successfully.</string>
@@ -365,4 +366,11 @@
     <!-- SubUser Deletion Popup Texts -->
     <string name="confirm_subuser_delete_header">Confirm Delete Sub User</string>
     <string name="confirm_subuser_delete_desc">Are you sure you want to delete the subuser?</string>
+
+    <!-- Version History Item Texts -->
+    <string name="version_title_prefix">Title:</string>
+    <string name="version_description_prefix">Description:</string>
+    <string name="version_code_prefix">Version Number:</string>
+    <string name="version_release_prefix">Release Date:</string>
+    <string name="version_id_prefix">MinIO ID:</string>
 </resources>
