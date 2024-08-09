@@ -123,9 +123,10 @@ public class OPMachineService {
         });
     }
 
-    public static void updateOwner(Context context, String machineID, String userName, Runnable onSuccess, Runnable onFailure) {
+    public static void updateOwner(Context context, String userID, String machineID, String userName, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("userID", userID);
             jsonObject.put("machineID", machineID);
             jsonObject.put("userName", userName);
         } catch (JSONException e) {

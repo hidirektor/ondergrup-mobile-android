@@ -135,7 +135,7 @@ public class SubUserListScreen extends AppCompatActivity {
                 .setOnDismissListener(dialog -> {
                     new Handler(Looper.getMainLooper()).postDelayed(() -> {
                         if (isConfirmed.get()) {
-                            SubUserService.deleteSubUser(this, selectedSubUser.getSubUserID(), () -> {
+                            SubUserService.deleteSubUser(this, UserDataService.getUserID(this), selectedSubUser.getSubUserID(), () -> {
                                 getSubUserList();
 
                                 Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.subuser_deleted));
@@ -147,14 +147,14 @@ public class SubUserListScreen extends AppCompatActivity {
     }
 
     private void deActivateSubUser(SubUser selectedSubUser) {
-        SubUserService.deActivateSubUser(this, selectedSubUser.getSubUserID(), () -> {
+        SubUserService.deActivateSubUser(this, UserDataService.getUserID(this), selectedSubUser.getSubUserID(), () -> {
             getSubUserList();
             Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.subuser_deactivated));
         });
     }
 
     private void activateSubUser(SubUser selectedSubUser) {
-        SubUserService.activateSubUser(this, selectedSubUser.getSubUserID(), () -> {
+        SubUserService.activateSubUser(this, UserDataService.getUserID(this), selectedSubUser.getSubUserID(), () -> {
             getSubUserList();
             Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.subuser_activated));
         });

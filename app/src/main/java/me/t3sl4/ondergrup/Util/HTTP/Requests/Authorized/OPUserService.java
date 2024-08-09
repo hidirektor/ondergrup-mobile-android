@@ -100,11 +100,12 @@ public class OPUserService {
     }
 
     // updateRole method
-    public static void updateRole(Context context, String userName, String newRole, Runnable onSuccess, Runnable onFailure) {
+    public static void updateRole(Context context, String userID, String userName, String newRole, Runnable onSuccess, Runnable onFailure) {
         String authToken = UserDataService.getAccessToken(context); // Auth token'ı al
 
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("userID", userID);
             jsonObject.put("userName", userName);
             jsonObject.put("newRole", newRole);
         } catch (JSONException e) {
@@ -156,11 +157,12 @@ public class OPUserService {
         });
     }
 
-    public static void deActivateUser(Context context, String userName, Runnable onSuccess, Runnable onFailure) {
+    public static void deActivateUser(Context context, String userID, String userName, Runnable onSuccess, Runnable onFailure) {
         String authToken = UserDataService.getAccessToken(context); // Auth token'ı al
 
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("userID", userID);
             jsonObject.put("userName", userName);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -211,11 +213,12 @@ public class OPUserService {
         });
     }
 
-    public static void activateUser(Context context, String userName, Runnable onSuccess, Runnable onFailure) {
+    public static void activateUser(Context context, String userID, String userName, Runnable onSuccess, Runnable onFailure) {
         String authToken = UserDataService.getAccessToken(context); // Auth token'ı al
 
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("userID", userID);
             jsonObject.put("userName", userName);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -266,11 +269,12 @@ public class OPUserService {
         });
     }
 
-    public static void deleteUser(Context context, String userName, Runnable onSuccess, Runnable onFailure) {
+    public static void deleteUser(Context context, String userID, String userName, Runnable onSuccess, Runnable onFailure) {
         String authToken = UserDataService.getAccessToken(context); // Auth token'ı al
 
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("userID", userID);
             jsonObject.put("userName", userName);
         } catch (JSONException e) {
             e.printStackTrace();

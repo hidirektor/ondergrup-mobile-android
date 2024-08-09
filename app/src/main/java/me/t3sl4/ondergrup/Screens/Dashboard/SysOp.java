@@ -221,7 +221,7 @@ public class SysOp extends AppCompatActivity {
                     .setOnDismissListener(dialog -> {
                         new Handler(Looper.getMainLooper()).postDelayed(() -> {
                             if (isConfirmed.get()) {
-                                OPUserService.deleteUser(this, userName, () -> {
+                                OPUserService.deleteUser(this, UserDataService.getUserID(this), userName, () -> {
                                     Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.user_deleted));
                                     getUserList();
                                 }, () -> {
@@ -238,7 +238,7 @@ public class SysOp extends AppCompatActivity {
         if(userName.equals(UserDataService.getUserName(this))) {
             Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.self_deactivate_error));
         } else {
-            OPUserService.deActivateUser(this, userName, () -> {
+            OPUserService.deActivateUser(this, UserDataService.getUserID(this), userName, () -> {
                 getUserList();
                 Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.deactivation_successful));
             }, () -> {
@@ -251,7 +251,7 @@ public class SysOp extends AppCompatActivity {
         if(userName.equals(UserDataService.getUserName(this))) {
             Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.self_activate_error));
         } else {
-            OPUserService.activateUser(this, userName, () -> {
+            OPUserService.activateUser(this, UserDataService.getUserID(this), userName, () -> {
                 getUserList();
                 Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.activation_successful));
             }, () -> {
@@ -302,7 +302,7 @@ public class SysOp extends AppCompatActivity {
     }
 
     private void sendRoleRequest(User selectedUser, String newRole) {
-        OPUserService.updateRole(this, selectedUser.getUserName(), newRole, () -> {
+        OPUserService.updateRole(this, UserDataService.getUserID(this), selectedUser.getUserName(), newRole, () -> {
             // onSuccess callback
             getUserList();
         }, () -> {

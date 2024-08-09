@@ -30,9 +30,10 @@ public class MachineService {
     private static final String GET_MAINTENANCES_URL = "/api/v2/machine/getMaintenances";
     private static final String GET_MAINTENANCES_ALL_URL = "/api/v2/machine/getMaintenancesAll";
 
-    public static void createMachine(Context context, String machineID, String machineType, Runnable onSuccess) {
+    public static void createMachine(Context context, String userID, String machineID, String machineType, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("userID", userID);
             jsonObject.put("machineID", machineID);
             jsonObject.put("machineType", machineType);
         } catch (JSONException e) {

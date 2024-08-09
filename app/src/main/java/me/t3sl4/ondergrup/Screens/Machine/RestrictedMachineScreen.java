@@ -295,6 +295,7 @@ public class RestrictedMachineScreen extends AppCompatActivity {
 
             OPMachineService.updateOwner(
                     this,
+                    UserDataService.getUserID(this),
                     machineID,
                     userName,
                     () -> Util.showSuccessPopup(uyariDiyalog, this.getResources().getString(R.string.machine_owner_updated)),

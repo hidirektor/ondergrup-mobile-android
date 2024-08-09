@@ -199,7 +199,7 @@ public class Engineer extends AppCompatActivity {
     }
 
     public void makineEkle(String machineType, String machineID) {
-        MachineService.createMachine(this, machineID, machineType, () -> {
+        MachineService.createMachine(this, UserDataService.getUserID(this), machineID, machineType, () -> {
             //onSuccess operations
             qrDiyalog.dismiss();
             getMachineList();

@@ -141,12 +141,13 @@ public class SubUserService {
         });
     }
 
-    public static void deleteSubUser(Context context, String subUserID, Runnable onSuccess) {
+    public static void deleteSubUser(Context context, String userID, String subUserID, Runnable onSuccess) {
 
         Log.d("Sub ID", subUserID);
 
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("userID", userID);
             jsonObject.put("subUserID", subUserID);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -183,12 +184,13 @@ public class SubUserService {
         });
     }
 
-    public static void deActivateSubUser(Context context, String subUserID, Runnable onSuccess) {
+    public static void deActivateSubUser(Context context, String userID, String subUserID, Runnable onSuccess) {
 
         Log.d("Sub ID", subUserID);
 
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("userID", userID);
             jsonObject.put("subUserID", subUserID);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -225,12 +227,13 @@ public class SubUserService {
         });
     }
 
-    public static void activateSubUser(Context context, String subUserID, Runnable onSuccess) {
+    public static void activateSubUser(Context context, String userID, String subUserID, Runnable onSuccess) {
 
         Log.d("Sub ID", subUserID);
 
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("userID", userID);
             jsonObject.put("subUserID", subUserID);
         } catch (JSONException e) {
             e.printStackTrace();
