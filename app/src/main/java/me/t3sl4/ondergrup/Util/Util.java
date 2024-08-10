@@ -144,12 +144,10 @@ public class Util {
         String userLanguage = UserDataService.getSelectedLanguage(context);
         String nextLang;
 
-        if(userLanguage != null) {
-            if (userLanguage.equals("true")) {
-                nextLang = "tr";
-            } else {
-                nextLang = "en";
-            }
+        if (userLanguage.equals("true")) {
+            nextLang = "tr";
+        } else if(userLanguage.equals("false")) {
+            nextLang = "en";
         } else {
             nextLang = "tr";
         }
