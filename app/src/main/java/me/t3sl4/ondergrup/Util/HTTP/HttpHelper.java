@@ -30,7 +30,7 @@ import retrofit2.http.Url;
 
 public class HttpHelper {
 
-    private static final String BASE_URL = "http://ondergrup.hidirektor.com.tr:3000";
+    private static final String BASE_URL = "https://ondergrup.hidirektor.com.tr";
     private static Retrofit retrofit;
 
     // Singleton Retrofit instance
