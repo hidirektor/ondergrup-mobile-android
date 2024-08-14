@@ -1,6 +1,7 @@
 package me.t3sl4.ondergrup;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -49,8 +50,16 @@ public class SplashActivity extends AppCompatActivity {
                 Util.redirectBasedRole(SplashActivity.this, true);
             }
         }, () -> {
-            refreshTokenAndRetry();
+            if (isHuaweiDevice()) {
+                redirectToLogin();
+            } else {
+                refreshTokenAndRetry();
+            }
         }), WAITING_TIME);
+    }
+
+    private boolean isHuaweiDevice() {
+        return Build.MANUFACTURER.equalsIgnoreCase("HUAWEI");
     }
 
     private void refreshTokenAndRetry() {
