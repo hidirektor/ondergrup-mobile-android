@@ -126,6 +126,13 @@ public class OPMachineService {
     public static void updateOwner(Context context, String userID, String machineID, String userName, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", null);
+            jsonObject.put("affectedUserName", null);
+            jsonObject.put("affectedMachineID", machineID);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("userID", userID);
             jsonObject.put("machineID", machineID);
             jsonObject.put("userName", userName);

@@ -105,7 +105,13 @@ public class OPUserService {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userID", userID);
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", null);
+            jsonObject.put("affectedUserName", userName);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("userName", userName);
             jsonObject.put("newRole", newRole);
         } catch (JSONException e) {
@@ -162,7 +168,13 @@ public class OPUserService {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userID", userID);
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", null);
+            jsonObject.put("affectedUserName", userName);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("userName", userName);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -218,7 +230,13 @@ public class OPUserService {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userID", userID);
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", null);
+            jsonObject.put("affectedUserName", userName);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("userName", userName);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -274,7 +292,13 @@ public class OPUserService {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userID", userID);
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", null);
+            jsonObject.put("affectedUserName", userName);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("userName", userName);
         } catch (JSONException e) {
             e.printStackTrace();

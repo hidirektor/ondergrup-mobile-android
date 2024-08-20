@@ -211,6 +211,13 @@ public class AuthService {
     public static void changePass(Context context, String userName, String oldPassword, String newPassword, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", UserDataService.getUserID(context));
+            jsonObject.put("affectedUserID", UserDataService.getUserID(context));
+            jsonObject.put("affectedUserName", null);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("userName", userName);
             jsonObject.put("oldPassword", oldPassword);
             jsonObject.put("newPassword", newPassword);

@@ -50,7 +50,13 @@ public class OPMaintenanceService {
     public static void deleteMaintenance(Context context, String userID, String maintenanceID, String authToken, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userID", userID);
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", null);
+            jsonObject.put("affectedUserName", null);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", maintenanceID);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("maintenanceID", maintenanceID);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -83,7 +89,13 @@ public class OPMaintenanceService {
     public static void editMaintenance(Context context, String userID, String maintenanceID, int machineID, int technicianID, String kontrol11, String authToken, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userID", userID);
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", null);
+            jsonObject.put("affectedUserName", null);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", maintenanceID);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("maintenanceID", maintenanceID);
             jsonObject.put("machineID", machineID);
             jsonObject.put("technicianID", technicianID);

@@ -30,6 +30,13 @@ public class SubUserService {
     public static void createSubUser(Context context, String ownerID, String userName, String userType, String nameSurname, String eMail, String phoneNumber, String companyName, String password, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", ownerID);
+            jsonObject.put("affectedUserID", null);
+            jsonObject.put("affectedUserName", userName);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("ownerID", ownerID);
             jsonObject.put("userName", userName);
             jsonObject.put("userType", userType);
@@ -143,11 +150,15 @@ public class SubUserService {
 
     public static void deleteSubUser(Context context, String userID, String subUserID, Runnable onSuccess) {
 
-        Log.d("Sub ID", subUserID);
-
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userID", userID);
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", subUserID);
+            jsonObject.put("affectedUserName", null);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("subUserID", subUserID);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -186,11 +197,15 @@ public class SubUserService {
 
     public static void deActivateSubUser(Context context, String userID, String subUserID, Runnable onSuccess) {
 
-        Log.d("Sub ID", subUserID);
-
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userID", userID);
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", subUserID);
+            jsonObject.put("affectedUserName", null);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("subUserID", subUserID);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -229,11 +244,15 @@ public class SubUserService {
 
     public static void activateSubUser(Context context, String userID, String subUserID, Runnable onSuccess) {
 
-        Log.d("Sub ID", subUserID);
-
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userID", userID);
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", subUserID);
+            jsonObject.put("affectedUserName", null);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("subUserID", subUserID);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -273,6 +292,13 @@ public class SubUserService {
     public static void editSubUser(Context context, String ownerID, String userID, String userName, String userType, String nameSurname, String eMail, String phoneNumber, String companyName, String password, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", UserDataService.getUserID(context));
+            jsonObject.put("affectedUserID", userID);
+            jsonObject.put("affectedUserName", null);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("ownerID", ownerID);
             jsonObject.put("userID", userID);
             jsonObject.put("userName", userName);

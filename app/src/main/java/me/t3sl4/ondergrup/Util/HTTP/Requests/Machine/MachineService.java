@@ -33,7 +33,13 @@ public class MachineService {
     public static void createMachine(Context context, String userID, String machineID, String machineType, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userID", userID);
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", null);
+            jsonObject.put("affectedUserName", null);
+            jsonObject.put("affectedMachineID", machineID);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("machineID", machineID);
             jsonObject.put("machineType", machineType);
         } catch (JSONException e) {
@@ -74,6 +80,13 @@ public class MachineService {
     public static void addMachine(Context context, String machineID, String ownerID, Runnable onSuccess, Runnable onFailure) {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", ownerID);
+            jsonObject.put("affectedUserID", null);
+            jsonObject.put("affectedUserName", null);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("machineID", machineID);
             jsonObject.put("ownerID", ownerID);
         } catch (JSONException e) {

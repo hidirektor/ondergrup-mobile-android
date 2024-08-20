@@ -137,6 +137,13 @@ public class UserService {
     public static void updatePreferences(Context context, String userID, String language, String nightMode) {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", userID);
+            jsonObject.put("affectedUserName", null);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("userID", userID);
             JSONObject preferencesData = new JSONObject();
             preferencesData.put("language", language);
@@ -177,6 +184,13 @@ public class UserService {
     public static void updateProfile(Context context, String userID, String nameSurname, String eMail, String companyName, String password, String phoneNumber, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("operationPlatform", "Android");
+            jsonObject.put("sourceUserID", userID);
+            jsonObject.put("affectedUserID", userID);
+            jsonObject.put("affectedUserName", null);
+            jsonObject.put("affectedMachineID", null);
+            jsonObject.put("affectedMaintenanceID", null);
+            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("userID", userID);
             JSONObject userData = new JSONObject();
             userData.put("nameSurname", nameSurname);
