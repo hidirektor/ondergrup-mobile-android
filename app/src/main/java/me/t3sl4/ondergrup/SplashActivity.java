@@ -1,5 +1,6 @@
 package me.t3sl4.ondergrup;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,7 @@ import me.t3sl4.ondergrup.Util.Util;
 
 public class SplashActivity extends AppCompatActivity {
     private final int WAITING_TIME = 3000;
+    private Dialog uyariDiyalog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,8 @@ public class SplashActivity extends AppCompatActivity {
         boolean isFirstTime = SharedPreferencesManager.getSharedPref("isFirstTime", this, false);
 
         Util.setSystemLanguage(this);
+
+        uyariDiyalog = new Dialog(this);
 
         if (isFirstTime) {
             setupOnboarding();
@@ -46,7 +50,7 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(() -> UserService.getProfile(SplashActivity.this, UserDataService.getUserID(SplashActivity.this), new Runnable() {
             @Override
             public void run() {
-                Util.redirectBasedRole(SplashActivity.this, true);
+                Util.redirectBasedRole(SplashActivity.this, true, uyariDiyalog);
             }
         }, () -> {
             refreshTokenAndRetry();
@@ -54,7 +58,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void refreshTokenAndRetry() {
-        TokenService.refreshToken(this, () -> UserService.getProfile(SplashActivity.this, UserDataService.getUserID(SplashActivity.this), () -> Util.redirectBasedRole(SplashActivity.this, true), () -> {
+        TokenService.refreshToken(this, () -> UserService.getProfile(SplashActivity.this, UserDataService.getUserID(SplashActivity.this), () -> Util.redirectBasedRole(SplashActivity.this, true, uyariDiyalog), () -> {
             redirectToLogin();
         }), () -> {
             redirectToLogin();

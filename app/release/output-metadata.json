@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 707,
-      "versionName": "1.6.7(707)",
-      "outputFile": "OnderGrup release_21-08-2024_v1.6.7(707).apk"
+      "versionCode": 736,
+      "versionName": "1.6.36(736)",
+      "outputFile": "OnderGrup release_22-08-2024_v1.6.36(736).apk"
     }
   ],
   "elementType": "File",
@@ -22,14 +22,14 @@
       "minApi": 28,
       "maxApi": 30,
       "baselineProfiles": [
-        "baselineProfiles/1/OnderGrup release_21-08-2024_v1.6.7(707).dm"
+        "baselineProfiles/1/OnderGrup release_22-08-2024_v1.6.36(736).dm"
       ]
     },
     {
       "minApi": 31,
       "maxApi": 2147483647,
       "baselineProfiles": [
-        "baselineProfiles/0/OnderGrup release_21-08-2024_v1.6.7(707).dm"
+        "baselineProfiles/0/OnderGrup release_22-08-2024_v1.6.36(736).dm"
       ]
     }
   ],

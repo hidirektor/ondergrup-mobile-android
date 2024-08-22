@@ -138,7 +138,7 @@ public class LoginScreen extends AppCompatActivity {
 
         AuthService.login(this, username, password, () -> {
             UserService.getProfile(this, UserDataService.getUserID(this), () -> {
-                Util.redirectBasedRole(LoginScreen.this, false);
+                Util.redirectBasedRole(LoginScreen.this, false, uyariDiyalog);
             }, null);
         }, () -> {
             Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.login_error));

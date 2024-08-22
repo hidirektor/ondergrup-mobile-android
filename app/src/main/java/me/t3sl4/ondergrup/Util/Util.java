@@ -13,6 +13,8 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -175,7 +177,7 @@ public class Util {
         Lingver.getInstance().setLocale(context, nextLang);
     }
 
-    public static void redirectBasedRole(Activity activity, boolean splashStatus) {
+    public static void redirectBasedRole(Activity activity, boolean splashStatus, Dialog uyariDiyalog) {
         Intent intent = null;
 
         String userRole = UserDataService.getUserRole(activity.getApplicationContext());
@@ -195,7 +197,13 @@ public class Util {
                 intent.putExtra("user", getUserFromPreferences(activity.getApplicationContext()));
                 break;
             case "SYSOP":
-                Util.showErrorPopup(new Dialog(activity.getApplicationContext()), activity.getResources().getString(R.string.unsupported_sysop));
+                Util.showErrorPopup(uyariDiyalog, activity.getResources().getString(R.string.unsupported_sysop));
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    Intent loginIntent = new Intent(activity, LoginScreen.class);
+                    activity.startActivity(loginIntent);
+                    activity.finish();
+                    UserDataService.logout(activity);
+                }, 500); // 500 ms
                 break;
             default:
                 if(splashStatus) {
@@ -203,7 +211,7 @@ public class Util {
                     activity.startActivity(intent);
                     activity.finish();
                 } else {
-                    Util.showErrorPopup(new Dialog(activity.getApplicationContext()), activity.getResources().getString(R.string.unsupported_role));
+                    Util.showErrorPopup(uyariDiyalog, activity.getResources().getString(R.string.unsupported_role));
                 }
                 break;
         }
