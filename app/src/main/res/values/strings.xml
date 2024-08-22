@@ -418,4 +418,8 @@
     <string name="open_tickets">Aktif</string>
     <string name="pending_tickets">Bekleyen</string>
     <string name="resolved_tickets">Çözülen</string>
+    <string name="ticket_status_created">Oluşturuldu</string>
+    <string name="ticket_status_answered">Yanıtlandı</string>
+    <string name="ticket_status_customer_response">Müşteri Yanıtı</string>
+    <string name="ticket_status_closed">Kapatıldı</string>
 </resources>

@@ -129,6 +129,8 @@
 
         <activity
             android:name=".Screens.SupportTicket.SupportTickets" />
+        <activity
+            android:name=".Screens.SupportTicket.SupportTicketDetails" />
     </application>
 
 </manifest>

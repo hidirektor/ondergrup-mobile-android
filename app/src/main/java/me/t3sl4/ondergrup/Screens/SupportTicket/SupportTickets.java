@@ -71,7 +71,7 @@ public class SupportTickets extends AppCompatActivity {
 
         ticketArrayList = loadTickets();
 
-        ticketAdapter = new TicketAdapter(this, ticketArrayList);
+        ticketAdapter = new TicketAdapter(this, ticketArrayList, receivedUser);
         allTicketsList.setAdapter(ticketAdapter);
     }
 
@@ -92,7 +92,7 @@ public class SupportTickets extends AppCompatActivity {
                 if (ticketAdapter != null) {
                     ticketAdapter.notifyDataSetChanged();
                 } else {
-                    ticketAdapter = new TicketAdapter(this, ticketListTemp);
+                    ticketAdapter = new TicketAdapter(this, ticketListTemp, receivedUser);
                     allTicketsList.setAdapter(ticketAdapter);
                 }
             });
@@ -132,7 +132,7 @@ public class SupportTickets extends AppCompatActivity {
             filteredList.addAll(closedList);
         }
 
-        ticketAdapter = new TicketAdapter(this, filteredList);
+        ticketAdapter = new TicketAdapter(this, filteredList, receivedUser);
         allTicketsList.setAdapter(ticketAdapter);
         ticketAdapter.notifyDataSetChanged();
     }
@@ -170,7 +170,7 @@ public class SupportTickets extends AppCompatActivity {
                 Util.showErrorPopup(uyariDiyalog, getString(R.string.ticket_not_found));
             }
 
-            ticketAdapter = new TicketAdapter(this, filteredList);
+            ticketAdapter = new TicketAdapter(this, filteredList, receivedUser);
             allTicketsList.setAdapter(ticketAdapter);
             ticketAdapter.notifyDataSetChanged();
         } catch (NumberFormatException e) {

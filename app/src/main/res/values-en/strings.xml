@@ -406,4 +406,8 @@
     <string name="open_tickets">Open</string>
     <string name="pending_tickets">Pending</string>
     <string name="resolved_tickets">Resolved</string>
+    <string name="ticket_status_created">Created</string>
+    <string name="ticket_status_answered">Answered</string>
+    <string name="ticket_status_customer_response">Customer Response</string>
+    <string name="ticket_status_closed">Closed</string>
 </resources>
