@@ -2,7 +2,6 @@ package me.t3sl4.ondergrup.Screens.Settings;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.t3sl4.ondergrup.Model.User.User;
@@ -77,9 +77,10 @@ public class SettingsDashboard extends AppCompatActivity {
     }
 
     private void setUserInfo() {
-        Log.d("USERNAME: ", receivedUser.getUserName().toString());
         Glide.with(this)
                 .load(HttpHelper.BASE_URL + "/api/v2/user/getProfilePhoto/" + receivedUser.getUserName())
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(R.drawable.ikon_blank_profile_photo)
                 .into(profileImage);
         nameSurname.setText(receivedUser.getNameSurname());

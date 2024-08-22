@@ -181,7 +181,7 @@ public class UserService {
         });
     }
 
-    public static void updateProfile(Context context, String userID, String nameSurname, String eMail, String companyName, String password, String phoneNumber, Runnable onSuccess) {
+    public static void updateProfile(Context context, String userID, String nameSurname, String eMail, String companyName, String phoneNumber, Runnable onSuccess) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("operationPlatform", "Android");
@@ -197,7 +197,6 @@ public class UserService {
             userData.put("eMail", eMail);
             userData.put("phoneNumber", phoneNumber);
             userData.put("companyName", companyName);
-            userData.put("password", password);
             jsonObject.put("userData", userData);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -236,7 +235,10 @@ public class UserService {
     }
 
     public static void uploadProfilePhoto(Context context, String userName, File photoFile) {
+        String accessToken = UserDataService.getAccessToken(context);
+
         Map<String, RequestBody> partMap = new HashMap<>();
+        partMap.put("accessToken", HttpHelper.createPartFromString(accessToken));
         partMap.put("userName", HttpHelper.createPartFromString(userName));
 
         MultipartBody.Part filePart = HttpHelper.prepareFilePart("file", photoFile);
