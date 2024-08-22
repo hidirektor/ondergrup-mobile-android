@@ -380,6 +380,8 @@
     <string name="version_not_found">Şuana kadar herhangi bir makine yazılımı sisteme eklenmemiş.</string>
     <string name="unsupported_sysop">Admin işlemleri için lütfen Admin Paneli kullanın.</string>
     <string name="ticketyok_all">Herhangi bir destek talebi oluşturmamışsınız.</string>
+    <string name="ticket_not_found">Girdiğiniz ID için herhangi bir destek talebi bulunamadı.</string>
+    <string name="invalid_ticket_id">Geçersiz ID girdiniz. Sadece sayı girebilirsiniz.</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">Makine başarılı bir şekilde eklendi.</string>

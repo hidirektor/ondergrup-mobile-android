@@ -368,6 +368,8 @@
     <string name="version_not_found">So far, no machine software has been added to the system.</string>
     <string name="unsupported_sysop">Please use the Admin Panel for admin operations.</string>
     <string name="ticketyok_all">You have not created any support requests.</string>
+    <string name="ticket_not_found">No support requests were found for the ID you entered.</string>
+    <string name="invalid_ticket_id">You have entered an invalid ID. You can only enter numbers.</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">The machine was added successfully.</string>

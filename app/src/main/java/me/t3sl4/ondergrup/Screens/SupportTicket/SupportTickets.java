@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.search.SearchBar;
+import androidx.appcompat.widget.SearchView;
 
 import java.util.ArrayList;
 
@@ -27,7 +26,7 @@ public class SupportTickets extends AppCompatActivity {
 
     private ImageView backButton;
 
-    private SearchBar ticketSearch;
+    private SearchView ticketSearch;
     private Button allTickets;
     private Button openTickets;
     private Button pendingTickets;
@@ -55,6 +54,7 @@ public class SupportTickets extends AppCompatActivity {
         initializeComponents();
 
         buttonClickListeners();
+        setupSearchBar();
     }
 
     private void initializeComponents() {
@@ -135,5 +135,46 @@ public class SupportTickets extends AppCompatActivity {
         ticketAdapter = new TicketAdapter(this, filteredList);
         allTicketsList.setAdapter(ticketAdapter);
         ticketAdapter.notifyDataSetChanged();
+    }
+
+    private void setupSearchBar() {
+        ticketSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterTicketById(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Metin değiştikçe otomatik olarak bir şey yapmak istemiyorsanız bu kısmı boş bırakabilirsiniz.
+                return false;
+            }
+        });
+    }
+
+    private void filterTicketById(String query) {
+        ArrayList<Ticket> filteredList = new ArrayList<>();
+
+        try {
+            int ticketId = Integer.parseInt(query);
+
+            for (Ticket ticket : ticketArrayList) {
+                if (ticket.getId() == ticketId) {
+                    filteredList.add(ticket);
+                    break;
+                }
+            }
+
+            if (filteredList.isEmpty()) {
+                Util.showErrorPopup(uyariDiyalog, getString(R.string.ticket_not_found));
+            }
+
+            ticketAdapter = new TicketAdapter(this, filteredList);
+            allTicketsList.setAdapter(ticketAdapter);
+            ticketAdapter.notifyDataSetChanged();
+        } catch (NumberFormatException e) {
+            Util.showErrorPopup(uyariDiyalog, getString(R.string.invalid_ticket_id));
+        }
     }
 }
