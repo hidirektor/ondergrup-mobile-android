@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 803,
-      "versionName": "1.7.3(803)",
-      "outputFile": "OnderGrup release_22-08-2024_v1.7.3(803).apk"
+      "versionCode": 813,
+      "versionName": "1.7.13(813)",
+      "outputFile": "OnderGrup release_22-08-2024_v1.7.13(813).apk"
     }
   ],
   "elementType": "File",
@@ -22,14 +22,14 @@
       "minApi": 28,
       "maxApi": 30,
       "baselineProfiles": [
-        "baselineProfiles/1/OnderGrup release_22-08-2024_v1.7.3(803).dm"
+        "baselineProfiles/1/OnderGrup release_22-08-2024_v1.7.13(813).dm"
       ]
     },
     {
       "minApi": 31,
       "maxApi": 2147483647,
       "baselineProfiles": [
-        "baselineProfiles/0/OnderGrup release_22-08-2024_v1.7.3(803).dm"
+        "baselineProfiles/0/OnderGrup release_22-08-2024_v1.7.13(813).dm"
       ]
     }
   ],
