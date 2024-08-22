@@ -24,6 +24,7 @@
     <string name="button_no">No</string>
     <string name="version_history">Version History</string>
     <string name="theme">Theme</string>
+    <string name="button_tickets">Support Tickets</string>
 
     <string name="notifications_title">Notifications</string>
     <string name="notifications_desc">System messages.</string>
@@ -53,6 +54,8 @@
     <string name="enter_mail">E-Mail</string>
     <string name="enter_phone">Phone</string>
     <string name="enter_sirket">Company</string>
+
+    <string name="searchbar_hint">Ticket ID</string>
 
     <!-- OnBoard Texts -->
     <string name="onboard_1_title_1">Holistic</string>
@@ -393,4 +396,11 @@
     <string name="version_code_prefix">Version Number:</string>
     <string name="version_release_prefix">Release Date:</string>
     <string name="version_id_prefix">MinIO ID:</string>
+
+    <!-- Ticket Filter Button Texts -->
+    <string name="create_ticket">Create Ticket</string>
+    <string name="all_tickets">All</string>
+    <string name="open_tickets">Open</string>
+    <string name="pending_tickets">Pending</string>
+    <string name="resolved_tickets">Resolved</string>
 </resources>

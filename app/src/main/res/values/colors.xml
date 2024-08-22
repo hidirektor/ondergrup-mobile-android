@@ -35,4 +35,6 @@
     <color name="softblue">#2F6DF6</color>
     <color name="softpurple">#9732FD</color>
     <color name="softbrown">#A6531E</color>
+
+    <color name="gray">#B0B0B0</color>
 </resources>

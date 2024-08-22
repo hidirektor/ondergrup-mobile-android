@@ -30,6 +30,7 @@
     <string name="button_no">Hayır</string>
     <string name="version_history">Versiyon Geçmişi</string>
     <string name="theme">Tema</string>
+    <string name="button_tickets">Destek Talepleri</string>
 
     <string name="notifications_title">Bildirimler</string>
     <string name="notifications_desc">Sistem mesajları.</string>
@@ -59,6 +60,8 @@
     <string name="enter_mail">E-Posta</string>
     <string name="enter_phone">Telefon</string>
     <string name="enter_sirket">Şirket</string>
+
+    <string name="searchbar_hint">Ticket ID</string>
 
     <!-- OnBoard Texts -->
     <string name="onboard_1_title_1">Bütüncül</string>
@@ -405,4 +408,11 @@
     <string name="version_code_prefix">Versiyon Numarası:</string>
     <string name="version_release_prefix">Yayınlanma Tarihi:</string>
     <string name="version_id_prefix">MinIO ID:</string>
+
+    <!-- Ticket Filter Button Texts -->
+    <string name="create_ticket">Destek Talebi Aç</string>
+    <string name="all_tickets">Tümü</string>
+    <string name="open_tickets">Aktif</string>
+    <string name="pending_tickets">Bekleyen</string>
+    <string name="resolved_tickets">Çözülen</string>
 </resources>
