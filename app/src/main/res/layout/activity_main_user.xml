@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_weight="1"
         android:orientation="horizontal"
         android:padding="16dp"
@@ -21,22 +22,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/hamburgerMenuBttn"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="6dp"
-            android:src="@drawable/ikon_hamburger" />
-
         <TextView
             android:id="@+id/loggedUserName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1.0"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/hello_template"
             android:textColor="@color/atlaTextColor" />
+
+        <ImageView
+            android:id="@+id/logoutButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ikon_logout" />
     </LinearLayout>
 
     <LinearLayout
@@ -55,47 +57,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.25"
-                android:orientation="vertical">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/subUserConstraint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_main">
-
-                    <ImageView
-                        android:id="@+id/imageView12"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ikon_subuser"
-                        app:tint="@color/white"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/subusers"
-                    android:textAlignment="center"
-                    android:textColor="#2E3D6D"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -176,47 +137,6 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.25"
-                android:orientation="vertical">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/belgelerConstraint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_main">
-
-                    <ImageView
-                        android:id="@+id/imageView16"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ikon_belgeler"
-                        app:tint="@color/white"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/docs"
-                    android:textAlignment="center"
-                    android:textColor="#2E3D6D"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
         </LinearLayout>
 
         <TextView
@@ -243,17 +163,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/machineLayout"
         app:layout_constraintBottom_toTopOf="@id/subLayout"/>
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/hamburgerMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@drawable/background_hamburger"
-        app:headerLayout="@layout/nav_hamburger"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="invisible"/>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/subLayout"
@@ -297,7 +206,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/profileConstraint"
+                    android:id="@+id/supportConstraint"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2">
@@ -305,7 +214,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/ikon_user"
+                        android:src="@drawable/ikon_support"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -330,7 +239,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/languageConstraint"
+                    android:id="@+id/subUserConstraint"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2">
@@ -338,11 +247,15 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/ikon_language"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ikon_subuser"
                         app:tint="@color/atlaTextColor"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

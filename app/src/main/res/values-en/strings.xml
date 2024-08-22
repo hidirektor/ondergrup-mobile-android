@@ -23,6 +23,25 @@
     <string name="button_yes">Yes</string>
     <string name="button_no">No</string>
     <string name="version_history">Version History</string>
+    <string name="theme">Theme</string>
+
+    <string name="notifications_title">Notifications</string>
+    <string name="notifications_desc">System messages.</string>
+
+    <string name="privacy_title">Privacy</string>
+    <string name="privacy_box_desc">Account status.</string>
+
+    <string name="security_title">Security</string>
+    <string name="security_desc">Password, login activity and data.</string>
+
+    <string name="fraud_title">Anti Fraud</string>
+    <string name="fraud_desc">Fraud detection analysis.</string>
+
+    <string name="help_title">Help</string>
+    <string name="help_desc">Contact us.</string>
+
+    <string name="about_title">About</string>
+    <string name="about_desc">Terms of use and regulations.</string>
 
     <!-- General Headers -->
     <string name="warning">WARNING !</string>
@@ -344,6 +363,7 @@
     <string name="subuser_empty_fields">You must fill in all fields to add a sub-user.</string>
     <string name="login_error">User name or password is incorrect, please try again.</string>
     <string name="version_not_found">So far, no machine software has been added to the system.</string>
+    <string name="unsupported_sysop">Please use the Admin Panel for admin operations.</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">The machine was added successfully.</string>

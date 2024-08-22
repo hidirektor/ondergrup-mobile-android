@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
-import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
 import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Service.UserDataService;
@@ -102,11 +101,6 @@ public class ProfileScreen extends AppCompatActivity {
             finish();
         } else if(userRole.equals("ENGINEER")) {
             Intent profileIntent = new Intent(ProfileScreen.this, Engineer.class);
-            profileIntent.putExtra("user", receivedUser);
-            startActivity(profileIntent);
-            finish();
-        } else if(userRole.equals("SYSOP")) {
-            Intent profileIntent = new Intent(ProfileScreen.this, SysOp.class);
             profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
             finish();

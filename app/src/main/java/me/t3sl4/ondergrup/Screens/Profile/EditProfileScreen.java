@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
@@ -129,10 +128,7 @@ public class EditProfileScreen extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent profileIntent = null;
-        if(incomeScreen != null) {
-            profileIntent = new Intent(EditProfileScreen.this, SysOp.class);
-            profileIntent.putExtra("user", mainUser);
-        } else {
+        if(incomeScreen == null) {
             profileIntent = new Intent(EditProfileScreen.this, ProfileScreen.class);
             profileIntent.putExtra("user", receivedUser);
         }

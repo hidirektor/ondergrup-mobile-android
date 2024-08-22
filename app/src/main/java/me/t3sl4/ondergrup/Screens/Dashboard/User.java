@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,66 +25,44 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
 import com.google.zxing.client.android.Intents;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import me.t3sl4.ondergrup.Model.Machine.Adapter.MachineAdapter;
 import me.t3sl4.ondergrup.Model.Machine.Machine;
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Screens.Documents.DocumentsScreen;
 import me.t3sl4.ondergrup.Screens.Log.Error.ErrorLogAll;
 import me.t3sl4.ondergrup.Screens.Log.Maintenance.MaintenanceLogAll;
 import me.t3sl4.ondergrup.Screens.Machine.MachineListScreen;
 import me.t3sl4.ondergrup.Screens.Machine.MachineScreen;
-import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
-import me.t3sl4.ondergrup.Screens.Profile.ProfileScreen;
 import me.t3sl4.ondergrup.Screens.QR.QRScanner;
+import me.t3sl4.ondergrup.Screens.Settings.SettingsDashboard;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
 import me.t3sl4.ondergrup.Service.UserDataService;
-import me.t3sl4.ondergrup.Util.Component.Navigation.NavigationManager;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class User extends AppCompatActivity {
     private TextView isimSoyisim;
 
-    private ImageView hamburgerButton;
-    private NavigationView hamburgerMenu;
-    private ConstraintLayout subLanguage;
-    private ConstraintLayout profileButton;
-    private ConstraintLayout settingsButton;
-    private ConstraintLayout belgelerButton;
+
+    //Sub Buttons:
+    private ConstraintLayout myMachineButton;
+    private ConstraintLayout supportButton;
+    private FloatingActionButton qrButton;
     private ConstraintLayout subUserButton;
+    private ConstraintLayout settingsButton;
+
+
+    //Header Buttons
+    private ImageView logoutButton;
     private ConstraintLayout allErrorsButton;
     private ConstraintLayout allMaintenancesButton;
-    private ConstraintLayout myMachineButton;
-    private FloatingActionButton qrButton;
-
-    //hamburgerButtons
-    private Button navAddMachineButton;
-    private LinearLayout navProfileButton;
-    private LinearLayout navDocsButton;
-    private LinearLayout navSettingsButton;
-    private LinearLayout navLanguageButton;
-    private TextView navCurrentLang;
-    private LinearLayout feedbackButton;
-    private LinearLayout logoutButton;
-
-    //Hamburger Restriction
-    private ConstraintLayout headerConstraint;
-    private LinearLayout headerLayout;
-    private LinearLayout machineLayout;
-    private LinearLayout machineInnerLayout;
-    private CoordinatorLayout subLayout;
-
 
     //Machine List View Section:
     private ListView machineListView;
@@ -100,8 +76,6 @@ public class User extends AppCompatActivity {
 
     public static String scannedQRCode;
     public static EditText scannedQRCodeEditText;
-
-    private String currentLang;
 
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
             result -> {
@@ -135,58 +109,24 @@ public class User extends AppCompatActivity {
         Intent intent = getIntent();
         receivedUser = intent.getParcelableExtra("user");
 
-        currentLang = UserDataService.getSelectedLanguage(this);
-
         initializeComponents();
-
-        String activeText = "";
-        if(Objects.equals(currentLang, "true")) {
-            activeText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_turkish);
-        } else {
-            activeText = this.getResources().getString(R.string.active_language) + " " + this.getResources().getString(R.string.lang_english);
-        }
-
-        navCurrentLang.setText(activeText);
 
         buttonClickListeners();
 
         setUserInfo();
-
-        hamburgerEffect();
     }
 
     private void initializeComponents() {
         isimSoyisim = findViewById(R.id.loggedUserName);
 
-        hamburgerButton = findViewById(R.id.hamburgerMenuBttn);
-        hamburgerMenu = findViewById(R.id.hamburgerMenu);
-        subLanguage = findViewById(R.id.languageConstraint);
-        profileButton = findViewById(R.id.profileConstraint);
+        supportButton = findViewById(R.id.supportConstraint);
         settingsButton = findViewById(R.id.settingsConstraint);
-        belgelerButton = findViewById(R.id.belgelerConstraint);
         subUserButton = findViewById(R.id.subUserConstraint);
         allErrorsButton = findViewById(R.id.allErrorsConstraint);
         allMaintenancesButton = findViewById(R.id.allMaintenancesConstraint);
         myMachineButton = findViewById(R.id.myMachine);
         qrButton = findViewById(R.id.qrConstraint);
-
-        //restriction
-        headerConstraint = findViewById(R.id.headerConstraint);
-        headerLayout = findViewById(R.id.headerLayout);
-        machineLayout = findViewById(R.id.machineLayout);
-        machineInnerLayout = findViewById(R.id.machineInnerLayout);
-        subLayout = findViewById(R.id.subLayout);
-
-        //hamburgerButtons
-        View hamburgerView = hamburgerMenu.getHeaderView(0);
-        navAddMachineButton = hamburgerView.findViewById(R.id.navAddMachineButton);
-        navProfileButton = hamburgerView.findViewById(R.id.navProfileButton);
-        navDocsButton = hamburgerView.findViewById(R.id.navDocsButton);
-        navSettingsButton = hamburgerView.findViewById(R.id.navSettingsButton);
-        navLanguageButton = hamburgerView.findViewById(R.id.navLanguageButton);
-        navCurrentLang = hamburgerView.findViewById(R.id.current_lang);
-        feedbackButton = hamburgerView.findViewById(R.id.feedbackButton);
-        logoutButton = hamburgerView.findViewById(R.id.logoutButton);
+        logoutButton = findViewById(R.id.logoutButton);
 
         //Machine List
         machineListView = findViewById(R.id.machineListView);
@@ -194,43 +134,7 @@ public class User extends AppCompatActivity {
     }
 
     private void buttonClickListeners() {
-        navProfileButton.setOnClickListener(v -> {
-            Intent profileIntent = new Intent(User.this, ProfileScreen.class);
-            profileIntent.putExtra("user", receivedUser);
-            startActivity(profileIntent);
-        });
-        subLanguage.setOnClickListener(v -> {
-            Util.changeSystemLanguage(this);
-            recreate();
-        });
-        navSettingsButton.setOnClickListener(v -> {
-            Intent settingsIntent = new Intent(User.this, EditProfileScreen.class);
-            settingsIntent.putExtra("user", receivedUser);
-            startActivity(settingsIntent);
-        });
-        navDocsButton.setOnClickListener(v -> {
-            Intent belgelerIntent = new Intent(User.this, DocumentsScreen.class);
-            startActivity(belgelerIntent);
-        });
-        navAddMachineButton.setOnClickListener(v -> {
-            NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-            //expandMainLayout();
-            addMachine();
-        });
-
-        navLanguageButton.setOnClickListener(v -> {
-            Util.changeSystemLanguage(this);
-            recreate();
-        });
-
         logoutButton.setOnClickListener(v -> UserDataService.logout(this));
-
-        feedbackButton.setOnClickListener(v -> {
-            String url = "https://play.google.com/store/apps/details?id=me.t3sl4.ondergrup&hl=tr&gl=US";
-            Intent playStoreIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(playStoreIntent);
-        });
-
 
         machineListView.setOnItemClickListener((parent, view, position, id) -> {
             Machine selectedMachine = machineList.get(position);
@@ -241,21 +145,16 @@ public class User extends AppCompatActivity {
             startActivity(machineIntent);
         });
 
-        profileButton.setOnClickListener(v -> {
+        /*supportButton.setOnClickListener(v -> {
             Intent profileIntent = new Intent(User.this, ProfileScreen.class);
             profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
-        });
+        });*/
 
         settingsButton.setOnClickListener(v -> {
-            Intent settingsIntent = new Intent(User.this, EditProfileScreen.class);
+            Intent settingsIntent = new Intent(User.this, SettingsDashboard.class);
             settingsIntent.putExtra("user", receivedUser);
             startActivity(settingsIntent);
-        });
-
-        belgelerButton.setOnClickListener(v -> {
-            Intent belgelerIntent = new Intent(User.this, DocumentsScreen.class);
-            startActivity(belgelerIntent);
         });
 
         subUserButton.setOnClickListener(v -> {
@@ -288,11 +187,6 @@ public class User extends AppCompatActivity {
 
         qrButton.setOnClickListener(v -> {
             addMachine();
-        });
-
-        hamburgerButton.setOnClickListener(v -> {
-            NavigationManager.showNavigationViewWithAnimation(hamburgerMenu, this);
-            //minimizeMainLayout();
         });
     }
 
@@ -337,63 +231,6 @@ public class User extends AppCompatActivity {
     public void scanBarcodeCustomLayout() {
         ScanOptions options = new ScanOptions().setOrientationLocked(false).setCaptureActivity(QRScanner.class);
         barcodeLauncher.launch(options);
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private void hamburgerEffect() {
-        headerConstraint.setOnTouchListener((view, motionEvent) -> {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
-                NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-                //expandMainLayout();
-                return true;
-            }
-            return false;
-        });
-
-        headerLayout.setOnTouchListener((view, motionEvent) -> {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
-                NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-                //expandMainLayout();
-                return true;
-            }
-            return false;
-        });
-
-        machineLayout.setOnTouchListener((view, motionEvent) -> {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
-                NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-                //expandMainLayout();
-                return true;
-            }
-            return false;
-        });
-
-        machineInnerLayout.setOnTouchListener((view, motionEvent) -> {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
-                NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-                //expandMainLayout();
-                return true;
-            }
-            return false;
-        });
-
-        machineListView.setOnTouchListener((view, motionEvent) -> {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
-                NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-                //expandMainLayout();
-                return true;
-            }
-            return false;
-        });
-
-        subLayout.setOnTouchListener((view, motionEvent) -> {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && hamburgerMenu.getVisibility() == View.VISIBLE) {
-                NavigationManager.hideNavigationViewWithAnimation(hamburgerMenu, this);
-                //expandMainLayout();
-                return true;
-            }
-            return false;
-        });
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -471,17 +308,5 @@ public class User extends AppCompatActivity {
         qrDiyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
-    }
-
-    private void minimizeMainLayout() {
-        subLayout.setPadding(200, 200, 200, 200);
-        machineLayout.setPadding(200, 200, 200, 200);
-        headerLayout.setPadding(200, 200, 200, 200);
-    }
-
-    private void expandMainLayout() {
-        subLayout.setPadding(0, 0, 0, 0);
-        machineLayout.setPadding(0, 0, 0, 0);
-        headerLayout.setPadding(0, 0, 0, 0);
     }
 }

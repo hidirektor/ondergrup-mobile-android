@@ -3,6 +3,7 @@
     <string name="app_name" translatable="false">Önder Grup</string>
     <string name="developer" translatable="false">Halil İbrahim Direktör</string>
     <string name="developer_mail" translatable="false">hidirektor@gmail.com</string>
+    <string name="developer_phone" translatable="false">+90 (541) 741 03 09</string>
     <string name="developedby" translatable="false">Designed &amp; Developed by\nHalil İbrahim Direktör</string>
 
     <!-- General Texts -->
@@ -28,6 +29,25 @@
     <string name="button_yes">Evet</string>
     <string name="button_no">Hayır</string>
     <string name="version_history">Versiyon Geçmişi</string>
+    <string name="theme">Tema</string>
+
+    <string name="notifications_title">Bildirimler</string>
+    <string name="notifications_desc">Sistem mesajları.</string>
+
+    <string name="privacy_title">Gizlilik</string>
+    <string name="privacy_box_desc">Hesap durumu.</string>
+
+    <string name="security_title">Güvenlik</string>
+    <string name="security_desc">Parola, giriş aktiviteleri ve veriler.</string>
+
+    <string name="fraud_title">Anti-Fraud</string>
+    <string name="fraud_desc">Dolandırıcılık tespit analizi.</string>
+
+    <string name="help_title">Yardım</string>
+    <string name="help_desc">Bize ulaşın.</string>
+
+    <string name="about_title">Hakkında</string>
+    <string name="about_desc">Kullanım koşulları ve regülasyonlar.</string>
 
     <!-- General Headers -->
     <string name="warning">HATA !</string>
@@ -355,6 +375,7 @@
     <string name="subuser_empty_fields">Alt kullanıcı eklemek için tüm alanları doldurmalısın.</string>
     <string name="login_error">Kullanıcı adı veya şifre hatalı. Lütfen tekrar deneyin.</string>
     <string name="version_not_found">Şuana kadar herhangi bir makine yazılımı sisteme eklenmemiş.</string>
+    <string name="unsupported_sysop">Admin işlemleri için lütfen Admin Paneli kullanın.</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">Makine başarılı bir şekilde eklendi.</string>

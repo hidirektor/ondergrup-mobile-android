@@ -114,8 +114,6 @@
         <activity
             android:name=".Screens.Dashboard.Technician" />
         <activity
-            android:name=".Screens.Dashboard.SysOp"/>
-        <activity
             android:name=".Screens.Machine.RestrictedMachineScreen" />
         <activity
             android:name=".Screens.Log.Maintenance.CreateMaintenance" />
@@ -125,6 +123,9 @@
 
         <activity
             android:name=".Screens.VersionHistory.VersionHistory" />
+
+        <activity
+            android:name=".Screens.Settings.SettingsDashboard" />
     </application>
 
 </manifest>

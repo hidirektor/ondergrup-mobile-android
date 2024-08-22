@@ -28,4 +28,11 @@
 
     <color name="errorcause">#d01818</color>
     <color name="errorsolution">#6fc276</color>
+
+    <color name="softred">#EA3445</color>
+    <color name="softorange">#F1A43A</color>
+    <color name="softgreen">#4AA32E</color>
+    <color name="softblue">#2F6DF6</color>
+    <color name="softpurple">#9732FD</color>
+    <color name="softbrown">#A6531E</color>
 </resources>

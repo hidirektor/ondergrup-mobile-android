@@ -29,7 +29,6 @@ import java.util.TimeZone;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
-import me.t3sl4.ondergrup.Screens.Dashboard.SysOp;
 import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
@@ -196,8 +195,7 @@ public class Util {
                 intent.putExtra("user", getUserFromPreferences(activity.getApplicationContext()));
                 break;
             case "SYSOP":
-                intent = new Intent(activity, SysOp.class);
-                intent.putExtra("user", getUserFromPreferences(activity.getApplicationContext()));
+                Util.showErrorPopup(new Dialog(activity.getApplicationContext()), activity.getResources().getString(R.string.unsupported_sysop));
                 break;
             default:
                 if(splashStatus) {
