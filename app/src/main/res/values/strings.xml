@@ -384,6 +384,8 @@
     <string name="ticketyok_all">Herhangi bir destek talebi oluşturmamışsınız.</string>
     <string name="ticket_not_found">Girdiğiniz ID için herhangi bir destek talebi bulunamadı.</string>
     <string name="invalid_ticket_id">Geçersiz ID girdiniz. Sadece sayı girebilirsiniz.</string>
+    <string name="ticket_fields_empty">Tüm alanları doldurmanız gerekiyor!</string>
+    <string name="ticket_creation_failed">Destek talebi oluşturulamadı!</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">Makine başarılı bir şekilde eklendi.</string>
@@ -398,6 +400,7 @@
     <string name="subuser_deleted">Alt kullanıcı başarılı bir şekilde silindi!</string>
     <string name="subuser_deactivated">Alt kullanıcı başarılı bir şekilde deaktif edildi!</string>
     <string name="subuser_activated">Alt kullanıcı başarılı bir şekilde aktif edildi!</string>
+    <string name="ticket_created_success">Destek talebiniz oluşturuldu!</string>
 
     <!-- User Deletion Popup Texts -->
     <string name="confirm_delete_header">Silme Onayı</string>
@@ -425,4 +428,12 @@
     <string name="ticket_status_customer_response">Müşteri Yanıtı</string>
     <string name="ticket_status_closed">Kapatıldı</string>
     <string name="enter_your_response">Yanıtınızı yazın...</string>
+    <string name="ticket_desc">Sorununuzu detaylıca anlatın lütfen.</string>
+    <string name="ticket_title">Destek Talebi Başlığı</string>
+    <string-array name="ticket_subjects">
+        <item>Hesap Problemleri</item>
+        <item>IoT Kart Problemleri</item>
+        <item>Teknik Destek</item>
+        <item>Bakım Problemleri</item>
+    </string-array>
 </resources>

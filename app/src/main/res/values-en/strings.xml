@@ -371,6 +371,8 @@
     <string name="ticketyok_all">You have not created any support requests.</string>
     <string name="ticket_not_found">No support requests were found for the ID you entered.</string>
     <string name="invalid_ticket_id">You have entered an invalid ID. You can only enter numbers.</string>
+    <string name="ticket_fields_empty">All fields are required!</string>
+    <string name="ticket_creation_failed">Failed to create ticket!</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">The machine was added successfully.</string>
@@ -385,6 +387,7 @@
     <string name="subuser_deleted">Subuser deleted successfully!</string>
     <string name="subuser_deactivated">Subuser successfully deactivated!</string>
     <string name="subuser_activated">Subuser successfully activated!</string>
+    <string name="ticket_created_success">Ticket created successfully!</string>
 
     <!-- Deletion Popup Texts -->
     <string name="confirm_delete_header">Confirm Delete User</string>
@@ -412,4 +415,12 @@
     <string name="ticket_status_customer_response">Customer Response</string>
     <string name="ticket_status_closed">Closed</string>
     <string name="enter_your_response">Your response...</string>
+    <string name="ticket_desc">Please describe your problem in detail.</string>
+    <string name="ticket_title">Support Ticket Title</string>
+    <string-array name="ticket_subjects">
+        <item>Account Issues</item>
+        <item>IoT Issues</item>
+        <item>Technical Support</item>
+        <item>Maintenance Issues</item>
+    </string-array>
 </resources>

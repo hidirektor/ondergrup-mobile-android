@@ -25,7 +25,7 @@ public class TicketService {
     private static final String GET_TICKETS_URL = "/api/v2/ticket/getTickets";
 
     // createTicket method
-    public static void createTicket(Context context, String ownerID, String title, String subject, String desc, String operationPlatform, String sourceUserID, Runnable onSuccess, Runnable onFailure) {
+    public static void createTicket(Context context, String ownerID, String title, String subject, String desc, String operationPlatform, Runnable onSuccess, Runnable onFailure) {
         String authToken = UserDataService.getAccessToken(context);
 
         JSONObject jsonObject = new JSONObject();
@@ -35,7 +35,7 @@ public class TicketService {
             jsonObject.put("subject", subject);
             jsonObject.put("desc", desc);
             jsonObject.put("operationPlatform", operationPlatform);
-            jsonObject.put("sourceUserID", sourceUserID);
+            jsonObject.put("sourceUserID", ownerID);
         } catch (JSONException e) {
             e.printStackTrace();
             if (onFailure != null) {

@@ -4,12 +4,17 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 
@@ -85,6 +90,8 @@ public class SupportTickets extends AppCompatActivity {
         openTickets.setOnClickListener(v -> filterTickets("Created"));
         pendingTickets.setOnClickListener(v -> filterTickets("Customer Response"));
         resolvedTickets.setOnClickListener(v -> filterTickets("Closed"));
+
+        createTicket.setOnClickListener(v -> openCreateTicketDialog());
     }
 
     private ArrayList<Ticket> loadTickets() {
@@ -186,5 +193,50 @@ public class SupportTickets extends AppCompatActivity {
 
         ticketAdapter = new TicketAdapter(this, ticketArrayList, receivedUser);
         allTicketsList.setAdapter(ticketAdapter);
+    }
+
+    private void openCreateTicketDialog() {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_ticket);
+
+        EditText ticketTitle = bottomSheetDialog.findViewById(R.id.ticketTitle);
+        Spinner ticketSubject = bottomSheetDialog.findViewById(R.id.ticketSubject);
+        EditText ticketDescription = bottomSheetDialog.findViewById(R.id.ticketDescription);
+        Button createTicketButton = bottomSheetDialog.findViewById(R.id.createTicketButton);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.ticket_subjects, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ticketSubject.setAdapter(adapter);
+
+        int defaultPosition = 0;
+        ticketSubject.setSelection(defaultPosition);
+
+        createTicketButton.setOnClickListener(v -> {
+            String title = ticketTitle.getText().toString().trim();
+            String subject = ticketSubject.getSelectedItem().toString();
+            String description = ticketDescription.getText().toString().trim();
+
+            if (title.isEmpty() || description.isEmpty()) {
+                Util.showErrorPopup(uyariDiyalog, getString(R.string.ticket_fields_empty));
+                return;
+            }
+
+            TicketService.createTicket(this,
+                    UserDataService.getUserID(this),
+                    title,
+                    subject,
+                    description,
+                    "Android",
+                    () -> {
+                        bottomSheetDialog.dismiss();
+                        Util.showSuccessPopup(uyariDiyalog, getString(R.string.ticket_created_success));
+                        loadTicketList();
+                    },
+                    () -> Util.showErrorPopup(uyariDiyalog, getString(R.string.ticket_creation_failed))
+            );
+        });
+
+        bottomSheetDialog.show();
     }
 }
