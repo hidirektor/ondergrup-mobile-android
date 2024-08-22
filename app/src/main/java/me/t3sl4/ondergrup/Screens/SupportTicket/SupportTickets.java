@@ -57,6 +57,12 @@ public class SupportTickets extends AppCompatActivity {
         setupSearchBar();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadTicketList();
+    }
+
     private void initializeComponents() {
         backButton = findViewById(R.id.backButton);
 
@@ -69,10 +75,7 @@ public class SupportTickets extends AppCompatActivity {
         allTicketsList = findViewById(R.id.allTicketsList);
         createTicket = findViewById(R.id.createTicketButton);
 
-        ticketArrayList = loadTickets();
-
-        ticketAdapter = new TicketAdapter(this, ticketArrayList, receivedUser);
-        allTicketsList.setAdapter(ticketAdapter);
+        loadTicketList();
     }
 
     private void buttonClickListeners() {
@@ -147,7 +150,6 @@ public class SupportTickets extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // Metin değiştikçe otomatik olarak bir şey yapmak istemiyorsanız bu kısmı boş bırakabilirsiniz.
                 return false;
             }
         });
@@ -176,5 +178,13 @@ public class SupportTickets extends AppCompatActivity {
         } catch (NumberFormatException e) {
             Util.showErrorPopup(uyariDiyalog, getString(R.string.invalid_ticket_id));
         }
+    }
+
+    private void loadTicketList() {
+        ticketArrayList = new ArrayList<>();
+        ticketArrayList = loadTickets();
+
+        ticketAdapter = new TicketAdapter(this, ticketArrayList, receivedUser);
+        allTicketsList.setAdapter(ticketAdapter);
     }
 }

@@ -102,6 +102,8 @@ public class TicketService {
             return;
         }
 
+        Log.d("BODY: ", jsonObject.toString());
+
         Call<ResponseBody> call = HttpHelper.makeRequestWithAuth("POST", RESPONSE_TICKET_URL, null, jsonObject.toString(), authToken);
         call.enqueue(new Callback<ResponseBody>() {
             @Override

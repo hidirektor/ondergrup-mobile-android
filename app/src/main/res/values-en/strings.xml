@@ -25,6 +25,7 @@
     <string name="version_history">Version History</string>
     <string name="theme">Theme</string>
     <string name="button_tickets">Support Tickets</string>
+    <string name="button_back">Go Back</string>
 
     <string name="notifications_title">Notifications</string>
     <string name="notifications_desc">System messages.</string>
@@ -410,4 +411,5 @@
     <string name="ticket_status_answered">Answered</string>
     <string name="ticket_status_customer_response">Customer Response</string>
     <string name="ticket_status_closed">Closed</string>
+    <string name="enter_your_response">Your response...</string>
 </resources>

@@ -32,6 +32,7 @@
     <string name="version_history">Versiyon Geçmişi</string>
     <string name="theme">Tema</string>
     <string name="button_tickets">Destek Talepleri</string>
+    <string name="button_back">Geri Dön</string>
 
     <string name="notifications_title">Bildirimler</string>
     <string name="notifications_desc">Sistem mesajları.</string>
@@ -423,4 +424,5 @@
     <string name="ticket_status_answered">Yanıtlandı</string>
     <string name="ticket_status_customer_response">Müşteri Yanıtı</string>
     <string name="ticket_status_closed">Kapatıldı</string>
+    <string name="enter_your_response">Yanıtınızı yazın...</string>
 </resources>

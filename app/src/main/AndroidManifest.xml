@@ -130,7 +130,8 @@
         <activity
             android:name=".Screens.SupportTicket.SupportTickets" />
         <activity
-            android:name=".Screens.SupportTicket.SupportTicketDetails" />
+            android:name=".Screens.SupportTicket.SupportTicketDetails"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

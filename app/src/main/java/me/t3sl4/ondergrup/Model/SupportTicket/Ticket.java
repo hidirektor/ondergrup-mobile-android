@@ -1,6 +1,9 @@
 package me.t3sl4.ondergrup.Model.SupportTicket;
 
-public class Ticket {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Ticket implements Parcelable {
     private int id;
     private String ownerID;
     private String title;
@@ -18,6 +21,45 @@ public class Ticket {
         this.ticketStatus = ticketStatus;
         this.responses = responses;
         this.createdDate = createdDate;
+    }
+
+    // Parcelable constructor
+    protected Ticket(Parcel in) {
+        id = in.readInt();
+        ownerID = in.readString();
+        title = in.readString();
+        subject = in.readString();
+        ticketStatus = in.readString();
+        responses = in.readString();
+        createdDate = in.readLong();
+    }
+
+    public static final Creator<Ticket> CREATOR = new Creator<Ticket>() {
+        @Override
+        public Ticket createFromParcel(Parcel in) {
+            return new Ticket(in);
+        }
+
+        @Override
+        public Ticket[] newArray(int size) {
+            return new Ticket[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(ownerID);
+        dest.writeString(title);
+        dest.writeString(subject);
+        dest.writeString(ticketStatus);
+        dest.writeString(responses);
+        dest.writeLong(createdDate);
     }
 
     // Getter and Setter methods

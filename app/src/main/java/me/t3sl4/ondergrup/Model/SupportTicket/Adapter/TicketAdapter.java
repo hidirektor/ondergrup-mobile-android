@@ -63,7 +63,7 @@ public class TicketAdapter extends BaseAdapter {
         titleTextView.setText("#" + currentTicket.getId() + " " + currentTicket.getTitle());
         subjectTextView.setText(currentTicket.getSubject());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss");
         dateTextView.setText(sdf.format(currentTicket.getCreatedDate() * 1000L));
 
         String currentStatus = currentTicket.getTicketStatus();
@@ -87,8 +87,8 @@ public class TicketAdapter extends BaseAdapter {
 
         showDetailsButton.setOnClickListener(v -> {
             Intent intent = new Intent(context, SupportTicketDetails.class);
-            intent.putExtra("ticketID", currentTicket.getId());
             intent.putExtra("user", receivedUser);
+            intent.putExtra("ticket", currentTicket);
             context.startActivity(intent);
         });
 
