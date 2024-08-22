@@ -5,6 +5,7 @@
     <string name="developer_mail" translatable="false">hidirektor@gmail.com</string>
     <string name="developer_phone" translatable="false">+90 (541) 741 03 09</string>
     <string name="developedby" translatable="false">Designed &amp; Developed by\nHalil İbrahim Direktör</string>
+    <string name="loading" translatable="false">Loading...</string>
 
     <!-- General Texts -->
     <string name="welcome">Merhabalar</string>
