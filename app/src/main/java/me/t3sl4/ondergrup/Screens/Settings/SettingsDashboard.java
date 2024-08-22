@@ -16,6 +16,7 @@ import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.Screens.Documents.DocumentsScreen;
 import me.t3sl4.ondergrup.Screens.Profile.EditProfileScreen;
+import me.t3sl4.ondergrup.Screens.SupportTicket.SupportTickets;
 import me.t3sl4.ondergrup.Util.HTTP.HttpHelper;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -105,6 +106,12 @@ public class SettingsDashboard extends AppCompatActivity {
         aboutConstraint.setOnClickListener(v -> {
             Intent belgelerIntent = new Intent(SettingsDashboard.this, DocumentsScreen.class);
             startActivity(belgelerIntent);
+        });
+
+        helpConstraint.setOnClickListener(v -> {
+            Intent settingsIntent = new Intent(SettingsDashboard.this, SupportTickets.class);
+            settingsIntent.putExtra("user", receivedUser);
+            startActivity(settingsIntent);
         });
     }
 }

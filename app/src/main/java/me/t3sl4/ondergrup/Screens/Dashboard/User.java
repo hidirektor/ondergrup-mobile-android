@@ -43,6 +43,7 @@ import me.t3sl4.ondergrup.Screens.Machine.MachineScreen;
 import me.t3sl4.ondergrup.Screens.QR.QRScanner;
 import me.t3sl4.ondergrup.Screens.Settings.SettingsDashboard;
 import me.t3sl4.ondergrup.Screens.SubUser.SubUserScreen;
+import me.t3sl4.ondergrup.Screens.SupportTicket.SupportTickets;
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
 import me.t3sl4.ondergrup.Util.Util;
@@ -145,11 +146,11 @@ public class User extends AppCompatActivity {
             startActivity(machineIntent);
         });
 
-        /*supportButton.setOnClickListener(v -> {
-            Intent profileIntent = new Intent(User.this, ProfileScreen.class);
+        supportButton.setOnClickListener(v -> {
+            Intent profileIntent = new Intent(User.this, SupportTickets.class);
             profileIntent.putExtra("user", receivedUser);
             startActivity(profileIntent);
-        });*/
+        });
 
         settingsButton.setOnClickListener(v -> {
             Intent settingsIntent = new Intent(User.this, SettingsDashboard.class);

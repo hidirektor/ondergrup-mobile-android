@@ -379,6 +379,7 @@
     <string name="login_error">Kullanıcı adı veya şifre hatalı. Lütfen tekrar deneyin.</string>
     <string name="version_not_found">Şuana kadar herhangi bir makine yazılımı sisteme eklenmemiş.</string>
     <string name="unsupported_sysop">Admin işlemleri için lütfen Admin Paneli kullanın.</string>
+    <string name="ticketyok_all">Herhangi bir destek talebi oluşturmamışsınız.</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">Makine başarılı bir şekilde eklendi.</string>

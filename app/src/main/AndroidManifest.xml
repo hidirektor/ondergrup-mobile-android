@@ -126,6 +126,9 @@
 
         <activity
             android:name=".Screens.Settings.SettingsDashboard" />
+
+        <activity
+            android:name=".Screens.SupportTicket.SupportTickets" />
     </application>
 
 </manifest>

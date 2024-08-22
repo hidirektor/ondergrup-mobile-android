@@ -367,6 +367,7 @@
     <string name="login_error">User name or password is incorrect, please try again.</string>
     <string name="version_not_found">So far, no machine software has been added to the system.</string>
     <string name="unsupported_sysop">Please use the Admin Panel for admin operations.</string>
+    <string name="ticketyok_all">You have not created any support requests.</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">The machine was added successfully.</string>
