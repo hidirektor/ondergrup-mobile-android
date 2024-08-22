@@ -3,7 +3,12 @@ package me.t3sl4.ondergrup.Screens.SupportTicket;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,8 +18,6 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 
@@ -44,6 +47,7 @@ public class SupportTickets extends AppCompatActivity {
     private TicketAdapter ticketAdapter;
 
     private Dialog uyariDiyalog;
+    private Dialog createTicketDialog;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -55,6 +59,7 @@ public class SupportTickets extends AppCompatActivity {
         receivedUser = intent.getParcelableExtra("user");
 
         uyariDiyalog = new Dialog(this);
+        createTicketDialog = new Dialog(this);
 
         initializeComponents();
 
@@ -196,13 +201,13 @@ public class SupportTickets extends AppCompatActivity {
     }
 
     private void openCreateTicketDialog() {
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        bottomSheetDialog.setContentView(R.layout.bottom_sheet_ticket);
+        createTicketDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        createTicketDialog.setContentView(R.layout.bottom_sheet_ticket);
 
-        EditText ticketTitle = bottomSheetDialog.findViewById(R.id.ticketTitle);
-        Spinner ticketSubject = bottomSheetDialog.findViewById(R.id.ticketSubject);
-        EditText ticketDescription = bottomSheetDialog.findViewById(R.id.ticketDescription);
-        Button createTicketButton = bottomSheetDialog.findViewById(R.id.createTicketButton);
+        EditText ticketTitle = createTicketDialog.findViewById(R.id.ticketTitle);
+        Spinner ticketSubject = createTicketDialog.findViewById(R.id.ticketSubject);
+        EditText ticketDescription = createTicketDialog.findViewById(R.id.ticketDescription);
+        Button createTicketButton = createTicketDialog.findViewById(R.id.createTicketButton);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.ticket_subjects, android.R.layout.simple_spinner_item);
@@ -229,7 +234,7 @@ public class SupportTickets extends AppCompatActivity {
                     description,
                     "Android",
                     () -> {
-                        bottomSheetDialog.dismiss();
+                        createTicketDialog.dismiss();
                         Util.showSuccessPopup(uyariDiyalog, getString(R.string.ticket_created_success));
                         loadTicketList();
                     },
@@ -237,6 +242,10 @@ public class SupportTickets extends AppCompatActivity {
             );
         });
 
-        bottomSheetDialog.show();
+        createTicketDialog.show();
+        createTicketDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        createTicketDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        createTicketDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        createTicketDialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 }

@@ -436,4 +436,5 @@
         <item>Teknik Destek</item>
         <item>Bakım Problemleri</item>
     </string-array>
+    <string name="ticket_subject">Konu:</string>
 </resources>

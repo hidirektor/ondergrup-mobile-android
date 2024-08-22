@@ -423,4 +423,5 @@
         <item>Technical Support</item>
         <item>Maintenance Issues</item>
     </string-array>
+    <string name="ticket_subject">Subject:</string>
 </resources>
