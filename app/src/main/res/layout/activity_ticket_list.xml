@@ -125,7 +125,7 @@
         android:textAllCaps="false"
         android:textStyle="bold"
         android:textSize="12sp"
-        android:background="@drawable/button_main_success"
+        android:background="@drawable/button_create_ticket"
         android:padding="16dp"
         android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
