@@ -11,6 +11,10 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.onesignal.Continue;
+import com.onesignal.OneSignal;
+import com.onesignal.debug.LogLevel;
+
 import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Screens.OnBoard.OnBoarding1;
 import me.t3sl4.ondergrup.Service.UserDataService;
@@ -26,6 +30,8 @@ public class SplashActivity extends AppCompatActivity {
     private Animation fadeIn;
     private Animation fadeOut;
 
+    String oneSignalAppId = BuildConfig.ONESIGNAL_APP_ID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,10 @@ public class SplashActivity extends AppCompatActivity {
         logoImageView = findViewById(R.id.logo);
         fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+
+        OneSignal.getDebug().setLogLevel(LogLevel.VERBOSE);
+        OneSignal.initWithContext(this, oneSignalAppId);
+        OneSignal.getNotifications().requestPermission(false, Continue.none());
 
         boolean isFirstTime = SharedPreferencesManager.getSharedPref("isFirstTime", this, false);
 

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import me.t3sl4.ondergrup.BuildConfig;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -30,7 +31,7 @@ import retrofit2.http.Url;
 
 public class HttpHelper {
 
-    public static final String BASE_URL = "https://ondergrup.hidirektor.com.tr";
+    public static final String BASE_URL = BuildConfig.BASE_URL;
     private static Retrofit retrofit;
 
     // Singleton Retrofit instance

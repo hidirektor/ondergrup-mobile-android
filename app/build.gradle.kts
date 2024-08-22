@@ -62,7 +62,8 @@ android {
             versionName = "$major.$minor.$patch($versionCode)"
             resourceConfigurations += listOf("en", "tr")
 
-            buildConfigField("String", "BASE_URL", "\"http://85.95.231.92:4000/api/v1/\"")
+            buildConfigField("String", "BASE_URL", "\"https://ondergrup.hidirektor.com.tr\"")
+            buildConfigField("String", "ONESIGNAL_APP_ID", "\"9cbe059f-be21-4512-a1f6-5a9fc0f77506\"")
 
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
@@ -125,6 +126,8 @@ dependencies {
     implementation("com.github.YarikSOffice:lingver:1.3.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation("com.onesignal:OneSignal:[5.0.0, 5.99.99]")
 
     implementation("io.github.chaosleung:pinview:1.4.4")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
