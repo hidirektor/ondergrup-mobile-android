@@ -125,7 +125,8 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
     implementation("com.github.YarikSOffice:lingver:1.3.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.github.sigma1326:NiceSwitch:1.0")
 
     implementation("com.onesignal:OneSignal:[5.0.0, 5.99.99]")
 

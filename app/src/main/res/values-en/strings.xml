@@ -26,6 +26,8 @@
     <string name="theme">Theme</string>
     <string name="button_tickets">Support Tickets</string>
     <string name="button_back">Go Back</string>
+    <string name="change_password">Change Password</string>
+    <string name="login_logs">Login Logs</string>
 
     <string name="notifications_title">Notifications</string>
     <string name="notifications_desc">System messages.</string>
@@ -388,6 +390,7 @@
     <string name="subuser_deactivated">Subuser successfully deactivated!</string>
     <string name="subuser_activated">Subuser successfully activated!</string>
     <string name="ticket_created_success">Ticket created successfully!</string>
+    <string name="password_changed">Your password changed successfully!</string>
 
     <!-- Deletion Popup Texts -->
     <string name="confirm_delete_header">Confirm Delete User</string>
@@ -424,4 +427,10 @@
         <item>Maintenance Issues</item>
     </string-array>
     <string name="ticket_subject">Subject:</string>
+
+    <!-- Change Pass Texts -->
+    <string name="close_all_sessions">Close All Active Sessions</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="multiFactorSetup">Enable 2 Factor Authentication</string>
 </resources>

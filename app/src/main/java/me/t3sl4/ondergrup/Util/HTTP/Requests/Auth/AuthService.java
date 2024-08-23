@@ -208,26 +208,24 @@ public class AuthService {
         });
     }
 
-    public static void changePass(Context context, String userName, String oldPassword, String newPassword, Runnable onSuccess) {
+    public static void changePass(Context context, String userName, String oldPassword, String newPassword, boolean closeSessions, Runnable onSuccess) {
+        String authToken = UserDataService.getAccessToken(context);
+
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("operationPlatform", "Android");
             jsonObject.put("sourceUserID", UserDataService.getUserID(context));
             jsonObject.put("affectedUserID", UserDataService.getUserID(context));
-            jsonObject.put("affectedUserName", null);
-            jsonObject.put("affectedMachineID", null);
-            jsonObject.put("affectedMaintenanceID", null);
-            jsonObject.put("affectedHydraulicUnitID", null);
             jsonObject.put("userName", userName);
             jsonObject.put("oldPassword", oldPassword);
             jsonObject.put("newPassword", newPassword);
+            jsonObject.put("closeSessions", closeSessions);
         } catch (JSONException e) {
             e.printStackTrace();
             return;
         }
 
-        String accessToken = UserDataService.getAccessToken(context);
-        Call<ResponseBody> call = HttpHelper.makeRequest("POST", CHANGE_PASS_URL, null, jsonObject.toString(), accessToken);
+        Call<ResponseBody> call = HttpHelper.makeRequest("POST", CHANGE_PASS_URL, null, jsonObject.toString(), authToken);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

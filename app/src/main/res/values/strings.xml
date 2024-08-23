@@ -33,6 +33,8 @@
     <string name="theme">Tema</string>
     <string name="button_tickets">Destek Talepleri</string>
     <string name="button_back">Geri Dön</string>
+    <string name="change_password">Şifreni Değiştir</string>
+    <string name="login_logs">Giriş Hareketleri</string>
 
     <string name="notifications_title">Bildirimler</string>
     <string name="notifications_desc">Sistem mesajları.</string>
@@ -401,6 +403,7 @@
     <string name="subuser_deactivated">Alt kullanıcı başarılı bir şekilde deaktif edildi!</string>
     <string name="subuser_activated">Alt kullanıcı başarılı bir şekilde aktif edildi!</string>
     <string name="ticket_created_success">Destek talebiniz oluşturuldu!</string>
+    <string name="password_changed">Şifreniz başarılı bir şekilde değiştirildi!</string>
 
     <!-- User Deletion Popup Texts -->
     <string name="confirm_delete_header">Silme Onayı</string>
@@ -437,4 +440,10 @@
         <item>Bakım Problemleri</item>
     </string-array>
     <string name="ticket_subject">Konu:</string>
+
+    <!-- Change Pass Texts -->
+    <string name="close_all_sessions">Tüm Oturumlardan Çıkış Yap</string>
+    <string name="current_password">Mevcut Şifreniz</string>
+    <string name="new_password">Yeni Şifreniz</string>
+    <string name="multiFactorSetup">2 Faktörlü Doğrulamayı Aktif Et</string>
 </resources>
