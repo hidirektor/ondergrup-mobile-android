@@ -45,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
         OneSignal.initWithContext(this, oneSignalAppId);
         OneSignal.getNotifications().requestPermission(false, Continue.none());
 
-        boolean isFirstTime = SharedPreferencesManager.getSharedPref("isFirstTime", this, false);
+        boolean isFirstTime = SharedPreferencesManager.getSharedPref("isFirstTime", this, true);
 
         Util.setSystemLanguage(this);
 
@@ -61,25 +61,22 @@ public class SplashActivity extends AppCompatActivity {
 
     private void startLoadingAnimation() {
         Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                logoImageView.startAnimation(fadeOut);
-                fadeOut.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                    }
+        handler.postDelayed(() -> {
+            logoImageView.startAnimation(fadeOut);
+            fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
 
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        logoImageView.startAnimation(fadeIn);
-                    }
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    logoImageView.startAnimation(fadeIn);
+                }
 
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-                    }
-                });
-            }
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+            });
         }, 0);
 
         fadeIn.setAnimationListener(new Animation.AnimationListener() {
@@ -99,10 +96,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void setupOnboarding() {
+        SharedPreferencesManager.writeSharedPref("isFirstTime", false, this);
         Intent intent = new Intent(SplashActivity.this, OnBoarding1.class);
         startActivity(intent);
         finish();
-        SharedPreferencesManager.writeSharedPref("isFirstTime", false, this);
     }
 
     private void redirectToMainActivity() {
