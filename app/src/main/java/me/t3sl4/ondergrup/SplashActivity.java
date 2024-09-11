@@ -171,11 +171,12 @@ public class SplashActivity extends AppCompatActivity {
         boolean isFirstTime = SharedPreferencesManager.getSharedPref("isFirstTime", this, true);
         Util.setSystemLanguage(this);
 
-        if (isFirstTime) {
+        setupOnboarding();
+        /*if (isFirstTime) {
             setupOnboarding();
         } else {
             redirectToMainActivity();
-        }
+        }*/
     }
 
     private void setupOnboarding() {

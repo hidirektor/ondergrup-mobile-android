@@ -24,7 +24,7 @@
             app:horizontalStepperLeftBottomRadius="5dp"
             app:horizontalStepperRightTopRadius="5dp"
             app:horizontalStepperRightBottomRadius="5dp"
-            app:horizontalStepperPager="false"
+            app:horizontalStepperPager="true"
             app:horizontalStepperPadding="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
