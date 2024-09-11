@@ -33,6 +33,9 @@
 
     <string name="current_country">I live in:</string>
 
+    <string name="permission_allow">Allow</string>
+    <string name="permission_deny">Skip for Now</string>
+
     <string name="notifications_title">Notifications</string>
     <string name="notifications_desc">System messages.</string>
 
@@ -53,6 +56,7 @@
 
     <!-- General Headers -->
     <string name="warning">WARNING !</string>
+    <string name="errorTitle">Error !</string>
 
     <!-- Input Fields -->
     <string name="enter_username">Username</string>
@@ -437,4 +441,11 @@
     <string name="current_password">Current Password</string>
     <string name="new_password">New Password</string>
     <string name="multiFactorSetup">Enable 2 Factor Authentication</string>
+
+    <!-- Permission Texts -->
+    <string name="permLocationTitle">Location</string>
+    <string name="permLocationDesc">By activating location services, you can make after-sales support more efficient by ensuring that your location is recorded in the system when pairing devices.</string>
+    <string name="permNotificationTitle">Notification</string>
+    <string name="permNotificationDesc">With notification permission, you can be informed about new updates and developments.</string>
+    <string name="locationPermError">Location must be enabled. Please restart the application.</string>
 </resources>

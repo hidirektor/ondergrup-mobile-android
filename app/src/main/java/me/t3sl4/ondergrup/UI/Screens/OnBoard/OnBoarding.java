@@ -6,7 +6,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
@@ -19,10 +18,11 @@ import me.t3sl4.ondergrup.Model.Country.Country;
 import me.t3sl4.ondergrup.Model.OnBoard.Adapter.OnBoardAdapter;
 import me.t3sl4.ondergrup.Model.OnBoard.OnBoard;
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.UI.BaseActivity;
 import me.t3sl4.ondergrup.UI.Components.HorizontalStepper.HorizontalStepper;
 import me.t3sl4.ondergrup.UI.Screens.Auth.LoginScreen;
 
-public class OnBoarding extends AppCompatActivity {
+public class OnBoarding extends BaseActivity {
 
     HorizontalStepper horizontalStepper;
 

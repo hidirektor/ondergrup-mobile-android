@@ -40,6 +40,9 @@
 
     <string name="current_country">Bulunduğum Ülke:</string>
 
+    <string name="permission_allow">İzin Ver</string>
+    <string name="permission_deny">Şimdilik Reddet</string>
+
     <string name="notifications_title">Bildirimler</string>
     <string name="notifications_desc">Sistem mesajları.</string>
 
@@ -59,7 +62,8 @@
     <string name="about_desc">Kullanım koşulları ve regülasyonlar.</string>
 
     <!-- General Headers -->
-    <string name="warning">HATA !</string>
+    <string name="warning">UYARI !</string>
+    <string name="errorTitle">Hata !</string>
 
     <!-- Input Fields -->
     <string name="enter_username">Kullanıcı Adı</string>
@@ -450,4 +454,11 @@
     <string name="current_password">Mevcut Şifreniz</string>
     <string name="new_password">Yeni Şifreniz</string>
     <string name="multiFactorSetup">2 Faktörlü Doğrulamayı Aktif Et</string>
+
+    <!-- Permission Texts -->
+    <string name="permLocationTitle">Konum İzni</string>
+    <string name="permLocationDesc">Konum servislerini aktif ederek cihaz eşleştirmelerinde konumunuzun da sisteme kaydedilmesini sağlayarak satış sonrası desteği daha verimli bir hale getirebilirsiniz.</string>
+    <string name="permNotificationTitle">Bildirim İzni</string>
+    <string name="permNotificationDesc">Bildirim izni ile yeni güncellemelerden ve gelişmelerden haberdar olabilirsiniz.</string>
+    <string name="locationPermError">Konum izni gereklidir. Lütfen uygulamayı yeniden başlatın.</string>
 </resources>
