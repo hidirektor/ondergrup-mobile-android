@@ -59,88 +59,84 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Screens.OnBoard.OnBoarding1" />
+            android:name=".UI.Screens.OnBoard.OnBoarding" />
         <activity
-            android:name=".Screens.OnBoard.OnBoarding2" />
-        <activity
-            android:name=".Screens.OnBoard.OnBoarding3" />
-        <activity
-            android:name=".Screens.Auth.LoginScreen"
+            android:name=".UI.Screens.Auth.LoginScreen"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".Screens.Auth.ResetPassword.ForgetPassword" />
+            android:name=".UI.Screens.Auth.ResetPassword.ForgetPassword" />
         <activity
-            android:name=".Screens.Auth.ResetPassword.ForgetPasswordSelection" />
+            android:name=".UI.Screens.Auth.ResetPassword.ForgetPasswordSelection" />
         <activity
-            android:name=".Screens.Auth.ResetPassword.ForgetPasswordVerification" />
+            android:name=".UI.Screens.Auth.ResetPassword.ForgetPasswordVerification" />
         <activity
-            android:name=".Screens.Auth.ResetPassword.ForgetPasswordNewPass"
+            android:name=".UI.Screens.Auth.ResetPassword.ForgetPasswordNewPass"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".Screens.Auth.ResetPassword.ForgetPasswordSuccess" />
+            android:name=".UI.Screens.Auth.ResetPassword.ForgetPasswordSuccess" />
         <activity
-            android:name=".Screens.Machine.MachineScreen" />
+            android:name=".UI.Screens.Machine.MachineScreen" />
         <activity
-            android:name=".Screens.Machine.MachineListScreen" />
+            android:name=".UI.Screens.Machine.MachineListScreen" />
         <activity
-            android:name=".Screens.Dashboard.User"
+            android:name=".UI.Screens.Dashboard.User"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".Screens.Documents.DocumentsScreen" />
+            android:name=".UI.Screens.Documents.DocumentsScreen" />
         <activity
-            android:name=".Screens.Documents.ManualScreen" />
+            android:name=".UI.Screens.Documents.ManualScreen" />
         <activity
-            android:name=".Screens.Documents.PrivacyScreen"  />
+            android:name=".UI.Screens.Documents.PrivacyScreen"  />
         <activity
-            android:name=".Screens.Documents.KVKKScreen" />
+            android:name=".UI.Screens.Documents.KVKKScreen" />
         <activity
-            android:name=".Screens.Documents.DestructionScreen" />
+            android:name=".UI.Screens.Documents.DestructionScreen" />
         <activity
-            android:name=".Screens.SubUser.SubUserScreen" />
+            android:name=".UI.Screens.SubUser.SubUserScreen" />
         <activity
-            android:name=".Screens.SubUser.SubUserAddScreen" />
+            android:name=".UI.Screens.SubUser.SubUserAddScreen" />
         <activity
-            android:name=".Screens.SubUser.SubUserListScreen" />
+            android:name=".UI.Screens.SubUser.SubUserListScreen" />
         <activity
-            android:name=".Screens.QR.QRScanner"
+            android:name=".UI.Screens.QR.QRScanner"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".Screens.Profile.ProfileScreen" />
+            android:name=".UI.Screens.Profile.ProfileScreen" />
         <activity
-            android:name=".Screens.Profile.EditProfileScreen" />
+            android:name=".UI.Screens.Profile.EditProfileScreen" />
         <activity
-            android:name=".Screens.Profile.EditSubScreen" />
+            android:name=".UI.Screens.Profile.EditSubScreen" />
         <activity
-            android:name=".Screens.Log.Error.ErrorLog" />
+            android:name=".UI.Screens.Log.Error.ErrorLog" />
         <activity
-            android:name=".Screens.Log.Maintenance.MaintenanceLog" />
+            android:name=".UI.Screens.Log.Maintenance.MaintenanceLog" />
         <activity
-            android:name=".Screens.Log.Maintenance.MaintenanceSingle" />
+            android:name=".UI.Screens.Log.Maintenance.MaintenanceSingle" />
         <activity
-            android:name=".Screens.Log.Error.ErrorLogAll" />
+            android:name=".UI.Screens.Log.Error.ErrorLogAll" />
         <activity
-            android:name=".Screens.Log.Maintenance.MaintenanceLogAll" />
+            android:name=".UI.Screens.Log.Maintenance.MaintenanceLogAll" />
         <activity
-            android:name=".Screens.Dashboard.Technician" />
+            android:name=".UI.Screens.Dashboard.Technician" />
         <activity
-            android:name=".Screens.Machine.RestrictedMachineScreen" />
+            android:name=".UI.Screens.Machine.RestrictedMachineScreen" />
         <activity
-            android:name=".Screens.Log.Maintenance.CreateMaintenance" />
+            android:name=".UI.Screens.Log.Maintenance.CreateMaintenance" />
         <activity
-            android:name=".Screens.Dashboard.Engineer"
+            android:name=".UI.Screens.Dashboard.Engineer"
             android:windowSoftInputMode="adjustResize"/>
 
         <activity
-            android:name=".Screens.VersionHistory.VersionHistory" />
+            android:name=".UI.Screens.VersionHistory.VersionHistory" />
 
         <activity
-            android:name=".Screens.Settings.SettingsDashboard" />
+            android:name=".UI.Screens.Settings.SettingsDashboard" />
 
         <activity
-            android:name=".Screens.SupportTicket.SupportTickets" />
+            android:name=".UI.Screens.SupportTicket.SupportTickets" />
         <activity
-            android:name=".Screens.SupportTicket.SupportTicketDetails"
+            android:name=".UI.Screens.SupportTicket.SupportTicketDetails"
             android:windowSoftInputMode="adjustResize" />
     </application>
 

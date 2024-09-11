@@ -61,6 +61,8 @@ android {
             versionCode = realVersionCode
             versionName = "$major.$minor.$patch($versionCode)"
             resourceConfigurations += listOf("en", "tr")
+            renderscriptTargetApi = 19
+            renderscriptSupportModeEnabled = true
 
             buildConfigField("String", "BASE_URL", "\"https://ondergrup.hidirektor.com.tr\"")
             buildConfigField("String", "ONESIGNAL_APP_ID", "\"9cbe059f-be21-4512-a1f6-5a9fc0f77506\"")

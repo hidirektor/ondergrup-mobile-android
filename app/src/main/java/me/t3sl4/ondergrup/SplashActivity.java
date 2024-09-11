@@ -15,9 +15,9 @@ import com.onesignal.Continue;
 import com.onesignal.OneSignal;
 import com.onesignal.debug.LogLevel;
 
-import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
-import me.t3sl4.ondergrup.Screens.OnBoard.OnBoarding1;
 import me.t3sl4.ondergrup.Service.UserDataService;
+import me.t3sl4.ondergrup.UI.Screens.Auth.LoginScreen;
+import me.t3sl4.ondergrup.UI.Screens.OnBoard.OnBoarding;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Token.TokenService;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.SharedPreferencesManager;
@@ -97,7 +97,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void setupOnboarding() {
         SharedPreferencesManager.writeSharedPref("isFirstTime", false, this);
-        Intent intent = new Intent(SplashActivity.this, OnBoarding1.class);
+        Intent intent = new Intent(SplashActivity.this, OnBoarding.class);
         startActivity(intent);
         finish();
     }

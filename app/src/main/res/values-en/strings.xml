@@ -28,6 +28,10 @@
     <string name="button_back">Go Back</string>
     <string name="change_password">Change Password</string>
     <string name="login_logs">Login Logs</string>
+    <string name="user_terms"><u>User Terms</u></string>
+    <string name="privacy_policy"><u>Privacy Policy</u></string>
+
+    <string name="current_country">I live in:</string>
 
     <string name="notifications_title">Notifications</string>
     <string name="notifications_desc">System messages.</string>

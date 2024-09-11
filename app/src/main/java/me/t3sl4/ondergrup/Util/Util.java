@@ -29,10 +29,11 @@ import java.util.Objects;
 import java.util.TimeZone;
 
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
-import me.t3sl4.ondergrup.Screens.Dashboard.Engineer;
-import me.t3sl4.ondergrup.Screens.Dashboard.Technician;
 import me.t3sl4.ondergrup.Service.UserDataService;
+import me.t3sl4.ondergrup.UI.Screens.Auth.LoginScreen;
+import me.t3sl4.ondergrup.UI.Screens.Dashboard.Engineer;
+import me.t3sl4.ondergrup.UI.Screens.Dashboard.Technician;
+import me.t3sl4.ondergrup.UI.Screens.Dashboard.User;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 
 public class Util {
@@ -184,7 +185,7 @@ public class Util {
 
         switch (userRole) {
             case "NORMAL":
-                intent = new Intent(activity, me.t3sl4.ondergrup.Screens.Dashboard.User.class);
+                intent = new Intent(activity, User.class);
                 intent.putExtra("user", getUserFromPreferences(activity.getApplicationContext()));
                 break;
             case "TECHNICIAN":

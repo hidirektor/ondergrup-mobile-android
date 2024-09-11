@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HorizontalStepper">
+        <attr name="horizontalStepperStepSize" format="integer" />
+        <attr name="horizontalStepperCurrentStep" format="integer" />
+        <attr name="horizontalStepperCompletedColor" format="color" />
+        <attr name="horizontalStepperCurrentColor" format="color" />
+        <attr name="horizontalStepperGeneralColor" format="color" />
+        <attr name="horizontalStepperLeftTopRadius" format="dimension" />
+        <attr name="horizontalStepperLeftBottomRadius" format="dimension" />
+        <attr name="horizontalStepperRightTopRadius" format="dimension" />
+        <attr name="horizontalStepperRightBottomRadius" format="dimension" />
+        <attr name="horizontalStepperPager" format="boolean" />
+        <attr name="horizontalStepperPadding" format="dimension" />
+    </declare-styleable>
+</resources>

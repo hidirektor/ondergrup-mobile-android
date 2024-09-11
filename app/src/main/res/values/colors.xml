@@ -11,9 +11,9 @@
 
     <color name="backgroundColor">#F9F871</color>
     <color name="splashBackground">#777777</color>
-    <color name="tanitimekrani1">#FFB760</color>
-    <color name="tanitimekrani2">#F07E6E</color>
-    <color name="tanitimekrani3">#A575B0</color>
+    <color name="tanitimekrani1">#FBE8D0</color>
+    <color name="tanitimekrani2">#EFDDFD</color>
+    <color name="tanitimekrani3">#FDF9A5</color>
 
     <color name="editTextTopColor">#1A1A35</color>
     <color name="filterColor">#EEEEFF</color>

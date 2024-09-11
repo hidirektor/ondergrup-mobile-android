@@ -18,7 +18,7 @@ import java.util.List;
 import me.t3sl4.ondergrup.Model.SupportTicket.Ticket;
 import me.t3sl4.ondergrup.Model.User.User;
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Screens.SupportTicket.SupportTicketDetails;
+import me.t3sl4.ondergrup.UI.Screens.SupportTicket.SupportTicketDetails;
 
 public class TicketAdapter extends BaseAdapter {
     private Context context;

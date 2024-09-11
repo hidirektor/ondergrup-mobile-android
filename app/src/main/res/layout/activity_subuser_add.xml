@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Screens.SubUser.SubUserAddScreen"
+    tools:context=".UI.Screens.SubUser.SubUserAddScreen"
     android:fitsSystemWindows="true">
 
     <ScrollView

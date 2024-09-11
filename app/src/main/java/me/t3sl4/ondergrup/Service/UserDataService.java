@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import me.t3sl4.ondergrup.Model.User.User;
-import me.t3sl4.ondergrup.Screens.Auth.LoginScreen;
+import me.t3sl4.ondergrup.UI.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Auth.AuthService;
 
 public class UserDataService {

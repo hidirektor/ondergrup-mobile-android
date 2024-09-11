@@ -12,7 +12,7 @@
 
     <!-- Button Texts -->
     <string name="login">Giriş Yap</string>
-    <string name="register">Kayıt Ol</string>
+    <string name="register">Hesap Oluştur</string>
     <string name="next_btn">İlerle</string>
     <string name="forget_password">Şifremi Unuttum</string>
     <string name="rememberme">Beni Hatırla</string>
@@ -35,6 +35,10 @@
     <string name="button_back">Geri Dön</string>
     <string name="change_password">Şifreni Değiştir</string>
     <string name="login_logs">Giriş Hareketleri</string>
+    <string name="user_terms"><u>Kullanım Koşulları</u></string>
+    <string name="privacy_policy"><u>Gizlilik Politikası</u></string>
+
+    <string name="current_country">Bulunduğum Ülke:</string>
 
     <string name="notifications_title">Bildirimler</string>
     <string name="notifications_desc">Sistem mesajları.</string>
