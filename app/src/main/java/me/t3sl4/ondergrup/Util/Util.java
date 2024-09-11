@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
@@ -57,13 +58,19 @@ public class Util {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         if (connectivityManager != null) {
-            Network network = connectivityManager.getActiveNetwork();
-            if (network != null) {
-                NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(network);
-                return networkCapabilities != null &&
-                        (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-                                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
-                                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                Network network = connectivityManager.getActiveNetwork();
+                if (network != null) {
+                    NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(network);
+                    return networkCapabilities != null &&
+                            (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                                    networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                                    networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET));
+                }
+            } else {
+                // below Android Marshmallow (API 23)
+                NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+                return activeNetworkInfo != null && activeNetworkInfo.isConnected();
             }
         }
         return false;
