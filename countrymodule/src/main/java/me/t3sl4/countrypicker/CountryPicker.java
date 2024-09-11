@@ -78,4 +78,12 @@ public class CountryPicker extends AppCompatSpinner {
     public Country getSelectedCountry() {
         return selectedCountry;
     }
+
+    public void setDefaultCountryByCode(String countryCode) {
+        int position = getDefaultCountryPosition(countryCode);
+        if (position != -1) {
+            setSelection(position);
+            selectedCountry = countries.get(position);
+        }
+    }
 }

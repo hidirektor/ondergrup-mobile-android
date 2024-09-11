@@ -19,6 +19,7 @@ import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.UI.BaseActivity;
 import me.t3sl4.ondergrup.UI.Components.HorizontalStepper.HorizontalStepper;
 import me.t3sl4.ondergrup.UI.Screens.Auth.LoginScreen;
+import me.t3sl4.ondergrup.Util.Util;
 
 public class OnBoarding extends BaseActivity {
 
@@ -45,6 +46,8 @@ public class OnBoarding extends BaseActivity {
         setContentView(R.layout.activity_on_boarding1);
 
         initializeComponents();
+
+        updateSpinnerBasedOnLocation();
 
         componentListeners();
     }
@@ -115,5 +118,15 @@ public class OnBoarding extends BaseActivity {
         onBoardList.add(new OnBoard(ContextCompat.getColor(this, R.color.tanitimekrani1), onboardTitle1, R.drawable.tanitimekrani_usercontrol));
         onBoardList.add(new OnBoard(ContextCompat.getColor(this, R.color.tanitimekrani2), onboardTitle2, R.drawable.tanitimekrani_esp));
         onBoardList.add(new OnBoard(ContextCompat.getColor(this, R.color.tanitimekrani3), onboardTitle3, R.drawable.tanitimekrani_csp));
+    }
+
+    private void updateSpinnerBasedOnLocation() {
+        Util.getUserCountryCode(this, this, userCountryCode -> {
+            if (userCountryCode != null && !userCountryCode.isEmpty()) {
+                countryPicker.setDefaultCountryByCode(userCountryCode);
+            } else {
+                countryPicker.setDefaultCountryByCode("US");
+            }
+        });
     }
 }

@@ -2,12 +2,19 @@ package me.t3sl4.ondergrup.Util;
 
 import static me.t3sl4.ondergrup.Service.UserDataService.getUserFromPreferences;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -19,12 +26,16 @@ import android.os.Looper;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.yariksoffice.lingver.Lingver;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
@@ -228,5 +239,61 @@ public class Util {
             activity.startActivity(intent);
             activity.finish();
         }
+    }
+
+    public static void getUserCountryCode(Activity activity, Context context, LocationCallback callback) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                String countryCode = getCountryCodeFromLocation(context, location);
+                if (callback != null) {
+                    callback.onLocationRetrieved(countryCode);
+                }
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, android.os.Bundle extras) {}
+
+            @Override
+            public void onProviderEnabled(String provider) {}
+
+            @Override
+            public void onProviderDisabled(String provider) {}
+        };
+
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (location != null) {
+            String countryCode = getCountryCodeFromLocation(context, location);
+            if (callback != null) {
+                callback.onLocationRetrieved(countryCode);
+            }
+        } else {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        }
+    }
+
+    private static String getCountryCodeFromLocation(Context context, Location location) {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        List<Address> addresses;
+        try {
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            if (addresses != null && !addresses.isEmpty()) {
+                return addresses.get(0).getCountryCode();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public interface LocationCallback {
+        void onLocationRetrieved(String countryCode);
     }
 }

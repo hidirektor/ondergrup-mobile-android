@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/country_spinner_background"
                 android:spinnerMode="dropdown"
-                app:defaultCountryCode="TR"
+                app:defaultCountryCode="US"
                 android:layout_marginBottom="12dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp" />
