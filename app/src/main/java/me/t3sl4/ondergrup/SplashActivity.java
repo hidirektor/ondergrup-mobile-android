@@ -171,12 +171,18 @@ public class SplashActivity extends AppCompatActivity {
         boolean isFirstTime = SharedPreferencesManager.getSharedPref("isFirstTime", this, true);
         Util.setSystemLanguage(this);
 
-        setupOnboarding();
-        /*if (isFirstTime) {
+        if(Util.isNetworkAvailable(this)) {
             setupOnboarding();
+            /*if (isFirstTime) {
+                setupOnboarding();
+            } else {
+                redirectToMainActivity();
+            }*/
         } else {
-            redirectToMainActivity();
-        }*/
+            String errorTitleMsg = getString(R.string.errorTitle);
+            String networkErrorMsg = getString(R.string.wifiFailure);
+            Sneaker.with(this).setTitle(errorTitleMsg).setMessage(networkErrorMsg).sneakError();
+        }
     }
 
     private void setupOnboarding() {

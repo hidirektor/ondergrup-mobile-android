@@ -46,15 +46,16 @@
             android:layout_marginBottom="16dp"
             android:layout_gravity="bottom">
 
-            <Spinner
-                android:id="@+id/country_spinner"
+            <me.t3sl4.countrypicker.CountryPicker
+                android:id="@+id/countryPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/country_spinner_background"
                 android:spinnerMode="dropdown"
+                app:defaultCountryCode="TR"
                 android:layout_marginBottom="12dp"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"/>
+                android:layout_marginEnd="12dp" />
             <Button
                 android:id="@+id/registerButton"
                 android:layout_width="match_parent"

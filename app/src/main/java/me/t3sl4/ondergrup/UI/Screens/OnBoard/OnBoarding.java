@@ -3,7 +3,6 @@ package me.t3sl4.ondergrup.UI.Screens.OnBoard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -13,8 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.t3sl4.ondergrup.Model.Country.Adapter.CountryAdapter;
-import me.t3sl4.ondergrup.Model.Country.Country;
+import me.t3sl4.countrypicker.CountryPicker;
 import me.t3sl4.ondergrup.Model.OnBoard.Adapter.OnBoardAdapter;
 import me.t3sl4.ondergrup.Model.OnBoard.OnBoard;
 import me.t3sl4.ondergrup.R;
@@ -27,7 +25,7 @@ public class OnBoarding extends BaseActivity {
     HorizontalStepper horizontalStepper;
 
     ConstraintLayout mainLayout;
-    Spinner countrySpinner;
+    CountryPicker countryPicker;
 
     Button createAccount;
     Button login;
@@ -55,7 +53,7 @@ public class OnBoarding extends BaseActivity {
         horizontalStepper = findViewById(R.id.horizontalStepper);
 
         mainLayout = findViewById(R.id.mainConstraint);
-        countrySpinner = findViewById(R.id.country_spinner);
+        countryPicker = findViewById(R.id.countryPicker);
 
         viewPager = findViewById(R.id.viewPager);
 
@@ -69,16 +67,6 @@ public class OnBoarding extends BaseActivity {
 
         adapter = new OnBoardAdapter(onBoardList);
         viewPager.setAdapter(adapter);
-
-        List<Country> countryList = new ArrayList<>();
-        countryList.add(new Country(R.drawable.flag_turkey, "Türkiye"));
-        countryList.add(new Country(R.drawable.flag_uk, "United Kingdom"));
-        countryList.add(new Country(R.drawable.flag_usa, "United States"));
-        countryList.add(new Country(R.drawable.flag_germany, "Germany"));
-        countryList.add(new Country(R.drawable.flag_france, "France"));
-
-        CountryAdapter adapter = new CountryAdapter(this, countryList);
-        countrySpinner.setAdapter(adapter);
     }
 
     private void componentListeners() {

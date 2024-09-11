@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ondergrup-mobile-android"
 include(":app")
- 
+include(":countrymodule")
