@@ -1,13 +1,13 @@
 package me.t3sl4.ondergrup.UI.Screens.Dashboard;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -22,12 +22,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.zxing.client.android.Intents;
-import com.journeyapps.barcodescanner.ScanContract;
-import com.journeyapps.barcodescanner.ScanOptions;
 
 import java.util.ArrayList;
 
@@ -50,6 +49,7 @@ import me.t3sl4.ondergrup.Util.Util;
 
 public class Engineer extends BaseActivity {
     private static final String TARGET_WIFI_SSID = "OnderGrup_IoT";
+    private static final int QR_REQUEST_CODE = 123;
 
     private TextView isimSoyisim;
 
@@ -65,7 +65,6 @@ public class Engineer extends BaseActivity {
     private ConstraintLayout allErrorsButton;
     private ConstraintLayout versionHistoryButton;
 
-
     //Machine List View Section:
     private ListView machineListView;
     private MachineAdapter machineListAdapter;
@@ -78,26 +77,6 @@ public class Engineer extends BaseActivity {
 
     public static String scannedQRCode;
     public static EditText scannedQRCodeEditText;
-
-    private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
-            result -> {
-                if(result.getContents() == null) {
-                    Intent originalIntent = result.getOriginalIntent();
-                    if (originalIntent == null) {
-                        Log.d("MainActivity", "Tarama iptal edildi");
-                        Toast.makeText(Engineer.this, "Tarama kapatıldı", Toast.LENGTH_LONG).show();
-                    } else if(originalIntent.hasExtra(Intents.Scan.MISSING_CAMERA_PERMISSION)) {
-                        Log.d("MainActivity", "Kamera yetkisi eksik");
-                        String cameraPerm = getResources().getString(R.string.camera_permission_error);
-                        Util.showErrorPopup(uyariDiyalog, cameraPerm);
-                    }
-                } else {
-                    Log.d("MainActivity", "Tarama tamamlandı");
-                    scannedQRCode = result.getContents();
-                    scannedQRCodeEditText.setText(scannedQRCode);
-                    Toast.makeText(Engineer.this, "ID: " + result.getContents(), Toast.LENGTH_LONG).show();
-                }
-            });
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -240,11 +219,6 @@ public class Engineer extends BaseActivity {
         machineListView.setAdapter(machineListAdapter);
     }
 
-    public void scanBarcodeCustomLayout() {
-        ScanOptions options = new ScanOptions().setOrientationLocked(false).setCaptureActivity(QRScanner.class);
-        barcodeLauncher.launch(options);
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     private void addMachine() {
         qrDiyalog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -263,7 +237,8 @@ public class Engineer extends BaseActivity {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_UP:
                     if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
-                        scanBarcodeCustomLayout();
+                        Intent intent = new Intent(Engineer.this, QRScanner.class);
+                        qrResultLauncher.launch(intent);
                         return true;
                     }
             }
@@ -284,4 +259,34 @@ public class Engineer extends BaseActivity {
         qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == QR_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            String scannedQRCode = data.getStringExtra("scannedQRCode");
+
+            if (scannedQRCode != null) {
+                scannedQRCodeEditText.setText(scannedQRCode);
+                Toast.makeText(this, "QR Code: " + scannedQRCode, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private final ActivityResultLauncher<Intent> qrResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null) {
+                        String scannedQRCode = data.getStringExtra("scannedQRCode");
+                        if (scannedQRCode != null) {
+                            scannedQRCodeEditText.setText(scannedQRCode);
+                            Toast.makeText(Engineer.this, "QR Code: " + scannedQRCode, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+            }
+    );
 }

@@ -14,7 +14,6 @@ public class QRScanner extends FragmentActivity {
         setContentView(R.layout.custom_barcode_scanner);
 
         ScanFragment scanFragment = new ScanFragment();
-
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frag_container, scanFragment)

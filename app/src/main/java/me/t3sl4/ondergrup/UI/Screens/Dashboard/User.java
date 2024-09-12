@@ -24,12 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.zxing.client.android.Intents;
-import com.journeyapps.barcodescanner.ScanContract;
-import com.journeyapps.barcodescanner.ScanOptions;
 
 import java.util.ArrayList;
 
@@ -79,26 +78,6 @@ public class User extends BaseActivity {
 
     public static String scannedQRCode;
     public static EditText scannedQRCodeEditText;
-
-    private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
-            result -> {
-                if(result.getContents() == null) {
-                    Intent originalIntent = result.getOriginalIntent();
-                    if (originalIntent == null) {
-                        Log.d("MainActivity", "Tarama iptal edildi");
-                        Toast.makeText(User.this, "Tarama kapatıldı", Toast.LENGTH_LONG).show();
-                    } else if(originalIntent.hasExtra(Intents.Scan.MISSING_CAMERA_PERMISSION)) {
-                        Log.d("MainActivity", "Kamera yetkisi eksik");
-                        String cameraPerm = getResources().getString(R.string.camera_permission_error);
-                        Util.showErrorPopup(uyariDiyalog, cameraPerm);
-                    }
-                } else {
-                    Log.d("MainActivity", "Tarama tamamlandı");
-                    scannedQRCode = result.getContents();
-                    scannedQRCodeEditText.setText(scannedQRCode);
-                    Toast.makeText(User.this, "ID: " + result.getContents(), Toast.LENGTH_LONG).show();
-                }
-            });
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -231,11 +210,6 @@ public class User extends BaseActivity {
         machineListView.setAdapter(machineListAdapter);
     }
 
-    public void scanBarcodeCustomLayout() {
-        ScanOptions options = new ScanOptions().setOrientationLocked(false).setCaptureActivity(QRScanner.class);
-        barcodeLauncher.launch(options);
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     private void addMachine() {
         qrDiyalog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -260,7 +234,8 @@ public class User extends BaseActivity {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_UP:
                     if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
-                        scanBarcodeCustomLayout();
+                        Intent intent = new Intent(User.this, QRScanner.class);
+                        qrResultLauncher.launch(intent);
                         return true;
                     }
             }
@@ -268,7 +243,6 @@ public class User extends BaseActivity {
         });
 
         cancelButton.setOnClickListener(view -> qrDiyalog.dismiss());
-
 
         addButton.setOnClickListener(view -> {
             Log.d("Selected Type", machineTypeSpinner.getSelectedItem().toString());
@@ -291,19 +265,32 @@ public class User extends BaseActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == QR_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == QR_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             String scannedQRCode = data.getStringExtra("scannedQRCode");
+
             if (scannedQRCode != null) {
                 scannedQRCodeEditText.setText(scannedQRCode);
+                Toast.makeText(this, "QR Code: " + scannedQRCode, Toast.LENGTH_LONG).show();
             }
         }
     }
 
-    private void launchQRScanner() {
-        Intent intent = new Intent(User.this, QRScanner.class);
-        startActivityForResult(intent, QR_REQUEST_CODE);
-    }
+    private final ActivityResultLauncher<Intent> qrResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null) {
+                        String scannedQRCode = data.getStringExtra("scannedQRCode");
+                        if (scannedQRCode != null) {
+                            scannedQRCodeEditText.setText(scannedQRCode);
+                            Toast.makeText(User.this, "QR Code: " + scannedQRCode, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+            }
+    );
 }

@@ -39,7 +39,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import me.t3sl4.ondergrup.R;
-import me.t3sl4.ondergrup.Util.QR.MyImageAnalyzer;
+import me.t3sl4.ondergrup.Util.QR.QRAnalyzer;
 import me.t3sl4.ondergrup.Util.QR.QRUtil;
 import me.t3sl4.ondergrup.databinding.FragmentScanBinding;
 
@@ -56,7 +56,7 @@ public class ScanFragment extends Fragment{
     private boolean isFlashOn;
     Preview preview = new Preview.Builder().build();
     CameraSelector cameraSelector;
-    MyImageAnalyzer analyzer;
+    QRAnalyzer analyzer;
     Camera camera;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -104,7 +104,7 @@ public class ScanFragment extends Fragment{
 
         requestCameraAndStartScanner();
 
-        analyzer = new MyImageAnalyzer(requireActivity().getSupportFragmentManager());
+        analyzer = new QRAnalyzer(requireActivity().getSupportFragmentManager());
 
     }
 
@@ -196,18 +196,15 @@ public class ScanFragment extends Fragment{
         camera = cameraProvider.bindToLifecycle(this, cameraSelector, preview);
 
         binding.btnFlash.setOnClickListener(v -> {
-
             navigateFlash();
         });
     }
 
     private void requestCameraPermission() {
-        if (shouldShowRequestPermissionRationale(permission))
-        {
+        if (shouldShowRequestPermissionRationale(permission)) {
             QRUtil.cameraPermissionRequest(getContext(),
                     () -> QRUtil.openPermissionSettings(requireContext()));
         } else {
-
             requestPermissionLauncher.launch(permission);
         }
     }
@@ -217,8 +214,7 @@ public class ScanFragment extends Fragment{
         // Load the selected image
         Bitmap bitmap = loadBitmapFromUri(imageUri);
 
-        if (bitmap != null)
-        {
+        if (bitmap != null) {
             analyzer.analyzeBitmap(bitmap);
         }
     }
@@ -237,18 +233,14 @@ public class ScanFragment extends Fragment{
         }
     }
 
-    // Function to turn on/off the flashlight
     private void navigateFlash() {
         try {
-            // Check if the camera has a flash unit
             if (camera != null && camera.getCameraInfo().hasFlashUnit()) {
                 if (isFlashOn) {
-                    // Disable the torch (flashlight)
                     camera.getCameraControl().enableTorch(false);
                     binding.btnFlash.setImageResource(R.drawable.flash_off);
                     isFlashOn = false;
                 } else {
-                    // Enable the torch (flashlight)
                     camera.getCameraControl().enableTorch(true);
                     binding.btnFlash.setImageResource(R.drawable.flash_on);
                     isFlashOn = true;

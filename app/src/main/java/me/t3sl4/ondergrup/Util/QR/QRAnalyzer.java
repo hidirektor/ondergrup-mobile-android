@@ -19,12 +19,12 @@ import com.google.mlkit.vision.common.InputImage;
 
 import java.util.List;
 
-public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
+public class QRAnalyzer implements ImageAnalysis.Analyzer {
 
     private FragmentManager fragmentManager;
     private BottomDialog bottomDialog;
 
-    public MyImageAnalyzer(FragmentManager fragmentManager) {
+    public QRAnalyzer(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
         bottomDialog = new BottomDialog();
     }
@@ -35,9 +35,7 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
     }
 
     public void analyzeBitmap(Bitmap bitmap){
-
-        if (bitmap != null)
-        {
+        if (bitmap != null) {
             InputImage image = InputImage.fromBitmap(bitmap, 0);
 
             BarcodeScannerOptions options = new BarcodeScannerOptions.Builder()
@@ -49,7 +47,6 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
             Task<List<Barcode>> result = scanner.process(image)
                     .addOnSuccessListener(this::readBarcodeData)
                     .addOnFailureListener(e -> {
-                        // Task failed with an exception
                         Toast.makeText(bottomDialog.getContext(),
                                 "Failed due to: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
@@ -58,13 +55,11 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
 
     private void scanBarcode(ImageProxy imageProxy) {
 
-        if(imageProxy!=null)
-        {
+        if(imageProxy!=null) {
             @SuppressLint("UnsafeOptInUsageError")
             Image mediaImage = imageProxy.getImage();
 
-            if (mediaImage != null)
-            {
+            if (mediaImage != null) {
                 InputImage image = InputImage.fromMediaImage(mediaImage, imageProxy.getImageInfo()
                         .getRotationDegrees());
 
@@ -74,15 +69,12 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
 
                 BarcodeScanner scanner = BarcodeScanning.getClient(options);
 
-                // Task completed successfully
                 Task<List<Barcode>> result = scanner.process(image)
                         .addOnSuccessListener(this::readBarcodeData)
                         .addOnFailureListener(e -> {
                             // Task failed with an exception
-
                         }).addOnCompleteListener(task -> {
                             imageProxy.close();
-
                         });
             }
 
@@ -91,37 +83,30 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
     }
 
     private void readBarcodeData(List<Barcode> barcodes) {
-
         barcodes.forEach(barcode -> {
-
             int valueType = barcode.getValueType();
 
-            if (valueType == Barcode.TYPE_URL)
-            {
-                if (!bottomDialog.isAdded())
-                {
+            if (valueType == Barcode.TYPE_URL) {
+                if (!bottomDialog.isAdded()) {
                     bottomDialog.show(fragmentManager, "");
                 }
+
                 String url = barcode.getUrl().getUrl();
                 bottomDialog.fetchUrl(url);
-
             } else if (valueType == Barcode.TYPE_WIFI) {
-
-                if (!bottomDialog.isAdded())
-                {
+                if (!bottomDialog.isAdded()) {
                     bottomDialog.show(fragmentManager, "");
                 }
+
                 String password = barcode.getWifi().getPassword();
                 bottomDialog.fetchUrl(password);
-
             } else {
-                if (!bottomDialog.isAdded())
-                {
+                if (!bottomDialog.isAdded()) {
                     bottomDialog.show(fragmentManager, "");
                 }
+
                 bottomDialog.fetchUrl(barcode.getRawValue());
             }
-
         });
     }
 }

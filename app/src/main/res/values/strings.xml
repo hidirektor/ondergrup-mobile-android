@@ -49,7 +49,7 @@
     <string name="flash_light">Flashı Aç</string>
     <string name="share">Paylaş</string>
     <string name="copy">Kopyala</string>
-    <string name="web_search">Webde Ara</string>
+    <string name="use_scanned_id">Taranan IDyi Kullan</string>
     <string name="scan_result">Tarama Sonucu</string>
 
     <string name="privacy_title">Gizlilik</string>
