@@ -235,6 +235,7 @@ public class User extends BaseActivity {
                 case MotionEvent.ACTION_UP:
                     if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
                         Intent intent = new Intent(User.this, QRScanner.class);
+                        intent.putExtra("user", receivedUser);
                         qrResultLauncher.launch(intent);
                         return true;
                     }

@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -195,11 +194,6 @@ public class Engineer extends BaseActivity {
         });
     }
 
-    private void openWifiSettings() {
-        Intent intent = new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK);
-        startActivity(intent);
-    }
-
     private ArrayList<Machine> getMachineList() {
         ArrayList<Machine> machines = new ArrayList<>();
 
@@ -238,6 +232,7 @@ public class Engineer extends BaseActivity {
                 case MotionEvent.ACTION_UP:
                     if (event.getRawX() >= (scannedQRCodeEditText.getRight() - scannedQRCodeEditText.getCompoundDrawables()[2].getBounds().width())) {
                         Intent intent = new Intent(Engineer.this, QRScanner.class);
+                        intent.putExtra("user", receivedUser);
                         qrResultLauncher.launch(intent);
                         return true;
                     }
