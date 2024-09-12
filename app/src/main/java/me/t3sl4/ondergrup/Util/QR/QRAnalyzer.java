@@ -3,6 +3,7 @@ package me.t3sl4.ondergrup.Util.QR;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -83,30 +84,36 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
     }
 
     private void readBarcodeData(List<Barcode> barcodes) {
-        barcodes.forEach(barcode -> {
-            int valueType = barcode.getValueType();
-
-            if (valueType == Barcode.TYPE_URL) {
-                if (!bottomDialog.isAdded()) {
-                    bottomDialog.show(fragmentManager, "");
-                }
-
-                String url = barcode.getUrl().getUrl();
-                bottomDialog.fetchUrl(url);
-            } else if (valueType == Barcode.TYPE_WIFI) {
-                if (!bottomDialog.isAdded()) {
-                    bottomDialog.show(fragmentManager, "");
-                }
-
-                String password = barcode.getWifi().getPassword();
-                bottomDialog.fetchUrl(password);
-            } else {
-                if (!bottomDialog.isAdded()) {
-                    bottomDialog.show(fragmentManager, "");
-                }
-
-                bottomDialog.fetchUrl(barcode.getRawValue());
+        new Handler().post(() -> {
+            if (fragmentManager == null || fragmentManager.isStateSaved()) {
+                return;
             }
+
+            barcodes.forEach(barcode -> {
+                int valueType = barcode.getValueType();
+
+                if (valueType == Barcode.TYPE_URL) {
+                    if (!bottomDialog.isAdded()) {
+                        bottomDialog.show(fragmentManager, "");
+                    }
+
+                    String url = barcode.getUrl().getUrl();
+                    bottomDialog.fetchUrl(url);
+                } else if (valueType == Barcode.TYPE_WIFI) {
+                    if (!bottomDialog.isAdded()) {
+                        bottomDialog.show(fragmentManager, "");
+                    }
+
+                    String password = barcode.getWifi().getPassword();
+                    bottomDialog.fetchUrl(password);
+                } else {
+                    if (!bottomDialog.isAdded()) {
+                        bottomDialog.show(fragmentManager, "");
+                    }
+
+                    bottomDialog.fetchUrl(barcode.getRawValue());
+                }
+            });
         });
     }
 }

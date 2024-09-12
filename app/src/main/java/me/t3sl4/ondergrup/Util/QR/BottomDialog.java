@@ -75,10 +75,9 @@ public class BottomDialog extends BottomSheetDialogFragment {
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("scannedQRCode", fetchUrl);
                 getActivity().setResult(Activity.RESULT_OK, resultIntent);
-                getActivity().finish();  // QRScanner Activity'sini kapat
+                dismiss();
+                getActivity().finish();
             }
-
-            dismiss();
         });
 
         btn_share.setOnClickListener(v -> {
