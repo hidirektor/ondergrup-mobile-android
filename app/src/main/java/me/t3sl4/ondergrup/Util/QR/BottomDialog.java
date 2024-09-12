@@ -62,7 +62,7 @@ public class BottomDialog extends BottomSheetDialogFragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM-dd-yyyy hh:mm a");
         String dateTime = dateFormat.format(calendar.getTime());
 
-        time.setText(dateTime+ " EAN_8");
+        time.setText(dateTime);
 
         btn_close.setOnClickListener(v -> dismiss());
 

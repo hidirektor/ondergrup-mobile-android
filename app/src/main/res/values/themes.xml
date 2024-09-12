@@ -20,10 +20,6 @@
 
     <style name="Theme.QRBarcodeReader" parent="Theme.OnderGrup" />
 
-    <style name="ScreenBackground">
-        <item name="android:background">@color/md_theme_light_onPrimary</item>
-    </style>
-
     <style name="TextColor">
         <item name="android:textColor">@color/black</item>
     </style>

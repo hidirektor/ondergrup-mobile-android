@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    style="@style/ScreenBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
     android:background="@drawable/background_permission_dialog">
 
     <ImageView
@@ -100,7 +100,6 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:weightSum="3"
-        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="50dp"
@@ -122,7 +121,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/ikon_use"
-                    app:tint="@color/white"
+                    android:tint="@color/white"
                     android:layout_gravity="center"/>
             </androidx.cardview.widget.CardView>
             <TextView
