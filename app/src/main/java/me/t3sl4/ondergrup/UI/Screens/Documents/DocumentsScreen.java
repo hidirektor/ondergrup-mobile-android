@@ -1,25 +1,23 @@
 package me.t3sl4.ondergrup.UI.Screens.Documents;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Util.Web.WebViewBottomSheetFragment;
 
 public class DocumentsScreen extends AppCompatActivity {
 
-    private Button dataButton;
-    private Button privacyButton;
-    private Button imhaButton;
-    private Button manualButton;
+    private LinearLayout dataButton;
+    private LinearLayout privacyButton;
+    private LinearLayout imhaButton;
+    private LinearLayout manualButton;
 
     private ImageView backButton;
 
-    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,32 +29,32 @@ public class DocumentsScreen extends AppCompatActivity {
     }
 
     private void initializeComponents() {
-        dataButton = findViewById(R.id.dataButton);
-        privacyButton = findViewById(R.id.privacyButton);
-        imhaButton = findViewById(R.id.imhaButton);
-        manualButton = findViewById(R.id.manualButton);
+        dataButton = findViewById(R.id.kvkkLinearLayout);
+        privacyButton = findViewById(R.id.privacyLinearLayout);
+        imhaButton = findViewById(R.id.destructionLinearLayout);
+        manualButton = findViewById(R.id.manualLinearLayout);
         backButton = findViewById(R.id.backButton);
     }
 
     private void buttonClickListeners() {
         manualButton.setOnClickListener(v -> {
-            Intent manualIntent = new Intent(DocumentsScreen.this, ManualScreen.class);
-            startActivity(manualIntent);
+            WebViewBottomSheetFragment webViewBottomSheet = new WebViewBottomSheetFragment("https://hidirektor.com.tr/manual");
+            webViewBottomSheet.show(getSupportFragmentManager(), "WebViewBottomSheet");
         });
 
         dataButton.setOnClickListener(v -> {
-            Intent dataIntent = new Intent(DocumentsScreen.this, KVKKScreen.class);
-            startActivity(dataIntent);
+            WebViewBottomSheetFragment webViewBottomSheet = new WebViewBottomSheetFragment("https://www.ondergrup.com/kvkk-politikasi/");
+            webViewBottomSheet.show(getSupportFragmentManager(), "WebViewBottomSheet");
         });
 
         privacyButton.setOnClickListener(v -> {
-            Intent privacyIntent = new Intent(DocumentsScreen.this, PrivacyScreen.class);
-            startActivity(privacyIntent);
+            WebViewBottomSheetFragment webViewBottomSheet = new WebViewBottomSheetFragment("https://www.ondergrup.com/gizlilik-politikasi/");
+            webViewBottomSheet.show(getSupportFragmentManager(), "WebViewBottomSheet");
         });
 
         imhaButton.setOnClickListener(v -> {
-            Intent privacyIntent = new Intent(DocumentsScreen.this, DestructionScreen.class);
-            startActivity(privacyIntent);
+            WebViewBottomSheetFragment webViewBottomSheet = new WebViewBottomSheetFragment("https://www.ondergrup.com/veri-saklama-ve-imha-politikasi/");
+            webViewBottomSheet.show(getSupportFragmentManager(), "WebViewBottomSheet");
         });
 
         backButton.setOnClickListener(v -> finish());

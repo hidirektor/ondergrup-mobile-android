@@ -84,14 +84,6 @@
         <activity
             android:name=".UI.Screens.Documents.DocumentsScreen" />
         <activity
-            android:name=".UI.Screens.Documents.ManualScreen" />
-        <activity
-            android:name=".UI.Screens.Documents.PrivacyScreen"  />
-        <activity
-            android:name=".UI.Screens.Documents.KVKKScreen" />
-        <activity
-            android:name=".UI.Screens.Documents.DestructionScreen" />
-        <activity
             android:name=".UI.Screens.SubUser.SubUserScreen" />
         <activity
             android:name=".UI.Screens.SubUser.SubUserAddScreen" />

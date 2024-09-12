@@ -22,6 +22,7 @@ import me.t3sl4.ondergrup.UI.Components.HorizontalStepper.HorizontalStepper;
 import me.t3sl4.ondergrup.UI.Components.Sneaker.Sneaker;
 import me.t3sl4.ondergrup.UI.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Util.Util;
+import me.t3sl4.ondergrup.Util.Web.WebViewBottomSheetFragment;
 
 public class OnBoarding extends BaseActivity {
 
@@ -68,7 +69,7 @@ public class OnBoarding extends BaseActivity {
         login = findViewById(R.id.loginButton);
 
         userTerms = findViewById(R.id.userTerms);
-        privacyPolicy = findViewById(R.id.privacyButton);
+        privacyPolicy = findViewById(R.id.privacyPolicy);
 
         setupOnBoards();
 
@@ -99,13 +100,15 @@ public class OnBoarding extends BaseActivity {
             }
         });
 
-        /*userTerms.setOnClickListener(v -> {
-
+        userTerms.setOnClickListener(v -> {
+            WebViewBottomSheetFragment webViewBottomSheet = new WebViewBottomSheetFragment("https://www.ondergrup.com/veri-saklama-ve-imha-politikasi/");
+            webViewBottomSheet.show(getSupportFragmentManager(), "WebViewBottomSheet");
         });
 
         privacyPolicy.setOnClickListener(v -> {
-
-        });*/
+            WebViewBottomSheetFragment webViewBottomSheet = new WebViewBottomSheetFragment("https://www.ondergrup.com/gizlilik-politikasi/");
+            webViewBottomSheet.show(getSupportFragmentManager(), "WebViewBottomSheet");
+        });
 
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
