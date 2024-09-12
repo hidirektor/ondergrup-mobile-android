@@ -47,6 +47,10 @@
     <string name="notifications_desc">Sistem mesajları.</string>
 
     <string name="flash_light">Flashı Aç</string>
+    <string name="share">Paylaş</string>
+    <string name="copy">Kopyala</string>
+    <string name="web_search">Webde Ara</string>
+    <string name="scan_result">Tarama Sonucu</string>
 
     <string name="privacy_title">Gizlilik</string>
     <string name="privacy_box_desc">Hesap durumu.</string>

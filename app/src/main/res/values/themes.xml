@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.OnderGrup" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
@@ -16,5 +16,40 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.QRBarcodeReader" parent="Theme.OnderGrup" />
+
+    <style name="ScreenBackground">
+        <item name="android:background">@color/md_theme_light_onPrimary</item>
+    </style>
+
+    <style name="TextColor">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ToolBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@color/md_theme_light_primary</item>
+        <item name="titleTextColor">@color/white</item>
+    </style>
+
+    <style name="ImageQr">
+        <item name="android:background">@drawable/qr_code</item>
+    </style>
+
+    <style name="ImageDel">
+        <item name="android:background">@drawable/delete</item>
+    </style>
+
+    <style name="ImageShare">
+        <item name="android:background">@drawable/share_black</item>
+    </style>
+
+    <style name="ImageClose">
+        <item name="android:background">@drawable/close</item>
+    </style>
+
+    <style name="ImageBar">
+        <item name="android:background">@drawable/barcode</item>
     </style>
 </resources>
