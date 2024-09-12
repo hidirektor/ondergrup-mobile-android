@@ -44,6 +44,7 @@
     <string name="copy">Copy</string>
     <string name="use_scanned_id">Use Scanned ID</string>
     <string name="scan_result">Scan Result</string>
+    <string name="qr_warning">Scan the QR Code on the side of the machine.</string>
 
     <string name="privacy_title">Privacy</string>
     <string name="privacy_box_desc">Account status.</string>
