@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import me.t3sl4.countrypicker.CountryPicker;
@@ -18,6 +19,7 @@ import me.t3sl4.ondergrup.Model.OnBoard.OnBoard;
 import me.t3sl4.ondergrup.R;
 import me.t3sl4.ondergrup.UI.BaseActivity;
 import me.t3sl4.ondergrup.UI.Components.HorizontalStepper.HorizontalStepper;
+import me.t3sl4.ondergrup.UI.Components.Sneaker.Sneaker;
 import me.t3sl4.ondergrup.UI.Screens.Auth.LoginScreen;
 import me.t3sl4.ondergrup.Util.Util;
 
@@ -40,10 +42,12 @@ public class OnBoarding extends BaseActivity {
 
     private int previousPosition = 0;
 
+    private List<String> countryBlacklist = Arrays.asList("IL");
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_on_boarding1);
+        setContentView(R.layout.activity_on_boarding);
 
         initializeComponents();
 
@@ -73,16 +77,26 @@ public class OnBoarding extends BaseActivity {
     }
 
     private void componentListeners() {
+        String errorTitleMsg = getString(R.string.errorTitle);
+        String countryErrorMsg = getString(R.string.country_error);
         createAccount.setOnClickListener(v -> {
-            Intent createAccountIntent = new Intent(OnBoarding.this, LoginScreen.class);
-            finish();
-            startActivity(createAccountIntent);
+            if(countryBlacklist.contains(countryPicker.getSelectedCountry().getCode())) {
+                Sneaker.with(this).setTitle(errorTitleMsg).setMessage(countryErrorMsg).sneakError();
+            } else {
+                Intent createAccountIntent = new Intent(OnBoarding.this, LoginScreen.class);
+                finish();
+                startActivity(createAccountIntent);
+            }
         });
 
         login.setOnClickListener(v -> {
-            Intent loginIntent = new Intent(OnBoarding.this, LoginScreen.class);
-            finish();
-            startActivity(loginIntent);
+            if(countryBlacklist.contains(countryPicker.getSelectedCountry().getCode())) {
+                Sneaker.with(this).setTitle(errorTitleMsg).setMessage(countryErrorMsg).sneakError();
+            } else {
+                Intent loginIntent = new Intent(OnBoarding.this, LoginScreen.class);
+                finish();
+                startActivity(loginIntent);
+            }
         });
 
         /*userTerms.setOnClickListener(v -> {
@@ -111,19 +125,25 @@ public class OnBoarding extends BaseActivity {
     }
 
     private void setupOnBoards() {
-        String onboardTitle1 = getString(R.string.onboard_1_title_1) + " " + getString(R.string.onboard_1_title_2);
-        String onboardTitle2 = getString(R.string.onboard_2_title_1) + " " + getString(R.string.onboard_2_title_2);
-        String onboardTitle3 = getString(R.string.onboard_3_title_1) + " " + getString(R.string.onboard_3_title_2);
+        String onboardTitle1 = getString(R.string.onboard_1_title_1);
+        String onboardTitle2 = getString(R.string.onboard_2_title_1);
+        String onboardTitle3 = getString(R.string.onboard_3_title_1);
         onBoardList = new ArrayList<>();
-        onBoardList.add(new OnBoard(ContextCompat.getColor(this, R.color.tanitimekrani1), onboardTitle1, R.drawable.tanitimekrani_usercontrol));
-        onBoardList.add(new OnBoard(ContextCompat.getColor(this, R.color.tanitimekrani2), onboardTitle2, R.drawable.tanitimekrani_esp));
-        onBoardList.add(new OnBoard(ContextCompat.getColor(this, R.color.tanitimekrani3), onboardTitle3, R.drawable.tanitimekrani_csp));
+        onBoardList.add(new OnBoard(ContextCompat.getColor(this, R.color.tanitimekrani1), onboardTitle1, R.drawable.onboard_1));
+        onBoardList.add(new OnBoard(ContextCompat.getColor(this, R.color.tanitimekrani2), onboardTitle2, R.drawable.onboard_2));
+        onBoardList.add(new OnBoard(ContextCompat.getColor(this, R.color.tanitimekrani3), onboardTitle3, R.drawable.onboard_3));
     }
 
     private void updateSpinnerBasedOnLocation() {
+        String errorTitleMsg = getString(R.string.errorTitle);
+        String countryErrorMsg = getString(R.string.country_error);
+
         Util.getUserCountryCode(this, this, userCountryCode -> {
             if (userCountryCode != null && !userCountryCode.isEmpty()) {
                 countryPicker.setDefaultCountryByCode(userCountryCode);
+                if(countryBlacklist.contains(userCountryCode)) {
+                    Sneaker.with(this).setTitle(errorTitleMsg).setMessage(countryErrorMsg).sneakError();
+                }
             } else {
                 countryPicker.setDefaultCountryByCode("US");
             }

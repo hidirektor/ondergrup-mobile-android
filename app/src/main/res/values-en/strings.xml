@@ -76,16 +76,13 @@
     <string name="searchbar_hint">Ticket ID</string>
 
     <!-- OnBoard Texts -->
-    <string name="onboard_1_title_1">Holistic</string>
-    <string name="onboard_1_title_2">Control</string>
+    <string name="onboard_1_title_1">Instant Update Tracking</string>
     <string name="onboard_1_desc">You can control your products under the ÖnderGrup umbrella and all sub-users authorized with the products through the application.</string>
 
-    <string name="onboard_2_title_1">ESP</string>
-    <string name="onboard_2_title_2">Management</string>
+    <string name="onboard_2_title_1">Comprehensive Error &amp; Maintenance Records</string>
     <string name="onboard_2_desc">You can control all your purchased ESP devices from a single platform.</string>
 
-    <string name="onboard_3_title_1">CSP-D</string>
-    <string name="onboard_3_title_2">Management</string>
+    <string name="onboard_3_title_1">Intelligent Fault Detection with Artificial Intelligence</string>
     <string name="onboard_3_desc">You can control all your purchased CSP-D devices from a single platform.</string>
 
     <!-- Forget Password Screen Texts -->
@@ -390,6 +387,7 @@
     <string name="invalid_ticket_id">You have entered an invalid ID. You can only enter numbers.</string>
     <string name="ticket_fields_empty">All fields are required!</string>
     <string name="ticket_creation_failed">Failed to create ticket!</string>
+    <string name="country_error">We do not provide service to the area you selected.</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">The machine was added successfully.</string>

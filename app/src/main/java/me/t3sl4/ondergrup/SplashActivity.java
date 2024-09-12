@@ -172,12 +172,12 @@ public class SplashActivity extends AppCompatActivity {
         Util.setSystemLanguage(this);
 
         if(Util.isNetworkAvailable(this)) {
-            //setupOnboarding();
-            if (isFirstTime) {
+            setupOnboarding();
+            /*if (isFirstTime) {
                 setupOnboarding();
             } else {
                 redirectToMainActivity();
-            }
+            }*/
         } else {
             String errorTitleMsg = getString(R.string.errorTitle);
             String networkErrorMsg = getString(R.string.wifiFailure);

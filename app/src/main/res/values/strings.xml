@@ -83,16 +83,13 @@
     <string name="searchbar_hint">Ticket ID</string>
 
     <!-- OnBoard Texts -->
-    <string name="onboard_1_title_1">Bütüncül</string>
-    <string name="onboard_1_title_2">Kontrol</string>
+    <string name="onboard_1_title_1">Anında Güncelleme Takibi</string>
     <string name="onboard_1_desc">ÖnderGrup çatısı altındaki ürünlerinizi ve ürünlerle yetkili tüm alt kullanıcıları uygulama üzerinden kontrol edebilirsiniz.</string>
 
-    <string name="onboard_2_title_1">ESP</string>
-    <string name="onboard_2_title_2">Yönetimi</string>
+    <string name="onboard_2_title_1">Kapsamlı Hata &amp; Bakım Kayıtları</string>
     <string name="onboard_2_desc">Satın almış olduğunuz tüm ESP cihazlarınızı tek bir platformdan kontrol edebilirsiniz.</string>
 
-    <string name="onboard_3_title_1">CSP-D</string>
-    <string name="onboard_3_title_2">Yönetimi</string>
+    <string name="onboard_3_title_1">Yapay Zeka ile Akıllı Arıza Tespiti</string>
     <string name="onboard_3_desc">Satın almış olduğunuz tüm CSP-D cihazlarınızı tek bir platformdan kontrol edebilirsiniz.</string>
 
     <!-- Forget Password Screen Texts -->
@@ -403,6 +400,7 @@
     <string name="invalid_ticket_id">Geçersiz ID girdiniz. Sadece sayı girebilirsiniz.</string>
     <string name="ticket_fields_empty">Tüm alanları doldurmanız gerekiyor!</string>
     <string name="ticket_creation_failed">Destek talebi oluşturulamadı!</string>
+    <string name="country_error">Seçtiğiniz bölgeye hizmet sağlamıyoruz.</string>
 
     <!-- Success Texts -->
     <string name="machine_add_successful">Makine başarılı bir şekilde eklendi.</string>

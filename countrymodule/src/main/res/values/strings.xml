@@ -1,3 +1,3 @@
 <resources>
-    <string name="app_name">CountryModule</string>
+    <string name="current_country">Bulunduğum Ülke:</string>
 </resources>
