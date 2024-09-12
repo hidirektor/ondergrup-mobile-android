@@ -251,7 +251,6 @@ public class Engineer extends BaseActivity {
         qrDiyalog.setContentView(R.layout.activity_machine_add);
 
         ImageView cancelButton = qrDiyalog.findViewById(R.id.cancelButton);
-        ImageView wifiButton = qrDiyalog.findViewById(R.id.wifiButton);
         Button addButton = qrDiyalog.findViewById(R.id.makineEkleButton);
         Spinner machineTypeSpinner = qrDiyalog.findViewById(R.id.machineTypeSpinner);
 
@@ -272,29 +271,6 @@ public class Engineer extends BaseActivity {
         });
 
         cancelButton.setOnClickListener(view -> qrDiyalog.dismiss());
-
-        wifiButton.setOnClickListener(view -> {
-            if (!Util.isConnectedToTargetWifi(this)) {
-                openWifiSettings();
-
-                new Thread(() -> {
-                    while (!Util.isConnectedToTargetWifi(this)) {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    runOnUiThread(() -> {
-                        wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
-                    });
-                }).start();
-            } else {
-                wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
-            }
-        });
-
 
         addButton.setOnClickListener(view -> makineEkle(machineTypeSpinner.getSelectedItem().toString(), scannedQRCodeEditText.getText().toString()));
 

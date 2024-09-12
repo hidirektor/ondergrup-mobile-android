@@ -1,6 +1,7 @@
 package me.t3sl4.ondergrup.UI.Screens.Dashboard;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -49,6 +50,7 @@ import me.t3sl4.ondergrup.Util.HTTP.Requests.Machine.MachineService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class User extends BaseActivity {
+    private static final int QR_REQUEST_CODE = 123;
     private TextView isimSoyisim;
 
 
@@ -241,7 +243,6 @@ public class User extends BaseActivity {
 
         TextView makineTuru = qrDiyalog.findViewById(R.id.textViewMakineTuru);
         ImageView cancelButton = qrDiyalog.findViewById(R.id.cancelButton);
-        ImageView wifiButton = qrDiyalog.findViewById(R.id.wifiButton);
         Button addButton = qrDiyalog.findViewById(R.id.makineEkleButton);
         Spinner machineTypeSpinner = qrDiyalog.findViewById(R.id.machineTypeSpinner);
         View splitter = qrDiyalog.findViewById(R.id.view);
@@ -268,28 +269,6 @@ public class User extends BaseActivity {
 
         cancelButton.setOnClickListener(view -> qrDiyalog.dismiss());
 
-        wifiButton.setOnClickListener(view -> {
-            if (!Util.isConnectedToTargetWifi(this)) {
-                openWifiSettings();
-
-                new Thread(() -> {
-                    while (!Util.isConnectedToTargetWifi(this)) {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    runOnUiThread(() -> {
-                        wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
-                    });
-                }).start();
-            } else {
-                wifiButton.setImageDrawable(getResources().getDrawable(R.drawable.ikon_wifi_green));
-            }
-        });
-
 
         addButton.setOnClickListener(view -> {
             Log.d("Selected Type", machineTypeSpinner.getSelectedItem().toString());
@@ -309,5 +288,22 @@ public class User extends BaseActivity {
         qrDiyalog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         qrDiyalog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         qrDiyalog.getWindow().setGravity(Gravity.BOTTOM);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == QR_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            String scannedQRCode = data.getStringExtra("scannedQRCode");
+            if (scannedQRCode != null) {
+                scannedQRCodeEditText.setText(scannedQRCode);
+            }
+        }
+    }
+
+    private void launchQRScanner() {
+        Intent intent = new Intent(User.this, QRScanner.class);
+        startActivityForResult(intent, QR_REQUEST_CODE);
     }
 }

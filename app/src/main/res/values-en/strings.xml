@@ -39,6 +39,8 @@
     <string name="notifications_title">Notifications</string>
     <string name="notifications_desc">System messages.</string>
 
+    <string name="flash_light">Turn on Flashlight</string>
+
     <string name="privacy_title">Privacy</string>
     <string name="privacy_box_desc">Account status.</string>
 
