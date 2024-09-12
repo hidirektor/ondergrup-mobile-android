@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 957,
-      "versionName": "1.8.57(957)",
-      "outputFile": "OnderGrup release_11-09-2024_v1.8.57(957).apk"
+      "versionCode": 1063,
+      "versionName": "1.9.63(1063)",
+      "outputFile": "OnderGrup release_13-09-2024_v1.9.63(1063).apk"
     }
   ],
   "elementType": "File",
@@ -22,14 +22,14 @@
       "minApi": 28,
       "maxApi": 30,
       "baselineProfiles": [
-        "baselineProfiles/1/OnderGrup release_11-09-2024_v1.8.57(957).dm"
+        "baselineProfiles/1/OnderGrup release_13-09-2024_v1.9.63(1063).dm"
       ]
     },
     {
       "minApi": 31,
       "maxApi": 2147483647,
       "baselineProfiles": [
-        "baselineProfiles/0/OnderGrup release_11-09-2024_v1.8.57(957).dm"
+        "baselineProfiles/0/OnderGrup release_13-09-2024_v1.9.63(1063).dm"
       ]
     }
   ],
