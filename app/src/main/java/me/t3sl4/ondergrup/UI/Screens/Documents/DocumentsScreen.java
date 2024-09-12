@@ -38,7 +38,8 @@ public class DocumentsScreen extends AppCompatActivity {
 
     private void buttonClickListeners() {
         manualButton.setOnClickListener(v -> {
-            WebViewBottomSheetFragment webViewBottomSheet = new WebViewBottomSheetFragment("https://hidirektor.com.tr/manual");
+            String pdfUrl = "https://hidirektor.com.tr/manual";
+            WebViewBottomSheetFragment webViewBottomSheet = new WebViewBottomSheetFragment(pdfUrl);
             webViewBottomSheet.show(getSupportFragmentManager(), "WebViewBottomSheet");
         });
 

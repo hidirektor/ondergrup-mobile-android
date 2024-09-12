@@ -41,7 +41,11 @@ public class WebViewBottomSheetFragment extends BottomSheetDialogFragment {
         Animation loadingAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.macos_loading_animation);
         customProgressBar.startAnimation(loadingAnimation);
 
+        String DESKTOP_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36";
+
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setUserAgentString(DESKTOP_USER_AGENT);
+        webView.getSettings().setDomStorageEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
