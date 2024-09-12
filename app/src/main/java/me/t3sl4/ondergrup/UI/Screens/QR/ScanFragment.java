@@ -39,6 +39,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import me.t3sl4.ondergrup.R;
+import me.t3sl4.ondergrup.Util.QR.MyImageAnalyzer;
+import me.t3sl4.ondergrup.Util.QR.QRUtil;
 import me.t3sl4.ondergrup.databinding.FragmentScanBinding;
 
 

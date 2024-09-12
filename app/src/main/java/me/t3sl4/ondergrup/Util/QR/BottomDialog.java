@@ -1,4 +1,4 @@
-package me.t3sl4.ondergrup.UI.Screens.QR;
+package me.t3sl4.ondergrup.Util.QR;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
@@ -25,6 +25,7 @@ import java.util.Calendar;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import me.t3sl4.ondergrup.Model.QR.Database.DatabaseHelper;
 import me.t3sl4.ondergrup.R;
 
 public class BottomDialog extends BottomSheetDialogFragment {

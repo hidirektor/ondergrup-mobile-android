@@ -1,4 +1,4 @@
-package me.t3sl4.ondergrup.UI.Screens.QR;
+package me.t3sl4.ondergrup.Model.QR.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import me.t3sl4.ondergrup.Model.QR.QR;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -52,8 +54,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<DataModel> getAllData() {
-        List<DataModel> dataList = new ArrayList<>();
+    public List<QR> getAllData() {
+        List<QR> dataList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         String[] columns = {ID_COL, TYPE_COL, TIMESTAMP_COL, VALUE_COL};
         Cursor cursor = db.query(TABLE_NAME, columns, null, null, null, null, null);
@@ -64,7 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String timestamp = cursor.getString(cursor.getColumnIndexOrThrow(TIMESTAMP_COL));
                 String value = cursor.getString(cursor.getColumnIndexOrThrow(VALUE_COL));
 
-                dataList.add(new DataModel(id, type, timestamp, value));
+                dataList.add(new QR(id, type, timestamp, value));
             }
             cursor.close();
         }

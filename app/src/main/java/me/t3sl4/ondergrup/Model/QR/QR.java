@@ -1,11 +1,11 @@
-package me.t3sl4.ondergrup.UI.Screens.QR;
+package me.t3sl4.ondergrup.Model.QR;
 
-public class DataModel {
+public class QR {
 
     private long id;
     private String type, timestamp, value;
 
-    public DataModel(long id, String type, String timestamp, String value) {
+    public QR(long id, String type, String timestamp, String value) {
         this.id = id;
         this.type = type;
         this.timestamp = timestamp;

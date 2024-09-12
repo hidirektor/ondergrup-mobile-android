@@ -1,4 +1,4 @@
-package me.t3sl4.ondergrup.UI.Screens.QR;
+package me.t3sl4.ondergrup.Util.QR;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
