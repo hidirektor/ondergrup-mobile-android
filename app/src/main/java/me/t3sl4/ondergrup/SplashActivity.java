@@ -52,6 +52,8 @@ public class SplashActivity extends AppCompatActivity {
         fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
+        uyariDiyalog = new Dialog(this);
+
         // OneSignal initialization for notifications
         OneSignal.getDebug().setLogLevel(LogLevel.VERBOSE);
         OneSignal.initWithContext(this, oneSignalAppId);
