@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "me.t3sl4.ondergrup",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 1098,
+      "versionName": "1.9.98(1098)",
+      "outputFile": "OnderGrup release_28-07-2025_v1.9.98(1098).apk"
+    }
+  ],
+  "elementType": "File",
+  "baselineProfiles": [
+    {
+      "minApi": 28,
+      "maxApi": 30,
+      "baselineProfiles": [
+        "baselineProfiles/1/OnderGrup release_28-07-2025_v1.9.98(1098).dm"
+      ]
+    },
+    {
+      "minApi": 31,
+      "maxApi": 2147483647,
+      "baselineProfiles": [
+        "baselineProfiles/0/OnderGrup release_28-07-2025_v1.9.98(1098).dm"
+      ]
+    }
+  ],
+  "minSdkVersionForDexing": 29
+}
