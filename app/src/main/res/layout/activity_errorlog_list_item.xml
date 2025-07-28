@@ -35,6 +35,14 @@
             android:text="Lorem Ipsum"
             android:textSize="14sp" />
 
+        <TextView
+            android:id="@+id/machineIDText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem Ipsum"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray" />
+
     </LinearLayout>
 
 </LinearLayout>

@@ -577,4 +577,83 @@ public class Maintenance implements Parcelable {
     public void setKontrol910(String kontrol910) {
         this.kontrol910 = kontrol910;
     }
+
+    // Bakım durumu kontrolü metodları
+    public boolean isMaintenanceCompleted() {
+        // Tüm kontrol alanlarını kontrol et
+        String[] allKontrols = {
+            kontrol11, kontrol12, kontrol13, kontrol14,
+            kontrol21, kontrol22, kontrol23, kontrol24,
+            kontrol31, kontrol32, kontrol33, kontrol34, kontrol35, kontrol36,
+            kontrol41, kontrol42, kontrol43, kontrol44, kontrol45, kontrol46,
+            kontrol51, kontrol52, kontrol53, kontrol54, kontrol55, kontrol56,
+            kontrol61, kontrol62, kontrol63,
+            kontrol71, kontrol72,
+            kontrol81, kontrol82, kontrol83,
+            kontrol91, kontrol92, kontrol93, kontrol94, kontrol95, kontrol96, kontrol97, kontrol98, kontrol99, kontrol910
+        };
+
+        // Eğer hiç kontrol yapılmamışsa (null veya boş) false döndür
+        boolean hasAnyKontrol = false;
+        for (String kontrol : allKontrols) {
+            if (kontrol != null && !kontrol.trim().isEmpty()) {
+                hasAnyKontrol = true;
+                break;
+            }
+        }
+
+        if (!hasAnyKontrol) {
+            return false; // Hiç kontrol yapılmamış
+        }
+
+        // Tüm kontrol alanlarını kontrol et, "Tamam" olmayan varsa false döndür
+        for (String kontrol : allKontrols) {
+            if (kontrol != null && !kontrol.trim().isEmpty() && !kontrol.trim().equalsIgnoreCase("Tamam")) {
+                return false; // Tamamlanmamış kontrol var
+            }
+        }
+
+        return true; // Tüm kontroller tamamlanmış
+    }
+
+    public String getMaintenanceStatus() {
+        if (isMaintenanceCompleted()) {
+            return "Tamamlandı";
+        } else {
+            return "Devam Ediyor";
+        }
+    }
+
+    public int getCompletedKontrolCount() {
+        String[] allKontrols = {
+            kontrol11, kontrol12, kontrol13, kontrol14,
+            kontrol21, kontrol22, kontrol23, kontrol24,
+            kontrol31, kontrol32, kontrol33, kontrol34, kontrol35, kontrol36,
+            kontrol41, kontrol42, kontrol43, kontrol44, kontrol45, kontrol46,
+            kontrol51, kontrol52, kontrol53, kontrol54, kontrol55, kontrol56,
+            kontrol61, kontrol62, kontrol63,
+            kontrol71, kontrol72,
+            kontrol81, kontrol82, kontrol83,
+            kontrol91, kontrol92, kontrol93, kontrol94, kontrol95, kontrol96, kontrol97, kontrol98, kontrol99, kontrol910
+        };
+
+        int completedCount = 0;
+        for (String kontrol : allKontrols) {
+            if (kontrol != null && kontrol.trim().equalsIgnoreCase("Tamam")) {
+                completedCount++;
+            }
+        }
+        return completedCount;
+    }
+
+    public int getTotalKontrolCount() {
+        return 50; // Toplam kontrol sayısı
+    }
+
+    public double getCompletionPercentage() {
+        int completed = getCompletedKontrolCount();
+        int total = getTotalKontrolCount();
+        if (total == 0) return 0.0;
+        return (double) completed / total * 100.0;
+    }
 }

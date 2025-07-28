@@ -68,7 +68,31 @@ public class MaintenanceAdapter extends BaseAdapter {
 
         holder.maintenanceIcon.setImageDrawable(drawable);
         holder.incharge_technician.setText(preIncharge + " " + machineMaintenance.getTechnicianName());
-        holder.maintenance_date.setText(preDate + " " + Util.convertUnixTimestampToDateString(Long.valueOf(machineMaintenance.getMaintenanceDate())));
+        
+        // Bakım durumunu göster
+        String maintenanceStatus = machineMaintenance.getMaintenanceStatus();
+        String completionText = String.format(" (%d/%d - %.1f%%)", 
+            machineMaintenance.getCompletedKontrolCount(), 
+            machineMaintenance.getTotalKontrolCount(), 
+            machineMaintenance.getCompletionPercentage());
+        holder.incharge_technician.setText(preIncharge + " " + machineMaintenance.getTechnicianName() + " - " + maintenanceStatus + completionText);
+        
+        // Bakım tarihini güvenli bir şekilde işle
+        String maintenanceDateStr = machineMaintenance.getMaintenanceDate();
+        String formattedDate;
+        try {
+            // Eğer tarih zaten string formatındaysa (15.01.2024 gibi) direkt kullan
+            if (maintenanceDateStr.contains(".") || maintenanceDateStr.contains("/")) {
+                formattedDate = maintenanceDateStr;
+            } else {
+                // Unix timestamp ise convert et
+                formattedDate = Util.convertUnixTimestampToDateString(Long.valueOf(maintenanceDateStr));
+            }
+        } catch (NumberFormatException e) {
+            // Parse edilemezse orijinal string'i kullan
+            formattedDate = maintenanceDateStr;
+        }
+        holder.maintenance_date.setText(preDate + " " + formattedDate);
         holder.maintenance_id.setText(preID + " " + machineMaintenance.getMaintenanceID());
 
         return convertView;

@@ -53,6 +53,7 @@ public class MachineErrorAdapter extends BaseAdapter {
             holder.machineErrorImage = convertView.findViewById(R.id.machineErrorImage);
             holder.errorName = convertView.findViewById(R.id.errorName);
             holder.errorDate = convertView.findViewById(R.id.errorDate);
+            holder.machineID = convertView.findViewById(R.id.machineIDText);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -62,7 +63,24 @@ public class MachineErrorAdapter extends BaseAdapter {
         Drawable drawable = null;
         String errorName = "";
 
-        int errorCode = Integer.parseInt(machineError.getErrorCode());
+        // Hata kodunu güvenli bir şekilde parse et
+        int errorCode = 1; // Varsayılan değer
+        try {
+            String errorCodeStr = machineError.getErrorCode();
+            // E001, E002 gibi formatları 1, 2 gibi sayılara çevir
+            if (errorCodeStr != null && errorCodeStr.startsWith("E")) {
+                String numberPart = errorCodeStr.substring(1);
+                errorCode = Integer.parseInt(numberPart);
+            } else if (errorCodeStr != null) {
+                errorCode = Integer.parseInt(errorCodeStr);
+            }
+        } catch (NumberFormatException e) {
+            // Parse edilemezse varsayılan değer kullan
+            errorCode = 1;
+        } catch (Exception e) {
+            // Herhangi bir hata durumunda varsayılan değer kullan
+            errorCode = 1;
+        }
 
         if(errorCode == 1) {
             errorName = context.getResources().getString(R.string.acilstop);
@@ -82,11 +100,34 @@ public class MachineErrorAdapter extends BaseAdapter {
         } else if(errorCode == 6) {
             errorName = context.getResources().getString(R.string.maximumcalisma);
             drawable = ContextCompat.getDrawable(context, R.drawable.ikon_hata_maximumcalisma);
+        } else {
+            // Bilinmeyen hata kodu için varsayılan değer
+            errorName = context.getResources().getString(R.string.acilstop);
+            drawable = ContextCompat.getDrawable(context, R.drawable.ikon_hata_acilstop);
         }
 
         holder.machineErrorImage.setImageDrawable(drawable);
         holder.errorName.setText(errorName);
-        holder.errorDate.setText(Util.dateTimeConvert(machineError.getErrorDate()));
+        // Tarihi güvenli bir şekilde göster
+        String errorDateStr = machineError.getErrorDate();
+        String formattedDate;
+        try {
+            // Eğer tarih zaten string formatındaysa (15.01.2024 10:30:00 gibi) direkt kullan
+            if (errorDateStr != null && (errorDateStr.contains(".") || errorDateStr.contains("/"))) {
+                formattedDate = errorDateStr;
+            } else {
+                // Unix timestamp ise convert et
+                formattedDate = Util.dateTimeConvert(errorDateStr);
+            }
+        } catch (Exception e) {
+            // Parse edilemezse orijinal string'i kullan
+            formattedDate = errorDateStr != null ? errorDateStr : "";
+        }
+        holder.errorDate.setText(formattedDate);
+
+        // Makine ID'yi göster
+        String idText = context.getResources().getString(R.string.machine_id) + " " + machineError.getMachineID();
+        holder.machineID.setText(idText);
 
         return convertView;
     }
@@ -95,5 +136,6 @@ public class MachineErrorAdapter extends BaseAdapter {
         ImageView machineErrorImage;
         TextView errorName;
         TextView errorDate;
+        TextView machineID;
     }
 }

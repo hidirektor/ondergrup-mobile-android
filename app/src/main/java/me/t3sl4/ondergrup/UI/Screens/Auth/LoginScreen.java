@@ -17,7 +17,6 @@ import me.t3sl4.ondergrup.UI.Screens.Auth.ResetPassword.ForgetPassword;
 import me.t3sl4.ondergrup.Util.Component.Button.ButtonManager;
 import me.t3sl4.ondergrup.Util.Component.PasswordField.PasswordFieldTouchListener;
 import me.t3sl4.ondergrup.Util.HTTP.Requests.Auth.AuthService;
-import me.t3sl4.ondergrup.Util.HTTP.Requests.User.UserService;
 import me.t3sl4.ondergrup.Util.Util;
 
 public class LoginScreen extends BaseActivity {
@@ -109,6 +108,10 @@ public class LoginScreen extends BaseActivity {
         passwordField_login = findViewById(R.id.passwordField_login);
         loginButton = findViewById(R.id.loginButton);
 
+        // Dummy data doldurma
+        userNameField_login.setText("recep.baskurt@ondergrup.com");
+        passwordField_login.setText("asdasd");
+
         //Register Section:
         nameSurnameField_register = findViewById(R.id.nameSurnameField_register);
         userNameField_register = findViewById(R.id.userNameField_register);
@@ -135,6 +138,8 @@ public class LoginScreen extends BaseActivity {
         String username = userNameField_login.getText().toString();
         String password = passwordField_login.getText().toString();
 
+        // Gerçek istek yorum satırına alındı
+        /*
         AuthService.login(this, username, password, () -> {
             UserService.getProfile(this, UserDataService.getUserID(this), () -> {
                 Util.redirectBasedRole(LoginScreen.this, false, uyariDiyalog);
@@ -142,6 +147,20 @@ public class LoginScreen extends BaseActivity {
         }, () -> {
             Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.login_error));
         });
+        */
+
+        // Dummy login simülasyonu
+        // Kullanıcı adı ve şifre doğruysa başarılı login simülasyonu
+        if (username.equals("recep.baskurt@ondergrup.com") && password.equals("asdasd")) {
+            // Dummy UserDataService doldurulabilir, ardından yönlendirme yapılır
+            UserDataService.setUserID(this, "dummyUserID");
+            UserDataService.setUserRole(this, "NORMAL");
+            UserDataService.setAccessToken(this, "dummyAccessToken");
+            UserDataService.setRefreshToken(this, "dummyRefreshToken");
+            Util.redirectBasedRole(LoginScreen.this, false, uyariDiyalog);
+        } else {
+            Util.showErrorPopup(uyariDiyalog, this.getResources().getString(R.string.login_error));
+        }
     }
 
     private void sendRegisterRequest() {

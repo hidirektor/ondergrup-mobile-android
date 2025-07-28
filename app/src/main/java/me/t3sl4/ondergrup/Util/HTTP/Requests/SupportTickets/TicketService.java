@@ -3,7 +3,6 @@ package me.t3sl4.ondergrup.Util.HTTP.Requests.SupportTickets;
 import android.content.Context;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -147,6 +146,8 @@ public class TicketService {
 
     // getTickets method
     public static void getTickets(Context context, String userID, List<Ticket> ticketList, Runnable onSuccess, Runnable onFailure) {
+        // Gerçek API isteği yorum satırına alındı, dummy data ile dolduruluyor
+        /*
         String authToken = UserDataService.getAccessToken(context);
 
         JSONObject jsonObject = new JSONObject();
@@ -217,5 +218,61 @@ public class TicketService {
                 }
             }
         });
+        */
+
+        // Dummy data
+        ticketList.clear();
+        
+        // Dummy ticket 1
+        Ticket ticket1 = new Ticket(1, userID, "Makine Arızası", "ESP makinesi çalışmıyor", "Açık", "2", 1704067200000L); // 01.01.2024
+        ticketList.add(ticket1);
+        
+        // Dummy ticket 2
+        Ticket ticket2 = new Ticket(2, userID, "Teknik Destek", "CSP-D makinesi ayarları", "Kapalı", "5", 1704153600000L); // 02.01.2024
+        ticketList.add(ticket2);
+        
+        // Dummy ticket 3
+        Ticket ticket3 = new Ticket(3, userID, "Yazılım Sorunu", "Uygulama açılmıyor", "Açık", "1", 1704240000000L); // 03.01.2024
+        ticketList.add(ticket3);
+        
+        // Dummy ticket 4
+        Ticket ticket4 = new Ticket(4, userID, "Parça Talebi", "Hidrolik pompa değişimi", "Beklemede", "3", 1704326400000L); // 04.01.2024
+        ticketList.add(ticket4);
+        
+        // Dummy ticket 5
+        Ticket ticket5 = new Ticket(5, userID, "Yazılım Güncelleme", "Uygulama güncelleme talebi", "Açık", "1", 1704412800000L); // 05.01.2024
+        ticketList.add(ticket5);
+        
+        // Dummy ticket 6
+        Ticket ticket6 = new Ticket(6, userID, "Eğitim Talebi", "Yeni makine kullanım eğitimi", "Kapalı", "4", 1704499200000L); // 06.01.2024
+        ticketList.add(ticket6);
+        
+        // Dummy ticket 7
+        Ticket ticket7 = new Ticket(7, userID, "Kontrol Paneli Sorunu", "Kontrol paneli yanıt vermiyor", "Açık", "2", 1704585600000L); // 07.01.2024
+        ticketList.add(ticket7);
+        
+        // Dummy ticket 8
+        Ticket ticket8 = new Ticket(8, userID, "Ses Sistemi Arızası", "Buzzer sesi gelmiyor", "Beklemede", "1", 1704672000000L); // 08.01.2024
+        ticketList.add(ticket8);
+        
+        // Dummy ticket 9
+        Ticket ticket9 = new Ticket(9, userID, "Acil Servis", "Makine tamamen durdu", "Açık", "5", 1704758400000L); // 09.01.2024
+        ticketList.add(ticket9);
+        
+        // Dummy ticket 10
+        Ticket ticket10 = new Ticket(10, userID, "Kullanım Kılavuzu", "Yeni makine kullanım kılavuzu", "Kapalı", "2", 1704844800000L); // 10.01.2024
+        ticketList.add(ticket10);
+        
+        // Dummy ticket 11
+        Ticket ticket11 = new Ticket(11, userID, "Güvenlik Sorunu", "Emniyet sistemi çalışmıyor", "Açık", "3", 1704931200000L); // 11.01.2024
+        ticketList.add(ticket11);
+        
+        // Dummy ticket 12
+        Ticket ticket12 = new Ticket(12, userID, "Performans Sorunu", "Makine yavaş çalışıyor", "Beklemede", "2", 1705017600000L); // 12.01.2024
+        ticketList.add(ticket12);
+
+        if (onSuccess != null) {
+            onSuccess.run();
+        }
     }
 }

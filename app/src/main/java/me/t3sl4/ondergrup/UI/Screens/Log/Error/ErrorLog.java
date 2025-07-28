@@ -103,7 +103,23 @@ public class ErrorLog extends AppCompatActivity {
     private void showErroDetail(Dialog diyalog, String errorDetail) {
         diyalog.setContentView(R.layout.activity_popup_errordetail);
 
-        int errorCode = Integer.parseInt(errorDetail);
+        // Hata kodunu güvenli bir şekilde parse et
+        int errorCode = 1; // Varsayılan değer
+        try {
+            // E001, E002 gibi formatları 1, 2 gibi sayılara çevir
+            if (errorDetail != null && errorDetail.startsWith("E")) {
+                String numberPart = errorDetail.substring(1);
+                errorCode = Integer.parseInt(numberPart);
+            } else if (errorDetail != null) {
+                errorCode = Integer.parseInt(errorDetail);
+            }
+        } catch (NumberFormatException e) {
+            // Parse edilemezse varsayılan değer kullan
+            errorCode = 1;
+        } catch (Exception e) {
+            // Herhangi bir hata durumunda varsayılan değer kullan
+            errorCode = 1;
+        }
 
         ImageView errorImage = diyalog.findViewById(R.id.errorImage);
         Button close = diyalog.findViewById(R.id.kapatButton);

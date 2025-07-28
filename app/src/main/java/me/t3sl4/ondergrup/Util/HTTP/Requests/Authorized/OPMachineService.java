@@ -3,7 +3,6 @@ package me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized;
 import android.content.Context;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +23,8 @@ public class OPMachineService {
 
     public static void getAllMachines(Context context, ArrayList<Machine> machines, Runnable onSuccess, Runnable onFailure) {
 
+        // Gerçek API isteği yorum satırına alındı, dummy data ile dolduruluyor
+        /*
         String authToken = UserDataService.getAccessToken(context);
 
         Call<ResponseBody> call = HttpHelper.makeRequestWithAuth("GET", GET_ALL_MACHINES_URL, null, null, authToken);
@@ -121,6 +122,155 @@ public class OPMachineService {
                 //boş kısım revize edilecek
             }
         });
+        */
+
+        // Dummy data
+        machines.clear();
+        
+        // Dummy makine 1
+        Machine machine1 = new Machine("MACH001", "ESP", "USER001", "Recep Baskurt", "01.01.2024", "15.01.2024");
+        machine1.setWifiSSID("OnderGrup_WiFi");
+        machine1.setWifiPass("12345678");
+        machine1.setDevirmeYuruyusSecim("1");
+        machine1.setCalismaSekli("Normal");
+        machine1.setEmniyetCercevesi("Açık");
+        machine1.setYavaslamaLimit("100");
+        machine1.setAltLimit("50");
+        machine1.setKapiTablaAcKonum("Açık");
+        machine1.setBasincSalteri("Aktif");
+        machine1.setKapiSecimleri("Otomatik");
+        machine1.setKapiAcTipi("Hidrolik");
+        machine1.setKapi1Tip("Tek Kapı");
+        machine1.setKapi1AcSure("3");
+        machine1.setKapi2Tip("Çift Kapı");
+        machine1.setKapi2AcSure("5");
+        machine1.setKapitablaTip("Hidrolik");
+        machine1.setKapiTablaAcSure("4");
+        machine1.setYukariYavasLimit("80");
+        machine1.setDevirmeYukariIleriLimit("90");
+        machine1.setDevirmeAsagiGeriLimit("10");
+        machine1.setDevirmeSilindirTipi("Çift Etkili");
+        machine1.setPlatformSilindirTipi("Tek Etkili");
+        machine1.setYukariValfTmr("2");
+        machine1.setAsagiValfTmr("2");
+        machine1.setDevirmeYukariIleriTmr("3");
+        machine1.setDevirmeAsagiGeriTmr("3");
+        machine1.setMakineCalismaTmr("10");
+        machine1.setBuzzer("Aktif");
+        machine1.setDemoMode("0");
+        machine1.setCalismaSayisi("1500");
+        machine1.setCalismaSayisiDemo("0");
+        machine1.setDilSecim("1");
+        machine1.setEepromData38("38");
+        machine1.setEepromData39("39");
+        machine1.setEepromData40("40");
+        machine1.setEepromData41("41");
+        machine1.setEepromData42("42");
+        machine1.setEepromData43("43");
+        machine1.setEepromData44("44");
+        machine1.setEepromData45("45");
+        machine1.setEepromData46("46");
+        machine1.setEepromData47("47");
+        machine1.setLcdBacklightSure("30");
+        machines.add(machine1);
+
+        // Dummy makine 2
+        Machine machine2 = new Machine("MACH002", "CSP-D", "USER001", "Recep Baskurt", "01.02.2024", "20.01.2024");
+        machine2.setWifiSSID("OnderGrup_WiFi_2");
+        machine2.setWifiPass("87654321");
+        machine2.setDevirmeYuruyusSecim("0");
+        machine2.setCalismaSekli("Hızlı");
+        machine2.setEmniyetCercevesi("Kapalı");
+        machine2.setYavaslamaLimit("120");
+        machine2.setAltLimit("30");
+        machine2.setKapiTablaAcKonum("Kapalı");
+        machine2.setBasincSalteri("Pasif");
+        machine2.setKapiSecimleri("Manuel");
+        machine2.setKapiAcTipi("Pnömatik");
+        machine2.setKapi1Tip("Çift Kapı");
+        machine2.setKapi1AcSure("4");
+        machine2.setKapi2Tip("Tek Kapı");
+        machine2.setKapi2AcSure("3");
+        machine2.setKapitablaTip("Pnömatik");
+        machine2.setKapiTablaAcSure("5");
+        machine2.setYukariYavasLimit("100");
+        machine2.setDevirmeYukariIleriLimit("95");
+        machine2.setDevirmeAsagiGeriLimit("5");
+        machine2.setDevirmeSilindirTipi("Tek Etkili");
+        machine2.setPlatformSilindirTipi("Çift Etkili");
+        machine2.setYukariValfTmr("3");
+        machine2.setAsagiValfTmr("3");
+        machine2.setDevirmeYukariIleriTmr("4");
+        machine2.setDevirmeAsagiGeriTmr("4");
+        machine2.setMakineCalismaTmr("15");
+        machine2.setBuzzer("Pasif");
+        machine2.setDemoMode("1");
+        machine2.setCalismaSayisi("0");
+        machine2.setCalismaSayisiDemo("500");
+        machine2.setDilSecim("0");
+        machine2.setEepromData38("138");
+        machine2.setEepromData39("139");
+        machine2.setEepromData40("140");
+        machine2.setEepromData41("141");
+        machine2.setEepromData42("142");
+        machine2.setEepromData43("143");
+        machine2.setEepromData44("144");
+        machine2.setEepromData45("145");
+        machine2.setEepromData46("146");
+        machine2.setEepromData47("147");
+        machine2.setLcdBacklightSure("60");
+        machines.add(machine2);
+
+        // Dummy makine 3
+        Machine machine3 = new Machine("MACH003", "ESP", "USER002", "Ahmet Yılmaz", "01.03.2024", "25.01.2024");
+        machine3.setWifiSSID("OnderGrup_WiFi_3");
+        machine3.setWifiPass("11111111");
+        machine3.setDevirmeYuruyusSecim("1");
+        machine3.setCalismaSekli("Yavaş");
+        machine3.setEmniyetCercevesi("Açık");
+        machine3.setYavaslamaLimit("80");
+        machine3.setAltLimit("40");
+        machine3.setKapiTablaAcKonum("Açık");
+        machine3.setBasincSalteri("Aktif");
+        machine3.setKapiSecimleri("Otomatik");
+        machine3.setKapiAcTipi("Hidrolik");
+        machine3.setKapi1Tip("Tek Kapı");
+        machine3.setKapi1AcSure("2");
+        machine3.setKapi2Tip("Tek Kapı");
+        machine3.setKapi2AcSure("2");
+        machine3.setKapitablaTip("Hidrolik");
+        machine3.setKapiTablaAcSure("3");
+        machine3.setYukariYavasLimit("70");
+        machine3.setDevirmeYukariIleriLimit("85");
+        machine3.setDevirmeAsagiGeriLimit("15");
+        machine3.setDevirmeSilindirTipi("Çift Etkili");
+        machine3.setPlatformSilindirTipi("Çift Etkili");
+        machine3.setYukariValfTmr("1");
+        machine3.setAsagiValfTmr("1");
+        machine3.setDevirmeYukariIleriTmr("2");
+        machine3.setDevirmeAsagiGeriTmr("2");
+        machine3.setMakineCalismaTmr("8");
+        machine3.setBuzzer("Aktif");
+        machine3.setDemoMode("0");
+        machine3.setCalismaSayisi("800");
+        machine3.setCalismaSayisiDemo("0");
+        machine3.setDilSecim("1");
+        machine3.setEepromData38("238");
+        machine3.setEepromData39("239");
+        machine3.setEepromData40("240");
+        machine3.setEepromData41("241");
+        machine3.setEepromData42("242");
+        machine3.setEepromData43("243");
+        machine3.setEepromData44("244");
+        machine3.setEepromData45("245");
+        machine3.setEepromData46("246");
+        machine3.setEepromData47("247");
+        machine3.setLcdBacklightSure("45");
+        machines.add(machine3);
+
+        if (onSuccess != null) {
+            onSuccess.run();
+        }
     }
 
     public static void updateOwner(Context context, String userID, String machineID, String userName, Runnable onSuccess, Runnable onFailure) {

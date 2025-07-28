@@ -3,7 +3,6 @@ package me.t3sl4.ondergrup.Util.HTTP.Requests.SubUser;
 import android.content.Context;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -81,6 +80,8 @@ public class SubUserService {
     }
 
     public static void getSubUsers(Context context, String ownerID, ArrayList<SubUser> subUsers, Runnable onSuccess, Runnable onFailure) {
+        // Gerçek API isteği yorum satırına alındı, dummy data ile dolduruluyor
+        /*
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("ownerID", ownerID);
@@ -146,6 +147,46 @@ public class SubUserService {
                 //Boş kısım revize edilecek
             }
         });
+        */
+
+        // Dummy data
+        subUsers.clear();
+        
+        // Dummy alt kullanıcı 1
+        SubUser subUser1 = new SubUser("SUB001", "NORMAL", "subuser1@ondergrup.com", "subuser1@ondergrup.com", "Alt Kullanıcı 1", "5555555560", "Önder Grup", ownerID, "1");
+        subUsers.add(subUser1);
+        
+        // Dummy alt kullanıcı 2
+        SubUser subUser2 = new SubUser("SUB002", "NORMAL", "subuser2@ondergrup.com", "subuser2@ondergrup.com", "Alt Kullanıcı 2", "5555555561", "Önder Grup", ownerID, "1");
+        subUsers.add(subUser2);
+        
+        // Dummy alt kullanıcı 3
+        SubUser subUser3 = new SubUser("SUB003", "NORMAL", "subuser3@ondergrup.com", "subuser3@ondergrup.com", "Alt Kullanıcı 3", "5555555562", "Önder Grup", ownerID, "0");
+        subUsers.add(subUser3);
+        
+        // Dummy alt kullanıcı 4
+        SubUser subUser4 = new SubUser("SUB004", "NORMAL", "ahmet.yilmaz@ondergrup.com", "ahmet.yilmaz@ondergrup.com", "Ahmet Yılmaz", "5555555563", "Önder Grup", ownerID, "1");
+        subUsers.add(subUser4);
+        
+        // Dummy alt kullanıcı 5
+        SubUser subUser5 = new SubUser("SUB005", "NORMAL", "mehmet.demir@ondergrup.com", "mehmet.demir@ondergrup.com", "Mehmet Demir", "5555555564", "Önder Grup", ownerID, "1");
+        subUsers.add(subUser5);
+        
+        // Dummy alt kullanıcı 6
+        SubUser subUser6 = new SubUser("SUB006", "NORMAL", "fatma.kaya@ondergrup.com", "fatma.kaya@ondergrup.com", "Fatma Kaya", "5555555565", "Önder Grup", ownerID, "0");
+        subUsers.add(subUser6);
+        
+        // Dummy alt kullanıcı 7
+        SubUser subUser7 = new SubUser("SUB007", "NORMAL", "ali.ozturk@ondergrup.com", "ali.ozturk@ondergrup.com", "Ali Öztürk", "5555555566", "Önder Grup", ownerID, "1");
+        subUsers.add(subUser7);
+        
+        // Dummy alt kullanıcı 8
+        SubUser subUser8 = new SubUser("SUB008", "NORMAL", "ayse.celik@ondergrup.com", "ayse.celik@ondergrup.com", "Ayşe Çelik", "5555555567", "Önder Grup", ownerID, "1");
+        subUsers.add(subUser8);
+
+        if (onSuccess != null) {
+            onSuccess.run();
+        }
     }
 
     public static void deleteSubUser(Context context, String userID, String subUserID, Runnable onSuccess) {

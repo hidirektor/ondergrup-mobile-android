@@ -3,7 +3,6 @@ package me.t3sl4.ondergrup.Util.HTTP.Requests.Authorized;
 import android.content.Context;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,6 +27,8 @@ public class OPUserService {
 
     // getAllUsers method
     public static void getAllUsers(Context context, ArrayList<User> users, Runnable onSuccess, Runnable onFailure) {
+        // Gerçek API isteği yorum satırına alındı, dummy data ile dolduruluyor
+        /*
         String authToken = UserDataService.getAccessToken(context);
 
         Call<ResponseBody> call = HttpHelper.makeRequestWithAuth("GET", GET_ALL_USERS_URL, null, null, authToken);
@@ -97,6 +98,62 @@ public class OPUserService {
                 }
             }
         });
+        */
+
+        // Dummy data
+        users.clear();
+        
+        // Dummy kullanıcı 1
+        User user1 = new User("NORMAL", "recep.baskurt@ondergrup.com", "recep.baskurt@ondergrup.com", "Recep Baskurt", "5555555555", "Önder Grup", "01.01.2024", "1", "tr", "light");
+        users.add(user1);
+        
+        // Dummy kullanıcı 2
+        User user2 = new User("TECHNICIAN", "ahmet.tekniker@ondergrup.com", "ahmet.tekniker@ondergrup.com", "Ahmet Tekniker", "5555555556", "Önder Grup", "01.02.2024", "1", "tr", "light");
+        users.add(user2);
+        
+        // Dummy kullanıcı 3
+        User user3 = new User("ENGINEER", "mehmet.muhendis@ondergrup.com", "mehmet.muhendis@ondergrup.com", "Mehmet Mühendis", "5555555557", "Önder Grup", "01.03.2024", "1", "tr", "dark");
+        users.add(user3);
+        
+        // Dummy kullanıcı 4
+        User user4 = new User("NORMAL", "ali.kullanici@ondergrup.com", "ali.kullanici@ondergrup.com", "Ali Kullanıcı", "5555555558", "Önder Grup", "01.04.2024", "1", "en", "light");
+        users.add(user4);
+        
+        // Dummy kullanıcı 5
+        User user5 = new User("TECHNICIAN", "veli.tekniker@ondergrup.com", "veli.tekniker@ondergrup.com", "Veli Tekniker", "5555555559", "Önder Grup", "01.05.2024", "0", "tr", "dark");
+        users.add(user5);
+        
+        // Dummy kullanıcı 6
+        User user6 = new User("ENGINEER", "can.muhendis@ondergrup.com", "can.muhendis@ondergrup.com", "Can Mühendis", "5555555560", "Önder Grup", "01.06.2024", "1", "tr", "light");
+        users.add(user6);
+        
+        // Dummy kullanıcı 7
+        User user7 = new User("NORMAL", "deniz.kullanici@ondergrup.com", "deniz.kullanici@ondergrup.com", "Deniz Kullanıcı", "5555555561", "Önder Grup", "01.07.2024", "1", "en", "dark");
+        users.add(user7);
+        
+        // Dummy kullanıcı 8
+        User user8 = new User("TECHNICIAN", "emre.tekniker@ondergrup.com", "emre.tekniker@ondergrup.com", "Emre Tekniker", "5555555562", "Önder Grup", "01.08.2024", "1", "tr", "light");
+        users.add(user8);
+        
+        // Dummy kullanıcı 9
+        User user9 = new User("ENGINEER", "burak.muhendis@ondergrup.com", "burak.muhendis@ondergrup.com", "Burak Mühendis", "5555555563", "Önder Grup", "01.09.2024", "0", "tr", "dark");
+        users.add(user9);
+        
+        // Dummy kullanıcı 10
+        User user10 = new User("NORMAL", "seda.kullanici@ondergrup.com", "seda.kullanici@ondergrup.com", "Seda Kullanıcı", "5555555564", "Önder Grup", "01.10.2024", "1", "tr", "light");
+        users.add(user10);
+        
+        // Dummy kullanıcı 11
+        User user11 = new User("TECHNICIAN", "kaan.tekniker@ondergrup.com", "kaan.tekniker@ondergrup.com", "Kaan Tekniker", "5555555565", "Önder Grup", "01.11.2024", "1", "en", "dark");
+        users.add(user11);
+        
+        // Dummy kullanıcı 12
+        User user12 = new User("ENGINEER", "zeynep.muhendis@ondergrup.com", "zeynep.muhendis@ondergrup.com", "Zeynep Mühendis", "5555555566", "Önder Grup", "01.12.2024", "1", "tr", "light");
+        users.add(user12);
+
+        if (onSuccess != null) {
+            onSuccess.run();
+        }
     }
 
     // updateRole method

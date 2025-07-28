@@ -216,6 +216,8 @@
             android:id="@+id/app_bar"
             android:layout_height="60dp"
             android:layout_gravity="bottom"
+            android:backgroundTint="@color/white"
+            app:backgroundTint="@color/white"
             app:fabCradleMargin="8dp"
             app:fabCradleRoundedCornerRadius="50dp"
             app:fabCradleVerticalOffset="6dp"

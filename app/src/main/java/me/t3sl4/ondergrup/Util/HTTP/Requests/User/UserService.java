@@ -14,7 +14,6 @@ import java.util.Map;
 
 import me.t3sl4.ondergrup.Service.UserDataService;
 import me.t3sl4.ondergrup.Util.HTTP.HttpHelper;
-import me.t3sl4.ondergrup.Util.Util;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -32,6 +31,8 @@ public class UserService {
     private static final String CHECK_USER_URL = "/api/v2/user/checkUser";
 
     public static void getProfile(Context context, String userID, Runnable onSuccess, Runnable onFailure) {
+        // Gerçek API isteği yorum satırına alındı, dummy response ile dolduruluyor
+        /*
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("userID", userID);
@@ -89,6 +90,21 @@ public class UserService {
                 Log.e("GetProfile", "Error: " + t.getMessage());
             }
         });
+        */
+
+        // Dummy response
+        UserDataService.setUserRole(context, "NORMAL");
+        UserDataService.setUserName(context, "recep.baskurt@ondergrup.com");
+        UserDataService.seteMail(context, "recep.baskurt@ondergrup.com");
+        UserDataService.setNameSurname(context, "Recep Baskurt");
+        UserDataService.setPhoneNumber(context, "5555555555");
+        UserDataService.setCompanyName(context, "Önder Grup");
+        UserDataService.setCreatedAt(context, "01.01.2024");
+        UserDataService.setSelectedLanguage(context, "tr");
+        UserDataService.setSelectedNightMode(context, "light");
+        if (onSuccess != null) {
+            onSuccess.run();
+        }
     }
 
     public static void getPreferences(Context context, String userID) {
